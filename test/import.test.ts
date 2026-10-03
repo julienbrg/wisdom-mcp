@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { test } from 'node:test';
 import { gzipSync } from 'node:zlib';
 import { importWorks } from '../dist/corpus/import.js';
+import { PassagesService } from '../dist/corpus/passages.service.js';
 import { PILOT_WORKS } from '../dist/corpus/works.js';
 import { openDatabase } from '../dist/database/database.module.js';
 
@@ -159,4 +160,48 @@ test('import stores the Meditations original by Casaubon section', async () => {
       { ref_unit: '12.3', body: '12.4.1', source_url: `${url}:12.4/` },
     ],
   );
+});
+
+function gitaCache() {
+  const dir = mkdtempSync(join(tmpdir(), 'wisdom-cache-'));
+  const text = [
+    'PREFACE',
+    'CHAPTER I',
+    'Dhritirashtra:\n  Ranged thus for battle',
+    'CHAPTER XVIII',
+    ...Array.from({ length: 26 }, (_, i) => `Krishna, passage ${i + 1}`),
+    'HERE ENDETH CHAPTER XVIII.',
+    '[FN#1] A note',
+  ].join('\n\n');
+  const record = { slug: 'bhagavad-gita', title: 'Bhagavad Gita', kind: 'full-text', text };
+  writeFileSync(join(dir, 'wisdom-corpus.jsonl.gz'), gzipSync(JSON.stringify(record) + '\n'));
+
+  const verse = (c: number, v: number) => ({
+    chapter_number: c,
+    verse_number: v,
+    text: `श्लोक ${c}.${v}\n\nपाद।।${c}.${v}।।\n `,
+  });
+  const verses = [verse(1, 1), ...Array.from({ length: 78 }, (_, i) => verse(18, i + 1))];
+  writeFileSync(join(dir, 'gita-verse.json'), JSON.stringify(verses));
+  return dir;
+}
+
+test('import stores the Gita by verse and reads back only the verses a passage renders', async () => {
+  const db = openDatabase(':memory:');
+  const works = PILOT_WORKS.filter((w) => w.id === 'bhagavad-gita');
+  await importWorks(db, works, gitaCache());
+
+  const quotable = db
+    .prepare('select id, ref_unit from passages where is_apparatus = 0 order by position')
+    .all() as { id: string; ref_unit: string }[];
+  assert.equal(quotable.length, 27);
+  assert.deepEqual(quotable[0], { id: 'bhagavad-gita:2', ref_unit: '1.1' });
+  assert.deepEqual(quotable.at(-1), { id: 'bhagavad-gita:29', ref_unit: '18.64-65' });
+
+  const { text } = new PassagesService(db).read(['bhagavad-gita:29']);
+  assert.match(text, /, 18\.64-65\nCovers hits: bhagavad-gita:29 \(18\.64-65\)\./);
+  assert.match(text, /श्लोक 18\.64\nपाद।।18\.64।।\nश्लोक 18\.65\nपाद।।18\.65।।\n/);
+  assert.doesNotMatch(text, /18\.63|18\.66/);
+  assert.match(text, /Krishna, passage 26/);
+  assert.doesNotMatch(text, /passage 25/);
 });

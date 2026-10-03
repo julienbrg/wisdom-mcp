@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { embed } from './mistral.js';
+import { MistralService } from './mistral.service.js';
 
 const CACHE_SIZE = 1000;
 const TIMEOUT_MS = 5000;
@@ -8,6 +8,8 @@ const TIMEOUT_MS = 5000;
 export class EmbeddingsService {
   // LRU: a model often repeats a search while it refines the others.
   private readonly cache = new Map<string, Float32Array>();
+
+  constructor(private readonly mistral: MistralService) {}
 
   async embed(text: string): Promise<Float32Array> {
     const key = text.trim().toLowerCase();
@@ -18,7 +20,7 @@ export class EmbeddingsService {
       return hit;
     }
 
-    const [vector] = await embed([text], { signal: AbortSignal.timeout(TIMEOUT_MS) });
+    const [vector] = await this.mistral.embed([text], { signal: AbortSignal.timeout(TIMEOUT_MS) });
     this.cache.set(key, vector);
     if (this.cache.size > CACHE_SIZE) this.cache.delete(this.cache.keys().next().value!);
     return vector;

@@ -1,10 +1,9 @@
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { env } from '../config.js';
 import type { Db } from '../database/database.module.js';
 import { generateKeywords, type PassageText } from './keywords.js';
-import { embed } from './mistral.js';
+import type { MistralService } from './mistral.service.js';
 
 export interface IndexStats {
   passages: number;
@@ -13,6 +12,8 @@ export interface IndexStats {
 }
 
 export interface Generators {
+  keywordsModel: string;
+  embeddingModel: string;
   keywords: (passages: PassageText[]) => Promise<Map<string, string>>;
   embed: (texts: string[]) => Promise<Float32Array[]>;
 }
@@ -21,10 +22,12 @@ const KEYWORD_BATCH = 20;
 const EMBED_BATCH = 32;
 const EMBED_BATCH_CHARS = 40_000;
 
-const defaults: Generators = {
-  keywords: generateKeywords,
-  embed: (texts) => embed(texts, { attempts: 5 }),
-};
+export const mistralGenerators = (mistral: MistralService): Generators => ({
+  keywordsModel: mistral.keywordsModel,
+  embeddingModel: mistral.embeddingModel,
+  keywords: (passages) => generateKeywords(mistral, passages),
+  embed: (texts) => mistral.embed(texts, { attempts: 5 }),
+});
 
 const hash = (s: string) => createHash('sha256').update(s).digest('hex');
 
@@ -35,7 +38,7 @@ const hash = (s: string) => createHash('sha256').update(s).digest('hex');
 export async function buildIndexes(
   db: Db,
   cacheDir: string,
-  generators: Generators = defaults,
+  generators: Generators,
 ): Promise<IndexStats> {
   const passages = db
     .prepare(
@@ -44,7 +47,9 @@ export async function buildIndexes(
     )
     .all() as PassageText[];
 
-  const keywords = new JsonCache<string>(join(cacheDir, `keywords-${env.KEYWORDS_MODEL}.json`));
+  const keywords = new JsonCache<string>(
+    join(cacheDir, `keywords-${generators.keywordsModel}.json`),
+  );
   const missingKeywords = passages.filter((p) => !keywords.has(hash(p.body)));
   for (let i = 0; i < missingKeywords.length; i += KEYWORD_BATCH) {
     const batch = missingKeywords.slice(i, i + KEYWORD_BATCH);
@@ -53,7 +58,9 @@ export async function buildIndexes(
     keywords.save();
   }
 
-  const vectors = new JsonCache<string>(join(cacheDir, `embeddings-${env.EMBEDDING_MODEL}.json`));
+  const vectors = new JsonCache<string>(
+    join(cacheDir, `embeddings-${generators.embeddingModel}.json`),
+  );
   const missingVectors = passages.filter((p) => !vectors.has(hash(p.body)));
   for (const batch of embedBatches(missingVectors)) {
     const out = await generators.embed(batch.map((p) => p.body));

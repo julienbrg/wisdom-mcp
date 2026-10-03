@@ -28,6 +28,8 @@ function fakes() {
   return {
     calls,
     generators: {
+      keywordsModel: 'fake-keywords',
+      embeddingModel: 'fake-embed',
       keywords: async (ps: { id: string; body: string }[]) => {
         calls.keywords += ps.length;
         return new Map(

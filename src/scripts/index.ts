@@ -1,10 +1,17 @@
-import { env } from '../config.js';
-import { buildIndexes } from '../corpus/indexes.js';
-import { openDatabase } from '../database/database.module.js';
+import 'reflect-metadata';
+import { ConfigService } from '@nestjs/config';
+import { NestFactory } from '@nestjs/core';
+import { CliModule } from '../cli.module.js';
+import type { Config } from '../config.js';
+import { buildIndexes, mistralGenerators } from '../corpus/indexes.js';
+import { MistralService } from '../corpus/mistral.service.js';
+import { DB, type Db } from '../database/database.module.js';
 
-const db = openDatabase(env.DATABASE_PATH);
+const app = await NestFactory.createApplicationContext(CliModule, { logger: ['error', 'warn'] });
 try {
-  console.table([await buildIndexes(db, env.CORPUS_CACHE)]);
+  const cacheDir = app.get<Config>(ConfigService).get('CORPUS_CACHE', { infer: true });
+  const generators = mistralGenerators(app.get(MistralService));
+  console.table([await buildIndexes(app.get<Db>(DB), cacheDir, generators)]);
 } finally {
-  db.close();
+  await app.close();
 }

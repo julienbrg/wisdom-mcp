@@ -12,6 +12,7 @@
     "build": "tsc -p .",
     "start": "node dist/main.js",
     "corpus:import": "pnpm build && node dist/scripts/import.js",
+    "corpus:index": "pnpm build && node dist/scripts/index.js",
     "typecheck": "tsc -p . --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",

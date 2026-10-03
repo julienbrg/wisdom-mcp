@@ -28,5 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Keyword-only fallback, flagged in the result, when the embedding call fails or takes longer than 5 seconds, and a 1,000-entry cache of query embeddings.
 - `read_passages` MCP tool: up to 10 ids, returned as whole reference units with the original text, its source and licence, and the English translation as an aid, or the translation alone when no original is available. Output is capped at about 6,000 words, cutting the aid translation first and then the original at a sentence boundary.
 - Server instructions sent at `initialize`, covering search language, quoting, translation and passages as data.
+- `.mcp.json` that registers the local server with Claude Code as `wisdom`.
+- `/wisdom` Claude Code skill, which answers a question and its follow-ups with `search_passages` and `read_passages` only and writes the whole conversation, with every tool call, to `test/output/` (git-ignored).
 - `MISTRAL_API_KEY`, `EMBEDDING_MODEL` and `KEYWORDS_MODEL` settings.
 - Settings load through `@nestjs/config`, which reads `.env` when it exists and validates it with zod. The corpus scripts boot a Nest application context, so they share the server's configuration.

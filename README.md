@@ -78,6 +78,16 @@ Search is hybrid: an FTS5 keyword index over passage text and keywords, and a ve
 - `GET /health`: liveness check
 - `GET /docs`: Swagger UI
 
+## Testing from Claude Code
+
+`.mcp.json` registers the local server with Claude Code as `wisdom`. Start it with `pnpm start`, approve it in `/mcp`, then ask a question:
+
+```text
+/wisdom How to improve global cooperation?
+```
+
+The `wisdom` skill answers with `search_passages` and `read_passages` only, quoting the originals with their references and its own translations. Ask follow-up questions in the same window. The whole conversation, with every tool call, the ids read and the number of calls per turn, is written to `test/output/<mon>-<dd>-<question-slug>.md`, which is git-ignored.
+
 ## Scripts
 
 | Script               | What it does                |

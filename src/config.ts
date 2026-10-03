@@ -1,3 +1,4 @@
+import { ConfigModule, type ConfigService } from '@nestjs/config';
 import { z } from 'zod';
 
 const Env = z.object({
@@ -10,5 +11,15 @@ const Env = z.object({
   KEYWORDS_MODEL: z.string().default('mistral-small-latest'),
 });
 
+export type Env = z.infer<typeof Env>;
+export type Config = ConfigService<Env, true>;
+
+/** Loads `.env` when present, then validates it together with the process environment. */
+export const AppConfigModule = ConfigModule.forRoot({
+  isGlobal: true,
+  cache: true,
+  validate: (raw) => Env.parse(raw),
+});
+
+/** @deprecated Read settings through ConfigService. */
 export const env = Env.parse(process.env);
-export const MCP_URL = new URL('/mcp', env.PUBLIC_URL);

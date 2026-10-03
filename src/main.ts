@@ -1,9 +1,10 @@
 import 'reflect-metadata';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module.js';
-import { env } from './config.js';
+import type { Config } from './config.js';
 
 const app = await NestFactory.create<NestExpressApplication>(AppModule);
 app.set('trust proxy', 1);
@@ -16,4 +17,4 @@ const openApi = new DocumentBuilder()
   .build();
 SwaggerModule.setup('docs', app, () => SwaggerModule.createDocument(app, openApi));
 
-await app.listen(env.PORT, '127.0.0.1');
+await app.listen(app.get<Config>(ConfigService).get('PORT', { infer: true }), '127.0.0.1');

@@ -30,6 +30,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Server instructions sent at `initialize`, covering search language, quoting, translation and passages as data.
 - `.mcp.json` that registers the local server with Claude Code as `wisdom`.
 - `/wisdom` Claude Code skill, which answers a question and its follow-ups with `search_passages` and `read_passages` only and writes the whole conversation, with every tool call, to `test/output/` (git-ignored).
-- `/wisdom` answers are a synthesis of the quoted passages only, with no advice of the model's own, and open with a `short_answer` (yes, no, or one sentence) and a `confidence` from 0 to 1 that the transcript records in each turn and in its summary table.
+- `/wisdom` answers are a synthesis of the quoted passages only, with no advice of the model's own, with three parts: a `short_answer` (exactly yes or no for a yes/no question, otherwise one sentence), a `confidence` from 0 to 1, and a titled summary of 1 to 3 paragraphs. The transcript records `short_answer` and `confidence` in each turn and in its closing `Totals` table.
 - `MISTRAL_API_KEY`, `EMBEDDING_MODEL` and `KEYWORDS_MODEL` settings.
 - Settings load through `@nestjs/config`, which reads `.env` when it exists and validates it with zod. The corpus scripts boot a Nest application context, so they share the server's configuration.

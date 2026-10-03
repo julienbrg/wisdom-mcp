@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { chaptersOf } from '../dist/corpus/originals/gita.js';
+import { verseUnits } from '../dist/corpus/originals/gita.js';
 import { gitaRange, gitaVerses } from '../dist/corpus/originals/gita-verses.js';
 import { meditationsChapters } from '../dist/corpus/originals/meditations.js';
 import { group, parseTei } from '../dist/corpus/originals/perseus.js';
@@ -67,17 +67,16 @@ test('suttacentral: verse lines without titles or the vagga colophon', () => {
   );
 });
 
-test('gita: verses joined by chapter in verse order', () => {
-  const chapters = chaptersOf([
-    { chapter_number: '1', verse_number: '2', text: 'b' },
-    { chapter_number: '1', verse_number: '1', text: 'धृतराष्ट्र उवाच\n\nधर्मक्षेत्रे' },
-    { chapter_number: 2, verse_number: 1, text: 'c' },
+test('gita: one unit per chapter.verse, blank lines dropped', () => {
+  const verses = verseUnits([
+    { chapter_number: '1', verse_number: '1', text: 'धृतराष्ट्र उवाच\n\nधर्मक्षेत्रे\n ' },
+    { chapter_number: 18, verse_number: 66, text: 'c' },
   ]);
   assert.deepEqual(
-    [...chapters],
+    [...verses],
     [
-      ['1', 'धृतराष्ट्र उवाच\nधर्मक्षेत्रे\n\nb'],
-      ['2', 'c'],
+      ['1.1', 'धृतराष्ट्र उवाच\nधर्मक्षेत्रे'],
+      ['18.66', 'c'],
     ],
   );
 });

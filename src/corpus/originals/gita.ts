@@ -10,25 +10,15 @@ interface Verse {
   text: string;
 }
 
-// Arnold's translation has no verse numbers, so a unit is a whole chapter.
-export function chaptersOf(verses: Verse[]): Map<string, string> {
-  const chapters = new Map<string, { v: number; text: string }[]>();
-  for (const verse of verses) {
-    const c = `${+verse.chapter_number}`;
-    const text = verse.text
-      .split('\n')
-      .map((l) => l.trim())
-      .filter(Boolean)
-      .join('\n');
-    chapters.set(c, [...(chapters.get(c) ?? []), { v: +verse.verse_number, text }]);
-  }
+export function verseUnits(verses: Verse[]): Map<string, string> {
   return new Map(
-    [...chapters].map(([c, vs]) => [
-      c,
-      vs
-        .sort((a, b) => a.v - b.v)
-        .map((v) => v.text)
-        .join('\n\n'),
+    verses.map((v) => [
+      `${+v.chapter_number}.${+v.verse_number}`,
+      v.text
+        .split('\n')
+        .map((l) => l.trim())
+        .filter(Boolean)
+        .join('\n'),
     ]),
   );
 }
@@ -36,6 +26,6 @@ export function chaptersOf(verses: Verse[]): Map<string, string> {
 export async function loadGita(cacheDir: string): Promise<SourceText> {
   const verses = JSON.parse((await cached(cacheDir, 'gita-verse.json', URL)).toString()) as Verse[];
   const units = new Map();
-  for (const [c, body] of chaptersOf(verses)) units.set(c, { body, url: PAGE });
+  for (const [v, body] of verseUnits(verses)) units.set(v, { body, url: PAGE });
   return { license: 'Unlicense (gita/gita dataset)', units };
 }

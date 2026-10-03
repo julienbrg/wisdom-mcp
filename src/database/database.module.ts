@@ -2,9 +2,10 @@ import { mkdirSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Global, Inject, Module, type OnApplicationShutdown } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import Database from 'better-sqlite3';
 import * as sqliteVec from 'sqlite-vec';
-import { env } from '../config.js';
+import type { Config } from '../config.js';
 
 export type Db = Database.Database;
 export const DB = Symbol('DB');
@@ -41,7 +42,13 @@ function migrate(db: Db) {
 
 @Global()
 @Module({
-  providers: [{ provide: DB, useFactory: () => openDatabase(env.DATABASE_PATH) }],
+  providers: [
+    {
+      provide: DB,
+      useFactory: (config: Config) => openDatabase(config.get('DATABASE_PATH', { infer: true })),
+      inject: [ConfigService],
+    },
+  ],
   exports: [DB],
 })
 export class DatabaseModule implements OnApplicationShutdown {

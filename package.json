@@ -22,6 +22,7 @@
     "@nestjs/common": "^12.1.2",
     "@nestjs/core": "^12.1.2",
     "@nestjs/platform-express": "^12.1.2",
+    "@nestjs/swagger": "^12.0.2",
     "better-sqlite3": "^13.0.3",
     "express": "^5.2.1",
     "reflect-metadata": "^0.2.2",
@@ -44,6 +45,9 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "better-sqlite3"
+    ],
+    "ignoredBuiltDependencies": [
+      "@scarf/scarf"
     ]
   }
 }

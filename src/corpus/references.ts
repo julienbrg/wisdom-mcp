@@ -162,7 +162,7 @@ function meditations(): Scheme {
       }
       return { text: piece };
     },
-    ref: () => (sec ? { ref: `${book}.${sec}`, refUnit: `${book}` } : null),
+    ref: () => (sec ? { ref: `${book}.${sec}`, refUnit: `${book}.${sec}` } : null),
   };
 }
 

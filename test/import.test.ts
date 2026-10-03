@@ -97,3 +97,66 @@ test('import writes works, texts, passages and originals, and can run again', as
     .all();
   assert.equal(hits.length, 1);
 });
+
+function meditationsCache() {
+  const dir = mkdtempSync(join(tmpdir(), 'wisdom-cache-'));
+  const text = [
+    'Produced by J. Boyd',
+    'THE FIRST BOOK',
+    'I. Of my grandfather Verus I have learned to be gentle and meek.',
+    'THE TWELFTH BOOK',
+    'I. Whatsoever thou doest hereafter aspire unto.',
+    'II. God beholds our minds and understandings.',
+    'III. I have often wondered how it should come to pass.',
+    'APPENDIX',
+  ].join('\n\n');
+  const record = { slug: 'meditations', title: 'Meditations', kind: 'full-text', text };
+  writeFileSync(join(dir, 'wisdom-corpus.jsonl.gz'), gzipSync(JSON.stringify(record) + '\n'));
+
+  const chapter = (book: number, n: number, sections = 1) =>
+    `<div type="textpart" subtype="chapter" n="${n}">` +
+    Array.from(
+      { length: sections },
+      (_, i) =>
+        `<div type="textpart" subtype="section" n="${i + 1}"><p>${book}.${n}.${i + 1}</p></div>`,
+    ).join('') +
+    '</div>';
+  const book = (n: number, chapters: string[]) =>
+    `<div type="textpart" subtype="book" n="${n}">${chapters.join('')}</div>`;
+  const tei = `<TEI><teiHeader><licence>CC-BY-SA 4.0</licence></teiHeader><text><body>
+<div type="edition">
+${book(
+  1,
+  [1, 2, 3, 4].map((n) => chapter(1, n)),
+)}
+${book(12, [chapter(12, 1, 2), chapter(12, 2), chapter(12, 3), chapter(12, 4)])}
+</div></body></text></TEI>`;
+  writeFileSync(join(dir, 'tlg0562.tlg001.perseus-grc2.xml'), tei);
+  return dir;
+}
+
+test('import stores the Meditations original by Casaubon section', async () => {
+  const db = openDatabase(':memory:');
+  const works = PILOT_WORKS.filter((w) => w.id === 'meditations');
+  await importWorks(db, works, meditationsCache());
+
+  assert.deepEqual(
+    db.prepare('select ref, ref_unit from passages where is_apparatus = 0 order by position').all(),
+    [
+      { ref: '1.1', ref_unit: '1.1' },
+      { ref: '12.1', ref_unit: '12.1' },
+      { ref: '12.2', ref_unit: '12.2' },
+      { ref: '12.3', ref_unit: '12.3' },
+    ],
+  );
+  const url = 'https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0562.tlg001.perseus-grc2';
+  assert.deepEqual(
+    db.prepare('select ref_unit, body, source_url from originals order by id').all(),
+    [
+      { ref_unit: '1.1', body: '1.1.1\n1.2.1\n1.3.1\n1.4.1', source_url: `${url}:1.1/` },
+      { ref_unit: '12.1', body: '(1) 12.1.1\n(2) 12.1.2', source_url: `${url}:12.1/` },
+      { ref_unit: '12.2', body: '12.2.1\n12.3.1', source_url: `${url}:12.2/` },
+      { ref_unit: '12.3', body: '12.4.1', source_url: `${url}:12.4/` },
+    ],
+  );
+});

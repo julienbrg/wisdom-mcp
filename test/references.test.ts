@@ -75,7 +75,7 @@ test('dhammapada: combined verses get a range', () => {
   ]);
 });
 
-test('meditations: book.section refs, original stored by book, one skipped section allowed', () => {
+test('meditations: book.section refs and units, one skipped section allowed', () => {
   const blocks = [
     'THE FIRST BOOK',
     'I. Of my grandfather',
@@ -88,7 +88,7 @@ test('meditations: book.section refs, original stored by book, one skipped secti
   ];
   assert.deepEqual(
     refs('meditations', blocks).map(([ref, unit]) => `${ref}@${unit}`),
-    ['null@null', '1.1@1', '1.1@1', 'null@null', '2.1@2', '2.2@2', '2.4@2', '2.4@2'],
+    ['null@null', '1.1@1.1', '1.1@1.1', 'null@null', '2.1@2.1', '2.2@2.2', '2.4@2.4', '2.4@2.4'],
   );
 });
 

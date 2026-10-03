@@ -4,3 +4,4 @@ coverage
 data
 .env
 docs/notes/
+test/output/

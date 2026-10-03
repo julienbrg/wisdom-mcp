@@ -21,6 +21,16 @@ const PER_WORK = 3;
 const RETURNED = 20;
 const OPENING_CHARS = 300;
 
+/** Words too common to rank on alone, dropped from the any-term pass. */
+export const STOP_WORDS = new Set(
+  (
+    'a about am an and are as at be been but by can could did do does for from had has have he ' +
+    'her his how i if in into is it its me my no not of on or our she should so than that the ' +
+    'their them then there these they this those to us was we were what when where which who ' +
+    'why will with would you your'
+  ).split(' '),
+);
+
 @Injectable()
 export class SearchService {
   private readonly ftsTop;
@@ -90,7 +100,7 @@ export class SearchService {
     const and = toFtsQuery(query, 'AND');
     if (!and) return [];
     const rows = this.ftsTop.all(and, CANDIDATES);
-    const or = toFtsQuery(query, 'OR');
+    const or = toFtsQuery(query, 'OR', STOP_WORDS) || toFtsQuery(query, 'OR');
     if (rows.length < CANDIDATES && or !== and) {
       const seen = new Set(rows.map((r) => r.id));
       rows.push(...this.ftsTop.all(or, CANDIDATES).filter((r) => !seen.has(r.id)));
@@ -101,12 +111,13 @@ export class SearchService {
 
 /**
  * Keeps quoted phrases as FTS5 phrases and quotes every other term, so punctuation in the
- * query cannot break FTS5 syntax.
+ * query cannot break FTS5 syntax. Bare terms in `skip` are dropped; phrases never are.
  */
-export function toFtsQuery(query: string, op: 'AND' | 'OR'): string {
+export function toFtsQuery(query: string, op: 'AND' | 'OR', skip?: Set<string>): string {
   const parts: string[] = [];
   for (const m of query.matchAll(/"([^"]+)"|(\S+)/g)) {
     const term = (m[1] ?? m[2]).replaceAll('"', '').trim();
+    if (m[2] && skip?.has(term.toLowerCase().replace(/[^\p{L}\p{N}]/gu, ''))) continue;
     if (/[\p{L}\p{N}]/u.test(term)) parts.push(`"${term}"`);
   }
   return parts.join(` ${op} `);

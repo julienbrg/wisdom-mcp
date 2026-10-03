@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- The keyword fallback that matches any term now ignores common English stop words, so hits no longer come in on words like "should" or "to" alone. Quoted phrases are kept, and a query made only of stop words still searches every term.
+- README title renamed to Wisdom MCP, with the corpus badge first.
+
 ### Added
 
 - NestJS (ESM) project with pnpm, TypeScript, ESLint, Prettier and a CI workflow.

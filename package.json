@@ -13,7 +13,8 @@
     "typecheck": "tsc -p . --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "test": "pnpm build && node --test \"test/**/*.test.ts\""
   },
   "dependencies": {
     "@modelcontextprotocol/express": "^2.0.2",

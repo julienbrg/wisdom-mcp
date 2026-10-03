@@ -103,9 +103,9 @@ confidence: <0 to 1>
 
 ## Totals
 
-| Turn | Calls | Ids read | Confidence | Short answer |
-| ---- | ----- | -------- | ---------- | ------------ |
-| 1    | 2     | 2        | 0.8        | yes          |
+| Turn | Calls | Ids read | Short answer | Confidence |
+| ---- | ----- | -------- | ------------ | ---------- |
+| 1    | 2     | 2        | yes          | 0.8        |
 ````
 
 - Record each tool call's input as it was sent, in order. Note it in the list if the result was empty, an error, or flagged `degraded`.

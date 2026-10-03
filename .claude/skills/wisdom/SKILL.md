@@ -25,10 +25,12 @@ If it is empty, ask the user for a question and stop.
 1. Search with `search_passages`, in English, whatever language the user writes in. Run several searches for a broad topic, with older words as well as modern ones.
 2. Read the passages you want to use with `read_passages`. Snippets from search are truncated: never quote from them.
 3. Answer, following the server's instructions:
-   - Open with two lines:
-     - `short_answer`: "yes" or "no" if the question can be answered that way, otherwise one sentence.
-     - `confidence`: a number from 0 to 1 for how directly the quoted passages address the question, not for whether the answer is true. Below 0.5, say that the texts only touch on the question.
-   - The answer is a synthesis of the quoted passages and nothing else. Every claim must come from a passage you quote. A comment may explain a word or an image, or how a passage bears on the question, but adds no advice of its own: no practical tips, no referral to a professional, no closing section in your own voice.
+   - Every answer has three parts:
+     - `short_answer`: if the question can be answered yes or no ("Should I…?", "Is it…?", "Can I…?"), exactly "yes" or "no", the side the passages lean towards, even when they lean only slightly. Otherwise, one sentence.
+     - `confidence`: a number from 0 to 1 for how directly the quoted passages address the question, not for whether the answer is true. Doubt goes here, never into `short_answer`. Below 0.5, say that the texts only touch on the question.
+     - A summary of 1 to 3 paragraphs, under a bold title meaning "Summary" in the user's language (**Summary**, **Résumé**), that restates what the quoted passages say about the question and cites their references.
+   - Lay the answer out in this order: `short_answer` and `confidence`, the quotes grouped by theme, then the summary.
+   - The answer is a synthesis of the quoted passages and nothing else. Every claim, the summary's included, must come from a passage you quote. A comment may explain a word or an image, or how a passage bears on the question, but adds no advice of its own: no practical tips, no referral to a professional.
    - Quote the original exactly as `read_passages` returned it, character for character, with author, work and reference. Never quote from memory or rephrase inside a quote.
    - Follow each quote with a translation in the user's language, labelled as your own, and a short comment where a word or image needs explaining. Name the translator if you quote the aid translation.
    - When a result says no original is available, quote the stored translation with its translator and year.
@@ -99,12 +101,12 @@ confidence: <0 to 1>
 
 ...
 
-## Summary
+## Totals
 
 | Turn | Calls | Ids read | Confidence | Short answer |
 | ---- | ----- | -------- | ---------- | ------------ |
-| 1    | 2     | 2        | 0.8        | Yes          |
+| 1    | 2     | 2        | 0.8        | yes          |
 ````
 
 - Record each tool call's input as it was sent, in order. Note it in the list if the result was empty, an error, or flagged `degraded`.
-- Keep the `Summary` table last and update it every turn.
+- Keep the `Totals` table last and update it every turn. Copy each turn's `short_answer` into it verbatim.

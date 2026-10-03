@@ -1,10 +1,18 @@
 # wisdom-mcp
 
+[![NestJS](https://img.shields.io/badge/NestJS-v12-E0234E?logo=nestjs)](https://nestjs.com/)
+[![CI](https://github.com/julienbrg/wisdom-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/julienbrg/wisdom-mcp/actions/workflows/ci.yml)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript)](https://www.typescriptlang.org/)
+[![pnpm](https://img.shields.io/badge/pnpm-10.28-F69220?logo=pnpm)](https://pnpm.io/)
+[![Node.js](https://img.shields.io/badge/Node.js-24-339933?logo=node.js)](https://nodejs.org/)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Corpus](https://img.shields.io/badge/corpus-8%20texts%20%C2%B7%202%2C969%20passages-45a2f8?labelColor=8c1c84)](#corpus)
+
 An MCP server for agentic hybrid search over philosophical and spiritual texts, built on Kevin Owocki's [Wisdom Context Window](https://wisdom.owocki.com/). The server only retrieves: your own model searches, reads, quotes and translates. See the [design write-up](https://julienberanger.com/wisdom-mcp-agentic-hybrid-search).
 
 ## Motivation
 
-Ask a model what the Stoics or the Tao Te Ching say about anger and it will often paraphrase, or invent a plausible line with a plausible reference. For texts like these, the exact words and where they come from matter.
+Ask a model what the Stoics or the Daodejing say about anger and it will often paraphrase, or invent a plausible line with a plausible reference. For texts like these, the exact words and where they come from matter.
 
 wisdom-mcp gives the model tools instead of answers. It searches a curated corpus with keywords and embeddings, then returns the original text with a precise reference. The model does the reasoning and translation, and quotes what it actually read. The corpus can grow without retraining anything, and every quote can be checked against its source.
 
@@ -43,6 +51,8 @@ pnpm corpus:import
 ```
 
 This imports the 8 pilot works from the Wisdom Context Window, with their original-language texts. Downloads are cached in `CORPUS_CACHE`, so later runs work offline, and each run replaces the works it imports.
+
+The corpus badge at the top of this README is static: after an import changes the counts, update it with `select count(*) from texts` and `select count(*) from passages`.
 
 | Work                | Translation                | Reference     | Original                    |
 | ------------------- | -------------------------- | ------------- | --------------------------- |

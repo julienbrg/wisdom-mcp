@@ -56,7 +56,7 @@ The corpus badge at the top of this README is static: after an import changes th
 | Dhammapada          | F. Max Müller              | verse         | SuttaCentral                |
 | Bhagavad Gita       | Edwin Arnold               | chapter       | gita/gita dataset           |
 | Enchiridion         | Thomas Wentworth Higginson | section       | Perseus                     |
-| Meditations         | Meric Casaubon             | book.section  | Perseus, by book            |
+| Meditations         | Meric Casaubon             | book.section  | Perseus, by section         |
 | Sermon on the Mount | King James Version         | chapter:verse | Perseus                     |
 | Ecclesiastes        | King James Version         | chapter:verse | Sefaria                     |
 

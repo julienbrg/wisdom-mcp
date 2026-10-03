@@ -3,10 +3,10 @@ export function isVerse(raw: string): boolean {
   return lines.length > 1 && lines.every((l) => /^\s/.test(l));
 }
 
-export function normalize(raw: string): string {
-  const text = raw.replace(/\[FN#\d+\]/g, '').replace(/(^|\W)_([^_]+)_(?=\W|$)/g, '$1$2');
+export function normalize(raw: string, verse = isVerse(raw)): string {
+  const text = raw.replace(/\[(?:FN#)?\d+\]/g, '').replace(/(^|\W)_([^_]+)_(?=\W|$)/g, '$1$2');
 
-  if (isVerse(raw)) {
+  if (verse) {
     return text
       .split('\n')
       .map((l) => l.replace(/\s+/g, ' ').trim())

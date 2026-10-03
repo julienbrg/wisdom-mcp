@@ -35,5 +35,10 @@ test('a single line or a hanging indent is prose', () => {
 
 test('italic markers and footnote anchors are dropped', () => {
   assert.equal(normalize('the _agora_ and[FN#3] the tables'), 'the agora and the tables');
+  assert.equal(normalize('let it be.”[10]'), 'let it be.”');
   assert.equal(normalize('snake_case stays'), 'snake_case stays');
+});
+
+test('the verse flag can come from the untrimmed passage', () => {
+  assert.equal(normalize('Him, filled\n  With eyes', true), 'Him, filled\nWith eyes');
 });

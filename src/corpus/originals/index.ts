@@ -1,5 +1,6 @@
 import type { Work } from '../works.js';
 import { loadGita } from './gita.js';
+import { meditationsChapters } from './meditations.js';
 import { loadPerseus } from './perseus.js';
 import { loadSefaria } from './sefaria.js';
 import type { SourceText } from './source.js';
@@ -40,6 +41,7 @@ const UNIT_MAPS: Record<string, (unit: string) => string[] | undefined> = {
   },
   // Higginson's L and LI each cover two of the 53 Greek chapters.
   enchiridion: (unit) => ({ '50': ['50', '51'], '51': ['52', '53'] })[unit],
+  meditations: meditationsChapters,
   // The KJV's 5:1 is the Hebrew 4:17, so Hebrew chapter 5 runs one verse behind.
   ecclesiastes(unit) {
     const [c, v] = unit.split(':').map(Number);

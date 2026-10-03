@@ -13,7 +13,7 @@ interface Edition {
 
 const EDITIONS: Record<string, Edition> = {
   'sermon-on-the-mount': { urn: 'tlg0031.tlg001.perseus-grc2', depth: 2, sep: ':' },
-  meditations: { urn: 'tlg0562.tlg001.perseus-grc2', depth: 1, sep: '.' },
+  meditations: { urn: 'tlg0562.tlg001.perseus-grc2', depth: 2, sep: '.' },
   enchiridion: { urn: 'tlg0557.tlg002.perseus-grc2', depth: 1, sep: '.' },
 };
 

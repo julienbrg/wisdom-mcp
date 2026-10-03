@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Meditations references are now one Casaubon section each (book.section) instead of a whole book. The Greek is stored by Perseus chapter, and a hand-checked table maps each of Casaubon's sections onto the chapters it translates, because his numbering merges and splits them. `read_passages` now returns only the matching section, in Greek and English.
 - The keyword fallback that matches any term now ignores common English stop words, so hits no longer come in on words like "should" or "to" alone. Quoted phrases are kept, and a query made only of stop words still searches every term.
 - README title renamed to Wisdom MCP, with the corpus badge first.
 

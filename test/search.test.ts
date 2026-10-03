@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { SearchService, rrf, toFtsQuery } from '../dist/corpus/search.service.js';
+import { STOP_WORDS, SearchService, rrf, toFtsQuery } from '../dist/corpus/search.service.js';
 import { openDatabase } from '../dist/database/database.module.js';
 
 const axis = (i: number) => {
@@ -71,6 +71,14 @@ test('toFtsQuery quotes terms, keeps phrases and drops bare punctuation', () => 
   assert.equal(toFtsQuery('— ?', 'AND'), '');
 });
 
+test('toFtsQuery drops skipped bare terms but keeps phrases', () => {
+  assert.equal(
+    toFtsQuery('Should I listen to "the others"?', 'OR', STOP_WORDS),
+    '"listen" OR "the others"',
+  );
+  assert.equal(toFtsQuery('to be', 'OR', STOP_WORDS), '');
+});
+
 test('rrf ranks ids found by both lists first', () => {
   assert.deepEqual(
     rrf([
@@ -114,6 +122,18 @@ test('search falls back from AND to OR and matches generated keywords', async ()
     byKeyword.hits.map((h) => h.id),
     ['dham:2'],
   );
+});
+
+test('search ignores stop words when falling back to OR', async () => {
+  const search = new SearchService(seed(), failing as never);
+  const { hits } = await search.search('Is love enough?');
+  assert.deepEqual(
+    hits.map((h) => h.id),
+    ['dham:1'],
+  );
+
+  const onlyStopWords = await search.search('he is');
+  assert.ok(onlyStopWords.hits.some((h) => h.id === 'tao:4'));
 });
 
 test('search returns keyword results flagged as degraded when embedding fails', async () => {

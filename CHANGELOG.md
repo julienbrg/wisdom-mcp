@@ -16,3 +16,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `/health` route that also checks the database.
 - Swagger UI at `/docs`.
 - Smoke tests for the schema, sqlite-vec, `/health` and the MCP `initialize` handshake.
+- GPL-3.0 `LICENSE` file and matching `license` field in `package.json`.

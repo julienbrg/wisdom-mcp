@@ -9,6 +9,7 @@ export interface Work {
   tradition: string;
   translator: string;
   year: number;
+  source: string;
   original: OriginalSource;
 }
 
@@ -22,6 +23,7 @@ export const PILOT_WORKS: Work[] = [
     tradition: 'chinese',
     translator: 'James Legge',
     year: 1891,
+    source: 'https://www.gutenberg.org/ebooks/216',
     original: 'wikisource',
   },
   {
@@ -33,6 +35,7 @@ export const PILOT_WORKS: Work[] = [
     tradition: 'chinese',
     translator: 'James Legge',
     year: 1861,
+    source: 'https://www.gutenberg.org/ebooks/3330',
     original: 'wikisource',
   },
   {
@@ -44,6 +47,7 @@ export const PILOT_WORKS: Work[] = [
     tradition: 'indian',
     translator: 'F. Max Müller',
     year: 1881,
+    source: 'https://www.gutenberg.org/ebooks/2017',
     original: 'suttacentral',
   },
   {
@@ -55,6 +59,7 @@ export const PILOT_WORKS: Work[] = [
     tradition: 'indian',
     translator: 'Edwin Arnold',
     year: 1885,
+    source: 'https://www.gutenberg.org/ebooks/2388',
     original: 'gita',
   },
   {
@@ -66,6 +71,7 @@ export const PILOT_WORKS: Work[] = [
     tradition: 'greco-roman',
     translator: 'Thomas Wentworth Higginson',
     year: 1865,
+    source: 'https://www.gutenberg.org/ebooks/45109',
     original: 'perseus',
   },
   {
@@ -77,6 +83,7 @@ export const PILOT_WORKS: Work[] = [
     tradition: 'greco-roman',
     translator: 'Meric Casaubon',
     year: 1634,
+    source: 'https://www.gutenberg.org/ebooks/2680',
     original: 'perseus',
   },
   {
@@ -88,6 +95,7 @@ export const PILOT_WORKS: Work[] = [
     tradition: 'abrahamic',
     translator: 'King James Version',
     year: 1611,
+    source: 'https://www.gutenberg.org/ebooks/8040',
     original: 'perseus',
   },
   {
@@ -99,6 +107,7 @@ export const PILOT_WORKS: Work[] = [
     tradition: 'abrahamic',
     translator: 'King James Version',
     year: 1611,
+    source: 'https://www.gutenberg.org/ebooks/8021',
     original: 'sefaria',
   },
 ];

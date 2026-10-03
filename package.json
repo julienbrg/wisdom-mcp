@@ -11,6 +11,7 @@
   "scripts": {
     "build": "tsc -p .",
     "start": "node dist/main.js",
+    "corpus:import": "pnpm build && node dist/scripts/import.js",
     "typecheck": "tsc -p . --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",

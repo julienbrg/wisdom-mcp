@@ -1,3 +1,5 @@
+import { gitaRange } from './originals/gita-verses.js';
+
 export interface Segment {
   n: number;
   part: number;
@@ -114,16 +116,22 @@ function dhammapada(): Scheme {
 
 function bhagavadGita(): Scheme {
   let ch = 0;
+  let passage = 0;
   return {
     start: /^CHAPTER I$/,
     end: /^\[FN#1\]/,
     read(piece) {
       const m = piece.match(/^CHAPTER ([IVXL]+)$/);
-      if (m) ch = roman(m[1]);
+      if (m) [ch, passage] = [roman(m[1]), 0];
       if (m || /^HERE END/.test(piece)) return { heading: true };
+      passage++;
       return { text: piece };
     },
-    ref: () => (ch ? { ref: `${ch}`, refUnit: `${ch}` } : null),
+    ref() {
+      if (!ch) return null;
+      const unit = `${ch}.${gitaRange(ch, passage)}`;
+      return { ref: unit, refUnit: unit };
+    },
   };
 }
 

@@ -129,20 +129,26 @@ test('bible: verse numbers become chapter:verse', () => {
   );
 });
 
-test('gita: chapters only, colophons and footnotes are apparatus', () => {
+test('gita: verse ranges counted per chapter, colophons and footnotes are apparatus', () => {
   assert.deepEqual(
     refs('bhagavad-gita', [
       'PREFACE',
       'CHAPTER I',
       '  Dhritirashtra:\n  Ranged',
+      '  Sanjaya:\n  When he beheld',
       'HERE ENDETH CHAPTER I.',
+      'CHAPTER II',
+      '  Sanjaya:\n  Him, filled',
       '[FN#1] Some',
     ]),
     [
       [null, null, true],
       [null, null, true],
-      ['1', '1', false],
+      ['1.1', '1.1', false],
+      ['1.2-11', '1.2-11', false],
       [null, null, true],
+      [null, null, true],
+      ['2.1', '2.1', false],
       [null, null, true],
     ],
   );

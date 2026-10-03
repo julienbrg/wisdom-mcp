@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { chaptersOf } from '../dist/corpus/originals/gita.js';
+import { verseUnits } from '../dist/corpus/originals/gita.js';
+import { gitaRange, gitaVerses } from '../dist/corpus/originals/gita-verses.js';
 import { meditationsChapters } from '../dist/corpus/originals/meditations.js';
 import { group, parseTei } from '../dist/corpus/originals/perseus.js';
 import { cleanVerse } from '../dist/corpus/originals/sefaria.js';
@@ -66,17 +67,16 @@ test('suttacentral: verse lines without titles or the vagga colophon', () => {
   );
 });
 
-test('gita: verses joined by chapter in verse order', () => {
-  const chapters = chaptersOf([
-    { chapter_number: '1', verse_number: '2', text: 'b' },
-    { chapter_number: '1', verse_number: '1', text: 'धृतराष्ट्र उवाच\n\nधर्मक्षेत्रे' },
-    { chapter_number: 2, verse_number: 1, text: 'c' },
+test('gita: one unit per chapter.verse, blank lines dropped', () => {
+  const verses = verseUnits([
+    { chapter_number: '1', verse_number: '1', text: 'धृतराष्ट्र उवाच\n\nधर्मक्षेत्रे\n ' },
+    { chapter_number: 18, verse_number: 66, text: 'c' },
   ]);
   assert.deepEqual(
-    [...chapters],
+    [...verses],
     [
-      ['1', 'धृतराष्ट्र उवाच\nधर्मक्षेत्रे\n\nb'],
-      ['2', 'c'],
+      ['1.1', 'धृतराष्ट्र उवाच\nधर्मक्षेत्रे'],
+      ['18.66', 'c'],
     ],
   );
 });
@@ -89,4 +89,13 @@ test('meditations: Casaubon sections map onto the Perseus chapters they translat
   assert.deepEqual(meditationsChapters('12.15'), ['12.19', '12.20', '12.21']);
   assert.throws(() => meditationsChapters('2.5'), /no section/);
   assert.throws(() => meditationsChapters('12.28'), /no section/);
+});
+
+test('gita: Arnold passages map onto the verse ranges they render', () => {
+  assert.equal(gitaRange(1, 1), '1');
+  assert.equal(gitaRange(18, 26), '64-65');
+  assert.equal(gitaRange(18, 31), '74-78');
+  assert.throws(() => gitaRange(18, 32), /no passage/);
+  assert.deepEqual(gitaVerses('18.64-65'), ['18.64', '18.65']);
+  assert.deepEqual(gitaVerses('2.70'), ['2.70']);
 });

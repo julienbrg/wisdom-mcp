@@ -49,16 +49,16 @@ This imports the 8 pilot works from the Wisdom Context Window, with their origin
 
 The corpus badge at the top of this README is static: after an import changes the counts, update it with `select count(*) from texts` and `select count(*) from passages`.
 
-| Work                | Translation                | Reference     | Original                    |
-| ------------------- | -------------------------- | ------------- | --------------------------- |
-| Tao Te Ching        | James Legge                | chapter.para  | Chinese Wikisource (王弼本) |
-| Analects            | James Legge                | book.chapter  | Chinese Wikisource          |
-| Dhammapada          | F. Max Müller              | verse         | SuttaCentral                |
-| Bhagavad Gita       | Edwin Arnold               | chapter       | gita/gita dataset           |
-| Enchiridion         | Thomas Wentworth Higginson | section       | Perseus                     |
-| Meditations         | Meric Casaubon             | book.section  | Perseus, by section         |
-| Sermon on the Mount | King James Version         | chapter:verse | Perseus                     |
-| Ecclesiastes        | King James Version         | chapter:verse | Sefaria                     |
+| Work                | Translation                | Reference      | Original                    |
+| ------------------- | -------------------------- | -------------- | --------------------------- |
+| Tao Te Ching        | James Legge                | chapter.para   | Chinese Wikisource (王弼本) |
+| Analects            | James Legge                | book.chapter   | Chinese Wikisource          |
+| Dhammapada          | F. Max Müller              | verse          | SuttaCentral                |
+| Bhagavad Gita       | Edwin Arnold               | chapter.verses | gita/gita dataset, by verse |
+| Enchiridion         | Thomas Wentworth Higginson | section        | Perseus                     |
+| Meditations         | Meric Casaubon             | book.section   | Perseus, by section         |
+| Sermon on the Mount | King James Version         | chapter:verse  | Perseus                     |
+| Ecclesiastes        | King James Version         | chapter:verse  | Sefaria                     |
 
 Every quotable passage has a reference and an original. Front matter, translators' notes, indexes and headings are kept but flagged `is_apparatus`.
 

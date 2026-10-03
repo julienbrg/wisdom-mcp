@@ -29,6 +29,28 @@ The database is created at `DATABASE_PATH` on first boot, and migrations in `mig
 | `PORT`          | `3000`                  | HTTP port, bound to `127.0.0.1`              |
 | `PUBLIC_URL`    | `http://localhost:3000` | Public origin; its host is allowed on `/mcp` |
 | `DATABASE_PATH` | `./data/app.db`         | SQLite file                                  |
+| `CORPUS_CACHE`  | `./data/cache`          | Downloaded texts used by the corpus import   |
+
+## Corpus
+
+```sh
+pnpm corpus:import
+```
+
+This imports the 8 pilot works from the Wisdom Context Window, with their original-language texts. Downloads are cached in `CORPUS_CACHE`, so later runs work offline, and each run replaces the works it imports.
+
+| Work                | Translation                | Reference     | Original                    |
+| ------------------- | -------------------------- | ------------- | --------------------------- |
+| Tao Te Ching        | James Legge                | chapter.para  | Chinese Wikisource (王弼本) |
+| Analects            | James Legge                | book.chapter  | Chinese Wikisource          |
+| Dhammapada          | F. Max Müller              | verse         | SuttaCentral                |
+| Bhagavad Gita       | Edwin Arnold               | chapter       | gita/gita dataset           |
+| Enchiridion         | Thomas Wentworth Higginson | section       | Perseus                     |
+| Meditations         | Meric Casaubon             | book.section  | Perseus, by book            |
+| Sermon on the Mount | King James Version         | chapter:verse | Perseus                     |
+| Ecclesiastes        | King James Version         | chapter:verse | Sefaria                     |
+
+Every quotable passage has a reference and an original. Front matter, translators' notes, indexes and headings are kept but flagged `is_apparatus`.
 
 ## Endpoints
 
@@ -38,18 +60,20 @@ The database is created at `DATABASE_PATH` on first boot, and migrations in `mig
 
 ## Scripts
 
-| Script              | What it does                    |
-| ------------------- | ------------------------------- |
-| `pnpm build`        | Compile to `dist/`              |
-| `pnpm start`        | Run the compiled server         |
-| `pnpm test`         | Build, then run the smoke tests |
-| `pnpm lint`         | ESLint                          |
-| `pnpm format:check` | Prettier check                  |
-| `pnpm typecheck`    | TypeScript without emitting     |
+| Script               | What it does                |
+| -------------------- | --------------------------- |
+| `pnpm build`         | Compile to `dist/`          |
+| `pnpm start`         | Run the compiled server     |
+| `pnpm corpus:import` | Import the pilot corpus     |
+| `pnpm test`          | Build, then run the tests   |
+| `pnpm lint`          | ESLint                      |
+| `pnpm format:check`  | Prettier check              |
+| `pnpm typecheck`     | TypeScript without emitting |
 
 ## Credits
 
 - [Kevin Owocki](https://github.com/owocki), for the [Wisdom Context Window](https://wisdom.owocki.com/): the corpus of texts, summaries and concept graph this server searches.
+- [Chinese Wikisource](https://zh.wikisource.org/), [Perseus Digital Library](https://www.perseus.tufts.edu/), [SuttaCentral](https://suttacentral.net/), [Sefaria](https://www.sefaria.org/) and the [gita/gita](https://github.com/gita/gita) dataset, for the original-language texts.
 - [sqlite-vec](https://github.com/asg017/sqlite-vec) by Alex Garcia, for vector search inside SQLite.
 - The [Model Context Protocol](https://modelcontextprotocol.io) TypeScript SDK.
 

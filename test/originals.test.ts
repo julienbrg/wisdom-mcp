@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { chaptersOf } from '../dist/corpus/originals/gita.js';
+import { meditationsChapters } from '../dist/corpus/originals/meditations.js';
 import { group, parseTei } from '../dist/corpus/originals/perseus.js';
 import { cleanVerse } from '../dist/corpus/originals/sefaria.js';
 import { versesOf } from '../dist/corpus/originals/suttacentral.js';
@@ -78,4 +79,14 @@ test('gita: verses joined by chapter in verse order', () => {
       ['2', 'c'],
     ],
   );
+});
+
+test('meditations: Casaubon sections map onto the Perseus chapters they translate', () => {
+  assert.deepEqual(meditationsChapters('1.1'), ['1.1', '1.2', '1.3', '1.4']);
+  assert.deepEqual(meditationsChapters('1.15'), ['2.1']);
+  assert.deepEqual(meditationsChapters('2.6'), ['2.9']);
+  assert.deepEqual(meditationsChapters('12.3'), ['12.4']);
+  assert.deepEqual(meditationsChapters('12.15'), ['12.19', '12.20', '12.21']);
+  assert.throws(() => meditationsChapters('2.5'), /no section/);
+  assert.throws(() => meditationsChapters('12.28'), /no section/);
 });

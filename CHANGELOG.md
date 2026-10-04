@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `docs/COMPATIBILITY.md`, a guide to the chat apps, coding tools and LLM APIs that can use the server as a connector: plans, setup per service, and how to expose the server over HTTPS. Linked from a new Compatibility section in the README.
 - NestJS (ESM) project with pnpm, TypeScript, ESLint, Prettier and a CI workflow.
 - SQLite database through better-sqlite3, with sqlite-vec loaded at startup and numbered SQL migrations applied on boot.
 - Schema for `works`, `texts`, `passages`, `originals` and `translations`, plus the `passages_fts`, `originals_fts` and `passages_vec` indexes.

@@ -93,6 +93,10 @@ Search is hybrid: an FTS5 keyword index over passage text and keywords, and a ve
 
 The `wisdom` skill first restates the question as the human situation underneath it, then answers with `search_passages` and `read_passages` only, quoting the originals with their references and its own translations. It may run one web search to understand an unfamiliar term, never as answer content. Ask follow-up questions in the same window. The whole conversation, with the reframed question, every tool call, the ids read and the number of calls per turn, is written to `test/output/<NNNNN>-<mon>-<dd>-<question-slug>.md`, numbered from `00001`, which is git-ignored.
 
+## Compatibility
+
+Any MCP client that speaks Streamable HTTP can use the server. Local clients such as Cursor, VS Code, Zed, Gemini CLI or Codex CLI connect to `http://localhost:3000/mcp` directly. Web apps such as Claude, ChatGPT, Le Chat, Perplexity, Gemini and Grok, and LLM APIs, need a public HTTPS URL. See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) for plans, setup per service, and how to expose the server.
+
 ## Scripts
 
 | Script               | What it does                |

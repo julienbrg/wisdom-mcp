@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- macOS `.DS_Store` files are now gitignored.
 - The Swagger document now takes its version from `package.json` instead of a hard-coded `0.1.0`.
 - Exports used only inside their own module are no longer exported.
 - Bhagavad Gita references are now the verse range each Arnold passage renders (e.g. 18.64-65) instead of a whole chapter. The Sanskrit is stored by verse, and a table maps each passage onto its verses: aligned offline with a local embedding model against the gita/gita English translations, keeping verse order, then checked by hand. `read_passages` now returns only those verses, in Sanskrit and English.

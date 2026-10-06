@@ -5,3 +5,4 @@ data
 .env
 docs/notes/
 test/output/
+.DS_Store

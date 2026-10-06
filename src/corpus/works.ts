@@ -1,4 +1,4 @@
-export type OriginalSource = 'wikisource' | 'suttacentral' | 'gita' | 'perseus' | 'sefaria';
+type OriginalSource = 'wikisource' | 'suttacentral' | 'gita' | 'perseus' | 'sefaria';
 
 export interface Work {
   id: string;

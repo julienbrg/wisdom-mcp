@@ -1,7 +1,7 @@
 import { gunzipSync } from 'node:zlib';
 import { cached } from './cache.js';
 
-export const WCW_URL = 'https://wisdom.owocki.com/downloads/wisdom-corpus.jsonl.gz';
+const WCW_URL = 'https://wisdom.owocki.com/downloads/wisdom-corpus.jsonl.gz';
 
 export interface WcwRecord {
   slug: string;

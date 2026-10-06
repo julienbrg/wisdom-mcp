@@ -1,4 +1,4 @@
-export interface SourceUnit {
+interface SourceUnit {
   body: string;
   url: string;
 }

@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { DB, type Db } from '../database/database.module.js';
 import { EmbeddingsService } from './embeddings.service.js';
 
-export interface Hit {
+interface Hit {
   id: string;
   author: string;
   title: string;

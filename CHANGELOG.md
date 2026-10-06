@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- The Swagger document now takes its version from `package.json` instead of a hard-coded `0.1.0`.
+- Exports used only inside their own module are no longer exported.
 - Bhagavad Gita references are now the verse range each Arnold passage renders (e.g. 18.64-65) instead of a whole chapter. The Sanskrit is stored by verse, and a table maps each passage onto its verses: aligned offline with a local embedding model against the gita/gita English translations, keeping verse order, then checked by hand. `read_passages` now returns only those verses, in Sanskrit and English.
 - Meditations references are now one Casaubon section each (book.section) instead of a whole book. The Greek is stored by Perseus chapter, and a hand-checked table maps each of Casaubon's sections onto the chapters it translates, because his numbering merges and splits them. `read_passages` now returns only the matching section, in Greek and English.
 - The keyword fallback that matches any term now ignores common English stop words, so hits no longer come in on words like "should" or "to" alone. Quoted phrases are kept, and a query made only of stop words still searches every term.
@@ -16,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- knip, with a `pnpm knip` script and a CI step after the build, to keep unused files, exports and dependencies out of the repo.
 - `docs/COMPATIBILITY.md`, a guide to the chat apps, coding tools and LLM APIs that can use the server as a connector: plans, setup per service, and how to expose the server over HTTPS. Linked from a new Compatibility section in the README.
 - NestJS (ESM) project with pnpm, TypeScript, ESLint, Prettier and a CI workflow.
 - SQLite database through better-sqlite3, with sqlite-vec loaded at startup and numbered SQL migrations applied on boot.

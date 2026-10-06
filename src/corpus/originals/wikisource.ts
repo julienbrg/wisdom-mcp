@@ -55,7 +55,7 @@ function convert(rule: string): string {
 }
 
 // A section runs until the next heading or the end of the transcluded part.
-export function untilTrailer(s: string): string {
+function untilTrailer(s: string): string {
   const end = s.search(/^=|<\/onlyinclude>/m);
   return end < 0 ? s : s.slice(0, end);
 }

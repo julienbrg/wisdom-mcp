@@ -15,7 +15,7 @@ export interface ImportStats {
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
 // "analects:123" for a whole corpus passage, "analects:123b" for the second chapter in it.
-export const passageId = (workId: string, s: Pick<Segment, 'n' | 'part'>) =>
+const passageId = (workId: string, s: Pick<Segment, 'n' | 'part'>) =>
   `${workId}:${s.n}${s.part ? String.fromCharCode(97 + s.part) : ''}`;
 
 export async function importWorks(db: Db, works: Work[], cacheDir: string): Promise<ImportStats[]> {

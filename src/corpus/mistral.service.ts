@@ -71,7 +71,7 @@ export class MistralService {
   }
 }
 
-export function normalize(v: ArrayLike<number>): Float32Array {
+function normalize(v: ArrayLike<number>): Float32Array {
   const out = Float32Array.from(v);
   const n = Math.hypot(...out);
   return n ? out.map((x) => x / n) : out;

@@ -1,0 +1,38 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { transcribe } from '../dist/corpus/transcription/index.js';
+
+test('Greek keeps accents and breathings, and writes the iota subscript', () => {
+  assert.equal(
+    transcribe('grc', 'ΜΑΚΑΡΙΟΙ οἱ πτωχοὶ τῷ πνεύματι, ὅτι αὐτῶν ἐστὶν ἡ βασιλεία τῶν οὐρανῶν.'),
+    'MAKARIOI hoi ptōchoì tôi pneúmati, hóti autôn estìn hē basileía tôn ouranôn.',
+  );
+  assert.equal(transcribe('grc', 'ἐφʼ ἡμῖν; Ἁγιασθήτω·'), 'eph’ hēmîn? Hagiasthḗtō;');
+  assert.equal(transcribe('grc', 'ῥῆμα ἄγγελος'), 'rhêma ángelos');
+});
+
+test('Hebrew is read from the points, without cantillation', () => {
+  assert.equal(
+    transcribe('hbo', 'דִּבְרֵי֙ קֹהֶ֣לֶת בֶּן־דָּוִ֔ד מֶ֖לֶךְ בִּירוּשָׁלָֽ͏ִם׃'),
+    'divre qohelet ben-david melekh birushalaim.',
+  );
+  assert.equal(
+    transcribe('hbo', 'הֲבֵ֤ל הֲבָלִים֙ אָמַ֣ר קֹהֶ֔לֶת הֲבֵ֥ל הֲבָלִ֖ים הַכֹּ֥ל הָֽבֶל׃'),
+    'havel havalim amar qohelet havel havalim hakkol havel.',
+  );
+});
+
+test('Sanskrit is written in IAST', () => {
+  assert.equal(
+    transcribe(
+      'san',
+      'धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः।\nमामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय।।1.1।।',
+    ),
+    'dharmakṣetre kurukṣetre samavetā yuyutsavaḥ|\nmāmakāḥ pāṇḍavāścaiva kimakurvata sañjaya||1.1||',
+  );
+  assert.equal(transcribe('san', 'एवमुक्त्वाऽर्जुनः संख्ये'), 'evamuktvā’rjunaḥ saṃkhye');
+});
+
+test('Pali and unknown languages get no transcription', () => {
+  assert.equal(transcribe('pli', 'Manopubbaṅgamā dhammā'), null);
+});

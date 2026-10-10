@@ -1,7 +1,8 @@
 node_modules
 dist
 coverage
-data
+data/*
+!data/pinyin/
 .env
 docs/notes/
 test/output/

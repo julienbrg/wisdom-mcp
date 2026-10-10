@@ -12,6 +12,13 @@ const LANGUAGES: Record<string, string> = {
   hbo: 'Biblical Hebrew',
 };
 
+const SCHEMES: Record<string, string> = {
+  lzh: 'Hanyu Pinyin, classical readings',
+  grc: 'romanization',
+  hbo: 'romanization',
+  san: 'IAST',
+};
+
 interface Unit {
   workId: string;
   refUnit: string;
@@ -52,8 +59,11 @@ export class PassagesService {
     );
     this.original = db.prepare<
       [string, string],
-      { body: string; source_url: string; license: string }
-    >('select body, source_url, license from originals where work_id = ? and ref_unit = ?');
+      { body: string; transcription: string | null; source_url: string; license: string }
+    >(
+      `select body, transcription, source_url, license from originals
+       where work_id = ? and ref_unit = ?`,
+    );
     this.aid = db.prepare<[string, string], { body: string }>(
       `select p.body from passages p join texts t on t.id = p.text_id
        where p.work_id = ? and p.ref_unit = ? and p.is_apparatus = 0 and t.quotable = 1
@@ -121,7 +131,11 @@ export class PassagesService {
 
     const language = LANGUAGES[w.original_language] ?? w.original_language;
     const orig = cutWords(original.body, share, true);
-    const aidBudget = Math.max(share - countWords(orig.text), 0);
+    // The transcription follows the original word for word, so it is cut to the same length.
+    const transcription = original.transcription
+      ? cutWords(original.transcription, countWords(orig.text)).text
+      : '';
+    const aidBudget = Math.max(share - countWords(orig.text) - countWords(transcription), 0);
     const aidCut = cutWords(aid, aidBudget);
     aid = aidCut.text;
 
@@ -132,6 +146,14 @@ export class PassagesService {
       orig.text +
         (orig.cut ? `\n[Cut at a sentence boundary; reference ${u.refUnit} continues.]` : ''),
     );
+    if (transcription) {
+      const scheme = SCHEMES[w.original_language] ?? 'transcription';
+      lines.push(
+        '',
+        `TRANSCRIPTION (pronunciation aid, ${scheme}; not the source, do not quote it as the original)`,
+        transcription,
+      );
+    }
     if (aid) {
       lines.push(
         '',

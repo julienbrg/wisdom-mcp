@@ -7,7 +7,7 @@ import { openDatabase } from '../dist/database/database.module.js';
 
 test('migrations create the schema', () => {
   const db = openDatabase(':memory:');
-  assert.equal(db.pragma('user_version', { simple: true }), 2);
+  assert.equal(db.pragma('user_version', { simple: true }), 3);
 
   const tables = db
     .prepare("select name from sqlite_master where type = 'table'")
@@ -28,6 +28,8 @@ test('migrations create the schema', () => {
   ]) {
     assert.ok(tables.includes(name), `missing table ${name}`);
   }
+  const columns = db.pragma('table_info(originals)').map((c: { name: string }) => c.name);
+  assert.ok(columns.includes('transcription'));
 });
 
 test('sqlite-vec stores 1024-dimension vectors', () => {
@@ -45,5 +47,5 @@ test('migrations are not re-applied on reopen', () => {
   const path = join(mkdtempSync(join(tmpdir(), 'wisdom-')), 'app.db');
   openDatabase(path).close();
   const db = openDatabase(path);
-  assert.equal(db.pragma('user_version', { simple: true }), 2);
+  assert.equal(db.pragma('user_version', { simple: true }), 3);
 });

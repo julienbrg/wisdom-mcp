@@ -2,6 +2,7 @@ import type { Db } from '../database/database.module.js';
 import { isVerse, normalize } from './normalize.js';
 import { loadOriginals, type Original } from './originals/index.js';
 import { segment, type Segment } from './references.js';
+import { transcribeOriginals } from './transcription/index.js';
 import { loadWcw, splitPassages } from './wcw.js';
 import type { Work } from './works.js';
 
@@ -18,19 +19,27 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 const passageId = (workId: string, s: Pick<Segment, 'n' | 'part'>) =>
   `${workId}:${s.n}${s.part ? String.fromCharCode(97 + s.part) : ''}`;
 
-export async function importWorks(db: Db, works: Work[], cacheDir: string): Promise<ImportStats[]> {
+/** Each work's passages and originals, as the import stores them. */
+export async function prepareWorks(works: Work[], cacheDir: string) {
   const records = await loadWcw(
     cacheDir,
     works.map((w) => w.id),
   );
-
-  // Everything is fetched before the first write, so a network failure leaves the database as it was.
   const prepared: { work: Work; segments: Segment[]; originals: Original[] }[] = [];
   for (const work of works) {
     const segments = segment(work.id, splitPassages(records.get(work.id)!.text));
     const units = [...new Set(segments.flatMap((s) => (s.apparatus ? [] : [s.refUnit!])))];
     prepared.push({ work, segments, originals: await loadOriginals(work, units, cacheDir) });
   }
+  return prepared;
+}
+
+export async function importWorks(db: Db, works: Work[], cacheDir: string): Promise<ImportStats[]> {
+  // Everything is fetched before the first write, so a network failure leaves the database as it was.
+  const prepared = await prepareWorks(works, cacheDir);
+  const transcriptions = prepared.map(({ work, originals }) =>
+    transcribeOriginals(work.id, work.originalLanguage, originals),
+  );
 
   const ids = works.map((w) => w.id);
   const placeholders = ids.map(() => '?').join(', ');
@@ -50,15 +59,15 @@ export async function importWorks(db: Db, works: Work[], cacheDir: string): Prom
      values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   );
   const insertOriginal = db.prepare(
-    `insert into originals (work_id, ref_unit, language, body, source_url, license)
-     values (?, ?, ?, ?, ?, ?)`,
+    `insert into originals (work_id, ref_unit, language, body, transcription, source_url, license)
+     values (?, ?, ?, ?, ?, ?, ?)`,
   );
 
   return db.transaction(() => {
     for (const { id } of oldPassages.all(...ids) as { id: string }[]) deleteVec.run(id);
     deleteWorks.run(...ids);
 
-    const stats = prepared.map(({ work, segments, originals }) => {
+    const stats = prepared.map(({ work, segments, originals }, w) => {
       const textId = `${work.id}:${slug(work.translator)}`;
       insertWork.run(
         work.id,
@@ -82,16 +91,17 @@ export async function importWorks(db: Db, works: Work[], cacheDir: string): Prom
           s.apparatus ? 1 : 0,
         ),
       );
-      for (const o of originals) {
+      originals.forEach((o, i) => {
         insertOriginal.run(
           work.id,
           o.refUnit,
           work.originalLanguage,
           o.body,
+          transcriptions[w][i],
           o.sourceUrl,
           o.license,
         );
-      }
+      });
       return {
         work: work.id,
         passages: segments.length,

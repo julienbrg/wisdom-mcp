@@ -59,7 +59,7 @@ test('mcp lists its tools', async () => {
   const { tools } = await rpc('tools/list', {});
   assert.deepEqual(
     tools.map((t: { name: string }) => t.name),
-    ['search_passages', 'read_passages', 'check_quote'],
+    ['search_passages', 'read_passages', 'check_quote', 'list_concepts', 'get_concept'],
   );
 });
 
@@ -91,6 +91,19 @@ test('check_quote reports no match on an empty corpus and rejects unknown works'
   });
   assert.equal(unknown.isError, true);
   assert.match(unknown.content[0].text, /No work matches "Plato"/);
+});
+
+test('concept tools report an empty graph and unknown ids', async () => {
+  const list = await rpc('tools/call', {
+    name: 'list_concepts',
+    arguments: { filter: 'death' },
+  });
+  assert.match(list.content[0].text, /No concept matches "death"/);
+  assert.deepEqual(list.structuredContent, { concepts: [] });
+
+  const unknown = await rpc('tools/call', { name: 'get_concept', arguments: { id: 'nope' } });
+  assert.equal(unknown.isError, true);
+  assert.equal(unknown.content[0].text, 'Unknown concept: nope. Find its id with list_concepts.');
 });
 
 test('mcp rejects foreign hosts', async () => {

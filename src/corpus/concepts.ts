@@ -23,7 +23,7 @@ interface Concept {
   tradition: string;
   school: string;
   domains: string[];
-  key_passages: { slug: string; idx: number; text: string }[];
+  key_passages: { slug: string; idx: number; text: string; quote?: string }[];
 }
 
 export interface ConceptStats {
@@ -52,8 +52,8 @@ export async function importConcepts(db: Db, cacheDir: string): Promise<ConceptS
      values (?, ?, ?, ?, ?, ?, ?, ?)`,
   );
   const insertPassage = db.prepare(
-    `insert into concept_passages (concept_id, position, work_slug, idx, text)
-     values (?, ?, ?, ?, ?)`,
+    `insert into concept_passages (concept_id, position, work_slug, idx, text, quote)
+     values (?, ?, ?, ?, ?, ?)`,
   );
   const insertLink = db.prepare(
     'insert or ignore into concept_links (source, target, type, note) values (?, ?, ?, ?)',
@@ -74,7 +74,7 @@ export async function importConcepts(db: Db, cacheDir: string): Promise<ConceptS
         c.domains.join(', '),
       );
       c.key_passages.forEach((p, position) => {
-        insertPassage.run(c.slug, position, p.slug, p.idx, p.text);
+        insertPassage.run(c.slug, position, p.slug, p.idx, p.text, p.quote ?? null);
         passages++;
       });
     }

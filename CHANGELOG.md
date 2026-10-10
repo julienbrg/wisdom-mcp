@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `get_concept` builds each key passage snippet around the phrase that makes it key, imported from the Wisdom Context Window's `quote` field into a new `concept_passages.quote` column, instead of cutting at the first 40 words. It starts a few words before the phrase, and falls back to the passage opening when the phrase isn't in the text.
+- `list_concepts` and `get_concept` show the original term after the name without an extra pair of parentheses, and `get_concept` no longer wraps snippets in quotation marks.
+- The `/wisdom` skill gives the transcription after a quote without a label.
 - macOS `.DS_Store` files are now gitignored.
 - The Swagger document now takes its version from `package.json` instead of a hard-coded `0.1.0`.
 - Exports used only inside their own module are no longer exported.

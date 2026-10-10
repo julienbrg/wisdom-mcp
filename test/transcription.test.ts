@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { transcribe } from '../dist/corpus/transcription/index.js';
+import { transcribe, transcribeOriginals } from '../dist/corpus/transcription/index.js';
 import { toPinyin } from '../dist/corpus/transcription/pinyin.js';
 
 test('Greek keeps accents and breathings, and writes the iota subscript', () => {
@@ -67,4 +67,19 @@ test('pinyin lists polyphones that have no reading', () => {
     { pos: 2, char: '樂' },
   ]);
   assert.throws(() => toPinyin('知者樂水', [ref(1, '樂', 'yào')]), /reading at 1 is for 樂/);
+});
+
+test('the Analects take their readings from data/pinyin/analects.json', () => {
+  const body = '子曰：「學而時習之，不亦說乎？有朋自遠方來，不亦樂乎？人不知而不慍，不亦君子乎？」';
+  assert.deepEqual(transcribeOriginals('analects', 'lzh', [{ refUnit: '1.1', body }]), [
+    'zǐ yuē: “xué ér shí xí zhī, bù yì yuè hū? yǒu péng zì yuǎn fāng lái, bù yì lè hū? ' +
+      'rén bù zhī ér bù yùn, bù yì jūn zǐ hū?”',
+  ]);
+});
+
+test('the import fails and lists polyphones that have no reviewed reading', () => {
+  assert.throws(
+    () => transcribeOriginals('analects', 'lzh', [{ refUnit: '0.0', body: '知者樂水' }]),
+    /2 polyphones have no reviewed reading[\s\S]*analects 0\.0 @0 知\nanalects 0\.0 @2 樂/,
+  );
 });

@@ -76,17 +76,23 @@ test('import writes works, texts, passages and originals, and can run again', as
   assert.match(passages[2].raw, /^21:001:001 .*\n {11}Jerusalem\.$/);
 
   assert.deepEqual(
-    db.prepare('select ref_unit, body, source_url, license from originals order by id').all(),
+    db
+      .prepare(
+        'select ref_unit, body, transcription, source_url, license from originals order by id',
+      )
+      .all(),
     [
       {
         ref_unit: '1:1',
         body: 'דִּבְרֵי קֹהֶלֶת',
+        transcription: 'divre qohelet',
         source_url: 'https://www.sefaria.org/Ecclesiastes.1.1?lang=he',
         license: 'CC-BY-SA (Sefaria, Miqra according to the Masorah)',
       },
       {
         ref_unit: '5:1',
         body: '4:17',
+        transcription: '4:17',
         source_url: 'https://www.sefaria.org/Ecclesiastes.4.17?lang=he',
         license: 'CC-BY-SA (Sefaria, Miqra according to the Masorah)',
       },

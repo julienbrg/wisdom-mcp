@@ -17,8 +17,10 @@ function seed() {
       ('tao:228', 'tao:legge', 'tao', 1, '63.1', '63', 'x', 'It is the way of the Tao to act without acting.', 0),
       ('tao:229', 'tao:legge', 'tao', 2, '63.2', '63', 'x', 'He recompenses injury with kindness.', 0),
       ('ecc:1', 'ecc:kjv', 'ecc', 0, '7:1', '7.1', 'x', 'A good name is better than precious ointment.', 0);
-    insert into originals (work_id, ref_unit, language, body, source_url, license) values
-      ('tao', '63', 'lzh', '為無為，事無事，味無味。大小多少，報怨以德。', 'https://zh.wikisource.org/', 'CC BY-SA 4.0');
+    insert into originals (work_id, ref_unit, language, body, transcription, source_url, license) values
+      ('tao', '63', 'lzh', '為無為，事無事，味無味。大小多少，報怨以德。',
+       'wéi wú wéi, shì wú shì, wèi wú wèi. dà xiǎo duō shǎo, bào yuàn yǐ dé.',
+       'https://zh.wikisource.org/', 'CC BY-SA 4.0');
   `);
   return db;
 }
@@ -36,6 +38,9 @@ test('read returns each reference unit once with original and aid translation', 
       '',
       'ORIGINAL (quote this)',
       '為無為，事無事，味無味。大小多少，報怨以德。',
+      '',
+      'TRANSCRIPTION (pronunciation aid, Hanyu Pinyin, classical readings; not the source, do not quote it as the original)',
+      'wéi wú wéi, shì wú shì, wèi wú wèi. dà xiǎo duō shǎo, bào yuàn yǐ dé.',
       '',
       'AID TRANSLATION (James Legge, 1891, public domain)',
       'It is the way of the Tao to act without acting.\n\nHe recompenses injury with kindness.',

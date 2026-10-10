@@ -2,6 +2,7 @@ import type { Db } from '../database/database.module.js';
 import { isVerse, normalize } from './normalize.js';
 import { loadOriginals, type Original } from './originals/index.js';
 import { segment, type Segment } from './references.js';
+import { transcribeOriginals } from './transcription/index.js';
 import { loadWcw, splitPassages } from './wcw.js';
 import type { Work } from './works.js';
 
@@ -36,6 +37,9 @@ export async function prepareWorks(works: Work[], cacheDir: string) {
 export async function importWorks(db: Db, works: Work[], cacheDir: string): Promise<ImportStats[]> {
   // Everything is fetched before the first write, so a network failure leaves the database as it was.
   const prepared = await prepareWorks(works, cacheDir);
+  const transcriptions = prepared.map(({ work, originals }) =>
+    transcribeOriginals(work.id, work.originalLanguage, originals),
+  );
 
   const ids = works.map((w) => w.id);
   const placeholders = ids.map(() => '?').join(', ');
@@ -55,15 +59,15 @@ export async function importWorks(db: Db, works: Work[], cacheDir: string): Prom
      values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   );
   const insertOriginal = db.prepare(
-    `insert into originals (work_id, ref_unit, language, body, source_url, license)
-     values (?, ?, ?, ?, ?, ?)`,
+    `insert into originals (work_id, ref_unit, language, body, transcription, source_url, license)
+     values (?, ?, ?, ?, ?, ?, ?)`,
   );
 
   return db.transaction(() => {
     for (const { id } of oldPassages.all(...ids) as { id: string }[]) deleteVec.run(id);
     deleteWorks.run(...ids);
 
-    const stats = prepared.map(({ work, segments, originals }) => {
+    const stats = prepared.map(({ work, segments, originals }, w) => {
       const textId = `${work.id}:${slug(work.translator)}`;
       insertWork.run(
         work.id,
@@ -87,16 +91,17 @@ export async function importWorks(db: Db, works: Work[], cacheDir: string): Prom
           s.apparatus ? 1 : 0,
         ),
       );
-      for (const o of originals) {
+      originals.forEach((o, i) => {
         insertOriginal.run(
           work.id,
           o.refUnit,
           work.originalLanguage,
           o.body,
+          transcriptions[w][i],
           o.sourceUrl,
           o.license,
         );
-      }
+      });
       return {
         work: work.id,
         passages: segments.length,

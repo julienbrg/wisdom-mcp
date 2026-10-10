@@ -55,11 +55,11 @@ test('mcp answers initialize with server instructions', async () => {
   assert.match(result.instructions, /Search in English/);
 });
 
-test('mcp lists search_passages and read_passages', async () => {
+test('mcp lists its tools', async () => {
   const { tools } = await rpc('tools/list', {});
   assert.deepEqual(
     tools.map((t: { name: string }) => t.name),
-    ['search_passages', 'read_passages'],
+    ['search_passages', 'read_passages', 'check_quote'],
   );
 });
 
@@ -75,6 +75,22 @@ test('search_passages falls back to keywords without the embedding API', async (
 test('read_passages reports unknown ids', async () => {
   const result = await rpc('tools/call', { name: 'read_passages', arguments: { ids: ['nope:1'] } });
   assert.equal(result.content[0].text, 'Not found or not quotable: nope:1.');
+});
+
+test('check_quote reports no match on an empty corpus and rejects unknown works', async () => {
+  const none = await rpc('tools/call', {
+    name: 'check_quote',
+    arguments: { quote: 'A good name is better than precious ointment' },
+  });
+  assert.equal(none.content[0].text, 'No exact match and no close candidate.');
+  assert.deepEqual(none.structuredContent, { exact: [], candidates: [] });
+
+  const unknown = await rpc('tools/call', {
+    name: 'check_quote',
+    arguments: { quote: 'A good name', work: 'Plato' },
+  });
+  assert.equal(unknown.isError, true);
+  assert.match(unknown.content[0].text, /No work matches "Plato"/);
 });
 
 test('mcp rejects foreign hosts', async () => {

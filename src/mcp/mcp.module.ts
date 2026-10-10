@@ -3,10 +3,11 @@ import { CorpusModule } from '../corpus/corpus.module.js';
 import { McpController } from './mcp.controller.js';
 import { McpFactory } from './mcp.factory.js';
 import { MCP_TOOLS, type McpTool } from './mcp-tool.js';
+import { CheckQuoteTool } from './tools/check-quote.tool.js';
 import { ReadPassagesTool } from './tools/read-passages.tool.js';
 import { SearchPassagesTool } from './tools/search-passages.tool.js';
 
-const TOOLS: Type<McpTool>[] = [SearchPassagesTool, ReadPassagesTool];
+const TOOLS: Type<McpTool>[] = [SearchPassagesTool, ReadPassagesTool, CheckQuoteTool];
 
 @Module({
   imports: [CorpusModule],

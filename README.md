@@ -70,12 +70,13 @@ This writes search keywords for each quotable passage, rebuilds the keyword inde
 
 ## Tools
 
-| Tool              | Input          | Returns                                                                                    |
-| ----------------- | -------------- | ------------------------------------------------------------------------------------------ |
-| `search_passages` | `query`        | Up to 20 hits (id, author, work, reference, snippet), at most 3 per work                   |
-| `read_passages`   | `ids` (max 10) | Each reference unit once: the original to quote, its source, and the translation as an aid |
+| Tool              | Input            | Returns                                                                                    |
+| ----------------- | ---------------- | ------------------------------------------------------------------------------------------ |
+| `search_passages` | `query`          | Up to 20 hits (id, author, work, reference, snippet), at most 3 per work                   |
+| `read_passages`   | `ids` (max 10)   | Each reference unit once: the original to quote, its source, and the translation as an aid |
+| `check_quote`     | `quote`, `work`? | The exact match (id, work, reference), or the closest candidates                           |
 
-Search is hybrid: an FTS5 keyword index over passage text and keywords, and a vector index over Mistral embeddings, merged with reciprocal rank fusion. When too few passages contain every term, keyword search adds passages that contain any of them, ignoring common English stop words. If the embedding call fails or takes more than 5 seconds, search returns keyword results only and says so. `read_passages` stops at about 6,000 words. The server sends its quoting rules to the client as MCP `instructions`.
+Search is hybrid: an FTS5 keyword index over passage text and keywords, and a vector index over Mistral embeddings, merged with reciprocal rank fusion. When too few passages contain every term, keyword search adds passages that contain any of them, ignoring common English stop words. If the embedding call fails or takes more than 5 seconds, search returns keyword results only and says so. `read_passages` stops at about 6,000 words. `check_quote` compares quotes with whitespace and punctuation removed but diacritics kept, through the trigram index on originals and the keyword index on translations. The server sends its quoting rules to the client as MCP `instructions`.
 
 ## Endpoints
 

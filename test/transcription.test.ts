@@ -77,6 +77,14 @@ test('the Analects take their readings from data/pinyin/analects.json', () => {
   ]);
 });
 
+test('於 reads yú, and 夫 opening a clause is the particle fú', () => {
+  const body =
+    '民之饑，以其上食稅之多，是以饑。民之難治，以其上之有為，是以難治。' +
+    '民之輕死，以其上求生之厚，是以輕死。夫唯無以生為者，是賢於貴生。';
+  const [text] = transcribeOriginals('tao-te-ching', 'lzh', [{ refUnit: '75', body }]);
+  assert.match(text!, /fú wéi wú yǐ shēng wéi zhě, shì xián yú guì shēng\.$/);
+});
+
 test('the import fails and lists polyphones that have no reviewed reading', () => {
   assert.throws(
     () => transcribeOriginals('analects', 'lzh', [{ refUnit: '0.0', body: '知者樂水' }]),

@@ -145,9 +145,9 @@
     {
       "pos": 100,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     }
   ],
   "3": [
@@ -363,6 +363,13 @@
       "note": "烏路反注作同也"
     },
     {
+      "pos": 24,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 36,
       "char": "與",
       "pinyin": "yǔ",
@@ -379,9 +386,9 @@
     {
       "pos": 56,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     }
   ],
   "9": [
@@ -627,6 +634,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 58,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 84,
       "char": "見",
       "pinyin": "jiàn",
@@ -666,9 +680,9 @@
     {
       "pos": 17,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 21,
@@ -701,9 +715,9 @@
     {
       "pos": 107,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     }
   ],
   "16": [
@@ -717,9 +731,9 @@
     {
       "pos": 20,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 47,
@@ -877,6 +891,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 166,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 171,
       "char": "食",
       "pinyin": "shí",
@@ -967,9 +988,9 @@
     {
       "pos": 66,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 74,
@@ -1009,9 +1030,51 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 36,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 42,
       "char": "從",
       "pinyin": "cóng",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 44,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 51,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 58,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 65,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 70,
+      "char": "於",
+      "pinyin": "yú",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },
@@ -1023,9 +1086,23 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 81,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 87,
       "char": "樂",
       "pinyin": "yuè",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 92,
+      "char": "於",
+      "pinyin": "yú",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },
@@ -1341,6 +1418,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 25,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 30,
       "char": "知",
       "pinyin": "zhī",
@@ -1362,6 +1446,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 57,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 62,
       "char": "知",
       "pinyin": "zhī",
@@ -1379,6 +1470,13 @@
       "pos": 78,
       "char": "足",
       "pinyin": "zú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 82,
+      "char": "於",
+      "pinyin": "yú",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },
@@ -1510,9 +1608,9 @@
     {
       "pos": 0,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 12,
@@ -1552,14 +1650,21 @@
     {
       "pos": 75,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 76,
       "char": "樂",
       "pinyin": "yuè",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 87,
+      "char": "於",
+      "pinyin": "yú",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },
@@ -1666,9 +1771,9 @@
     {
       "pos": 59,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 61,
@@ -1688,6 +1793,13 @@
       "pos": 65,
       "char": "知",
       "pinyin": "zhī",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 84,
+      "char": "於",
+      "pinyin": "yú",
       "source": "經典釋文",
       "note": "如字 (no note)"
     }
@@ -1783,6 +1895,13 @@
       "pos": 33,
       "char": "為",
       "pinyin": "wéi",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 42,
+      "char": "於",
+      "pinyin": "yú",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },
@@ -1943,6 +2062,13 @@
       "pinyin": "qiáng",
       "source": "經典釋文",
       "note": "如字 (no note)"
+    },
+    {
+      "pos": 56,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
     }
   ],
   "37": [
@@ -1984,9 +2110,9 @@
     {
       "pos": 45,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 47,
@@ -2077,9 +2203,9 @@
     {
       "pos": 99,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 114,
@@ -2224,6 +2350,22 @@
       "note": "色主反"
     }
   ],
+  "40": [
+    {
+      "pos": 19,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 24,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    }
+  ],
   "41": [
     {
       "pos": 7,
@@ -2312,9 +2454,9 @@
     {
       "pos": 123,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     }
   ],
   "42": [
@@ -2572,6 +2714,13 @@
   ],
   "46": [
     {
+      "pos": 20,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 25,
       "char": "莫",
       "pinyin": "mò",
@@ -2582,6 +2731,13 @@
       "pos": 26,
       "char": "大",
       "pinyin": "dà",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 27,
+      "char": "於",
+      "pinyin": "yú",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },
@@ -2610,6 +2766,13 @@
       "pos": 34,
       "char": "大",
       "pinyin": "dà",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 35,
+      "char": "於",
+      "pinyin": "yú",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },
@@ -2723,6 +2886,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 19,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 21,
       "char": "為",
       "pinyin": "wéi",
@@ -2771,9 +2941,9 @@
     {
       "pos": 36,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 55,
@@ -2792,9 +2962,9 @@
     {
       "pos": 89,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     }
   ],
   "51": [
@@ -2815,9 +2985,9 @@
     {
       "pos": 38,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 39,
@@ -2936,6 +3106,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 8,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 9,
       "char": "大",
       "pinyin": "dà",
@@ -2994,6 +3171,27 @@
   ],
   "54": [
     {
+      "pos": 25,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 35,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 46,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 47,
       "char": "鄉",
       "pinyin": "xiāng",
@@ -3004,6 +3202,20 @@
       "pos": 52,
       "char": "長",
       "pinyin": "cháng",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 56,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 66,
+      "char": "於",
+      "pinyin": "yú",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },
@@ -3065,6 +3277,13 @@
     }
   ],
   "55": [
+    {
+      "pos": 6,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
     {
       "pos": 38,
       "char": "知",
@@ -3272,9 +3491,9 @@
     {
       "pos": 10,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 24,
@@ -3344,9 +3563,9 @@
     {
       "pos": 50,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 53,
@@ -3416,9 +3635,9 @@
     {
       "pos": 90,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 99,
@@ -3495,6 +3714,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 26,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 30,
       "char": "為",
       "pinyin": "wéi",
@@ -3509,6 +3735,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 32,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 38,
       "char": "難",
       "pinyin": "nán",
@@ -3516,9 +3749,23 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 42,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 47,
       "char": "大",
       "pinyin": "dà",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 51,
+      "char": "於",
+      "pinyin": "yú",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },
@@ -3546,9 +3793,9 @@
     {
       "pos": 69,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 80,
@@ -3581,9 +3828,44 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 25,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 32,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 43,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 53,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 60,
       "char": "行",
       "pinyin": "xíng",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 63,
+      "char": "於",
+      "pinyin": "yú",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },
@@ -3612,6 +3894,13 @@
       "pos": 96,
       "char": "從",
       "pinyin": "cóng",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 100,
+      "char": "於",
+      "pinyin": "yú",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },
@@ -3869,9 +4158,9 @@
     {
       "pos": 107,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 112,
@@ -3962,6 +4251,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 48,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 55,
       "char": "喪",
       "pinyin": "sāng",
@@ -4029,9 +4325,9 @@
     {
       "pos": 30,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 33,
@@ -4094,9 +4390,9 @@
     {
       "pos": 11,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     }
   ],
   "72": [
@@ -4117,9 +4413,9 @@
     {
       "pos": 23,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 26,
@@ -4151,6 +4447,20 @@
     }
   ],
   "73": [
+    {
+      "pos": 1,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 8,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
     {
       "pos": 28,
       "char": "惡",
@@ -4205,9 +4515,9 @@
     {
       "pos": 42,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 52,
@@ -4219,9 +4529,9 @@
     {
       "pos": 57,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 59,
@@ -4263,14 +4573,21 @@
     {
       "pos": 51,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
     },
     {
       "pos": 56,
       "char": "為",
       "pinyin": "wéi",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 61,
+      "char": "於",
+      "pinyin": "yú",
       "source": "經典釋文",
       "note": "如字 (no note)"
     }
@@ -4407,6 +4724,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 5,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 11,
       "char": "強",
       "pinyin": "qiáng",
@@ -4517,6 +4841,13 @@
       "pos": 13,
       "char": "為",
       "pinyin": "wéi",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 28,
+      "char": "於",
+      "pinyin": "yú",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },

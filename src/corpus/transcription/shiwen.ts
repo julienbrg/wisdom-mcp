@@ -128,8 +128,14 @@ const RUZI: Record<string, string> = {
   大: 'dà',
   夫: 'fū',
   舍: 'shè',
+  於: 'yú',
 };
 export const ruzi = (c: string) => RUZI[fold(c)];
+
+// 夫 opening a clause is the particle 音扶 (夫唯, 夫物), which 釋文 does not note every time;
+// 夫子, the Master, keeps its usual reading.
+const clauseInitial = (chars: string[], pos: number) =>
+  (pos === 0 || /[\p{P}\s]/u.test(chars[pos - 1])) && chars[pos + 1] !== '子';
 
 const isPolyphone = (c: string) => POLYPHONES.has(fold(c));
 const HAN = /\p{Script=Han}/u;
@@ -340,6 +346,7 @@ export function draft(
 ): { readings: Readings; unmatched: Note[] } {
   const readings: Readings = {};
   const unmatched: Note[] = [];
+  const bodies = new Map(units.map((u) => [u.refUnit, [...u.body]]));
   for (const [book, slots] of slotsByBook(units, bookOf)) {
     const text = slots.map((s) => fold(s.char)).join('');
     const events = new Map<number, { pinyin: string | null; note: Note; carry: boolean }>();
@@ -375,6 +382,12 @@ export function draft(
           note: `下同 (${from.at.refUnit} ${from.note.head}: ${from.note.note})`,
         };
         if (!from.pinyin) entry.todo = 'carried note not resolved';
+      } else if (c === '夫' && clauseInitial(bodies.get(slot.refUnit)!, slot.pos)) {
+        entry = {
+          pinyin: 'fú',
+          source: '經典釋文',
+          note: '如字 (no note); clause-initial particle 夫, 音扶',
+        };
       } else {
         entry = { pinyin: ruzi(c), source: '經典釋文', note: '如字 (no note)' };
       }

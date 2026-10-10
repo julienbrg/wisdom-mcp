@@ -1,0 +1,385 @@
+[
+  {
+    "id": "anger-at-work",
+    "situation": "I keep losing my temper with my colleagues at work.",
+    "relevant": [
+      "dhammapada:242",
+      "dhammapada:243",
+      "ecclesiastes:124",
+      "meditations:68",
+      "enchiridion:164"
+    ]
+  },
+  {
+    "id": "child-died",
+    "situation": "My child died last month and I cannot stop grieving.",
+    "relevant": [
+      "enchiridion:89",
+      "enchiridion:73",
+      "enchiridion:96",
+      "bhagavad-gita:34",
+      "bhagavad-gita:37",
+      "sermon-on-the-mount:3"
+    ]
+  },
+  {
+    "id": "fear-of-death",
+    "situation": "I am afraid of dying.",
+    "relevant": [
+      "enchiridion:77",
+      "enchiridion:110",
+      "bhagavad-gita:36",
+      "bhagavad-gita:37",
+      "meditations:78",
+      "analects:121"
+    ]
+  },
+  {
+    "id": "worry-future",
+    "situation": "I worry all the time about what will happen to me next year.",
+    "relevant": [
+      "sermon-on-the-mount:72",
+      "sermon-on-the-mount:81",
+      "enchiridion:66",
+      "meditations:456",
+      "meditations:315"
+    ]
+  },
+  {
+    "id": "get-rich",
+    "situation": "I want to get rich as fast as possible.",
+    "relevant": [
+      "ecclesiastes:93",
+      "ecclesiastes:96",
+      "sermon-on-the-mount:66",
+      "sermon-on-the-mount:71",
+      "dhammapada:222",
+      "analects:43c"
+    ]
+  },
+  {
+    "id": "risky-investment",
+    "situation": "I am about to put all my savings into a risky crypto token.",
+    "relevant": [
+      "ecclesiastes:201",
+      "ecclesiastes:97",
+      "analects:43c",
+      "tao-te-ching:162",
+      "tao-te-ching:152"
+    ]
+  },
+  {
+    "id": "betrayal-revenge",
+    "situation": "A friend betrayed me and I want revenge.",
+    "relevant": [
+      "meditations:186",
+      "dhammapada:12",
+      "dhammapada:14",
+      "sermon-on-the-mount:38",
+      "sermon-on-the-mount:43",
+      "analects:171b"
+    ]
+  },
+  {
+    "id": "public-insult",
+    "situation": "Someone insulted me in front of everyone.",
+    "relevant": [
+      "enchiridion:108",
+      "enchiridion:141",
+      "enchiridion:164",
+      "dhammapada:12",
+      "sermon-on-the-mount:10"
+    ]
+  },
+  {
+    "id": "envy-promotion",
+    "situation": "A colleague got the promotion I wanted and I feel envious.",
+    "relevant": ["enchiridion:118", "dhammapada:389", "analects:46c", "analects:47c"]
+  },
+  {
+    "id": "cannot-get-up",
+    "situation": "I can't get out of bed in the morning to go to work.",
+    "relevant": ["meditations:150", "bhagavad-gita:77", "ecclesiastes:171"]
+  },
+  {
+    "id": "big-project",
+    "situation": "I keep putting off a big project because it feels too large to start.",
+    "relevant": ["tao-te-ching:232", "tao-te-ching:229", "ecclesiastes:203", "analects:103d"]
+  },
+  {
+    "id": "not-recognized",
+    "situation": "Nobody notices the work I do.",
+    "relevant": ["analects:10", "analects:46c", "enchiridion:116", "sermon-on-the-mount:48"]
+  },
+  {
+    "id": "legacy",
+    "situation": "I want to be remembered after I die.",
+    "relevant": [
+      "meditations:121",
+      "meditations:214",
+      "ecclesiastes:12",
+      "ecclesiastes:35",
+      "analects:184b"
+    ]
+  },
+  {
+    "id": "pointless-job",
+    "situation": "My job feels pointless: I toil all day and it amounts to nothing.",
+    "relevant": [
+      "ecclesiastes:3",
+      "ecclesiastes:43",
+      "ecclesiastes:58",
+      "meditations:150",
+      "bhagavad-gita:40"
+    ]
+  },
+  {
+    "id": "exam-outcome",
+    "situation": "I am obsessed with whether I will pass my exam.",
+    "relevant": ["bhagavad-gita:40", "bhagavad-gita:73", "enchiridion:66", "enchiridion:83"]
+  },
+  {
+    "id": "duty-against-loved-ones",
+    "situation": "My duty requires me to act against people I love, and I want to walk away.",
+    "relevant": ["bhagavad-gita:32", "bhagavad-gita:39", "bhagavad-gita:53", "enchiridion:128"]
+  },
+  {
+    "id": "aging-parents",
+    "situation": "My parents are getting old. How should I care for them?",
+    "relevant": ["analects:21b", "analects:22b", "analects:48c", "enchiridion:128"]
+  },
+  {
+    "id": "choosing-friends",
+    "situation": "How do I choose good friends?",
+    "relevant": [
+      "analects:195b",
+      "analects:14b",
+      "dhammapada:89",
+      "dhammapada:350",
+      "dhammapada:352"
+    ]
+  },
+  {
+    "id": "loneliness",
+    "situation": "I feel lonely and have no one to rely on.",
+    "relevant": ["ecclesiastes:76", "ecclesiastes:77", "dhammapada:351", "dhammapada:352"]
+  },
+  {
+    "id": "talking-too-much",
+    "situation": "I talk too much and say things I regret.",
+    "relevant": [
+      "enchiridion:135",
+      "ecclesiastes:85",
+      "dhammapada:148",
+      "dhammapada:251",
+      "sermon-on-the-mount:36"
+    ]
+  },
+  {
+    "id": "arrogance",
+    "situation": "People tell me I am arrogant and always show off.",
+    "relevant": [
+      "tao-te-ching:78",
+      "tao-te-ching:72",
+      "enchiridion:146",
+      "enchiridion:172",
+      "sermon-on-the-mount:4"
+    ]
+  },
+  {
+    "id": "new-manager",
+    "situation": "I just became a manager. How do I lead my team?",
+    "relevant": [
+      "analects:20",
+      "analects:149",
+      "analects:140",
+      "tao-te-ching:56",
+      "tao-te-ching:238"
+    ]
+  },
+  {
+    "id": "governing",
+    "situation": "How should a country be governed?",
+    "relevant": ["tao-te-ching:215", "tao-te-ching:284", "analects:20c", "analects:135"]
+  },
+  {
+    "id": "war",
+    "situation": "Is war ever justified?",
+    "relevant": [
+      "tao-te-ching:97",
+      "tao-te-ching:101",
+      "dhammapada:144",
+      "dhammapada:219",
+      "sermon-on-the-mount:8"
+    ]
+  },
+  {
+    "id": "lying",
+    "situation": "Should I lie to get myself out of trouble?",
+    "relevant": [
+      "dhammapada:243",
+      "dhammapada:244",
+      "analects:27b",
+      "sermon-on-the-mount:36",
+      "tao-te-ching:289"
+    ]
+  },
+  {
+    "id": "temptation",
+    "situation": "I can't resist temptation.",
+    "relevant": [
+      "bhagavad-gita:43",
+      "bhagavad-gita:44",
+      "dhammapada:232",
+      "dhammapada:234",
+      "enchiridion:148",
+      "sermon-on-the-mount:27"
+    ]
+  },
+  {
+    "id": "self-mastery",
+    "situation": "I want to master myself.",
+    "relevant": [
+      "dhammapada:117",
+      "dhammapada:44",
+      "tao-te-ching:109",
+      "bhagavad-gita:74",
+      "bhagavad-gita:81"
+    ]
+  },
+  {
+    "id": "restless-mind",
+    "situation": "My mind won't stop racing when I try to meditate.",
+    "relevant": [
+      "bhagavad-gita:78",
+      "bhagavad-gita:80",
+      "bhagavad-gita:81",
+      "dhammapada:44",
+      "meditations:108"
+    ]
+  },
+  {
+    "id": "meaning-of-life",
+    "situation": "What is the point of life?",
+    "relevant": ["ecclesiastes:3", "ecclesiastes:222", "meditations:150", "analects:45"]
+  },
+  {
+    "id": "growing-old",
+    "situation": "I am getting old and my body is failing.",
+    "relevant": ["ecclesiastes:210", "dhammapada:164", "dhammapada:166", "analects:20d"]
+  },
+  {
+    "id": "chronic-pain",
+    "situation": "I live with chronic pain.",
+    "relevant": ["meditations:258", "meditations:271", "enchiridion:85"]
+  },
+  {
+    "id": "business-failed",
+    "situation": "My business failed and I feel like a failure.",
+    "relevant": [
+      "ecclesiastes:172",
+      "meditations:158",
+      "analects:103d",
+      "bhagavad-gita:83",
+      "enchiridion:83"
+    ]
+  },
+  {
+    "id": "learning-piano",
+    "situation": "I wish I could play the piano but I find the lessons painful.",
+    "relevant": ["analects:69", "analects:10", "analects:103d", "bhagavad-gita:81"]
+  },
+  {
+    "id": "how-to-study",
+    "situation": "How should I study?",
+    "relevant": ["analects:24d", "analects:25", "analects:80", "tao-te-ching:165"]
+  },
+  {
+    "id": "showing-off-giving",
+    "situation": "I want people to know about the money I give to charity.",
+    "relevant": [
+      "sermon-on-the-mount:48",
+      "sermon-on-the-mount:49",
+      "sermon-on-the-mount:50",
+      "meditations:155",
+      "tao-te-ching:290"
+    ]
+  },
+  {
+    "id": "judging-others",
+    "situation": "I keep criticizing other people's faults.",
+    "relevant": [
+      "sermon-on-the-mount:82",
+      "sermon-on-the-mount:84",
+      "dhammapada:62",
+      "dhammapada:272",
+      "meditations:414",
+      "enchiridion:170"
+    ]
+  },
+  {
+    "id": "living-with-less",
+    "situation": "Should I live with less?",
+    "relevant": [
+      "tao-te-ching:152",
+      "tao-te-ching:162",
+      "analects:78",
+      "enchiridion:139",
+      "ecclesiastes:73"
+    ]
+  },
+  {
+    "id": "out-of-control",
+    "situation": "Things keep happening to me that I cannot control.",
+    "relevant": [
+      "enchiridion:66",
+      "enchiridion:83",
+      "enchiridion:184",
+      "meditations:326",
+      "ecclesiastes:16"
+    ]
+  },
+  {
+    "id": "impermanence",
+    "situation": "Everything I love changes and disappears.",
+    "relevant": [
+      "dhammapada:296",
+      "dhammapada:187",
+      "ecclesiastes:46",
+      "ecclesiastes:47",
+      "meditations:371",
+      "enchiridion:73"
+    ]
+  },
+  {
+    "id": "enemies",
+    "situation": "How should I treat people who hate me?",
+    "relevant": [
+      "sermon-on-the-mount:43",
+      "tao-te-ching:169",
+      "dhammapada:14",
+      "dhammapada:243",
+      "analects:171b"
+    ]
+  },
+  {
+    "id": "cooperation",
+    "situation": "How can people of different nations cooperate?",
+    "relevant": ["analects:132", "analects:185", "sermon-on-the-mount:93", "tao-te-ching:238"]
+  },
+  {
+    "id": "praise-and-blame",
+    "situation": "Praise and criticism affect me too much.",
+    "relevant": ["bhagavad-gita:75", "bhagavad-gita:190", "dhammapada:94", "meditations:145"]
+  },
+  {
+    "id": "drinking",
+    "situation": "I drink too much.",
+    "relevant": ["dhammapada:266", "dhammapada:267", "bhagavad-gita:77"]
+  },
+  {
+    "id": "impatience",
+    "situation": "I am impatient to see results.",
+    "relevant": ["ecclesiastes:123", "tao-te-ching:232", "analects:152"]
+  }
+]

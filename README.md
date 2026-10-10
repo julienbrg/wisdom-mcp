@@ -45,7 +45,7 @@ Settings come from `.env` and the environment, which takes precedence, and are v
 pnpm corpus:import
 ```
 
-This imports the 8 pilot works from the Wisdom Context Window, with their original-language texts. Downloads are cached in `CORPUS_CACHE`, so later runs work offline, and each run replaces the works it imports.
+This imports the 8 pilot works from the Wisdom Context Window, with their original-language texts, and its concept graph: 208 concepts, each with a summary, key passages and links to parallel, opposing, related and broader concepts. Downloads are cached in `CORPUS_CACHE`, so later runs work offline, and each run replaces the works and concepts it imports.
 
 The corpus badge at the top of this README is static: after an import changes the counts, update it with `select count(*) from texts` and `select count(*) from passages`.
 
@@ -75,8 +75,10 @@ This writes search keywords for each quotable passage, rebuilds the keyword inde
 | `search_passages` | `query`          | Up to 20 hits (id, author, work, reference, snippet), at most 3 per work                   |
 | `read_passages`   | `ids` (max 10)   | Each reference unit once: the original to quote, its source, and the translation as an aid |
 | `check_quote`     | `quote`, `work`? | The exact match (id, work, reference), or the closest candidates                           |
+| `list_concepts`   | `filter`?        | Concepts (id, name, original term, gloss, tradition, school), optionally filtered          |
+| `get_concept`     | `id`             | Summary, key passages with their passage ids, and parallels, tensions and related concepts |
 
-Search is hybrid: an FTS5 keyword index over passage text and keywords, and a vector index over Mistral embeddings, merged with reciprocal rank fusion. When too few passages contain every term, keyword search adds passages that contain any of them, ignoring common English stop words. If the embedding call fails or takes more than 5 seconds, search returns keyword results only and says so. `read_passages` stops at about 6,000 words. `check_quote` compares quotes with whitespace and punctuation removed but diacritics kept, through the trigram index on originals and the keyword index on translations. The server sends its quoting rules to the client as MCP `instructions`.
+Search is hybrid: an FTS5 keyword index over passage text and keywords, and a vector index over Mistral embeddings, merged with reciprocal rank fusion. When too few passages contain every term, keyword search adds passages that contain any of them, ignoring common English stop words. If the embedding call fails or takes more than 5 seconds, search returns keyword results only and says so. `read_passages` stops at about 6,000 words. `check_quote` compares quotes with whitespace and punctuation removed but diacritics kept, through the trigram index on originals and the keyword index on translations. `list_concepts` matches its filter against a concept's id, name, gloss, tradition, school and domains. `get_concept` resolves a key passage to a passage id when its work is in the corpus, and lists the others by work as context only, with a 40-word snippet of each. The server sends its quoting rules to the client as MCP `instructions`.
 
 ## Endpoints
 

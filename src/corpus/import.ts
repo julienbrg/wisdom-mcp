@@ -18,19 +18,24 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 const passageId = (workId: string, s: Pick<Segment, 'n' | 'part'>) =>
   `${workId}:${s.n}${s.part ? String.fromCharCode(97 + s.part) : ''}`;
 
-export async function importWorks(db: Db, works: Work[], cacheDir: string): Promise<ImportStats[]> {
+/** Each work's passages and originals, as the import stores them. */
+export async function prepareWorks(works: Work[], cacheDir: string) {
   const records = await loadWcw(
     cacheDir,
     works.map((w) => w.id),
   );
-
-  // Everything is fetched before the first write, so a network failure leaves the database as it was.
   const prepared: { work: Work; segments: Segment[]; originals: Original[] }[] = [];
   for (const work of works) {
     const segments = segment(work.id, splitPassages(records.get(work.id)!.text));
     const units = [...new Set(segments.flatMap((s) => (s.apparatus ? [] : [s.refUnit!])))];
     prepared.push({ work, segments, originals: await loadOriginals(work, units, cacheDir) });
   }
+  return prepared;
+}
+
+export async function importWorks(db: Db, works: Work[], cacheDir: string): Promise<ImportStats[]> {
+  // Everything is fetched before the first write, so a network failure leaves the database as it was.
+  const prepared = await prepareWorks(works, cacheDir);
 
   const ids = works.map((w) => w.id);
   const placeholders = ids.map(() => '?').join(', ');

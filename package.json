@@ -14,6 +14,7 @@
     "corpus:import": "pnpm build && node dist/scripts/import.js",
     "corpus:index": "pnpm build && node dist/scripts/index.js",
     "eval": "pnpm build && node dist/scripts/eval.js",
+    "readings:draft": "pnpm build && node dist/scripts/readings.js",
     "typecheck": "tsc -p . --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",

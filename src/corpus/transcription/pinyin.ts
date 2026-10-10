@@ -7,7 +7,7 @@ const READINGS_DIR = new URL('../../../data/pinyin/', import.meta.url);
 // from the sources rather than the library's guess from modern usage.
 export const POLYPHONES = new Set(
   '說樂為爲好惡知行長見食數間傳重中王先從少予降語衣雨令處喪相將女曾乘度分解遺屬施藏觀和難要' +
-    '齊正朝遠上告共被量便冠沒費參適弟足衰厭辟鄉期賈莫奇識強勝張稱載畜亡使與父大夫舍',
+    '齊正朝遠告共被量便冠沒費參適弟足衰厭辟鄉期賈莫奇識強勝張稱載畜亡使與父大夫舍',
 );
 
 export interface Reading {
@@ -16,14 +16,20 @@ export interface Reading {
   pinyin: string;
   source: string;
   note: string;
+  /** A check against a second source. */
+  check?: string;
+  /** Why the reading still needs review: the import refuses it until this is gone. */
+  todo?: string;
   reviewed?: string;
 }
 
 /** Readings by reference unit, from data/pinyin/<work>.json, or none when the work has no file. */
 export type Readings = Record<string, Reading[]>;
 
+export const readingsFile = (workId: string) => new URL(`${workId}.json`, READINGS_DIR);
+
 export function loadReadings(workId: string): Readings {
-  const file = new URL(`${workId}.json`, READINGS_DIR);
+  const file = readingsFile(workId);
   return existsSync(file) ? (JSON.parse(readFileSync(file, 'utf-8')) as Readings) : {};
 }
 
@@ -72,7 +78,8 @@ export function toPinyin(text: string, readings: Reading[] = []): PinyinResult {
   base.forEach((b, pos) => {
     const c = chars[pos];
     if (b.isZh) {
-      const reading = byPos.get(pos);
+      const found = byPos.get(pos);
+      const reading = found?.todo ? undefined : found;
       if (!reading && POLYPHONES.has(c)) missing.push({ pos, char: c });
       out += (open ? '' : ' ') + (reading?.pinyin ?? b.pinyin);
       open = false;

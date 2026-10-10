@@ -93,6 +93,20 @@ Search is hybrid: an FTS5 keyword index over passage text and keywords, and a ve
 
 The `wisdom` skill first restates the question as the human situation underneath it, then answers with `search_passages` and `read_passages` only, quoting the originals with their references and its own translations. It may run one web search to understand an unfamiliar term, never as answer content. Ask follow-up questions in the same window. The whole conversation, with the reframed question, every tool call, the ids read and the number of calls per turn, is written to `test/output/<NNNNN>-<mon>-<dd>-<question-slug>.md`, numbered from `00001`, which is git-ignored.
 
+## Evaluation
+
+```sh
+pnpm eval
+```
+
+This runs `search_passages` on each situation in `test/eval/situations.json` and reports Recall@10: the share of the passages judged relevant that appear in the first 10 hits, per situation and on average. It needs a built corpus and `MISTRAL_API_KEY`, so it is not part of CI. Run it before each launch; the target is 0.7.
+
+The set has 44 situations written as a person would ask them, each with 3 to 6 passages judged relevant by hand, at most 3 per work since search returns at most 3 hits per work. A hit counts only if it is the same passage, not another passage of the same reference.
+
+| Date       | Recall@10 | Situations |
+| ---------- | --------- | ---------- |
+| 2026-10-10 | 0.184     | 44         |
+
 ## Compatibility
 
 Any MCP client that speaks Streamable HTTP can use the server. Local clients such as Cursor, VS Code, Zed, Gemini CLI or Codex CLI connect to `http://localhost:3000/mcp` directly. Web apps such as Claude, ChatGPT, Le Chat, Perplexity, Gemini and Grok, and LLM APIs, need a public HTTPS URL. See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) for plans, setup per service, and how to expose the server.
@@ -105,6 +119,7 @@ Any MCP client that speaks Streamable HTTP can use the server. Local clients suc
 | `pnpm start`         | Run the compiled server     |
 | `pnpm corpus:import` | Import the pilot corpus     |
 | `pnpm corpus:index`  | Build the search indexes    |
+| `pnpm eval`          | Measure search Recall@10    |
 | `pnpm test`          | Build, then run the tests   |
 | `pnpm lint`          | ESLint                      |
 | `pnpm format:check`  | Prettier check              |

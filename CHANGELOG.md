@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Retrieval test set in `test/eval/situations.json`: 44 situations, each with the passages judged relevant by hand, and `pnpm eval`, which runs search on each and reports Recall@10 per situation and overall. The first run scores 0.184 against a target of 0.7.
 - knip, with a `pnpm knip` script and a CI step after the build, to keep unused files, exports and dependencies out of the repo.
 - `docs/COMPATIBILITY.md`, a guide to the chat apps, coding tools and LLM APIs that can use the server as a connector: plans, setup per service, and how to expose the server over HTTPS. Linked from a new Compatibility section in the README.
 - NestJS (ESM) project with pnpm, TypeScript, ESLint, Prettier and a CI workflow.

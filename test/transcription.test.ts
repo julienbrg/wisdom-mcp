@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { transcribe } from '../dist/corpus/transcription/index.js';
+import { toPinyin } from '../dist/corpus/transcription/pinyin.js';
 
 test('Greek keeps accents and breathings, and writes the iota subscript', () => {
   assert.equal(
@@ -35,4 +36,35 @@ test('Sanskrit is written in IAST', () => {
 
 test('Pali and unknown languages get no transcription', () => {
   assert.equal(transcribe('pli', 'Manopubbaṅgamā dhammā'), null);
+});
+
+const ref = (pos: number, char: string, pinyin: string) => ({
+  pos,
+  char,
+  pinyin,
+  source: '經典釋文',
+  note: '',
+});
+
+test('pinyin takes polyphone readings from the readings file', () => {
+  assert.deepEqual(toPinyin('學而時習之，不亦說乎？', [ref(8, '說', 'yuè')]), {
+    text: 'xué ér shí xí zhī, bù yì yuè hū?',
+    missing: [],
+  });
+  assert.equal(
+    toPinyin('子曰：「知者樂水，仁者樂山。」', [
+      ref(4, '知', 'zhì'),
+      ref(6, '樂', 'yào'),
+      ref(11, '樂', 'yào'),
+    ]).text,
+    'zǐ yuē: “zhì zhě yào shuǐ, rén zhě yào shān.”',
+  );
+});
+
+test('pinyin lists polyphones that have no reading', () => {
+  assert.deepEqual(toPinyin('知者樂水').missing, [
+    { pos: 0, char: '知' },
+    { pos: 2, char: '樂' },
+  ]);
+  assert.throws(() => toPinyin('知者樂水', [ref(1, '樂', 'yào')]), /reading at 1 is for 樂/);
 });

@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
 import { importConcepts } from '../dist/corpus/concepts.js';
-import { ConceptsService } from '../dist/corpus/concepts.service.js';
+import { ConceptsService, keySnippet } from '../dist/corpus/concepts.service.js';
 import { openDatabase } from '../dist/database/database.module.js';
 
 const concept = (slug: string, name: string, extra: object = {}) => ({
@@ -29,7 +29,7 @@ function conceptsCache() {
       domains: ['art-of-living', 'politics'],
       key_passages: [
         { slug: 'tao-te-ching', idx: 1, text: 'The Tao   does nothing,\nyet nothing is undone.' },
-        { slug: 'chuang-tzu', idx: 815, text: Array(60).fill('word').join(' ') },
+        { slug: 'chuang-tzu', idx: 815, text: Array(60).fill('word').join(' '), quote: 'gone' },
       ],
     }),
     concept('non-attachment', 'Non-attachment', { tradition: 'perennial', school: 'hub' }),
@@ -130,4 +130,22 @@ test('get_concept maps key passages in the corpus to passage ids and lists the o
 
   db.exec("update passages set is_apparatus = 1 where id = 'tao-te-ching:1'");
   assert.equal(concepts.get('wu-wei').passages[0].id, null);
+});
+
+const words = (from: number, to: number) =>
+  Array.from({ length: to - from + 1 }, (_, i) => `w${from + i}`).join(' ');
+
+test('a key snippet starts a few words before the quote and keeps it whole', () => {
+  const text = `${words(1, 50)} wander in the\n realms of inaction. ${words(51, 100)}`;
+  assert.equal(
+    keySnippet(text, 'wander in the realms   of inaction.'),
+    `… ${words(43, 50)} wander in the realms of inaction. ${words(51, 26 + 50)} …`,
+  );
+  assert.equal(keySnippet(`${words(1, 3)} the quote`, 'the quote'), `${words(1, 3)} the quote`);
+  assert.equal(keySnippet(`a${words(1, 3)}`, 'w2'), `a${words(1, 3)}`);
+});
+
+test('a key snippet falls back to the passage opening when the quote is not in the text', () => {
+  assert.equal(keySnippet(words(1, 60), 'not there'), `${words(1, 40)} …`);
+  assert.equal(keySnippet(words(1, 60), null), `${words(1, 40)} …`);
 });

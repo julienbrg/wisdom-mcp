@@ -3,6 +3,21 @@ import { DB, type Db } from '../database/database.module.js';
 import { cutWords } from './passages.service.js';
 
 const SNIPPET_WORDS = 40;
+const WORDS_BEFORE_QUOTE = 8;
+
+const squash = (text: string) => text.replace(/\s+/g, ' ').trim();
+
+// Builds the snippet around the phrase that makes the passage key, so a long passage still shows
+// it; when the phrase isn't in the text, the snippet is the passage opening.
+export function keySnippet(text: string, quote: string | null) {
+  const body = squash(text);
+  const at = quote ? body.indexOf(squash(quote)) : -1;
+  const starts = [...body.matchAll(/\S+/g)].map((m) => m.index);
+  const first = at < 0 ? 0 : Math.max(0, starts.filter((i) => i <= at).length - 1);
+  const start = Math.max(0, first - WORDS_BEFORE_QUOTE);
+  const cut = cutWords(body.slice(starts[start] ?? 0), SNIPPET_WORDS);
+  return (start > 0 ? '… ' : '') + cut.text + (cut.cut ? ' …' : '');
+}
 
 export interface ConceptSummary {
   id: string;
@@ -69,13 +84,14 @@ export class ConceptsService {
       {
         work_slug: string;
         text: string;
+        quote: string | null;
         id: string | null;
         author: string | null;
         title: string | null;
         ref: string | null;
       }
     >(
-      `select cp.work_slug, cp.text, p.id, w.author, w.title, p.ref
+      `select cp.work_slug, cp.text, cp.quote, p.id, w.author, w.title, p.ref
        from concept_passages cp
        left join passages p on p.id = cp.work_slug || ':' || cp.idx and p.is_apparatus = 0
          and p.ref_unit is not null
@@ -100,17 +116,14 @@ export class ConceptsService {
     return {
       ...row,
       domains: row.domains ? row.domains.split(', ') : [],
-      passages: this.passages.all(id).map((p) => {
-        const cut = cutWords(p.text.replace(/\s+/g, ' ').trim(), SNIPPET_WORDS);
-        return {
-          work: p.work_slug,
-          id: p.id,
-          author: p.author,
-          title: p.title,
-          ref: p.ref,
-          snippet: cut.text + (cut.cut ? ' …' : ''),
-        };
-      }),
+      passages: this.passages.all(id).map((p) => ({
+        work: p.work_slug,
+        id: p.id,
+        author: p.author,
+        title: p.title,
+        ref: p.ref,
+        snippet: keySnippet(p.text, p.quote),
+      })),
       links: this.links.all({ id }).map((l) => {
         const other = l.source === id ? l.target : l.source;
         const type = l.type === 'broader' && l.target === id ? 'narrower' : l.type;

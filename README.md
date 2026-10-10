@@ -62,6 +62,30 @@ The corpus badge at the top of this README is static: after an import changes th
 
 Every quotable passage has a reference and an original. Front matter, translators' notes, indexes and headings are kept but flagged `is_apparatus`.
 
+### Transcriptions
+
+`read_passages` gives each original a transcription under it, so a reader who doesn't know the script can say it aloud. It is labelled as a pronunciation aid, never as the source. The import computes it into `originals.transcription`.
+
+| Language                  | Scheme                                                                                           |
+| ------------------------- | ------------------------------------------------------------------------------------------------ |
+| Classical Chinese (`lzh`) | Hanyu Pinyin with tone marks, using classical readings                                           |
+| Ancient Greek (`grc`)     | Romanization with accents and breathings: ē and ō for η and ω, h for the rough breathing, ῳ → ōi |
+| Biblical Hebrew (`hbo`)   | SBL general-purpose style, read from the points: v, kh, f for spirants, dagesh forte doubled     |
+| Sanskrit (`san`)          | IAST                                                                                             |
+| Pali (`pli`)              | None, already in Latin script                                                                    |
+
+Pinyin libraries guess polyphones from modern usage, which is often wrong for classical texts: 不亦說乎 is _bù yì yuè hū_, not _shuō_. So every occurrence of a polyphone whose classical reading depends on its sense (說, 樂, 為, 好, 惡, 知, 行, 長, 見, 食…) takes its reading from `data/pinyin/<work>.json`, keyed by reference and character position. The import fails and lists every occurrence that has no reviewed reading.
+
+```sh
+pnpm readings:draft
+```
+
+This drafts both readings files from 《經典釋文》 (論語音義 and 老子音義, 四部叢刊本 on Chinese Wikisource). Each headword is aligned on the text, and each note is resolved to a 廣韻 sound class through [ytenx](https://github.com/BYVoid/ytenx): 「音X」 is X's class, and 「AB反」 is A's initial with B's rhyme. The script then picks the pinyin reading that is the regular Mandarin outcome of that class. A note marked 下同 carries its reading to later occurrences in the same book. An occurrence with no note takes the usual reading (如字), since 釋文 notes only departures from it. For the Analects, each reading is cross-checked against 朱熹《論語集注》.
+
+Each entry records its source and the original note, e.g. `"note": "音恱注同"`, and `check` when 集注 agrees. Entries where the sources disagree, or where a note couldn't be resolved, carry a `todo` saying why. The import refuses them until they are reviewed.
+
+To fix or add a reading, edit the entry: set `pinyin`, remove `todo`, add `"reviewed": "<your name>"`, and give your reasoning in `note`. `pnpm readings:draft` keeps reviewed entries when it runs again.
+
 ```sh
 pnpm corpus:index
 ```
@@ -116,22 +140,25 @@ Any MCP client that speaks Streamable HTTP can use the server. Local clients suc
 
 ## Scripts
 
-| Script               | What it does                |
-| -------------------- | --------------------------- |
-| `pnpm build`         | Compile to `dist/`          |
-| `pnpm start`         | Run the compiled server     |
-| `pnpm corpus:import` | Import the pilot corpus     |
-| `pnpm corpus:index`  | Build the search indexes    |
-| `pnpm eval`          | Measure search Recall@10    |
-| `pnpm test`          | Build, then run the tests   |
-| `pnpm lint`          | ESLint                      |
-| `pnpm format:check`  | Prettier check              |
-| `pnpm typecheck`     | TypeScript without emitting |
+| Script                | What it does                    |
+| --------------------- | ------------------------------- |
+| `pnpm build`          | Compile to `dist/`              |
+| `pnpm start`          | Run the compiled server         |
+| `pnpm corpus:import`  | Import the pilot corpus         |
+| `pnpm corpus:index`   | Build the search indexes        |
+| `pnpm readings:draft` | Draft the pinyin readings files |
+| `pnpm eval`           | Measure search Recall@10        |
+| `pnpm test`           | Build, then run the tests       |
+| `pnpm lint`           | ESLint                          |
+| `pnpm format:check`   | Prettier check                  |
+| `pnpm typecheck`      | TypeScript without emitting     |
 
 ## Credits
 
 - [Kevin Owocki](https://github.com/owocki), for the [Wisdom Context Window](https://wisdom.owocki.com/): the corpus of texts, summaries and concept graph this server searches.
 - [Chinese Wikisource](https://zh.wikisource.org/), [Perseus Digital Library](https://www.perseus.tufts.edu/), [SuttaCentral](https://suttacentral.net/), [Sefaria](https://www.sefaria.org/) and the [gita/gita](https://github.com/gita/gita) dataset, for the original-language texts.
+- 陸德明《經典釋文》 and 朱熹《論語集注》, as transcribed on Chinese Wikisource, and [ytenx](https://github.com/BYVoid/ytenx) by BYVoid, for the 廣韻 sound classes behind the pinyin readings.
+- [pinyin-pro](https://github.com/zh-lx/pinyin-pro), for the base pinyin.
 - [sqlite-vec](https://github.com/asg017/sqlite-vec) by Alex Garcia, for vector search inside SQLite.
 - The [Model Context Protocol](https://modelcontextprotocol.io) TypeScript SDK.
 

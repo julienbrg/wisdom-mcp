@@ -129,6 +129,8 @@ const RUZI: Record<string, string> = {
   夫: 'fū',
   舍: 'shè',
   於: 'yú',
+  鮮: 'xiān',
+  孫: 'sūn',
 };
 export const ruzi = (c: string) => RUZI[fold(c)];
 

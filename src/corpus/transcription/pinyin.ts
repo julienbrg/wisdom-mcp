@@ -7,7 +7,7 @@ const READINGS_DIR = new URL('../../../data/pinyin/', import.meta.url);
 // from the sources rather than the library's guess from modern usage.
 export const POLYPHONES = new Set(
   '說樂為爲好惡知行長見食數間傳重中王先從少予降語衣雨令處喪相將女曾乘度分解遺屬施藏觀和難要' +
-    '齊正朝遠告共被量便冠沒費參適弟足衰厭辟鄉期賈莫奇識強勝張稱載畜亡使與父大夫舍於',
+    '齊正朝遠告共被量便冠沒費參適弟足衰厭辟鄉期賈莫奇識強勝張稱載畜亡使與父大夫舍於鮮孫',
 );
 
 export interface Reading {

@@ -85,6 +85,17 @@ test('於 reads yú, and 夫 opening a clause is the particle fú', () => {
   assert.match(text!, /fú wéi wú yǐ shēng wéi zhě, shì xián yú guì shēng\.$/);
 });
 
+test('鮮 meaning few reads xiǎn, and 孫 meaning yielding reads xùn', () => {
+  const body = '子曰：「巧言令色，鮮矣仁。」';
+  assert.deepEqual(transcribeOriginals('analects', 'lzh', [{ refUnit: '1.3', body }]), [
+    'zǐ yuē: “qiǎo yán lìng sè, xiǎn yǐ rén.”',
+  ]);
+  const [text] = transcribeOriginals('analects', 'lzh', [
+    { refUnit: '7.35', body: '子曰：「奢則不孫，儉則固；與其不孫也，甯固。」' },
+  ]);
+  assert.match(text!, /bù xùn, jiǎn zé gù; yǔ qí bù xùn yě/);
+});
+
 test('the import fails and lists polyphones that have no reviewed reading', () => {
   assert.throws(
     () => transcribeOriginals('analects', 'lzh', [{ refUnit: '0.0', body: '知者樂水' }]),

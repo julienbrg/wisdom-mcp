@@ -3171,6 +3171,13 @@
   ],
   "54": [
     {
+      "pos": 15,
+      "char": "孫",
+      "pinyin": "sūn",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 25,
       "char": "於",
       "pinyin": "yú",
@@ -3559,6 +3566,13 @@
       "pinyin": "dà",
       "source": "經典釋文",
       "note": "如字 (no note)"
+    },
+    {
+      "pos": 7,
+      "char": "鮮",
+      "pinyin": "xiān",
+      "source": "經典釋文",
+      "note": "音仙"
     },
     {
       "pos": 50,

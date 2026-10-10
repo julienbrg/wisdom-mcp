@@ -5,7 +5,7 @@ import { ConceptsService, type ConceptSummary } from '../../corpus/concepts.serv
 import type { McpTool } from '../mcp-tool.js';
 
 const line = (c: ConceptSummary) =>
-  `[${c.id}] ${c.name}${c.original ? ` (${c.original})` : ''}: ${c.gloss} ` +
+  `[${c.id}] ${c.name}${c.original ? ` ${c.original}` : ''}: ${c.gloss} ` +
   `(${c.tradition}, ${c.school})`;
 
 @Injectable()

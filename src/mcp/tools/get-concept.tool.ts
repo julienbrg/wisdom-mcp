@@ -19,12 +19,12 @@ const LINK_HEADINGS: [ConceptLink['type'], string][] = [
 
 const passage = (p: KeyPassage) =>
   p.id
-    ? `- [${p.id}] ${p.author}, ${p.title}, ${p.ref}: "${p.snippet}"`
-    : `- ${p.work} (not in the corpus, context only): "${p.snippet}"`;
+    ? `- [${p.id}] ${p.author}, ${p.title}, ${p.ref}: ${p.snippet}`
+    : `- ${p.work} (not in the corpus, context only): ${p.snippet}`;
 
 function format(c: Concept) {
   const lines = [
-    `${c.name}${c.original ? ` (${c.original})` : ''} [${c.id}]`,
+    `${c.name}${c.original ? ` ${c.original}` : ''} [${c.id}]`,
     `${c.tradition}, ${c.school}; domains: ${c.domains.join(', ') || 'none'}`,
     '',
     c.gloss,

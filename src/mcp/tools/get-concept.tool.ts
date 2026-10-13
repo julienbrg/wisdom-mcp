@@ -7,6 +7,7 @@ import {
   type ConceptLink,
   type KeyPassage,
 } from '../../corpus/concepts.service.js';
+import { UsageService } from '../../usage/usage.service.js';
 import type { McpTool } from '../mcp-tool.js';
 
 const LINK_HEADINGS: [ConceptLink['type'], string][] = [
@@ -52,7 +53,10 @@ function format(c: Concept) {
 
 @Injectable()
 export class GetConceptTool implements McpTool {
-  constructor(private readonly concepts: ConceptsService) {}
+  constructor(
+    private readonly concepts: ConceptsService,
+    private readonly usage: UsageService,
+  ) {}
 
   register(server: McpServer) {
     server.registerTool(
@@ -66,21 +70,24 @@ export class GetConceptTool implements McpTool {
         inputSchema: z.object({ id: z.string().min(1).max(100) }),
         annotations: { readOnlyHint: true },
       },
-      async ({ id }) => {
-        const concept = this.concepts.get(id);
-        if (!concept) {
+      ({ id }) =>
+        this.usage.track('get_concept', async (row) => {
+          row.query = id;
+          const concept = this.concepts.get(id);
+          if (!concept) {
+            return {
+              content: [
+                { type: 'text', text: `Unknown concept: ${id}. Find its id with list_concepts.` },
+              ],
+              isError: true,
+            };
+          }
+          row.passageIds = concept.passages.flatMap((p) => (p.id ? [p.id] : []));
           return {
-            content: [
-              { type: 'text', text: `Unknown concept: ${id}. Find its id with list_concepts.` },
-            ],
-            isError: true,
+            content: [{ type: 'text', text: format(concept) }],
+            structuredContent: { ...concept },
           };
-        }
-        return {
-          content: [{ type: 'text', text: format(concept) }],
-          structuredContent: { ...concept },
-        };
-      },
+        }),
     );
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import type { McpServer } from '@modelcontextprotocol/server';
 import { z } from 'zod';
 import { ConceptsService, type ConceptSummary } from '../../corpus/concepts.service.js';
+import { UsageService } from '../../usage/usage.service.js';
 import type { McpTool } from '../mcp-tool.js';
 
 const line = (c: ConceptSummary) =>
@@ -10,7 +11,10 @@ const line = (c: ConceptSummary) =>
 
 @Injectable()
 export class ListConceptsTool implements McpTool {
-  constructor(private readonly concepts: ConceptsService) {}
+  constructor(
+    private readonly concepts: ConceptsService,
+    private readonly usage: UsageService,
+  ) {}
 
   register(server: McpServer) {
     server.registerTool(
@@ -26,13 +30,16 @@ export class ListConceptsTool implements McpTool {
         inputSchema: z.object({ filter: z.string().max(100).optional() }),
         annotations: { readOnlyHint: true },
       },
-      async ({ filter }) => {
-        const concepts = this.concepts.list(filter);
-        const text = concepts.length
-          ? [`${concepts.length} concepts:`, ...concepts.map(line)].join('\n')
-          : `No concept matches "${filter}". Call list_concepts without a filter to see them all.`;
-        return { content: [{ type: 'text', text }], structuredContent: { concepts } };
-      },
+      ({ filter }) =>
+        this.usage.track('list_concepts', async (row) => {
+          row.query = filter;
+          const concepts = this.concepts.list(filter);
+          row.hits = concepts.length;
+          const text = concepts.length
+            ? [`${concepts.length} concepts:`, ...concepts.map(line)].join('\n')
+            : `No concept matches "${filter}". Call list_concepts without a filter to see them all.`;
+          return { content: [{ type: 'text', text }], structuredContent: { concepts } };
+        }),
     );
   }
 }

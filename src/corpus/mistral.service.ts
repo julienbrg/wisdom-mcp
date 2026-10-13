@@ -23,13 +23,18 @@ export class MistralService {
   }
 
   /** Unit-length vectors, so the cosine distance stored in passages_vec is meaningful. */
-  async embed(texts: string[], options: RequestOptions = {}): Promise<Float32Array[]> {
-    const res = await this.post<{ data: { index: number; embedding: number[] }[] }>(
-      '/embeddings',
-      { model: this.embeddingModel, input: texts },
-      options,
-    );
-    return res.data.sort((a, b) => a.index - b.index).map((d) => normalize(d.embedding));
+  async embed(
+    texts: string[],
+    options: RequestOptions = {},
+  ): Promise<{ vectors: Float32Array[]; tokens: number }> {
+    const res = await this.post<{
+      data: { index: number; embedding: number[] }[];
+      usage: { prompt_tokens: number };
+    }>('/embeddings', { model: this.embeddingModel, input: texts }, options);
+    return {
+      vectors: res.data.sort((a, b) => a.index - b.index).map((d) => normalize(d.embedding)),
+      tokens: res.usage.prompt_tokens,
+    };
   }
 
   /** Throws a SyntaxError when the model replies with malformed or truncated JSON. */

@@ -157,6 +157,17 @@ Any MCP client that speaks Streamable HTTP can use the server. Local clients suc
 | `pnpm format:check`   | Prettier check                  |
 | `pnpm typecheck`      | TypeScript without emitting     |
 
+## Privacy
+
+Every tool call is logged to the `usage` table in the server's SQLite database:
+
+- the time and the tool called
+- the query: the search query, the quote checked, the concept filter or concept id
+- the passage ids returned or read, and the number of hits
+- the duration, whether search fell back to keywords only, and the embedding tokens billed by Mistral
+
+No IP address, client name or session id is stored. After 30 days, a job that runs daily replaces each query with its SHA-256 hash and keeps the other fields. The log is used to improve search: to review retrieval quality and how many calls it takes to answer a question.
+
 ## Credits
 
 - [Kevin Owocki](https://github.com/owocki), for the [Wisdom Context Window](https://wisdom.owocki.com/): the corpus of texts, summaries and concept graph this server searches.

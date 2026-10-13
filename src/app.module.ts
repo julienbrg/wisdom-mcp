@@ -5,9 +5,10 @@ import { AppConfigModule, type Env } from './config.js';
 import { DatabaseModule } from './database/database.module.js';
 import { HealthController } from './health.controller.js';
 import { McpModule } from './mcp/mcp.module.js';
+import { UsageModule } from './usage/usage.module.js';
 
 @Module({
-  imports: [AppConfigModule, DatabaseModule, McpModule],
+  imports: [AppConfigModule, DatabaseModule, UsageModule, McpModule],
   controllers: [HealthController],
 })
 export class AppModule implements NestModule {

@@ -26,7 +26,7 @@ export const mistralGenerators = (mistral: MistralService): Generators => ({
   keywordsModel: mistral.keywordsModel,
   embeddingModel: mistral.embeddingModel,
   keywords: (passages) => generateKeywords(mistral, passages),
-  embed: (texts) => mistral.embed(texts, { attempts: 5 }),
+  embed: async (texts) => (await mistral.embed(texts, { attempts: 5 })).vectors,
 });
 
 const hash = (s: string) => createHash('sha256').update(s).digest('hex');

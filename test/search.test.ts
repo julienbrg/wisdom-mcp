@@ -55,7 +55,7 @@ function seed() {
   return db;
 }
 
-const embeddings = (i: number) => ({ embed: async () => axis(i) });
+const embeddings = (i: number) => ({ embed: async () => ({ vector: axis(i), tokens: 3 }) });
 const failing = {
   embed: async () => {
     throw new Error('timeout');
@@ -91,9 +91,10 @@ test('rrf ranks ids found by both lists first', () => {
 
 test('search merges both indexes, caps each work at 3 hits and skips apparatus', async () => {
   const search = new SearchService(seed(), embeddings(6) as never);
-  const { hits, degraded } = await search.search('anger');
+  const { hits, degraded, tokens } = await search.search('anger');
 
   assert.equal(degraded, false);
+  assert.equal(tokens, 3);
   const ids = hits.map((h) => h.id);
   assert.equal(ids.filter((id) => id.startsWith('tao:')).length, 3);
   assert.ok(!ids.includes('tao:5'));
@@ -122,6 +123,7 @@ test('search falls back from AND to OR and matches generated keywords', async ()
     byKeyword.hits.map((h) => h.id),
     ['dham:2'],
   );
+  assert.equal(byKeyword.tokens, 0);
 });
 
 test('search ignores stop words when falling back to OR', async () => {

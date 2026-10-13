@@ -52,6 +52,7 @@ function taoTeChing(): Scheme {
   return {
     start: /^Ch\. 1\. 1\./,
     read(piece) {
+      if (/^PART [\dIVX]+\.$/.test(piece)) return { heading: true };
       let m = piece.match(/^(?:Ch\. )?(\d+)\. (\d+)\.\s*/);
       if (m && +m[1] === ch + 1) {
         ch = +m[1];

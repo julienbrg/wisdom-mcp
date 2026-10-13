@@ -106,6 +106,29 @@ test('concept tools report an empty graph and unknown ids', async () => {
   assert.equal(unknown.content[0].text, 'Unknown concept: nope. Find its id with list_concepts.');
 });
 
+test('every tool call writes a usage row', async () => {
+  const { DB } = await import('../dist/database/database.module.js');
+  const db = app.get(DB);
+  const counts = db
+    .prepare('select tool, count(*) as n from usage group by tool order by tool')
+    .all()
+    .map((r: { tool: string; n: number }) => [r.tool, r.n]);
+  assert.deepEqual(counts, [
+    ['check_quote', 2],
+    ['get_concept', 1],
+    ['list_concepts', 1],
+    ['read_passages', 1],
+    ['search_passages', 1],
+  ]);
+  const search = db.prepare("select * from usage where tool = 'search_passages'").get();
+  assert.equal(search.query, 'anger');
+  assert.equal(search.hits, 0);
+  assert.equal(search.keyword_only, 1);
+  assert.equal(search.embedding_tokens, 0);
+  const read = db.prepare("select * from usage where tool = 'read_passages'").get();
+  assert.equal(read.passage_ids, '["nope:1"]');
+});
+
 test('mcp rejects foreign hosts', async () => {
   const status = await new Promise<number | undefined>((resolve, reject) => {
     const req = request(`${base}/mcp`, {

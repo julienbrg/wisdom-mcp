@@ -2,11 +2,15 @@ import { Injectable } from '@nestjs/common';
 import type { McpServer } from '@modelcontextprotocol/server';
 import { z } from 'zod';
 import { MAX_IDS, PassagesService } from '../../corpus/passages.service.js';
+import { UsageService } from '../../usage/usage.service.js';
 import type { McpTool } from '../mcp-tool.js';
 
 @Injectable()
 export class ReadPassagesTool implements McpTool {
-  constructor(private readonly passages: PassagesService) {}
+  constructor(
+    private readonly passages: PassagesService,
+    private readonly usage: UsageService,
+  ) {}
 
   register(server: McpServer) {
     server.registerTool(
@@ -21,10 +25,12 @@ export class ReadPassagesTool implements McpTool {
         inputSchema: z.object({ ids: z.array(z.string()).min(1).max(MAX_IDS) }),
         annotations: { readOnlyHint: true },
       },
-      async ({ ids }) => {
-        const { text } = this.passages.read(ids);
-        return { content: [{ type: 'text', text }] };
-      },
+      ({ ids }) =>
+        this.usage.track('read_passages', async (row) => {
+          row.passageIds = ids;
+          const { text } = this.passages.read(ids);
+          return { content: [{ type: 'text', text }] };
+        }),
     );
   }
 }

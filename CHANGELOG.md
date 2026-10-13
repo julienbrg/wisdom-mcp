@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Usage log: every MCP tool call writes a row to a new `usage` table with its time, tool, query, passage ids, hit count, duration, keyword-only fallback flag and Mistral embedding tokens (0 when the query embedding is cached). A job run at startup and every 24 hours replaces queries older than 30 days with their SHA-256 hash and keeps the other fields. The README has a new Privacy section.
 - Rate limiting on `/mcp` with `@nestjs/throttler`, per client IP behind the reverse proxy: `RATE_LIMIT_PER_MINUTE` (default 30) tool calls per minute, and `SEARCH_LIMIT_PER_DAY` (default 200) `search_passages` calls per day, since each one calls Mistral. Over either limit, the endpoint answers 429 with a JSON-RPC error and `Retry-After`. Counters are kept in memory.
 - Phonetic transcriptions under each original in `read_passages`, labelled as a pronunciation aid not to be quoted: Hanyu Pinyin with classical readings for Classical Chinese, romanization with accents and breathings for Ancient Greek, SBL-style romanization from the points for Biblical Hebrew, and IAST for Sanskrit. A migration adds `originals.transcription`, and `corpus:import` fills it. The `/wisdom` skill gives it after each quote.
 - Pinyin for polyphones comes from committed readings files, `data/pinyin/analects.json` and `data/pinyin/tao-te-ching.json`, keyed by reference and character position. `corpus:import` fails and lists every occurrence of a classical polyphone without a reviewed reading.

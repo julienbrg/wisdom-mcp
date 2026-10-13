@@ -1,12 +1,14 @@
-import { All, Controller, type OnModuleDestroy, Post, Req, Res } from '@nestjs/common';
+import { All, Controller, type OnModuleDestroy, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { ApiBody, ApiExcludeEndpoint, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { createMcpHandler } from '@modelcontextprotocol/server';
 import { toNodeHandler } from '@modelcontextprotocol/node';
 import type { Request, Response } from 'express';
 import { McpFactory } from './mcp.factory.js';
+import { McpThrottlerGuard } from './throttle.js';
 
 @ApiTags('mcp')
 @Controller('mcp')
+@UseGuards(McpThrottlerGuard)
 export class McpController implements OnModuleDestroy {
   private readonly handler = createMcpHandler(() => this.factory.build());
   private readonly serve = toNodeHandler(this.handler);

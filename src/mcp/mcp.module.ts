@@ -3,6 +3,7 @@ import { CorpusModule } from '../corpus/corpus.module.js';
 import { McpController } from './mcp.controller.js';
 import { McpFactory } from './mcp.factory.js';
 import { MCP_TOOLS, type McpTool } from './mcp-tool.js';
+import { McpThrottlerModule } from './throttle.js';
 import { CheckQuoteTool } from './tools/check-quote.tool.js';
 import { GetConceptTool } from './tools/get-concept.tool.js';
 import { ListConceptsTool } from './tools/list-concepts.tool.js';
@@ -18,7 +19,7 @@ const TOOLS: Type<McpTool>[] = [
 ];
 
 @Module({
-  imports: [CorpusModule],
+  imports: [CorpusModule, McpThrottlerModule],
   controllers: [McpController],
   providers: [
     ...TOOLS,

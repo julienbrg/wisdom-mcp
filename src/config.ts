@@ -9,6 +9,8 @@ const Env = z.object({
   MISTRAL_API_KEY: z.string().optional(),
   EMBEDDING_MODEL: z.string().default('mistral-embed'),
   KEYWORDS_MODEL: z.string().default('ministral-8b-latest'),
+  RATE_LIMIT_PER_MINUTE: z.coerce.number().int().positive().default(30),
+  SEARCH_LIMIT_PER_DAY: z.coerce.number().int().positive().default(200),
 });
 
 export type Env = z.infer<typeof Env>;

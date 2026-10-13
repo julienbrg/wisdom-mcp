@@ -1,7 +1,7 @@
 import { type ExecutionContext, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import type { Request } from 'express';
+import { type ThrottlerLimitDetail, ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import type { Request, Response } from 'express';
 import type { Config } from '../config.js';
 
 const MINUTE = 60_000;
@@ -36,7 +36,11 @@ export const McpThrottlerModule = ThrottlerModule.forRootAsync({
 /** Answers over the limit with 429 and a JSON-RPC error, so MCP clients can surface it. */
 @Injectable()
 export class McpThrottlerGuard extends ThrottlerGuard {
-  protected override throwThrottlingException(context: ExecutionContext): Promise<void> {
+  protected override throwThrottlingException(
+    context: ExecutionContext,
+    { timeToBlockExpire }: ThrottlerLimitDetail,
+  ): Promise<void> {
+    context.switchToHttp().getResponse<Response>().setHeader('Retry-After', timeToBlockExpire);
     const body = context.switchToHttp().getRequest<Request>().body as { id?: unknown } | undefined;
     throw new HttpException(
       {

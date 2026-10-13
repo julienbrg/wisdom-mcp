@@ -57,3 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `MISTRAL_API_KEY`, `EMBEDDING_MODEL` and `KEYWORDS_MODEL` settings.
 - README badges for NestJS, CI, TypeScript, pnpm, Node.js and the license, plus a static corpus badge with the number of texts and passages.
 - Settings load through `@nestjs/config`, which reads `.env` when it exists and validates it with zod. The corpus scripts boot a Nest application context, so they share the server's configuration.
+
+### Fixed
+
+- The Tao Te Ching `PART II.` heading is now imported as apparatus instead of a passage in chapter 37, so `read_passages` no longer appends it to that chapter's translation.

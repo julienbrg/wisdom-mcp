@@ -17,7 +17,7 @@ test('front matter before the main text is apparatus', () => {
   ]);
 });
 
-test('tao te ching: chapters, paragraphs and bare markers', () => {
+test('tao te ching: chapters, paragraphs, bare markers and part headings', () => {
   const blocks = [
     'PART 1.',
     'Ch. 1. 1. The Tao that can be trodden',
@@ -29,6 +29,8 @@ test('tao te ching: chapters, paragraphs and bare markers', () => {
     '4.',
     '1.',
     "  Colour's five hues",
+    'PART II.',
+    '5. 1. Heaven and earth',
   ];
   assert.deepEqual(refs('tao-te-ching', blocks), [
     [null, null, true],
@@ -41,6 +43,8 @@ test('tao te ching: chapters, paragraphs and bare markers', () => {
     [null, null, true],
     [null, null, true],
     ['4.1', '4', false],
+    [null, null, true],
+    ['5.1', '5', false],
   ]);
 });
 

@@ -11,18 +11,22 @@ export class EmbeddingsService {
 
   constructor(private readonly mistral: MistralService) {}
 
-  async embed(text: string): Promise<Float32Array> {
+  /** `tokens` is what Mistral billed for the call: 0 on a cache hit. */
+  async embed(text: string): Promise<{ vector: Float32Array; tokens: number }> {
     const key = text.trim().toLowerCase();
     const hit = this.cache.get(key);
     if (hit) {
       this.cache.delete(key);
       this.cache.set(key, hit);
-      return hit;
+      return { vector: hit, tokens: 0 };
     }
 
-    const [vector] = await this.mistral.embed([text], { signal: AbortSignal.timeout(TIMEOUT_MS) });
+    const {
+      vectors: [vector],
+      tokens,
+    } = await this.mistral.embed([text], { signal: AbortSignal.timeout(TIMEOUT_MS) });
     this.cache.set(key, vector);
     if (this.cache.size > CACHE_SIZE) this.cache.delete(this.cache.keys().next().value!);
-    return vector;
+    return { vector, tokens };
   }
 }

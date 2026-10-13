@@ -13,6 +13,8 @@ interface Hit {
 export interface SearchResult {
   hits: Hit[];
   degraded: boolean;
+  /** Embedding tokens billed for the query. */
+  tokens: number;
 }
 
 const CANDIDATES = 50;
@@ -72,9 +74,11 @@ export class SearchService {
 
     let vecIds: string[] = [];
     let degraded = false;
+    let tokens = 0;
     try {
-      const vector = await this.embeddings.embed(query);
-      vecIds = this.vecTop.all(Buffer.from(vector.buffer), CANDIDATES).map((r) => r.id);
+      const embedded = await this.embeddings.embed(query);
+      tokens = embedded.tokens;
+      vecIds = this.vecTop.all(Buffer.from(embedded.vector.buffer), CANDIDATES).map((r) => r.id);
     } catch {
       degraded = true;
     }
@@ -92,7 +96,7 @@ export class SearchService {
       hits.push({ id, author, title, ref, snippet });
       if (hits.length === RETURNED) break;
     }
-    return { hits, degraded };
+    return { hits, degraded, tokens };
   }
 
   /** Every term required first, then any term to fill the list. */

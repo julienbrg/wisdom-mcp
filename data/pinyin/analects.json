@@ -127,6 +127,14 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 8,
+      "char": "省",
+      "pinyin": "xǐng",
+      "source": "經典釋文",
+      "note": "悉井反視也鄭云思察己之所行也",
+      "check": "朱熹集注: 省，悉井反"
+    },
+    {
       "pos": 12,
       "char": "爲",
       "pinyin": "wèi",
@@ -689,6 +697,13 @@
       "pos": 5,
       "char": "與",
       "pinyin": "yǔ",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 18,
+      "char": "省",
+      "pinyin": "xǐng",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },
@@ -1293,6 +1308,13 @@
     }
   ],
   "3.14": [
+    {
+      "pos": 5,
+      "char": "監",
+      "pinyin": "jiàn",
+      "source": "經典釋文",
+      "note": "古暫反觀也視也"
+    },
     {
       "pos": 6,
       "char": "於",
@@ -2053,6 +2075,14 @@
       "pinyin": "jiàn",
       "source": "經典釋文",
       "note": "如字 (no note)"
+    },
+    {
+      "pos": 16,
+      "char": "省",
+      "pinyin": "xǐng",
+      "source": "經典釋文",
+      "note": "如字 (no note)",
+      "check": "朱熹集注: 省，悉井反"
     }
   ],
   "4.18": [
@@ -2060,6 +2090,13 @@
       "pos": 5,
       "char": "父",
       "pinyin": "fù",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 7,
+      "char": "幾",
+      "pinyin": "jī",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },
@@ -2127,6 +2164,15 @@
       "reviewed": "julien"
     }
   ],
+  "4.22": [
+    {
+      "pos": 15,
+      "char": "逮",
+      "pinyin": "dài",
+      "source": "經典釋文",
+      "note": "音代又大計反"
+    }
+  ],
   "4.23": [
     {
       "pos": 10,
@@ -2188,6 +2234,13 @@
       "note": "如字姓公冶名長家語字子張范𡩋云名芝字子長史記亦字子長"
     },
     {
+      "pos": 8,
+      "char": "妻",
+      "pinyin": "qì",
+      "source": "經典釋文",
+      "note": "七細反下同"
+    },
+    {
       "pos": 16,
       "char": "中",
       "pinyin": "zhōng",
@@ -2195,11 +2248,25 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 27,
+      "char": "妻",
+      "pinyin": "qì",
+      "source": "經典釋文",
+      "note": "下同 (5.1 可妻: 七細反下同)"
+    },
+    {
       "pos": 49,
       "char": "於",
       "pinyin": "yú",
       "source": "經典釋文",
       "note": "如字 (no note)"
+    },
+    {
+      "pos": 59,
+      "char": "妻",
+      "pinyin": "qì",
+      "source": "經典釋文",
+      "note": "下同 (5.1 可妻: 七細反下同)"
     }
   ],
   "5.3": [
@@ -3319,6 +3386,13 @@
       "pinyin": "rǔ",
       "source": "經典釋文",
       "note": "音汝"
+    },
+    {
+      "pos": 23,
+      "char": "澹",
+      "pinyin": "tán",
+      "source": "經典釋文",
+      "note": "徒甘反"
     },
     {
       "pos": 29,
@@ -4591,6 +4665,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 5,
+      "char": "召",
+      "pinyin": "zhào",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 7,
       "char": "弟",
       "pinyin": "dì",
@@ -4757,6 +4838,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 13,
+      "char": "任",
+      "pinyin": "rèn",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 14,
       "char": "重",
       "pinyin": "zhòng",
@@ -4774,6 +4862,13 @@
       "pos": 21,
       "char": "爲",
       "pinyin": "wéi",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 23,
+      "char": "任",
+      "pinyin": "rèn",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },
@@ -5705,6 +5800,14 @@
       "reviewed": "julien"
     },
     {
+      "pos": 12,
+      "char": "貉",
+      "pinyin": "hé",
+      "source": "經典釋文",
+      "note": "戸洛反依字當作貈",
+      "check": "朱熹集注: 貉，胡各反"
+    },
+    {
       "pos": 24,
       "char": "與",
       "pinyin": "yú",
@@ -5936,6 +6039,13 @@
   ],
   "10.3": [
     {
+      "pos": 1,
+      "char": "召",
+      "pinyin": "zhào",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 2,
       "char": "使",
       "pinyin": "shǐ",
@@ -6040,6 +6150,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 16,
+      "char": "當",
+      "pinyin": "dāng",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 30,
       "char": "衣",
       "pinyin": "yī",
@@ -6080,6 +6197,13 @@
       "pinyin": "cháng",
       "source": "經典釋文",
       "note": "如字 (no note)"
+    },
+    {
+      "pos": 66,
+      "char": "貉",
+      "pinyin": "hé",
+      "source": "經典釋文",
+      "note": "戸各反"
     },
     {
       "pos": 73,
@@ -6443,6 +6567,13 @@
       "note": "下同 (10.1 朝: 直遥反篇内不出者同)"
     },
     {
+      "pos": 57,
+      "char": "召",
+      "pinyin": "zhào",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 62,
       "char": "行",
       "pinyin": "xíng",
@@ -6650,6 +6781,16 @@
       "pinyin": "dì",
       "source": "經典釋文",
       "note": "如字 (no note)"
+    }
+  ],
+  "11.5": [
+    {
+      "pos": 16,
+      "char": "妻",
+      "pinyin": "qì",
+      "source": "經典釋文",
+      "note": "七細反",
+      "check": "朱熹集注: 三、妻，並去聲"
     }
   ],
   "11.6": [
@@ -7582,6 +7723,13 @@
   ],
   "12.4": [
     {
+      "pos": 45,
+      "char": "省",
+      "pinyin": "xǐng",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 49,
       "char": "夫",
       "pinyin": "fú",
@@ -7636,9 +7784,23 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 19,
+      "char": "愬",
+      "pinyin": "sù",
+      "source": "經典釋文",
+      "note": "蘇路反"
+    },
+    {
       "pos": 22,
       "char": "行",
       "pinyin": "xíng",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 40,
+      "char": "愬",
+      "pinyin": "sù",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },
@@ -8623,6 +8785,13 @@
   ],
   "13.15": [
     {
+      "pos": 30,
+      "char": "幾",
+      "pinyin": "jī",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 39,
       "char": "爲",
       "pinyin": "wéi",
@@ -8665,12 +8834,26 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 58,
+      "char": "幾",
+      "pinyin": "jī",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 74,
       "char": "喪",
       "pinyin": "sàng",
       "source": "經典釋文",
       "note": "息浪反",
       "check": "朱熹集注: 喪，去聲，下同"
+    },
+    {
+      "pos": 94,
+      "char": "幾",
+      "pinyin": "jī",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
     },
     {
       "pos": 103,
@@ -8719,6 +8902,13 @@
       "pos": 138,
       "char": "莫",
       "pinyin": "mò",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 144,
+      "char": "幾",
+      "pinyin": "jī",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },
@@ -9136,6 +9326,34 @@
   ],
   "13.28": [
     {
+      "pos": 24,
+      "char": "偲",
+      "pinyin": "sī",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 25,
+      "char": "偲",
+      "pinyin": "sī",
+      "source": "經典釋文",
+      "note": "音絲本又作愢"
+    },
+    {
+      "pos": 43,
+      "char": "偲",
+      "pinyin": "sī",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 44,
+      "char": "偲",
+      "pinyin": "sī",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 47,
       "char": "弟",
       "pinyin": "dì",
@@ -9224,6 +9442,13 @@
   ],
   "14.6": [
     {
+      "pos": 2,
+      "char": "适",
+      "pinyin": "kuò",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 4,
       "char": "於",
       "pinyin": "yú",
@@ -9234,6 +9459,13 @@
       "pos": 35,
       "char": "夫",
       "pinyin": "fū",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 42,
+      "char": "适",
+      "pinyin": "kuò",
       "source": "經典釋文",
       "note": "如字 (no note)"
     }
@@ -9255,6 +9487,14 @@
       "pinyin": "wéi",
       "source": "經典釋文",
       "note": "如字 (no note)"
+    },
+    {
+      "pos": 7,
+      "char": "裨",
+      "pinyin": "pí",
+      "source": "經典釋文",
+      "note": "上婢之反下時針反",
+      "check": "朱熹集注: 裨，婢之反"
     },
     {
       "pos": 19,
@@ -9483,6 +9723,16 @@
       "pinyin": "zhèng",
       "source": "經典釋文",
       "note": "如字 (no note)"
+    }
+  ],
+  "14.17": [
+    {
+      "pos": 12,
+      "char": "召",
+      "pinyin": "shào",
+      "source": "經典釋文",
+      "note": "音邵",
+      "check": "朱熹集注: 召，音邵"
     }
   ],
   "14.18": [
@@ -9979,6 +10229,13 @@
   ],
   "14.38": [
     {
+      "pos": 3,
+      "char": "愬",
+      "pinyin": "sù",
+      "source": "經典釋文",
+      "note": "悉路反"
+    },
+    {
       "pos": 6,
       "char": "於",
       "pinyin": "yú",
@@ -10122,6 +10379,14 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 7,
+      "char": "荷",
+      "pinyin": "hè",
+      "source": "經典釋文",
+      "note": "上胡我反本又作河音同下其位反蕢草器也下皆同",
+      "check": "朱熹集注: 荷，去聲"
+    },
+    {
       "pos": 41,
       "char": "莫",
       "pinyin": "mò",
@@ -10134,6 +10399,13 @@
       "pinyin": "zhī",
       "source": "經典釋文",
       "note": "如字 (no note)"
+    },
+    {
+      "pos": 59,
+      "char": "揭",
+      "pinyin": "qì",
+      "source": "經典釋文",
+      "note": "起例反"
     },
     {
       "pos": 72,
@@ -10999,6 +11271,13 @@
   ],
   "15.35": [
     {
+      "pos": 4,
+      "char": "當",
+      "pinyin": "dāng",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 9,
       "char": "於",
       "pinyin": "yú",
@@ -11165,6 +11444,13 @@
       "pinyin": "fū",
       "source": "經典釋文",
       "note": "如字 (no note)"
+    },
+    {
+      "pos": 106,
+      "char": "任",
+      "pinyin": "rén",
+      "source": "經典釋文",
+      "note": "音壬注同"
     },
     {
       "pos": 134,
@@ -11387,6 +11673,13 @@
     }
   ],
   "16.3": [
+    {
+      "pos": 16,
+      "char": "逮",
+      "pinyin": "dài",
+      "source": "經典釋文",
+      "note": "音代一音弟"
+    },
     {
       "pos": 17,
       "char": "於",
@@ -11733,11 +12026,27 @@
   ],
   "16.13": [
     {
+      "pos": 1,
+      "char": "亢",
+      "pinyin": "gāng",
+      "source": "經典釋文",
+      "note": "音剛又苦浪反",
+      "check": "朱熹集注: 亢，音剛"
+    },
+    {
       "pos": 3,
       "char": "於",
       "pinyin": "yú",
       "source": "經典釋文",
       "note": "如字 (no note)"
+    },
+    {
+      "pos": 124,
+      "char": "亢",
+      "pinyin": "gāng",
+      "source": "經典釋文",
+      "note": "陳亢: same name as above, 音剛",
+      "reviewed": "julien"
     },
     {
       "pos": 149,
@@ -11749,6 +12058,13 @@
     }
   ],
   "16.14": [
+    {
+      "pos": 3,
+      "char": "妻",
+      "pinyin": "qī",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
     {
       "pos": 6,
       "char": "稱",
@@ -11865,6 +12181,14 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 76,
+      "char": "亟",
+      "pinyin": "qì",
+      "source": "經典釋文",
+      "note": "去冀反",
+      "check": "朱熹集注: 好、亟、知，並去聲"
+    },
+    {
       "pos": 82,
       "char": "知",
       "pinyin": "zhì",
@@ -11960,6 +12284,13 @@
       "reviewed": "julien"
     },
     {
+      "pos": 8,
+      "char": "召",
+      "pinyin": "zhào",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 17,
       "char": "說",
       "pinyin": "yuè",
@@ -11974,6 +12305,13 @@
       "source": "經典釋文",
       "note": "音符",
       "check": "朱熹集注: 夫，音扶"
+    },
+    {
+      "pos": 42,
+      "char": "召",
+      "pinyin": "zhào",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
     },
     {
       "pos": 59,
@@ -12020,6 +12358,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 60,
+      "char": "任",
+      "pinyin": "rèn",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 70,
       "char": "足",
       "pinyin": "zú",
@@ -12035,6 +12380,13 @@
     }
   ],
   "17.7": [
+    {
+      "pos": 2,
+      "char": "召",
+      "pinyin": "zhào",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
     {
       "pos": 19,
       "char": "夫",
@@ -12270,11 +12622,25 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 11,
+      "char": "召",
+      "pinyin": "shào",
+      "source": "經典釋文",
+      "note": "上實照反下及注同"
+    },
+    {
       "pos": 19,
       "char": "爲",
       "pinyin": "wéi",
       "source": "經典釋文",
       "note": "如字 (no note)"
+    },
+    {
+      "pos": 22,
+      "char": "召",
+      "pinyin": "shào",
+      "source": "經典釋文",
+      "note": "下同 (17.10 召南: 上實照反下及注同)"
     },
     {
       "pos": 27,
@@ -13245,6 +13611,13 @@
       "note": "才用反"
     },
     {
+      "pos": 12,
+      "char": "荷",
+      "pinyin": "hè",
+      "source": "經典釋文",
+      "note": "何可反又音何"
+    },
+    {
       "pos": 22,
       "char": "見",
       "pinyin": "jiàn",
@@ -13495,6 +13868,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 6,
+      "char": "亞",
+      "pinyin": "yà",
+      "source": "經典釋文",
+      "note": "於嫁反"
+    },
+    {
       "pos": 9,
       "char": "適",
       "pinyin": "shì",
@@ -13580,6 +13960,15 @@
       "pinyin": "yú",
       "source": "經典釋文",
       "note": "如字 (no note)"
+    }
+  ],
+  "18.11": [
+    {
+      "pos": 9,
+      "char": "适",
+      "pinyin": "kuò",
+      "source": "經典釋文",
+      "note": "古活反"
     }
   ],
   "19.1": [
@@ -13732,6 +14121,14 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 19,
+      "char": "泥",
+      "pinyin": "nì",
+      "source": "經典釋文",
+      "note": "乃細反下同",
+      "check": "朱熹集注: 泥，去聲"
+    },
+    {
       "pos": 26,
       "char": "爲",
       "pinyin": "wéi",
@@ -13798,6 +14195,20 @@
     }
   ],
   "19.12": [
+    {
+      "pos": 13,
+      "char": "當",
+      "pinyin": "dāng",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 16,
+      "char": "應",
+      "pinyin": "yìng",
+      "source": "經典釋文",
+      "note": "抑證反"
+    },
     {
       "pos": 58,
       "char": "先",
@@ -14376,6 +14787,13 @@
       "pos": 178,
       "char": "喪",
       "pinyin": "sāng",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 190,
+      "char": "任",
+      "pinyin": "rèn",
       "source": "經典釋文",
       "note": "如字 (no note)"
     },

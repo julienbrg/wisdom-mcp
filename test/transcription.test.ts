@@ -96,6 +96,15 @@ test('鮮 meaning few reads xiǎn, and 孫 meaning yielding reads xùn', () => {
   assert.match(text!, /bù xùn, jiǎn zé gù; yǔ qí bù xùn yě/);
 });
 
+test('适 in a name reads kuò, not shì as the simplified 適', () => {
+  const body =
+    '南宮适問於孔子曰：「羿善射，奡盪舟，俱不得其死然。禹稷躬稼而有天下。」' +
+    '夫子不答。南宮适出，子曰：「君子哉若人！尙德哉若人！」';
+  const [text] = transcribeOriginals('analects', 'lzh', [{ refUnit: '14.6', body }]);
+  assert.match(text!, /^nán gōng kuò wèn/);
+  assert.match(text!, /nán gōng kuò chū/);
+});
+
 test('the import fails and lists polyphones that have no reviewed reading', () => {
   assert.throws(
     () => transcribeOriginals('analects', 'lzh', [{ refUnit: '0.0', body: '知者樂水' }]),

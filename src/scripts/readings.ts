@@ -22,7 +22,7 @@ try {
   for (const { work, originals } of await prepareWorks(works, cacheDir)) {
     const { bookOf } = VOLUMES[work.id];
     const notes = await loadNotes(cacheDir, work.id);
-    const { readings, unmatched } = draft(gy, notes, originals, bookOf);
+    const { readings, unmatched, skipped } = draft(gy, notes, originals, bookOf);
     if (work.id === 'analects')
       crossCheck(gy, await loadJizhu(cacheDir), readings, originals, bookOf);
 
@@ -41,6 +41,11 @@ try {
       l.filter((e) => e.todo).map((e) => ({ ref, ...e })),
     );
     for (const t of todo) console.log(`${work.id} ${t.ref} @${t.pos} ${t.char}: ${t.todo}`);
+    for (const s of skipped) {
+      console.log(
+        `${work.id} ${s.refUnit} @${s.pos} ${s.char}: skipped ${s.note.head} ${s.note.note} (${s.pinyin}, pinyin-pro ${s.modern})`,
+      );
+    }
     stats.push({
       work: work.id,
       notes: notes.length,
@@ -49,6 +54,7 @@ try {
       checked: all.filter((e) => e.check).length,
       reviewed: all.filter((e) => e.reviewed).length,
       todo: todo.length,
+      skipped: skipped.length,
     });
   }
   console.table(stats);

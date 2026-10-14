@@ -363,6 +363,13 @@
       "note": "烏路反注作同也"
     },
     {
+      "pos": 23,
+      "char": "幾",
+      "pinyin": "jī",
+      "source": "經典釋文",
+      "note": "音機近也又一音祈"
+    },
+    {
       "pos": 24,
       "char": "於",
       "pinyin": "yú",
@@ -474,6 +481,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 7,
+      "char": "當",
+      "pinyin": "dàng",
+      "source": "經典釋文",
+      "note": "丁浪反"
+    },
+    {
       "pos": 20,
       "char": "為",
       "pinyin": "wèi",
@@ -481,11 +495,27 @@
       "note": "下同 (5 爲: 于僞反下有爲不爲皆同)"
     },
     {
+      "pos": 23,
+      "char": "當",
+      "pinyin": "dàng",
+      "source": "經典釋文",
+      "note": "當其無: parallel to the first 當其無, 丁浪反",
+      "reviewed": "julien"
+    },
+    {
       "pos": 36,
       "char": "為",
       "pinyin": "wèi",
       "source": "經典釋文",
       "note": "下同 (5 爲: 于僞反下有爲不爲皆同)"
+    },
+    {
+      "pos": 39,
+      "char": "當",
+      "pinyin": "dàng",
+      "source": "經典釋文",
+      "note": "當其無: parallel to the first 當其無, 丁浪反",
+      "reviewed": "julien"
     },
     {
       "pos": 52,
@@ -863,6 +893,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 12,
+      "char": "幾",
+      "pinyin": "jǐ",
+      "source": "經典釋文",
+      "note": "居豈反"
+    },
+    {
       "pos": 17,
       "char": "與",
       "pinyin": "yǔ",
@@ -889,6 +926,20 @@
       "pinyin": "yí",
       "source": "經典釋文",
       "note": "如字 (no note)"
+    },
+    {
+      "pos": 134,
+      "char": "澹",
+      "pinyin": "dàn",
+      "source": "經典釋文",
+      "note": "徒紺反古本河上作忽兮若海嚴遵作忽兮若晦"
+    },
+    {
+      "pos": 141,
+      "char": "飂",
+      "pinyin": "liáo",
+      "source": "經典釋文",
+      "note": "力幽反梁作飄簡文云敷遥反河上淵兮"
     },
     {
       "pos": 166,
@@ -2201,6 +2252,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 64,
+      "char": "應",
+      "pinyin": "yìng",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 99,
       "char": "夫",
       "pinyin": "fú",
@@ -3292,6 +3350,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 12,
+      "char": "虺",
+      "pinyin": "huǐ",
+      "source": "經典釋文",
+      "note": "虚鬼反"
+    },
+    {
       "pos": 38,
       "char": "知",
       "pinyin": "zhī",
@@ -3919,6 +3984,13 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 101,
+      "char": "幾",
+      "pinyin": "jī",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
       "pos": 128,
       "char": "難",
       "pinyin": "nán",
@@ -4272,6 +4344,14 @@
       "note": "如字 (no note)"
     },
     {
+      "pos": 54,
+      "char": "幾",
+      "pinyin": "jī",
+      "source": "經典釋文",
+      "note": "幾喪: nearly, 音機 as in ch. 8 (近也)",
+      "reviewed": "julien"
+    },
+    {
       "pos": 55,
       "char": "喪",
       "pinyin": "sāng",
@@ -4500,6 +4580,20 @@
       "pos": 52,
       "char": "勝",
       "pinyin": "shèng",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 59,
+      "char": "應",
+      "pinyin": "yìng",
+      "source": "經典釋文",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 63,
+      "char": "召",
+      "pinyin": "zhào",
       "source": "經典釋文",
       "note": "如字 (no note)"
     }

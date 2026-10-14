@@ -1,3 +1,4 @@
+import { pinyin } from 'pinyin-pro';
 import { cached } from '../cache.js';
 import { fold, type Guangyun } from './guangyun.js';
 import { POLYPHONES, type Reading, type Readings } from './pinyin.js';
@@ -131,6 +132,29 @@ const RUZI: Record<string, string> = {
   於: 'yú',
   鮮: 'xiān',
   孫: 'sūn',
+  逮: 'dài',
+  妻: 'qī',
+  貉: 'hé',
+  愬: 'sù',
+  召: 'zhào',
+  荷: 'hé',
+  當: 'dāng',
+  幾: 'jī',
+  飂: 'liáo',
+  虺: 'huǐ',
+  省: 'xǐng',
+  監: 'jiān',
+  澹: 'dàn',
+  偲: 'sī',
+  裨: 'bì',
+  揭: 'jiē',
+  任: 'rèn',
+  亢: 'kàng',
+  亟: 'jí',
+  亞: 'yà',
+  适: 'kuò',
+  泥: 'ní',
+  應: 'yìng',
 };
 export const ruzi = (c: string) => RUZI[fold(c)];
 
@@ -220,14 +244,13 @@ interface Resolved {
 }
 
 /** Which character of the headword a note reads, and as what. */
-function resolve(gy: Guangyun, head: string, note: string): Resolved[] {
+function resolve(gy: Guangyun, head: string, note: string, poly = isPolyphone): Resolved[] {
   const chars = [...head];
   const targets = (prefix: string | undefined) => {
     if (prefix === '上') return [0];
     if (prefix === '下') return [chars.length - 1];
     if (prefix) return [chars.lastIndexOf(prefix)];
-    const poly = chars.flatMap((c, i) => (isPolyphone(c) ? [i] : []));
-    return poly;
+    return chars.flatMap((c, i) => (poly(c) ? [i] : []));
   };
 
   const tries: [string | undefined, string][] = [[undefined, note]];
@@ -251,7 +274,7 @@ function resolve(gy: Guangyun, head: string, note: string): Resolved[] {
       hint = homophone[1];
     } else continue;
 
-    const idx = both ? chars.flatMap((c, i) => (isPolyphone(c) ? [i] : [])) : targets(prefix);
+    const idx = both ? chars.flatMap((c, i) => (poly(c) ? [i] : [])) : targets(prefix);
     if (!idx.length) return [];
     if (plain) return idx.map((index) => ({ index, pinyin: ruzi(chars[index]) ?? null }));
     const found = idx.map((index) => ({
@@ -339,15 +362,23 @@ export function align(heads: string[], text: string): number[] {
   return at;
 }
 
+/** A note on a character missing from POLYPHONES whose reading differs from pinyin-pro's. */
+export interface Skipped extends Slot {
+  pinyin: string;
+  modern: string;
+  note: Note;
+}
+
 /** Draft readings for every polyphone occurrence, from the notes aligned on the text. */
 export function draft(
   gy: Guangyun,
   notes: Note[],
   units: Unit[],
   bookOf: (refUnit: string) => string,
-): { readings: Readings; unmatched: Note[] } {
+): { readings: Readings; unmatched: Note[]; skipped: Skipped[] } {
   const readings: Readings = {};
   const unmatched: Note[] = [];
+  const skipped: Skipped[] = [];
   const bodies = new Map(units.map((u) => [u.refUnit, [...u.body]]));
   for (const [book, slots] of slotsByBook(units, bookOf)) {
     const text = slots.map((s) => fold(s.char)).join('');
@@ -362,6 +393,15 @@ export function draft(
       if (at < 0) return void unmatched.push(n);
       for (const r of resolve(gy, n.head, n.note)) {
         events.set(at + r.index, { pinyin: r.pinyin, note: n, carry: CARRY.test(n.note) });
+      }
+      for (const r of resolve(gy, n.head, n.note, () => true)) {
+        const slot = slots[at + r.index];
+        if (isPolyphone(slot.char) || !r.pinyin) continue;
+        const modern = pinyin(bodies.get(slot.refUnit)!.join(''), {
+          type: 'all',
+          toneSandhi: false,
+        })[slot.pos].pinyin;
+        if (modern !== r.pinyin) skipped.push({ ...slot, pinyin: r.pinyin, modern, note: n });
       }
     });
 
@@ -396,5 +436,5 @@ export function draft(
       (readings[slot.refUnit] ??= []).push({ pos: slot.pos, char: slot.char, ...entry });
     });
   }
-  return { readings, unmatched };
+  return { readings, unmatched, skipped };
 }

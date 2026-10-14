@@ -88,6 +88,8 @@ This drafts both readings files from 《經典釋文》 (論語音義 and 老子
 
 Each entry records its source and the original note, e.g. `"note": "音恱注同"`, and `check` when 集注 agrees. Entries where the sources disagree, or where a note couldn't be resolved, carry a `todo` saying why. The import refuses them until they are reviewed.
 
+The script also lists the notes it skips: a note on a character missing from the polyphone list, whose reading differs from pinyin-pro's. Add such a character to `POLYPHONES` in `src/corpus/transcription/pinyin.ts`, with its usual reading in `RUZI` in `src/corpus/transcription/shiwen.ts`, and run the script again.
+
 To fix or add a reading, edit the entry: set `pinyin`, remove `todo`, add `"reviewed": "<your name>"`, and give your reasoning in `note`. `pnpm readings:draft` keeps reviewed entries when it runs again.
 
 ```sh

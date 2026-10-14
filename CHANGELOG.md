@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `pnpm readings:draft` now lists the 釋文 notes it skips: notes on characters missing from the polyphone list whose reading differs from pinyin-pro's. Reviewing that list added 23 characters, among them 适 kuò, 應 yìng, 召 shào in names, 妻 qì as a verb and 亞 yà, so 57 more Analects and 13 more Laozi occurrences now take a reading from the readings files. Four occurrences the notes don't settle were reviewed by hand.
 - `get_concept` builds each key passage snippet around the phrase that makes it key, imported from the Wisdom Context Window's `quote` field into a new `concept_passages.quote` column, instead of cutting at the first 40 words. It starts a few words before the phrase, and falls back to the passage opening when the phrase isn't in the text.
 - `list_concepts` and `get_concept` show the original term after the name without an extra pair of parentheses, and `get_concept` no longer wraps snippets in quotation marks.
 - The `/wisdom` skill gives the transcription after a quote without a label.

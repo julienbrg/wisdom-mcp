@@ -15,6 +15,7 @@ const { version } = JSON.parse(
 
 const app = await NestFactory.create<NestExpressApplication>(AppModule);
 app.set('trust proxy', 1);
+app.useBodyParser('json', { limit: '16kb' });
 app.enableShutdownHooks();
 
 const openApi = new DocumentBuilder()

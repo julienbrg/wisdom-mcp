@@ -91,6 +91,8 @@ test('zhangju: chapters end at 右, with notes, titles and the preface dropped',
 test('translation units map onto source units', () => {
   assert.deepEqual(sourceUnits('dhammapada', '58-59'), ['58', '59']);
   assert.deepEqual(sourceUnits('dhammapada', '183'), ['183']);
+  assert.deepEqual(sourceUnits('mencius', '1A.6-7'), ['1A.6', '1A.7']);
+  assert.deepEqual(sourceUnits('doctrine-of-the-mean', '14-15'), ['14', '15']);
   assert.deepEqual(sourceUnits('analects', '5.1'), ['5.1', '5.2']);
   assert.deepEqual(sourceUnits('analects', '5.27'), ['5.28']);
   assert.deepEqual(sourceUnits('analects', '9.5'), ['9.5']);

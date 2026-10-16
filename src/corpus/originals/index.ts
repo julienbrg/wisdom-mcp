@@ -15,7 +15,7 @@ export interface Original {
   license: string;
 }
 
-function load(work: Work, cacheDir: string): Promise<SourceText> {
+export function loadSource(work: Work, cacheDir: string): Promise<SourceText> {
   switch (work.original) {
     case 'wikisource':
       return loadWikisource(work.id, cacheDir);
@@ -54,17 +54,13 @@ const UNIT_MAPS: Record<string, (unit: string) => string[] | undefined> = {
 export function sourceUnits(workId: string, refUnit: string): string[] {
   const mapped = UNIT_MAPS[workId]?.(refUnit);
   if (mapped) return mapped;
-  const range = refUnit.match(/^(\d+)-(\d+)$/);
+  const range = refUnit.match(/^(.*?)(\d+)-(\d+)$/);
   if (!range) return [refUnit];
-  return Array.from({ length: +range[2] - +range[1] + 1 }, (_, i) => `${+range[1] + i}`);
+  const [, prefix, from, to] = range;
+  return Array.from({ length: +to - +from + 1 }, (_, i) => `${prefix}${+from + i}`);
 }
 
-export async function loadOriginals(
-  work: Work,
-  refUnits: string[],
-  cacheDir: string,
-): Promise<Original[]> {
-  const source = await load(work, cacheDir);
+export function loadOriginals(work: Work, refUnits: string[], source: SourceText): Original[] {
   return refUnits.map((refUnit) => {
     const parts = sourceUnits(work.id, refUnit).map((u) => {
       const part = source.units.get(u);

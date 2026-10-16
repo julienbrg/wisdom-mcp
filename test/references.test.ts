@@ -157,3 +157,45 @@ test('gita: verse ranges counted per chapter, colophons and footnotes are appara
     ],
   );
 });
+
+test('aligned: each translation takes the chapter its Chinese paragraph comes from', () => {
+  const source = new Map(
+    Object.entries({
+      '1A.1': '孟子見梁惠王。王曰：「叟不遠千里而來，亦將有以利吾國乎？」',
+      '1A.2': '孟子見梁惠王，王立於沼上，顧鴻鴈麋鹿，曰：「賢者亦樂此乎？」',
+      '1A.3': '梁惠王曰：「寡人之於國也，盡心焉耳矣。」',
+    }).map(([unit, body]) => [unit, { body }]),
+  );
+  const segs = segment(
+    'mencius',
+    [
+      '## chapter01',
+      '梁惠王上',
+      'Liang Hui Wang I',
+      '孟子見梁惠王。王曰：「叟不遠千里而來，亦將有以利吾國乎？」',
+      'Mencius went to see king Hui of Liang.',
+      'He went on.',
+      '王立於沼上，顧鴻鴈麋鹿。梁惠王曰：「寡人之於國也，盡心焉耳矣。」',
+      'The king went and stood with him by a pond.',
+      '## chapter02',
+      'Liang Hui Wang II',
+    ],
+    source,
+  );
+  assert.deepEqual(
+    segs.map((s) => [s.ref, s.refUnit, s.apparatus]),
+    [
+      [null, null, true],
+      [null, null, true],
+      [null, null, true],
+      [null, null, true],
+      ['1A.1', '1A.1', false],
+      ['1A.1', '1A.1', false],
+      [null, null, true],
+      ['1A.2-3', '1A.2-3', false],
+      [null, null, true],
+      [null, null, true],
+    ],
+  );
+  assert.throws(() => segment('mencius', []), /source text/);
+});

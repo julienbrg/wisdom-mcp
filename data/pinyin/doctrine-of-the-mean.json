@@ -1537,10 +1537,10 @@
     {
       "pos": 280,
       "char": "強",
-      "pinyin": "",
+      "pinyin": "qiǎng",
       "source": "朱熹集注",
-      "note": "強，上聲",
-      "todo": "朱熹集注 allows qiǎng/jiàng"
+      "note": "強，上聲; 勉強, to force. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 282,
@@ -1797,10 +1797,10 @@
     {
       "pos": 682,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "行，去聲",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "行，去聲; conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 805,
@@ -2193,10 +2193,10 @@
     {
       "pos": 66,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "行，去聲",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "行，去聲; conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 84,

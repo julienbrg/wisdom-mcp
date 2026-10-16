@@ -682,10 +682,10 @@
     {
       "pos": 48,
       "char": "弟",
-      "pinyin": "",
+      "pinyin": "tì",
       "source": "朱熹集注",
-      "note": "弟，去聲",
-      "todo": "朱熹集注 allows dì/tì"
+      "note": "弟，去聲; 孝弟, respect for elders. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 54,
@@ -839,10 +839,10 @@
     {
       "pos": 25,
       "char": "弟",
-      "pinyin": "",
+      "pinyin": "tì",
       "source": "朱熹集注",
-      "note": "弟，去聲",
-      "todo": "朱熹集注 allows dì/tì"
+      "note": "弟，去聲; 孝弟, respect for elders. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 47,

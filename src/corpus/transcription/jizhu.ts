@@ -173,7 +173,12 @@ export function draftJizhu(
           at + offset,
           ok.length === 1
             ? { pinyin: ok[0], note, carry: CARRY.test(c.clause) }
-            : { pinyin: null, note, carry: false, todo: `朱熹集注 allows ${ok.join('/')}` },
+            : {
+                pinyin: null,
+                note,
+                carry: CARRY.test(c.clause),
+                todo: `朱熹集注 allows ${ok.join('/')}`,
+              },
         );
       }
     }

@@ -4090,10 +4090,10 @@
     {
       "pos": 360,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "行，去聲",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "行，去聲; conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 365,
@@ -5532,10 +5532,10 @@
     {
       "pos": 103,
       "char": "強",
-      "pinyin": "",
+      "pinyin": "qiǎng",
       "source": "朱熹集注",
-      "note": "強，上聲",
-      "todo": "朱熹集注 allows qiǎng/jiàng"
+      "note": "強，上聲; 勉強, to force. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 104,
@@ -7088,10 +7088,10 @@
     {
       "pos": 859,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "行，去聲",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "行，去聲; conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 870,
@@ -12487,10 +12487,10 @@
     {
       "pos": 1128,
       "char": "強",
-      "pinyin": "",
+      "pinyin": "qiǎng",
       "source": "朱熹集注",
-      "note": "強，上聲",
-      "todo": "朱熹集注 allows qiǎng/jiàng"
+      "note": "強，上聲; 勉強, to force. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 1129,
@@ -13073,10 +13073,10 @@
     {
       "pos": 196,
       "char": "強",
-      "pinyin": "",
+      "pinyin": "qiǎng",
       "source": "朱熹集注",
-      "note": "強，上聲",
-      "todo": "朱熹集注 allows qiǎng/jiàng"
+      "note": "強，上聲; 勉強, to force. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 202,
@@ -14423,10 +14423,10 @@
     {
       "pos": 34,
       "char": "辟",
-      "pinyin": "",
+      "pinyin": "bì",
       "source": "朱熹集注",
-      "note": "辟，去聲",
-      "todo": "朱熹集注 allows pì/bì"
+      "note": "辟，去聲; = 避, to avoid. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 55,
@@ -14743,10 +14743,10 @@
     {
       "pos": 211,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "行，去聲，下同",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "行，去聲，下同; conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 237,
@@ -14828,9 +14828,10 @@
     {
       "pos": 331,
       "char": "行",
-      "pinyin": "xíng",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "如字 (no note)"
+      "note": "下同 (3B.9 行: 行，去聲，下同); conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 346,
@@ -15003,10 +15004,10 @@
     {
       "pos": 679,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "行、好，皆去聲",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "行、好，皆去聲; conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 692,
@@ -15600,10 +15601,10 @@
     {
       "pos": 92,
       "char": "強",
-      "pinyin": "",
+      "pinyin": "qiǎng",
       "source": "朱熹集注",
-      "note": "強，上聲",
-      "todo": "朱熹集注 allows qiǎng/jiàng"
+      "note": "強，上聲; 勉強, to force. Manual review by Julien",
+      "reviewed": "julien"
     }
   ],
   "4A.4": [
@@ -16151,10 +16152,10 @@
     {
       "pos": 7,
       "char": "辟",
-      "pinyin": "",
+      "pinyin": "bì",
       "source": "朱熹集注",
-      "note": "辟，去聲",
-      "todo": "朱熹集注 allows pì/bì"
+      "note": "辟，去聲; = 避, to avoid. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 18,
@@ -16166,10 +16167,10 @@
     {
       "pos": 42,
       "char": "辟",
-      "pinyin": "",
+      "pinyin": "bì",
       "source": "朱熹集注",
-      "note": "辟，去聲",
-      "todo": "朱熹集注 allows pì/bì"
+      "note": "辟，去聲; = 避, to avoid. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 53,
@@ -17573,10 +17574,10 @@
     {
       "pos": 14,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "行，去聲",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "行，去聲; conduct. Manual review by Julien",
+      "reviewed": "julien"
     }
   ],
   "4B.12": [
@@ -20258,10 +20259,10 @@
     {
       "pos": 80,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "行，去聲，下同",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "行，去聲，下同; conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 81,
@@ -20273,9 +20274,10 @@
     {
       "pos": 94,
       "char": "行",
-      "pinyin": "xíng",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "如字 (no note)"
+      "note": "下同 (5A.5 行: 行，去聲，下同); conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 95,
@@ -20392,9 +20394,10 @@
     {
       "pos": 192,
       "char": "行",
-      "pinyin": "xíng",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "如字 (no note)"
+      "note": "下同 (5A.5 行: 行，去聲，下同); conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 193,
@@ -21110,10 +21113,10 @@
     {
       "pos": 342,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "行，去聲",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "行，去聲; conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 348,
@@ -24765,10 +24768,10 @@
     {
       "pos": 108,
       "char": "辟",
-      "pinyin": "",
+      "pinyin": "bì",
       "source": "朱熹集注",
-      "note": "惡、辟，皆去聲，下同",
-      "todo": "朱熹集注 allows pì/bì"
+      "note": "惡、辟，皆去聲，下同; = 避, to avoid. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 112,
@@ -24824,7 +24827,8 @@
       "char": "辟",
       "pinyin": "bì",
       "source": "朱熹集注",
-      "note": "如字 (no note)"
+      "note": "下同 (6A.10 惡、辟: 惡、辟，皆去聲，下同); = 避, to avoid. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 156,
@@ -24838,7 +24842,8 @@
       "char": "辟",
       "pinyin": "bì",
       "source": "朱熹集注",
-      "note": "如字 (no note)"
+      "note": "下同 (6A.10 惡、辟: 惡、辟，皆去聲，下同); = 避, to avoid. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 179,
@@ -26022,34 +26027,34 @@
     {
       "pos": 194,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xíng",
       "source": "朱熹集注",
-      "note": "之、行，並去聲",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "之、行，並去聲; the verb, to practise: 行堯之行. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 197,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "之、行，並去聲",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "之、行，並去聲; conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 216,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xíng",
       "source": "朱熹集注",
-      "note": "之、行，並去聲",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "之、行，並去聲; the verb, to practise: 行桀之行. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 219,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "之、行，並去聲",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "之、行，並去聲; conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 233,
@@ -28211,10 +28216,10 @@
     {
       "pos": 23,
       "char": "強",
-      "pinyin": "",
+      "pinyin": "qiǎng",
       "source": "朱熹集注",
-      "note": "強，上聲",
-      "todo": "朱熹集注 allows qiǎng/jiàng"
+      "note": "強，上聲; 勉強, to force. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 26,
@@ -28554,10 +28559,10 @@
     {
       "pos": 47,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "行，去聲",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "行，去聲; conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 56,
@@ -28833,10 +28838,10 @@
     {
       "pos": 7,
       "char": "辟",
-      "pinyin": "",
+      "pinyin": "bì",
       "source": "朱熹集注",
-      "note": "辟，去聲，下同",
-      "todo": "朱熹集注 allows pì/bì"
+      "note": "辟，去聲，下同; = 避, to avoid. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 18,
@@ -28848,10 +28853,10 @@
     {
       "pos": 42,
       "char": "辟",
-      "pinyin": "",
+      "pinyin": "bì",
       "source": "朱熹集注",
-      "note": "辟，去聲，下同",
-      "todo": "朱熹集注 allows pì/bì"
+      "note": "辟，去聲，下同; = 避, to avoid. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 53,
@@ -29225,9 +29230,10 @@
     {
       "pos": 8,
       "char": "辟",
-      "pinyin": "bì",
+      "pinyin": "pì",
       "source": "朱熹集注",
-      "note": "如字 (no note)"
+      "note": "下同 (7A.22 辟: 辟，去聲，下同); = 譬, like: 辟若掘井. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 23,
@@ -31051,10 +31057,10 @@
     {
       "pos": 63,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "中、為、行，並去聲",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "中、為、行，並去聲; conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 68,
@@ -31298,10 +31304,10 @@
     {
       "pos": 171,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "行，去聲",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "行，去聲; conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 195,
@@ -31334,26 +31340,26 @@
     {
       "pos": 272,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "行，去聲",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "行，去聲; conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 274,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xìng",
       "source": "朱熹集注",
-      "note": "行，去聲",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "行，去聲; conduct. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 290,
       "char": "行",
-      "pinyin": "",
+      "pinyin": "xíng",
       "source": "朱熹集注",
-      "note": "行，去聲",
-      "todo": "朱熹集注 allows hàng/xìng"
+      "note": "行，去聲; to walk: 行何為踽踽涼涼; the 去聲 note is on 言不顧行. Manual review by Julien",
+      "reviewed": "julien"
     },
     {
       "pos": 292,

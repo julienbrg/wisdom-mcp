@@ -52,18 +52,26 @@ test('analects: chapters by div id, trailer cut at the next heading', () => {
   );
 });
 
-test('mencius: chapters by heading, numbered by book and part', () => {
+test('mencius: a chapter per paragraph of 集注, numbered by book and part', () => {
   const chapters = menciusChapters(
-    '{{header|title=[[../]]}}\n<onlyinclude>\n===1===\n\n　　孟子見梁惠王。\n\n　　王曰：「叟！」\n\n=== 2 ===\n\n　　孟子對曰：「不可。」\n</onlyinclude>\n{{PD-old}}',
-    3,
-  );
-  assert.deepEqual(
-    [...chapters],
     [
-      ['2B.1', { anchor: '1', body: '孟子見梁惠王。\n王曰：「叟！」' }],
-      ['2B.2', { anchor: '2', body: '孟子對曰：「不可。」' }],
-    ],
+      '==盡心章句上==',
+      '\u3000\u3000{{annotate|凡四十六章。}}',
+      '\u3000\u3000孟子曰：「盡其心者，知其性也。」{{annotate|心者，人之神明。-{云}-}}',
+      ...Array.from({ length: 39 }, (_, i) => `\u3000\u3000孟子曰：「${i}。」`),
+      '\u3000\u3000公孫丑曰：「道則高矣。」',
+      '\u3000\u3000孟子曰：「大匠不為拙工。」',
+      '\u3000\u3000孟子曰：「天下有道。」',
+    ].join('\n'),
+    12,
   );
+  assert.equal(chapters.size, 42);
+  assert.deepEqual(chapters.get('7A.1'), { anchor: '', body: '孟子曰：「盡其心者，知其性也。」' });
+  assert.deepEqual(chapters.get('7A.41'), {
+    anchor: '',
+    body: '公孫丑曰：「道則高矣。」\n孟子曰：「大匠不為拙工。」',
+  });
+  assert.equal(chapters.get('7A.42')?.body, '孟子曰：「天下有道。」');
 });
 
 test('zhangju: chapters end at 右, with notes, titles and the preface dropped', () => {

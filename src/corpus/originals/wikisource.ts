@@ -28,10 +28,10 @@ const ANALECTS = [
   '子張第十九',
   '堯曰第二十',
 ].map((book) => `論語/${book}`);
-const MENCIUS = ['梁惠王', '公孫丑', '滕文公', '離婁', '萬章', '告子', '盡心'].flatMap((book) => [
-  `孟子/${book}上`,
-  `孟子/${book}下`,
-]);
+// Zhu Xi's text, as for the Great Learning and the Doctrine of the Mean, so his readings align on it.
+const MENCIUS = '一 二 三 四 五 六 七 八 九 十 十一 十二 十三 十四'
+  .split(' ')
+  .map((n) => `四書章句集註/孟子集注卷${n}`);
 const GREAT_LEARNING = '四書章句集註/大學章句';
 const DOCTRINE_OF_THE_MEAN = '四書章句集註/中庸章句';
 
@@ -113,14 +113,21 @@ export function analectsChapters(wikitext: string): Map<string, Section> {
 }
 
 // "1A.1": book I, part A (上), chapter 1, as Legge numbers them.
-export function menciusChapters(wikitext: string, page: number): Map<string, Section> {
-  const prefix = `${(page >> 1) + 1}${'AB'[page & 1]}`;
-  const parts = wikitext.split('</onlyinclude>')[0].split(/^===\s*(\d+)\s*===\s*$/m);
-  const chapters = new Map<string, Section>();
-  for (let i = 1; i < parts.length; i += 2) {
-    chapters.set(`${prefix}.${parts[i]}`, { anchor: parts[i], body: cleanWikitext(parts[i + 1]) });
-  }
-  return chapters;
+// Chapters that 集注 sets out as two paragraphs: 7A.41 runs on with 「孟子曰：大匠不為拙工」.
+const RUN_ON: Record<string, number> = { '7A': 41 };
+
+// One volume (卷) of 集注 per part of a book, one paragraph per chapter: "1A.1" is book I, part A
+// (上), chapter 1, as Legge numbers them.
+export function menciusChapters(wikitext: string, volume: number): Map<string, Section> {
+  const prefix = `${(volume >> 1) + 1}${'AB'[volume & 1]}`;
+  const paragraphs = wikitext
+    .split('\n')
+    .filter((l) => l.startsWith('\u3000'))
+    .map(cleanWikitext)
+    .filter((body) => /[，。：；！？]/.test(body));
+  const runOn = RUN_ON[prefix];
+  if (runOn) paragraphs.splice(runOn - 1, 2, paragraphs.slice(runOn - 1, runOn + 1).join('\n'));
+  return new Map(paragraphs.map((body, i) => [`${prefix}.${i + 1}`, { anchor: '', body }]));
 }
 
 // Zhu Xi's 章句: each chapter ends with a 「右…章」 line, and his notes run inline in {{annotate}}.

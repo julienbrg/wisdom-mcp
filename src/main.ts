@@ -18,11 +18,15 @@ app.set('trust proxy', 1);
 app.useBodyParser('json', { limit: '16kb' });
 app.enableShutdownHooks();
 
-const openApi = new DocumentBuilder()
-  .setTitle('wisdom-mcp')
-  .setDescription('MCP server for agentic hybrid search over wisdom texts')
-  .setVersion(version)
-  .build();
-SwaggerModule.setup('docs', app, () => SwaggerModule.createDocument(app, openApi));
+const config = app.get<Config>(ConfigService);
 
-await app.listen(app.get<Config>(ConfigService).get('PORT', { infer: true }), '127.0.0.1');
+if (config.get('NODE_ENV', { infer: true }) !== 'production') {
+  const openApi = new DocumentBuilder()
+    .setTitle('wisdom-mcp')
+    .setDescription('MCP server for agentic hybrid search over wisdom texts')
+    .setVersion(version)
+    .build();
+  SwaggerModule.setup('docs', app, () => SwaggerModule.createDocument(app, openApi));
+}
+
+await app.listen(config.get('PORT', { infer: true }), '127.0.0.1');

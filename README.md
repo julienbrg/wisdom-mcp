@@ -1,4 +1,4 @@
-[![Corpus](https://img.shields.io/badge/corpus-8%20texts%20%C2%B7%202%2C969%20passages-45a2f8?labelColor=8c1c84)](#corpus)
+[![Corpus](https://img.shields.io/badge/corpus-11%20texts%20%C2%B7%204%2C506%20passages-45a2f8?labelColor=8c1c84)](#corpus)
 [![CI](https://github.com/julienbrg/wisdom-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/julienbrg/wisdom-mcp/actions/workflows/ci.yml)
 [![NestJS](https://img.shields.io/badge/NestJS-v12-E0234E?logo=nestjs)](https://nestjs.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript)](https://www.typescriptlang.org/)
@@ -52,22 +52,27 @@ Over either rate limit, `/mcp` answers 429 with a JSON-RPC error and a `Retry-Af
 pnpm corpus:import
 ```
 
-This imports the 8 pilot works from the Wisdom Context Window, with their original-language texts, and its concept graph: 208 concepts, each with a summary, key passages and links to parallel, opposing, related and broader concepts. Downloads are cached in `CORPUS_CACHE`, so later runs work offline, and each run replaces the works and concepts it imports.
+This imports the 11 pilot works from the Wisdom Context Window, with their original-language texts, and its concept graph: 208 concepts, each with a summary, key passages and links to parallel, opposing, related and broader concepts. Downloads are cached in `CORPUS_CACHE`, so later runs work offline, and each run replaces the works and concepts it imports.
 
 The corpus badge at the top of this README is static: after an import changes the counts, update it with `select count(*) from texts` and `select count(*) from passages`.
 
-| Work                | Translation                | Reference      | Original                    |
-| ------------------- | -------------------------- | -------------- | --------------------------- |
-| Tao Te Ching        | James Legge                | chapter.para   | Chinese Wikisource (王弼本) |
-| Analects            | James Legge                | book.chapter   | Chinese Wikisource          |
-| Dhammapada          | F. Max Müller              | verse          | SuttaCentral                |
-| Bhagavad Gita       | Edwin Arnold               | chapter.verses | gita/gita dataset, by verse |
-| Enchiridion         | Thomas Wentworth Higginson | section        | Perseus                     |
-| Meditations         | Meric Casaubon             | book.section   | Perseus, by section         |
-| Sermon on the Mount | King James Version         | chapter:verse  | Perseus                     |
-| Ecclesiastes        | King James Version         | chapter:verse  | Sefaria                     |
+| Work                 | Translation                | Reference      | Original                    |
+| -------------------- | -------------------------- | -------------- | --------------------------- |
+| Tao Te Ching         | James Legge                | chapter.para   | Chinese Wikisource (王弼本) |
+| Analects             | James Legge                | book.chapter   | Chinese Wikisource          |
+| Great Learning       | James Legge                | chapter        | Chinese Wikisource (章句)   |
+| Doctrine of the Mean | James Legge                | chapter        | Chinese Wikisource (章句)   |
+| Mencius              | James Legge                | book.chapter   | Chinese Wikisource (集注)   |
+| Dhammapada           | F. Max Müller              | verse          | SuttaCentral                |
+| Bhagavad Gita        | Edwin Arnold               | chapter.verses | gita/gita dataset, by verse |
+| Enchiridion          | Thomas Wentworth Higginson | section        | Perseus                     |
+| Meditations          | Meric Casaubon             | book.section   | Perseus, by section         |
+| Sermon on the Mount  | King James Version         | chapter:verse  | Perseus                     |
+| Ecclesiastes         | King James Version         | chapter:verse  | Sefaria                     |
 
 Every quotable passage has a reference and an original. Front matter, translators' notes, indexes and headings are kept but flagged `is_apparatus`.
+
+The Great Learning, the Doctrine of the Mean and Mencius come from Zhu Xi's 《四書章句集注》, and follow his chapters as Legge does: the Great Learning counts from 0, the text of Confucius, then ten chapters of commentary, and Mencius is book, part and chapter (`1A.1`). The Wisdom Context Window gives these three with no numbers, each Chinese paragraph followed by Legge's translation of it. So each Chinese paragraph is matched to the chapter whose text it shares the most character pairs with, and the translation after it takes that chapter. The Chinese paragraphs are flagged `is_apparatus`, and a paragraph that runs over into the next chapter takes a range, such as `14-15`.
 
 ### Transcriptions
 
@@ -87,7 +92,7 @@ Pinyin libraries guess polyphones from modern usage, which is often wrong for cl
 pnpm readings:draft
 ```
 
-This drafts both readings files from 《經典釋文》 (論語音義 and 老子音義, 四部叢刊本 on Chinese Wikisource). Each headword is aligned on the text, and each note is resolved to a 廣韻 sound class through [ytenx](https://github.com/BYVoid/ytenx): 「音X」 is X's class, and 「AB反」 is A's initial with B's rhyme. The script then picks the pinyin reading that is the regular Mandarin outcome of that class. A note marked 下同 carries its reading to later occurrences in the same book. An occurrence with no note takes the usual reading (如字), since 釋文 notes only departures from it. For the Analects, each reading is cross-checked against 朱熹《論語集注》.
+This drafts the Analects and Laozi readings files from 《經典釋文》 (論語音義 and 老子音義, 四部叢刊本 on Chinese Wikisource). Each headword is aligned on the text, and each note is resolved to a 廣韻 sound class through [ytenx](https://github.com/BYVoid/ytenx): 「音X」 is X's class, and 「AB反」 is A's initial with B's rhyme. The script then picks the pinyin reading that is the regular Mandarin outcome of that class. A note marked 下同 carries its reading to later occurrences in the same book. An occurrence with no note takes the usual reading (如字), since 釋文 notes only departures from it. For the Analects, each reading is cross-checked against 朱熹《論語集注》. The Great Learning, the Doctrine of the Mean and Mencius take their readings from 集注 alone, since 釋文 has no 音義 for Mencius: each phonetic note (「去聲」, 「音X」, 「AB反」) is placed in the passage it follows and read the same way, and a note it allows two readings for goes to review.
 
 Each entry records its source and the original note, e.g. `"note": "音恱注同"`, and `check` when 集注 agrees. Entries where the sources disagree, or where a note couldn't be resolved, carry a `todo` saying why. The import refuses them until they are reviewed.
 
@@ -177,7 +182,7 @@ No IP address, client name or session id is stored. After 30 days, a job that ru
 
 - [Kevin Owocki](https://github.com/owocki), for the [Wisdom Context Window](https://wisdom.owocki.com/): the corpus of texts, summaries and concept graph this server searches.
 - [Chinese Wikisource](https://zh.wikisource.org/), [Perseus Digital Library](https://www.perseus.tufts.edu/), [SuttaCentral](https://suttacentral.net/), [Sefaria](https://www.sefaria.org/) and the [gita/gita](https://github.com/gita/gita) dataset, for the original-language texts.
-- 陸德明《經典釋文》 and 朱熹《論語集注》, as transcribed on Chinese Wikisource, and [ytenx](https://github.com/BYVoid/ytenx) by BYVoid, for the 廣韻 sound classes behind the pinyin readings.
+- 陸德明《經典釋文》 and 朱熹《四書章句集注》, as transcribed on Chinese Wikisource, and [ytenx](https://github.com/BYVoid/ytenx) by BYVoid, for the 廣韻 sound classes behind the pinyin readings.
 - [pinyin-pro](https://github.com/zh-lx/pinyin-pro), for the base pinyin.
 - [sqlite-vec](https://github.com/asg017/sqlite-vec) by Alex Garcia, for vector search inside SQLite.
 - The [Model Context Protocol](https://modelcontextprotocol.io) TypeScript SDK.

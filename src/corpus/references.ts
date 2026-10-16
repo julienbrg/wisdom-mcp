@@ -202,7 +202,73 @@ const SCHEMES: Record<string, () => Scheme> = {
   ecclesiastes: bible,
 };
 
-export function segment(workId: string, blocks: string[]): Segment[] {
+// Texts with no numbers, where each Chinese paragraph is followed by Legge's translation of it.
+const ALIGNED = new Set(['great-learning', 'doctrine-of-the-mean', 'mencius']);
+
+const HAN = /\p{Script=Han}/gu;
+const bigrams = (s: string) => {
+  const han = s.match(HAN) ?? [];
+  return han.slice(1).map((c, i) => han[i] + c);
+};
+
+// The chapter a Chinese paragraph comes from, by the share of its character pairs found in it.
+// A paragraph may run over into the next chapter: "14-15", "1A.6-7".
+function locate(
+  pairs: string[],
+  units: { unit: string; pairs: Set<string> }[],
+  previous: number,
+): { at: number; unit: string } | null {
+  const share = (i: number, of = pairs) =>
+    of.filter((p) => units[i].pairs.has(p)).length / of.length;
+  const scores = units.map((_, i) => share(i));
+  const best = Math.max(...scores);
+  if (best < 0.5) return null;
+  // Short paragraphs can score as well elsewhere: stay closest to where the last one was.
+  const at = scores
+    .map((s, i) => (s >= best - 0.05 ? i : -1))
+    .filter((i) => i >= 0)
+    .sort((a, b) => Math.abs(a - previous - 0.5) - Math.abs(b - previous - 0.5))[0];
+  const unit = units[at].unit;
+  const rest = pairs.filter((p) => !units[at].pairs.has(p));
+  if (rest.length < 3 || rest.length < pairs.length * 0.1) return { at, unit };
+  const prefix = (u: string) => u.replace(/\d+$/, '');
+  for (const next of [at - 1, at + 1]) {
+    const other = units[next]?.unit;
+    if (!other || prefix(other) !== prefix(unit) || share(next, rest) < 0.8) continue;
+    const [a, b] = next < at ? [other, unit] : [unit, other];
+    return { at, unit: `${a}-${b.match(/\d+$/)![0]}` };
+  }
+  return { at, unit };
+}
+
+function aligned(blocks: string[], source: ReadonlyMap<string, { body: string }>): Segment[] {
+  const units = [...source].map(([unit, { body }]) => ({ unit, pairs: new Set(bigrams(body)) }));
+  let previous = -1;
+  let unit: string | null = null;
+  return blocks.map((raw, n) => {
+    const han = raw.match(HAN)?.length ?? 0;
+    const chinese = han * 2 > raw.replace(/\s/g, '').length;
+    if (raw.trim().startsWith('#') || (chinese && !/[，。：；！？、]/.test(raw))) unit = null;
+    else if (chinese) {
+      const found = locate(bigrams(raw), units, previous);
+      if (found) previous = found.at;
+      unit = found?.unit ?? null;
+    }
+    // The Chinese paragraphs are the source text, so only the translation is quotable.
+    const at = chinese ? null : unit;
+    return { n, part: 0, raw, text: raw, ref: at, refUnit: at, apparatus: !at };
+  });
+}
+
+export function segment(
+  workId: string,
+  blocks: string[],
+  source?: ReadonlyMap<string, { body: string }>,
+): Segment[] {
+  if (ALIGNED.has(workId)) {
+    if (!source) throw new Error(`${workId}: references come from the source text`);
+    return aligned(blocks, source);
+  }
   const scheme = SCHEMES[workId]?.();
   if (!scheme) throw new Error(`no reference scheme for ${workId}`);
 

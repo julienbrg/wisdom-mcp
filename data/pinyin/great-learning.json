@@ -1,0 +1,1380 @@
+{
+  "0": [
+    {
+      "pos": 0,
+      "char": "大",
+      "pinyin": "dà",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 16,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 20,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 61,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 63,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 77,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 82,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 93,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 94,
+      "char": "齊",
+      "pinyin": "qí",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 99,
+      "char": "齊",
+      "pinyin": "qí",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 104,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 115,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 116,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 121,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 126,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 137,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 140,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 143,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 152,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 155,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 167,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 170,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 181,
+      "char": "齊",
+      "pinyin": "qí",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 184,
+      "char": "齊",
+      "pinyin": "qí",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 203,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 213,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    }
+  ],
+  "1": [
+    {
+      "pos": 13,
+      "char": "大",
+      "pinyin": "dà",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    }
+  ],
+  "3": [
+    {
+      "pos": 38,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 41,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 65,
+      "char": "王",
+      "pinyin": "wáng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 67,
+      "char": "於",
+      "pinyin": "wū",
+      "source": "朱熹集注",
+      "note": "於緝之於，音烏"
+    },
+    {
+      "pos": 74,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 79,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 82,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 87,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 90,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 95,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 98,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 100,
+      "char": "父",
+      "pinyin": "fù",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 103,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 106,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 112,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 249,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 252,
+      "char": "王",
+      "pinyin": "wáng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 270,
+      "char": "樂",
+      "pinyin": "lè",
+      "source": "朱熹集注",
+      "note": "樂，音洛"
+    },
+    {
+      "pos": 272,
+      "char": "樂",
+      "pinyin": "lè",
+      "source": "朱熹集注",
+      "note": "樂，音洛"
+    },
+    {
+      "pos": 281,
+      "char": "沒",
+      "pinyin": "mò",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    }
+  ],
+  "4": [
+    {
+      "pos": 14,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 29,
+      "char": "大",
+      "pinyin": "dà",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 36,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    }
+  ],
+  "6": [
+    {
+      "pos": 13,
+      "char": "惡",
+      "pinyin": "è",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 14,
+      "char": "惡",
+      "pinyin": "è",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 18,
+      "char": "好",
+      "pinyin": "hǎo",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 19,
+      "char": "好",
+      "pinyin": "hǎo",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 42,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 51,
+      "char": "見",
+      "pinyin": "jiàn",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 57,
+      "char": "厭",
+      "pinyin": "yàn",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 76,
+      "char": "見",
+      "pinyin": "jiàn",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 90,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 91,
+      "char": "中",
+      "pinyin": "zhōng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 94,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 106,
+      "char": "曾",
+      "pinyin": "zēng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    }
+  ],
+  "7": [
+    {
+      "pos": 5,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 20,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 31,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 35,
+      "char": "好",
+      "pinyin": "hào",
+      "source": "朱熹集注",
+      "note": "好、樂，並去聲"
+    },
+    {
+      "pos": 36,
+      "char": "樂",
+      "pinyin": "yào",
+      "source": "朱熹集注",
+      "note": "好、樂，並去聲"
+    },
+    {
+      "pos": 42,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 53,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 63,
+      "char": "見",
+      "pinyin": "jiàn",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 70,
+      "char": "食",
+      "pinyin": "shí",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 73,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 82,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    }
+  ],
+  "8": [
+    {
+      "pos": 2,
+      "char": "齊",
+      "pinyin": "qí",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 19,
+      "char": "辟",
+      "pinyin": "bì",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 26,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "朱熹集注",
+      "note": "惡而之惡、敖、好，並去聲"
+    },
+    {
+      "pos": 29,
+      "char": "辟",
+      "pinyin": "bì",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 39,
+      "char": "辟",
+      "pinyin": "bì",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 49,
+      "char": "辟",
+      "pinyin": "bì",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 59,
+      "char": "辟",
+      "pinyin": "bì",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 63,
+      "char": "好",
+      "pinyin": "hào",
+      "source": "朱熹集注",
+      "note": "惡而之惡、敖、好，並去聲"
+    },
+    {
+      "pos": 65,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 67,
+      "char": "惡",
+      "pinyin": "è",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 69,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "朱熹集注",
+      "note": "惡而之惡、敖、好，並去聲"
+    },
+    {
+      "pos": 71,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 78,
+      "char": "鮮",
+      "pinyin": "xiǎn",
+      "source": "朱熹集注",
+      "note": "鮮，上聲"
+    },
+    {
+      "pos": 89,
+      "char": "莫",
+      "pinyin": "mò",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 90,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 94,
+      "char": "惡",
+      "pinyin": "è",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 96,
+      "char": "莫",
+      "pinyin": "mò",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 97,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 113,
+      "char": "齊",
+      "pinyin": "qí",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    }
+  ],
+  "9": [
+    {
+      "pos": 5,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 6,
+      "char": "齊",
+      "pinyin": "qí",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 36,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 48,
+      "char": "弟",
+      "pinyin": "tì",
+      "source": "朱熹集注",
+      "note": "弟，去聲; 孝弟, respect for elders. Manual review by Julien",
+      "reviewed": "julien"
+    },
+    {
+      "pos": 54,
+      "char": "長",
+      "pinyin": "zhǎng",
+      "source": "朱熹集注",
+      "note": "長，上聲"
+    },
+    {
+      "pos": 62,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 86,
+      "char": "中",
+      "pinyin": "zhòng",
+      "source": "朱熹集注",
+      "note": "中，去聲"
+    },
+    {
+      "pos": 89,
+      "char": "遠",
+      "pinyin": "yuǎn",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 159,
+      "char": "從",
+      "pinyin": "cóng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 172,
+      "char": "從",
+      "pinyin": "cóng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 177,
+      "char": "令",
+      "pinyin": "lìng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 181,
+      "char": "好",
+      "pinyin": "hào",
+      "source": "朱熹集注",
+      "note": "好，去聲"
+    },
+    {
+      "pos": 186,
+      "char": "從",
+      "pinyin": "cóng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 214,
+      "char": "藏",
+      "pinyin": "cáng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 236,
+      "char": "齊",
+      "pinyin": "qí",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 289,
+      "char": "弟",
+      "pinyin": "dì",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 295,
+      "char": "弟",
+      "pinyin": "dì",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 316,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 323,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 324,
+      "char": "父",
+      "pinyin": "fù",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 327,
+      "char": "弟",
+      "pinyin": "dì",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 328,
+      "char": "足",
+      "pinyin": "zú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 344,
+      "char": "齊",
+      "pinyin": "qí",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    }
+  ],
+  "10": [
+    {
+      "pos": 20,
+      "char": "長",
+      "pinyin": "zhǎng",
+      "source": "朱熹集注",
+      "note": "長，上聲"
+    },
+    {
+      "pos": 21,
+      "char": "長",
+      "pinyin": "zhǎng",
+      "source": "朱熹集注",
+      "note": "長，上聲"
+    },
+    {
+      "pos": 25,
+      "char": "弟",
+      "pinyin": "tì",
+      "source": "朱熹集注",
+      "note": "弟，去聲; 孝弟, respect for elders. Manual review by Julien",
+      "reviewed": "julien"
+    },
+    {
+      "pos": 47,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "朱熹集注",
+      "note": "惡、先，並去聲"
+    },
+    {
+      "pos": 48,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 53,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 57,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "朱熹集注",
+      "note": "惡、先，並去聲"
+    },
+    {
+      "pos": 58,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 67,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "朱熹集注",
+      "note": "惡、先，並去聲"
+    },
+    {
+      "pos": 68,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 73,
+      "char": "先",
+      "pinyin": "xiàn",
+      "source": "朱熹集注",
+      "note": "惡、先，並去聲"
+    },
+    {
+      "pos": 77,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "朱熹集注",
+      "note": "惡、先，並去聲"
+    },
+    {
+      "pos": 78,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 83,
+      "char": "從",
+      "pinyin": "cóng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 87,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "朱熹集注",
+      "note": "惡、先，並去聲"
+    },
+    {
+      "pos": 88,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 94,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 98,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "朱熹集注",
+      "note": "惡、先，並去聲"
+    },
+    {
+      "pos": 99,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 105,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 123,
+      "char": "樂",
+      "pinyin": "lè",
+      "source": "朱熹集注",
+      "note": "樂，音洛"
+    },
+    {
+      "pos": 130,
+      "char": "父",
+      "pinyin": "fù",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 137,
+      "char": "好",
+      "pinyin": "hào",
+      "source": "朱熹集注",
+      "note": "好、惡，並去聲，下並同"
+    },
+    {
+      "pos": 138,
+      "char": "好",
+      "pinyin": "hào",
+      "source": "朱熹集注",
+      "note": "好、惡，並去聲，下並同"
+    },
+    {
+      "pos": 144,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "朱熹集注",
+      "note": "好、惡，並去聲，下並同"
+    },
+    {
+      "pos": 145,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "朱熹集注",
+      "note": "好、惡，並去聲，下並同"
+    },
+    {
+      "pos": 153,
+      "char": "父",
+      "pinyin": "fù",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 192,
+      "char": "辟",
+      "pinyin": "bì",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 194,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 209,
+      "char": "喪",
+      "pinyin": "sàng",
+      "source": "朱熹集注",
+      "note": "喪，去聲"
+    },
+    {
+      "pos": 218,
+      "char": "監",
+      "pinyin": "jiān",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 247,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 297,
+      "char": "施",
+      "pinyin": "shī",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 374,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 380,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 389,
+      "char": "亡",
+      "pinyin": "wáng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 393,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 399,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 453,
+      "char": "好",
+      "pinyin": "hào",
+      "source": "朱熹集注",
+      "note": "下同 (10 好、惡: 好、惡，並去聲，下並同)"
+    },
+    {
+      "pos": 474,
+      "char": "孫",
+      "pinyin": "sūn",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 492,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "朱熹集注",
+      "note": "下同 (10 好、惡: 好、惡，並去聲，下並同)"
+    },
+    {
+      "pos": 518,
+      "char": "孫",
+      "pinyin": "sūn",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 541,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 543,
+      "char": "中",
+      "pinyin": "zhōng",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 551,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 557,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "朱熹集注",
+      "note": "下同 (10 好、惡: 好、惡，並去聲，下並同)"
+    },
+    {
+      "pos": 560,
+      "char": "見",
+      "pinyin": "jiàn",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 571,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 576,
+      "char": "見",
+      "pinyin": "jiàn",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 588,
+      "char": "遠",
+      "pinyin": "yuàn",
+      "source": "朱熹集注",
+      "note": "遠，去聲"
+    },
+    {
+      "pos": 593,
+      "char": "好",
+      "pinyin": "hào",
+      "source": "朱熹集注",
+      "note": "下同 (10 好、惡: 好、惡，並去聲，下並同)"
+    },
+    {
+      "pos": 597,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "朱熹集注",
+      "note": "下同 (10 好、惡: 好、惡，並去聲，下並同)"
+    },
+    {
+      "pos": 599,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "朱熹集注",
+      "note": "下同 (10 好、惡: 好、惡，並去聲，下並同)"
+    },
+    {
+      "pos": 603,
+      "char": "好",
+      "pinyin": "hào",
+      "source": "朱熹集注",
+      "note": "下同 (10 好、惡: 好、惡，並去聲，下並同)"
+    },
+    {
+      "pos": 614,
+      "char": "逮",
+      "pinyin": "dài",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 615,
+      "char": "夫",
+      "pinyin": "fú",
+      "source": "朱熹集注",
+      "note": "夫，音扶"
+    },
+    {
+      "pos": 624,
+      "char": "大",
+      "pinyin": "dà",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 643,
+      "char": "大",
+      "pinyin": "dà",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 651,
+      "char": "食",
+      "pinyin": "shí",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 656,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 669,
+      "char": "足",
+      "pinyin": "zú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 690,
+      "char": "好",
+      "pinyin": "hào",
+      "source": "朱熹集注",
+      "note": "下同 (10 好、惡: 好、惡，並去聲，下並同)"
+    },
+    {
+      "pos": 695,
+      "char": "好",
+      "pinyin": "hào",
+      "source": "朱熹集注",
+      "note": "下同 (10 好、惡: 好、惡，並去聲，下並同)"
+    },
+    {
+      "pos": 702,
+      "char": "好",
+      "pinyin": "hào",
+      "source": "朱熹集注",
+      "note": "下同 (10 好、惡: 好、惡，並去聲，下並同)"
+    },
+    {
+      "pos": 727,
+      "char": "畜",
+      "pinyin": "xù",
+      "source": "朱熹集注",
+      "note": "畜，許六反"
+    },
+    {
+      "pos": 729,
+      "char": "乘",
+      "pinyin": "shèng",
+      "source": "朱熹集注",
+      "note": "乘、斂，並去聲"
+    },
+    {
+      "pos": 733,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 743,
+      "char": "畜",
+      "pinyin": "xù",
+      "source": "朱熹集注",
+      "note": "畜，許六反"
+    },
+    {
+      "pos": 748,
+      "char": "乘",
+      "pinyin": "shèng",
+      "source": "朱熹集注",
+      "note": "乘、斂，並去聲"
+    },
+    {
+      "pos": 753,
+      "char": "畜",
+      "pinyin": "xù",
+      "source": "朱熹集注",
+      "note": "畜，許六反"
+    },
+    {
+      "pos": 759,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 778,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 783,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 787,
+      "char": "長",
+      "pinyin": "zhǎng",
+      "source": "朱熹集注",
+      "note": "長，上聲"
+    },
+    {
+      "pos": 803,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 810,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 811,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 838,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 843,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "朱熹集注",
+      "note": "如字 (no note)"
+    }
+  ]
+}

@@ -381,5 +381,20 @@
     "id": "impatience",
     "situation": "I am impatient to see results.",
     "relevant": ["ecclesiastes:123", "tao-te-ching:232", "analects:152"]
+  },
+  {
+    "id": "human-nature",
+    "situation": "Are people good by nature, or do they have to be forced to be good?",
+    "relevant": ["mencius:314", "mencius:976", "mencius:1014"]
+  },
+  {
+    "id": "extremes",
+    "situation": "I always go to extremes and can't find a middle way.",
+    "relevant": ["doctrine-of-the-mean:3", "doctrine-of-the-mean:5", "doctrine-of-the-mean:9"]
+  },
+  {
+    "id": "changing-the-world",
+    "situation": "I want to change the world. Where do I start?",
+    "relevant": ["great-learning:3", "great-learning:5"]
   }
 ]

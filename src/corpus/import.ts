@@ -1,6 +1,6 @@
 import type { Db } from '../database/database.module.js';
 import { isVerse, normalize } from './normalize.js';
-import { loadOriginals, type Original } from './originals/index.js';
+import { loadOriginals, loadSource, type Original } from './originals/index.js';
 import { segment, type Segment } from './references.js';
 import { transcribeOriginals } from './transcription/index.js';
 import { loadWcw, splitPassages } from './wcw.js';
@@ -27,9 +27,10 @@ export async function prepareWorks(works: Work[], cacheDir: string) {
   );
   const prepared: { work: Work; segments: Segment[]; originals: Original[] }[] = [];
   for (const work of works) {
-    const segments = segment(work.id, splitPassages(records.get(work.id)!.text));
+    const source = await loadSource(work, cacheDir);
+    const segments = segment(work.id, splitPassages(records.get(work.id)!.text), source.units);
     const units = [...new Set(segments.flatMap((s) => (s.apparatus ? [] : [s.refUnit!])))];
-    prepared.push({ work, segments, originals: await loadOriginals(work, units, cacheDir) });
+    prepared.push({ work, segments, originals: loadOriginals(work, units, source) });
   }
   return prepared;
 }

@@ -144,3 +144,17 @@ test('mcp rejects foreign hosts', async () => {
   });
   assert.equal(status, 403);
 });
+
+test('mcp rejects json-rpc batches', async () => {
+  const call = { jsonrpc: '2.0', method: 'tools/call', params: { name: 'list_concepts' } };
+  const res = await fetch(`${base}/mcp`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream' },
+    body: JSON.stringify([
+      { ...call, id: 1 },
+      { ...call, id: 2 },
+    ]),
+  });
+  assert.equal(res.status, 400);
+  assert.equal((await res.json()).error.code, -32600);
+});

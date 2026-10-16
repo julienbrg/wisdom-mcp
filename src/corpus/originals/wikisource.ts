@@ -28,6 +28,12 @@ const ANALECTS = [
   '子張第十九',
   '堯曰第二十',
 ].map((book) => `論語/${book}`);
+const MENCIUS = ['梁惠王', '公孫丑', '滕文公', '離婁', '萬章', '告子', '盡心'].flatMap((book) => [
+  `孟子/${book}上`,
+  `孟子/${book}下`,
+]);
+const GREAT_LEARNING = '四書章句集註/大學章句';
+const DOCTRINE_OF_THE_MEAN = '四書章句集註/中庸章句';
 
 const DIGITS = '〇一二三四五六七八九';
 
@@ -106,6 +112,37 @@ export function analectsChapters(wikitext: string): Map<string, Section> {
   return chapters;
 }
 
+// "1A.1": book I, part A (上), chapter 1, as Legge numbers them.
+export function menciusChapters(wikitext: string, page: number): Map<string, Section> {
+  const prefix = `${(page >> 1) + 1}${'AB'[page & 1]}`;
+  const parts = wikitext.split('</onlyinclude>')[0].split(/^===\s*(\d+)\s*===\s*$/m);
+  const chapters = new Map<string, Section>();
+  for (let i = 1; i < parts.length; i += 2) {
+    chapters.set(`${prefix}.${parts[i]}`, { anchor: parts[i], body: cleanWikitext(parts[i + 1]) });
+  }
+  return chapters;
+}
+
+// Zhu Xi's 章句: each chapter ends with a 「右…章」 line, and his notes run inline in {{annotate}}.
+// The Great Learning counts from 0, the text of Confucius, then the ten chapters of commentary.
+export function zhangjuChapters(wikitext: string, first: number): Map<string, Section> {
+  const chapters = new Map<string, Section>();
+  let lines: string[] = [];
+  for (const para of wikitext.split(/\n[ \t]*\n/)) {
+    const p = para.replace(/^\n+/, '');
+    if (/^(?:\{\{gap\}\}|::)\s*右/.test(p)) {
+      chapters.set(`${first + chapters.size}`, { anchor: '', body: lines.join('\n') });
+      lines = [];
+      continue;
+    }
+    if (!/^(?:\{\{gap\}\}|\u3000)/.test(p)) continue;
+    const body = cleanWikitext(p);
+    // Titles have no punctuation, and the preface quotes 程子.
+    if (/[，。：；！？]/.test(body) && !body.startsWith('子程子曰')) lines.push(body);
+  }
+  return chapters;
+}
+
 async function wikitext(cacheDir: string, title: string): Promise<string> {
   const file = `wikisource-${title.replace(/[/ ]/g, '_')}.json`;
   const res = JSON.parse(
@@ -116,16 +153,22 @@ async function wikitext(cacheDir: string, title: string): Promise<string> {
 }
 
 export async function loadWikisource(workId: string, cacheDir: string): Promise<SourceText> {
-  const pages =
-    workId === 'tao-te-ching'
-      ? [{ title: TAO_TE_CHING, sections: taoChapters }]
-      : ANALECTS.map((title) => ({ title, sections: analectsChapters }));
+  const pages: Record<string, { title: string; sections: (w: string) => Map<string, Section> }[]> =
+    {
+      'tao-te-ching': [{ title: TAO_TE_CHING, sections: taoChapters }],
+      analects: ANALECTS.map((title) => ({ title, sections: analectsChapters })),
+      mencius: MENCIUS.map((title, i) => ({ title, sections: (w) => menciusChapters(w, i) })),
+      'great-learning': [{ title: GREAT_LEARNING, sections: (w) => zhangjuChapters(w, 0) }],
+      'doctrine-of-the-mean': [
+        { title: DOCTRINE_OF_THE_MEAN, sections: (w) => zhangjuChapters(w, 1) },
+      ],
+    };
 
   const units = new Map();
-  for (const { title, sections } of pages) {
+  for (const { title, sections } of pages[workId]) {
     const base = `https://zh.wikisource.org/wiki/${encodeURI(title.replace(/ /g, '_'))}`;
     for (const [unit, { anchor, body }] of sections(await wikitext(cacheDir, title))) {
-      units.set(unit, { body, url: `${base}#${encodeURIComponent(anchor)}` });
+      units.set(unit, { body, url: anchor ? `${base}#${encodeURIComponent(anchor)}` : base });
     }
   }
   return { license: LICENSE, units };

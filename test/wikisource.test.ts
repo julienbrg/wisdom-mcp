@@ -5,7 +5,9 @@ import {
   analectsChapters,
   cleanWikitext,
   cnum,
+  menciusChapters,
   taoChapters,
+  zhangjuChapters,
 } from '../dist/corpus/originals/wikisource.js';
 
 test('chinese numerals, written and positional', () => {
@@ -46,6 +48,42 @@ test('analects: chapters by div id, trailer cut at the next heading', () => {
     [
       ['1.1', { anchor: '一之一', body: '子曰：「學而時習之」' }],
       ['1.16', { anchor: '一之十六', body: '子曰：「不患人之不己知」' }],
+    ],
+  );
+});
+
+test('mencius: chapters by heading, numbered by book and part', () => {
+  const chapters = menciusChapters(
+    '{{header|title=[[../]]}}\n<onlyinclude>\n===1===\n\n　　孟子見梁惠王。\n\n　　王曰：「叟！」\n\n=== 2 ===\n\n　　孟子對曰：「不可。」\n</onlyinclude>\n{{PD-old}}',
+    3,
+  );
+  assert.deepEqual(
+    [...chapters],
+    [
+      ['2B.1', { anchor: '1', body: '孟子見梁惠王。\n王曰：「叟！」' }],
+      ['2B.2', { anchor: '2', body: '孟子對曰：「不可。」' }],
+    ],
+  );
+});
+
+test('zhangju: chapters end at 右, with notes, titles and the preface dropped', () => {
+  const chapters = zhangjuChapters(
+    [
+      '　　中庸章句{{annotate|中者，不偏不倚。}}',
+      '::　　子程子曰：「不偏之謂中。」',
+      '{{gap}}子程子曰：「大學，孔氏之遺書。」',
+      '　　天命之謂性，{{annotate|命，猶令也。-{云}-}}率性之謂道。',
+      '::    右第一章。{{annotate|言道。}}\n::其下十章。',
+      '{{gap}}《[[康誥]]》曰：「克明德。」\n富潤屋，德潤身。',
+      '{{gap}}右傳之首章。釋明明德。',
+    ].join('\n\n'),
+    0,
+  );
+  assert.deepEqual(
+    [...chapters],
+    [
+      ['0', { anchor: '', body: '天命之謂性，率性之謂道。' }],
+      ['1', { anchor: '', body: '《康誥》曰：「克明德。」\n富潤屋，德潤身。' }],
     ],
   );
 });

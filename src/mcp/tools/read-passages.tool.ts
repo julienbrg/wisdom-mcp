@@ -22,7 +22,7 @@ export class ReadPassagesTool implements McpTool {
           'from search_passages: the original text to quote, its reference, and a ' +
           'public-domain English translation as an aid. Hits in the same unit are returned ' +
           'once. Output stops at about 6,000 words, so read only the ids you need.',
-        inputSchema: z.object({ ids: z.array(z.string()).min(1).max(MAX_IDS) }),
+        inputSchema: z.object({ ids: z.array(z.string().max(100)).min(1).max(MAX_IDS) }),
         annotations: { readOnlyHint: true },
       },
       ({ ids }) =>

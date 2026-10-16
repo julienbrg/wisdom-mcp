@@ -144,3 +144,39 @@ test('mcp rejects foreign hosts', async () => {
   });
   assert.equal(status, 403);
 });
+
+test('mcp rejects json-rpc batches', async () => {
+  const call = { jsonrpc: '2.0', method: 'tools/call', params: { name: 'list_concepts' } };
+  const res = await fetch(`${base}/mcp`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream' },
+    body: JSON.stringify([
+      { ...call, id: 1 },
+      { ...call, id: 2 },
+    ]),
+  });
+  assert.equal(res.status, 400);
+  assert.equal((await res.json()).error.code, -32600);
+});
+
+test('mcp rejects foreign origins', async () => {
+  const res = await fetch(`${base}/mcp`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      accept: 'application/json, text/event-stream',
+      origin: 'https://evil.example',
+    },
+    body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/list' }),
+  });
+  assert.equal(res.status, 403);
+});
+
+test('responses carry security headers', async () => {
+  const res = await fetch(`${base}/health`);
+  assert.equal(res.headers.get('x-powered-by'), null);
+  assert.equal(res.headers.get('x-content-type-options'), 'nosniff');
+  assert.equal(res.headers.get('x-frame-options'), 'DENY');
+  assert.equal(res.headers.get('referrer-policy'), 'no-referrer');
+  assert.match(res.headers.get('content-security-policy')!, /default-src 'none'/);
+});

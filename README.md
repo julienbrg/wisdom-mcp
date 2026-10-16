@@ -29,19 +29,22 @@ The database is created at `DATABASE_PATH` on first boot, and migrations in `mig
 
 Settings come from `.env` and the environment, which takes precedence, and are validated at startup by the server and the corpus scripts alike. Without `MISTRAL_API_KEY`, search falls back to keywords only.
 
-| Variable                | Default                 | Purpose                                       |
-| ----------------------- | ----------------------- | --------------------------------------------- |
-| `PORT`                  | `3000`                  | HTTP port, bound to `127.0.0.1`               |
-| `PUBLIC_URL`            | `http://localhost:3000` | Public origin; its host is allowed on `/mcp`  |
-| `DATABASE_PATH`         | `./data/app.db`         | SQLite file                                   |
-| `CORPUS_CACHE`          | `./data/cache`          | Downloaded texts used by the corpus import    |
-| `MISTRAL_API_KEY`       |                         | Mistral API key for keywords and embeddings   |
-| `EMBEDDING_MODEL`       | `mistral-embed`         | Embedding model (1,024 dimensions)            |
-| `KEYWORDS_MODEL`        | `ministral-8b-latest`   | Model that writes search keywords             |
-| `RATE_LIMIT_PER_MINUTE` | `30`                    | Tool calls per client IP per minute on `/mcp` |
-| `SEARCH_LIMIT_PER_DAY`  | `200`                   | `search_passages` calls per client IP per day |
+| Variable                | Default                 | Purpose                                                   |
+| ----------------------- | ----------------------- | --------------------------------------------------------- |
+| `NODE_ENV`              | `development`           | `production` turns off Swagger UI at `/docs`              |
+| `PORT`                  | `3000`                  | HTTP port, bound to `127.0.0.1`                           |
+| `PUBLIC_URL`            | `http://localhost:3000` | Public origin; the only host and origin allowed on `/mcp` |
+| `DATABASE_PATH`         | `./data/app.db`         | SQLite file                                               |
+| `CORPUS_CACHE`          | `./data/cache`          | Downloaded texts used by the corpus import                |
+| `MISTRAL_API_KEY`       |                         | Mistral API key for keywords and embeddings               |
+| `EMBEDDING_MODEL`       | `mistral-embed`         | Embedding model (1,024 dimensions)                        |
+| `KEYWORDS_MODEL`        | `ministral-8b-latest`   | Model that writes search keywords                         |
+| `RATE_LIMIT_PER_MINUTE` | `30`                    | Tool calls per client IP per minute on `/mcp`             |
+| `SEARCH_LIMIT_PER_DAY`  | `200`                   | `search_passages` calls per client IP per day             |
 
 Over either rate limit, `/mcp` answers 429 with a JSON-RPC error and a `Retry-After` header. Clients are told apart by IP, taken from `X-Forwarded-For` as set by the reverse proxy in front of the server. Counters are kept in memory, so a restart resets them.
+
+`/mcp` rejects JSON-RPC batches, request bodies over 16 KB, and a `Host` or `Origin` header naming another host than `PUBLIC_URL`. Requests without `Origin`, as sent by non-browser clients, pass.
 
 ## Corpus
 
@@ -114,7 +117,7 @@ Search is hybrid: an FTS5 keyword index over passage text and keywords, and a ve
 
 - `POST /mcp`: MCP over Streamable HTTP
 - `GET /health`: liveness check
-- `GET /docs`: Swagger UI
+- `GET /docs`: Swagger UI, outside production
 
 ## Testing from Claude Code
 

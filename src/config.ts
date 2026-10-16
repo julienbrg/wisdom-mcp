@@ -2,6 +2,7 @@ import { ConfigModule, type ConfigService } from '@nestjs/config';
 import { z } from 'zod';
 
 const Env = z.object({
+  NODE_ENV: z.string().default('development'),
   PORT: z.coerce.number().default(3000),
   PUBLIC_URL: z.url().default('http://localhost:3000'),
   DATABASE_PATH: z.string().default('./data/app.db'),

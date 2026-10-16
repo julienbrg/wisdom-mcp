@@ -158,3 +158,16 @@ test('mcp rejects json-rpc batches', async () => {
   assert.equal(res.status, 400);
   assert.equal((await res.json()).error.code, -32600);
 });
+
+test('mcp rejects foreign origins', async () => {
+  const res = await fetch(`${base}/mcp`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      accept: 'application/json, text/event-stream',
+      origin: 'https://evil.example',
+    },
+    body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/list' }),
+  });
+  assert.equal(res.status, 403);
+});

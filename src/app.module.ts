@@ -1,6 +1,6 @@
 import { type MiddlewareConsumer, Module, type NestModule } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { hostHeaderValidation } from '@modelcontextprotocol/express';
+import { hostHeaderValidation, originValidation } from '@modelcontextprotocol/express';
 import { AppConfigModule, type Env } from './config.js';
 import { DatabaseModule } from './database/database.module.js';
 import { HealthController } from './health.controller.js';
@@ -16,9 +16,9 @@ export class AppModule implements NestModule {
   constructor(private readonly config: ConfigService<Env, true>) {}
 
   configure(consumer: MiddlewareConsumer) {
-    const publicUrl = this.config.get('PUBLIC_URL', { infer: true });
+    const { hostname } = new URL(this.config.get('PUBLIC_URL', { infer: true }));
     consumer
-      .apply(hostHeaderValidation([new URL(publicUrl).hostname]), rejectBatches)
+      .apply(hostHeaderValidation([hostname]), originValidation([hostname]), rejectBatches)
       .forRoutes('mcp');
   }
 }

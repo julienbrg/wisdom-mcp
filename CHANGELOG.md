@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+- `/mcp` rejects JSON-RPC batches with 400, which let a single request run any number of tool calls past the rate limits.
+- `/mcp` rejects a present `Origin` header whose host is not `PUBLIC_URL`'s, so websites can't make their visitors' browsers call the tools.
+- Every response sets `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy` and a strict Content Security Policy, and no longer sends `X-Powered-By`.
+- `read_passages` ids are capped at 100 characters, and JSON request bodies at 16 KB.
+- Swagger UI at `/docs` is off when `NODE_ENV` is `production`.
+- CI runs `pnpm audit --prod`, and Dependabot checks npm and GitHub Actions updates weekly.
+
 ### Changed
 
 - `pnpm readings:draft` now lists the 釋文 notes it skips: notes on characters missing from the polyphone list whose reading differs from pinyin-pro's. Reviewing that list added 23 characters, among them 适 kuò, 應 yìng, 召 shào in names, 妻 qì as a verb and 亞 yà, so 57 more Analects and 13 more Laozi occurrences now take a reading from the readings files. Four occurrences the notes don't settle were reviewed by hand.

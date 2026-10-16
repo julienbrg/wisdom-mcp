@@ -171,3 +171,12 @@ test('mcp rejects foreign origins', async () => {
   });
   assert.equal(res.status, 403);
 });
+
+test('responses carry security headers', async () => {
+  const res = await fetch(`${base}/health`);
+  assert.equal(res.headers.get('x-powered-by'), null);
+  assert.equal(res.headers.get('x-content-type-options'), 'nosniff');
+  assert.equal(res.headers.get('x-frame-options'), 'DENY');
+  assert.equal(res.headers.get('referrer-policy'), 'no-referrer');
+  assert.match(res.headers.get('content-security-policy')!, /default-src 'none'/);
+});

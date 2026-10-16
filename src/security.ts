@@ -12,3 +12,15 @@ export function rejectBatches(req: Request, res: Response, next: NextFunction) {
     error: { code: -32600, message: 'Batch requests are not supported.' },
   });
 }
+
+/** Hardening headers for every response. Swagger UI needs inline scripts, so `/docs` skips the CSP. */
+export function securityHeaders(req: Request, res: Response, next: NextFunction) {
+  res.removeHeader('X-Powered-By');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Referrer-Policy', 'no-referrer');
+  if (!req.originalUrl.startsWith('/docs')) {
+    res.setHeader('Content-Security-Policy', "default-src 'none'; frame-ancestors 'none'");
+  }
+  next();
+}

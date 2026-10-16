@@ -5,7 +5,7 @@ import { AppConfigModule, type Env } from './config.js';
 import { DatabaseModule } from './database/database.module.js';
 import { HealthController } from './health.controller.js';
 import { McpModule } from './mcp/mcp.module.js';
-import { rejectBatches } from './security.js';
+import { rejectBatches, securityHeaders } from './security.js';
 import { UsageModule } from './usage/usage.module.js';
 
 @Module({
@@ -17,6 +17,7 @@ export class AppModule implements NestModule {
 
   configure(consumer: MiddlewareConsumer) {
     const { hostname } = new URL(this.config.get('PUBLIC_URL', { infer: true }));
+    consumer.apply(securityHeaders).forRoutes('*');
     consumer
       .apply(hostHeaderValidation([hostname]), originValidation([hostname]), rejectBatches)
       .forRoutes('mcp');

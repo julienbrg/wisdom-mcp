@@ -293,7 +293,7 @@ export interface Unit {
   body: string;
 }
 
-interface Slot {
+export interface Slot {
   refUnit: string;
   pos: number;
   char: string;
@@ -312,7 +312,7 @@ export function slotsByBook(units: Unit[], bookOf: (refUnit: string) => string) 
   return books;
 }
 
-const CARRY = /下.{0,8}?同|放此|不出者同/;
+export const CARRY = /下.{0,8}?同|放此|不出者同/;
 
 function occurrences(text: string, h: string): number[] {
   const out: number[] = [];
@@ -369,6 +369,54 @@ export interface Skipped extends Slot {
   note: Note;
 }
 
+/** A source's reading for one character of the text, or null with why it needs review. */
+export interface ReadingEvent {
+  pinyin: string | null;
+  note: Note;
+  carry: boolean;
+  todo?: string;
+}
+
+/**
+ * A reading for every polyphone occurrence in a book: the source's own where it has one, carried
+ * on by 下同, and the usual reading (如字) elsewhere.
+ */
+export function fill(
+  readings: Readings,
+  slots: Slot[],
+  events: Map<number, ReadingEvent>,
+  bodies: Map<string, string[]>,
+  source: string,
+): void {
+  const carried = new Map<string, ReadingEvent & { at: Slot }>();
+  slots.forEach((slot, i) => {
+    const c = fold(slot.char);
+    if (!isPolyphone(c)) return;
+    const event = events.get(i);
+    let entry: Omit<Reading, 'pos' | 'char'>;
+    if (event) {
+      entry = { pinyin: event.pinyin ?? '', source, note: event.note.note };
+      if (!event.pinyin)
+        entry.todo = event.todo ?? `note not resolved: ${event.note.head} ${event.note.note}`;
+      if (event.carry) carried.set(c, { ...event, at: slot });
+      else carried.delete(c);
+    } else if (carried.has(c)) {
+      const from = carried.get(c)!;
+      entry = {
+        pinyin: from.pinyin ?? '',
+        source,
+        note: `下同 (${from.at.refUnit} ${from.note.head}: ${from.note.note})`,
+      };
+      if (!from.pinyin) entry.todo = 'carried note not resolved';
+    } else if (c === '夫' && clauseInitial(bodies.get(slot.refUnit)!, slot.pos)) {
+      entry = { pinyin: 'fú', source, note: '如字 (no note); clause-initial particle 夫, 音扶' };
+    } else {
+      entry = { pinyin: ruzi(c), source, note: '如字 (no note)' };
+    }
+    (readings[slot.refUnit] ??= []).push({ pos: slot.pos, char: slot.char, ...entry });
+  });
+}
+
 /** Draft readings for every polyphone occurrence, from the notes aligned on the text. */
 export function draft(
   gy: Guangyun,
@@ -382,7 +430,7 @@ export function draft(
   const bodies = new Map(units.map((u) => [u.refUnit, [...u.body]]));
   for (const [book, slots] of slotsByBook(units, bookOf)) {
     const text = slots.map((s) => fold(s.char)).join('');
-    const events = new Map<number, { pinyin: string | null; note: Note; carry: boolean }>();
+    const events = new Map<number, ReadingEvent>();
     const own = notes.filter((x) => x.book === book && x.head);
     const positions = align(
       own.map((n) => [...n.head].map(fold).join('')),
@@ -405,36 +453,7 @@ export function draft(
       }
     });
 
-    const carried = new Map<string, { pinyin: string | null; note: Note; at: Slot }>();
-    slots.forEach((slot, i) => {
-      const c = fold(slot.char);
-      if (!isPolyphone(c)) return;
-      const event = events.get(i);
-      let entry: Omit<Reading, 'pos' | 'char'>;
-      if (event) {
-        entry = { pinyin: event.pinyin ?? '', source: '經典釋文', note: event.note.note };
-        if (!event.pinyin) entry.todo = `note not resolved: ${event.note.head} ${event.note.note}`;
-        if (event.carry) carried.set(c, { ...event, at: slot });
-        else carried.delete(c);
-      } else if (carried.has(c)) {
-        const from = carried.get(c)!;
-        entry = {
-          pinyin: from.pinyin ?? '',
-          source: '經典釋文',
-          note: `下同 (${from.at.refUnit} ${from.note.head}: ${from.note.note})`,
-        };
-        if (!from.pinyin) entry.todo = 'carried note not resolved';
-      } else if (c === '夫' && clauseInitial(bodies.get(slot.refUnit)!, slot.pos)) {
-        entry = {
-          pinyin: 'fú',
-          source: '經典釋文',
-          note: '如字 (no note); clause-initial particle 夫, 音扶',
-        };
-      } else {
-        entry = { pinyin: ruzi(c), source: '經典釋文', note: '如字 (no note)' };
-      }
-      (readings[slot.refUnit] ??= []).push({ pos: slot.pos, char: slot.char, ...entry });
-    });
+    fill(readings, slots, events, bodies, '經典釋文');
   }
   return { readings, unmatched, skipped };
 }

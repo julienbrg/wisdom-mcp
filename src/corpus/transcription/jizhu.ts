@@ -1,12 +1,34 @@
-import { cached } from '../cache.js';
+import { wikitext } from '../originals/wikisource.js';
 import { candidates, fold, toneOf, type Guangyun } from './guangyun.js';
 import type { Readings } from './pinyin.js';
-import { ruzi, slotsByBook, type Unit } from './shiwen.js';
+import { CARRY, fill, ruzi, slotsByBook, type ReadingEvent, type Unit } from './shiwen.js';
 
-// 朱熹《論語集注》 on Chinese Wikisource, used to cross-check the readings drawn from 釋文.
-const API =
-  'https://zh.wikisource.org/w/api.php?action=parse&format=json&formatversion=2&prop=wikitext&page=';
-const VOLUMES = '一二三四五六七八九十'.split('').map((n) => `四書章句集註/論語集注卷${n}`);
+// 朱熹《四書章句集注》 on Chinese Wikisource: it cross-checks the Analects readings drawn from 釋文,
+// and is the only source for the books 釋文 does not cover.
+const NUMBERS = '一 二 三 四 五 六 七 八 九 十 十一 十二 十三 十四'.split(' ');
+
+interface Volume {
+  pages: string[];
+  /** The book a reference unit falls under: a 篇 of the Analects, a 卷 of Mencius. */
+  bookOf: (refUnit: string) => string;
+}
+
+export const VOLUMES: Record<string, Volume> = {
+  analects: {
+    pages: NUMBERS.slice(0, 10).map((n) => `四書章句集註/論語集注卷${n}`),
+    bookOf: (refUnit) => refUnit.split('.')[0],
+  },
+  // One 卷 for each part of a book: 1A is 卷一, 1B 卷二.
+  mencius: {
+    pages: NUMBERS.map((n) => `四書章句集註/孟子集注卷${n}`),
+    bookOf: (refUnit) => {
+      const [, book, part] = refUnit.match(/^(\d+)([AB])/)!;
+      return String(+book * 2 - (part === 'A' ? 1 : 0));
+    },
+  },
+  'great-learning': { pages: ['四書章句集註/大學章句'], bookOf: () => '1' },
+  'doctrine-of-the-mean': { pages: ['四書章句集註/中庸章句'], bookOf: () => '1' },
+};
 
 const HAN = /\p{Script=Han}/u;
 const plain = (s: string) =>
@@ -22,17 +44,21 @@ interface Clause {
   clause: string;
 }
 
-export async function loadJizhu(cacheDir: string): Promise<Clause[]> {
+export async function loadJizhu(cacheDir: string, workId: string): Promise<Clause[]> {
   const out: Clause[] = [];
-  let book = 0;
-  for (const [i, page] of VOLUMES.entries()) {
-    const json = JSON.parse(
-      (await cached(cacheDir, `jizhu-${i + 1}.json`, API + encodeURIComponent(page))).toString(),
-    );
-    const text = (json.parse.wikitext as string).replace(/\{\{ProperNoun\|([^{}]*)\}\}/g, '$1');
-    for (const section of text.split(/^==([^=]+)==$/m).slice(1)) {
-      if (/第/.test(section) && !section.includes('\n')) {
-        book++;
+  const { pages } = VOLUMES[workId];
+  let book = pages.length === 1 ? 1 : 0;
+  for (const page of pages) {
+    const text = (await wikitext(cacheDir, page))
+      .replace(/\{\{ProperNoun\|([^{}]*)\}\}/g, '$1')
+      .replace(/-\{([^{}]*)\}-/g, '$1')
+      .replace(/\[\[(?:[^|\]]*\|)?([^\]]*)\]\]/g, '$1')
+      // Chapter colophons (右第一章), the 程子 preface and the notes indented under them.
+      .replace(/^(?:\{\{gap\}\}\s*(?:右|子程子曰)|::).*$/gm, '');
+    const parts = text.split(/^==([^=]+)==$/m);
+    for (const [k, section] of parts.entries()) {
+      if (k % 2) {
+        if (/第|章句/.test(section)) book++;
         continue;
       }
       let segment = '';
@@ -42,7 +68,7 @@ export async function loadJizhu(cacheDir: string): Promise<Clause[]> {
           segment += part;
           continue;
         }
-        const phonetic = m[1].split('◯')[0];
+        const phonetic = m[1].split(/[◯○]/)[0];
         for (const clause of phonetic.split('。')) {
           if (/[平上去入]聲|音.|..反|、.同|如字/.test(clause)) {
             out.push({ book: String(book), segment: plain(segment), clause: clause.trim() });
@@ -118,6 +144,42 @@ function allowed(gy: Guangyun, clause: string, segment: string): Map<number, str
     if (ok.length) for (const a of at) out.set(a, ok);
   }
   return out;
+}
+
+/** Draft readings from 集注 alone, for the books 釋文 does not cover. */
+export function draftJizhu(
+  gy: Guangyun,
+  clauses: Clause[],
+  units: Unit[],
+  bookOf: (refUnit: string) => string,
+): { readings: Readings; unmatched: Clause[] } {
+  const readings: Readings = {};
+  const unmatched: Clause[] = [];
+  const bodies = new Map(units.map((u) => [u.refUnit, [...u.body]]));
+  for (const [book, slots] of slotsByBook(units, bookOf)) {
+    const text = slots.map((s) => fold(s.char)).join('');
+    const events = new Map<number, ReadingEvent>();
+    let cursor = 0;
+    for (const c of clauses.filter((x) => x.book === book)) {
+      const at = c.segment ? text.indexOf(c.segment, cursor) : -1;
+      if (at < 0) {
+        unmatched.push(c);
+        continue;
+      }
+      cursor = at;
+      const note = { book, head: c.clause.split('，')[0], note: c.clause };
+      for (const [offset, ok] of allowed(gy, c.clause, c.segment)) {
+        events.set(
+          at + offset,
+          ok.length === 1
+            ? { pinyin: ok[0], note, carry: CARRY.test(c.clause) }
+            : { pinyin: null, note, carry: false, todo: `朱熹集注 allows ${ok.join('/')}` },
+        );
+      }
+    }
+    fill(readings, slots, events, bodies, '朱熹集注');
+  }
+  return { readings, unmatched };
 }
 
 /** Marks each reading 集注 confirms, and sends each one it contradicts to review. */

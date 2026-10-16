@@ -6,25 +6,44 @@ import { CliModule } from '../cli.module.js';
 import type { Config } from '../config.js';
 import { prepareWorks } from '../corpus/import.js';
 import { Guangyun } from '../corpus/transcription/guangyun.js';
-import { crossCheck, loadJizhu } from '../corpus/transcription/jizhu.js';
+import {
+  crossCheck,
+  draftJizhu,
+  loadJizhu,
+  VOLUMES as JIZHU,
+} from '../corpus/transcription/jizhu.js';
 import { loadReadings, readingsFile, type Readings } from '../corpus/transcription/pinyin.js';
-import { draft, loadNotes, VOLUMES } from '../corpus/transcription/shiwen.js';
+import { draft, loadNotes, VOLUMES, type Skipped } from '../corpus/transcription/shiwen.js';
 import { PILOT_WORKS } from '../corpus/works.js';
 
 // Drafts data/pinyin/<work>.json from 《經典釋文》, cross-checked against 朱熹《論語集注》 for the
-// Analects. Reviewed entries are kept as they are.
+// Analects, or from 《四書章句集注》 alone for the books 釋文 does not cover. Reviewed entries are
+// kept as they are.
 const app = await NestFactory.createApplicationContext(CliModule, { logger: ['error', 'warn'] });
 try {
   const cacheDir = app.get<Config>(ConfigService).get('CORPUS_CACHE', { infer: true });
   const gy = await Guangyun.load(cacheDir);
-  const works = PILOT_WORKS.filter((w) => VOLUMES[w.id]);
+  const works = PILOT_WORKS.filter((w) => VOLUMES[w.id] || JIZHU[w.id]);
   const stats = [];
   for (const { work, originals } of await prepareWorks(works, cacheDir)) {
-    const { bookOf } = VOLUMES[work.id];
-    const notes = await loadNotes(cacheDir, work.id);
-    const { readings, unmatched, skipped } = draft(gy, notes, originals, bookOf);
-    if (work.id === 'analects')
-      crossCheck(gy, await loadJizhu(cacheDir), readings, originals, bookOf);
+    let notes: number;
+    let commentary: number;
+    let readings: Readings;
+    let skipped: Skipped[] = [];
+    if (VOLUMES[work.id]) {
+      const { bookOf } = VOLUMES[work.id];
+      const shiwen = await loadNotes(cacheDir, work.id);
+      const drafted = draft(gy, shiwen, originals, bookOf);
+      ({ readings, skipped } = drafted);
+      [notes, commentary] = [shiwen.length, drafted.unmatched.length];
+      if (JIZHU[work.id])
+        crossCheck(gy, await loadJizhu(cacheDir, work.id), readings, originals, bookOf);
+    } else {
+      const clauses = await loadJizhu(cacheDir, work.id);
+      const drafted = draftJizhu(gy, clauses, originals, JIZHU[work.id].bookOf);
+      readings = drafted.readings;
+      [notes, commentary] = [clauses.length, drafted.unmatched.length];
+    }
 
     const old = loadReadings(work.id);
     const merged: Readings = {};
@@ -48,8 +67,8 @@ try {
     }
     stats.push({
       work: work.id,
-      notes: notes.length,
-      commentary: unmatched.length,
+      notes,
+      commentary,
       readings: all.length,
       checked: all.filter((e) => e.check).length,
       reviewed: all.filter((e) => e.reviewed).length,

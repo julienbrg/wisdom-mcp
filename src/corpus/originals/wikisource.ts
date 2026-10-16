@@ -143,7 +143,7 @@ export function zhangjuChapters(wikitext: string, first: number): Map<string, Se
   return chapters;
 }
 
-async function wikitext(cacheDir: string, title: string): Promise<string> {
+export async function wikitext(cacheDir: string, title: string): Promise<string> {
   const file = `wikisource-${title.replace(/[/ ]/g, '_')}.json`;
   const res = JSON.parse(
     (await cached(cacheDir, file, API + encodeURIComponent(title))).toString(),

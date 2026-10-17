@@ -193,6 +193,74 @@ function bible(): Scheme {
   };
 }
 
+// Where each Wikisource paragraph of a chapter starts, in Giles's sections. "22+" starts within
+// section 22, which then spans both paragraphs.
+const ART_OF_WAR_PARAGRAPHS = [
+  '1 5 15 26',
+  '1 8 10 15 16 19',
+  '1 3 6 8 11 12 17 18',
+  '1 5 8 11 17',
+  '1 5 12 16 19 21',
+  '1 3 6 10 13 19 22+ 29',
+  '1 5 15 23 27 33',
+  '1 7 11 12',
+  '1 11 15 18 40 42',
+  '1 14 21 25 27',
+  '1 15 20 29 35 42 52 63',
+  '1 5 15',
+  '1 7 14 20 26',
+].map((starts) => starts.split(' ').map((s) => (s.endsWith('+') ? parseFloat(s) + 0.5 : +s)));
+
+/** The source paragraphs that Giles's sections from..to of a chapter fall in: "6.6-7". */
+export function artOfWarUnit(ch: number, from: number, to: number): string {
+  const starts = ART_OF_WAR_PARAGRAPHS[ch - 1];
+  const first = starts.findLastIndex((s) => s <= from) + 1;
+  const last = starts.findLastIndex((s) => s < to + 1) + 1;
+  return first === last ? `${ch}.${first}` : `${ch}.${first}-${last}`;
+}
+
+// Giles's notes are in brackets, and some run over several blocks: an unclosed one goes on with
+// the quotation after it, and a block ending in "]" closes one.
+function artOfWar(): Scheme {
+  let ch = 0;
+  let secs: [number, number] | null = null;
+  let open = false;
+  return {
+    start: /^Chapter I\. /,
+    split: /(?<=\])\n(?=\d+\. )/,
+    read(piece) {
+      const m = piece.match(/^Chapter ([IVX]+)\./);
+      if (m) {
+        [ch, secs, open] = [roman(m[1]), null, false];
+        return { heading: true };
+      }
+      const text = squash(piece);
+      if (text.startsWith('[') || text.endsWith(']') || (open && text.startsWith('"'))) {
+        const depth = (text.match(/\[/g)?.length ?? 0) - (text.match(/\]/g)?.length ?? 0);
+        open = text.startsWith('[') ? depth > 0 : open && !text.endsWith(']');
+        return { heading: true };
+      }
+      open = false;
+      // "5, 6." for two sections in one; the scan drops a period now and then ("9 There").
+      const n = text.match(/^(\d+)(?:, (\d+))?(\.?)\s+/);
+      const last = secs?.[1] ?? 0;
+      if (n && +n[1] > last && +n[1] <= last + 2 && (n[3] || +n[1] === last + 1)) {
+        secs = [+n[1], +(n[2] ?? n[1])];
+        return { text: piece.replace(/^\d+(?:, \d+)?\.?\s+/, '') };
+      }
+      return { text: piece };
+    },
+    ref() {
+      if (!ch || !secs) return null;
+      const [from, to] = secs;
+      return {
+        ref: from === to ? `${ch}.${from}` : `${ch}.${from}-${to}`,
+        refUnit: artOfWarUnit(ch, from, to),
+      };
+    },
+  };
+}
+
 const SCHEMES: Record<string, () => Scheme> = {
   'tao-te-ching': taoTeChing,
   analects,
@@ -200,6 +268,7 @@ const SCHEMES: Record<string, () => Scheme> = {
   'bhagavad-gita': bhagavadGita,
   enchiridion,
   meditations,
+  'art-of-war': artOfWar,
   'sermon-on-the-mount': bible,
   ecclesiastes: bible,
 };

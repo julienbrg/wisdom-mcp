@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { anchored, roman, segment } from '../dist/corpus/references.js';
+import { anchored, artOfWarUnit, roman, segment } from '../dist/corpus/references.js';
 
 const refs = (workId: string, blocks: string[]) =>
   segment(workId, blocks).map((s) => [s.ref, s.refUnit, s.apparatus]);
@@ -156,6 +156,53 @@ test('gita: verse ranges counted per chapter, colophons and footnotes are appara
       [null, null, true],
     ],
   );
+});
+
+test('art of war: sections by number, notes in brackets over several blocks', () => {
+  assert.deepEqual(
+    refs('art-of-war', [
+      'Preface by Lionel Giles',
+      'Chapter I. LAYING PLANS',
+      '[Ts’ao Kung, in defining the meaning]',
+      '1. Sun Tzŭ said: The art of war',
+      '2, 3. It is a matter of life and death',
+      '[True excellence being, as Tu Mu says, things that',
+      '"the world’s coarse thumb\nAnd finger fail to plumb."',
+      '4 These are: (1) The Moral Law',
+      'If his forces are united, separate them.',
+      'The latter defined as "places enclosed."]',
+      '[1] "Words on Wellington," by Sir. W. Fraser.',
+      'Chapter XII. THE ATTACK BY FIRE',
+      '1. Sun Tzŭ said: There are five ways',
+      '[Tu Mu says\n]\n2. In order to carry out an attack',
+    ]),
+    [
+      [null, null, true],
+      [null, null, true],
+      [null, null, true],
+      ['1.1', '1.1', false],
+      ['1.2-3', '1.1', false],
+      [null, null, true],
+      [null, null, true],
+      ['1.4', '1.1', false],
+      ['1.4', '1.1', false],
+      [null, null, true],
+      [null, null, true],
+      [null, null, true],
+      ['12.1', '12.1', false],
+      [null, null, true],
+      ['12.2', '12.1', false],
+    ],
+  );
+});
+
+test('art of war: a section that runs over two source paragraphs takes both', () => {
+  assert.equal(artOfWarUnit(1, 4, 4), '1.1');
+  assert.equal(artOfWarUnit(1, 5, 6), '1.2');
+  assert.equal(artOfWarUnit(6, 21, 21), '6.6');
+  assert.equal(artOfWarUnit(6, 22, 22), '6.6-7');
+  assert.equal(artOfWarUnit(6, 23, 23), '6.7');
+  assert.equal(artOfWarUnit(13, 27, 27), '13.5');
 });
 
 test('aligned: each translation takes the chapter its Chinese paragraph comes from', () => {

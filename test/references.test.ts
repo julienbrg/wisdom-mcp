@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { anchored, roman, segment } from '../dist/corpus/references.js';
+import { anchored, artOfWarUnit, roman, segment } from '../dist/corpus/references.js';
 
 const refs = (workId: string, blocks: string[]) =>
   segment(workId, blocks).map((s) => [s.ref, s.refUnit, s.apparatus]);
@@ -158,6 +158,53 @@ test('gita: verse ranges counted per chapter, colophons and footnotes are appara
   );
 });
 
+test('art of war: sections by number, notes in brackets over several blocks', () => {
+  assert.deepEqual(
+    refs('art-of-war', [
+      'Preface by Lionel Giles',
+      'Chapter I. LAYING PLANS',
+      '[Ts’ao Kung, in defining the meaning]',
+      '1. Sun Tzŭ said: The art of war',
+      '2, 3. It is a matter of life and death',
+      '[True excellence being, as Tu Mu says, things that',
+      '"the world’s coarse thumb\nAnd finger fail to plumb."',
+      '4 These are: (1) The Moral Law',
+      'If his forces are united, separate them.',
+      'The latter defined as "places enclosed."]',
+      '[1] "Words on Wellington," by Sir. W. Fraser.',
+      'Chapter XII. THE ATTACK BY FIRE',
+      '1. Sun Tzŭ said: There are five ways',
+      '[Tu Mu says\n]\n2. In order to carry out an attack',
+    ]),
+    [
+      [null, null, true],
+      [null, null, true],
+      [null, null, true],
+      ['1.1', '1.1', false],
+      ['1.2-3', '1.1', false],
+      [null, null, true],
+      [null, null, true],
+      ['1.4', '1.1', false],
+      ['1.4', '1.1', false],
+      [null, null, true],
+      [null, null, true],
+      [null, null, true],
+      ['12.1', '12.1', false],
+      [null, null, true],
+      ['12.2', '12.1', false],
+    ],
+  );
+});
+
+test('art of war: a section that runs over two source paragraphs takes both', () => {
+  assert.equal(artOfWarUnit(1, 4, 4), '1.1');
+  assert.equal(artOfWarUnit(1, 5, 6), '1.2');
+  assert.equal(artOfWarUnit(6, 21, 21), '6.6');
+  assert.equal(artOfWarUnit(6, 22, 22), '6.6-7');
+  assert.equal(artOfWarUnit(6, 23, 23), '6.7');
+  assert.equal(artOfWarUnit(13, 27, 27), '13.5');
+});
+
 test('aligned: each translation takes the chapter its Chinese paragraph comes from', () => {
   const source = new Map(
     Object.entries({
@@ -233,8 +280,107 @@ test('anchored: units start at their anchors, and a unit starting within a block
   );
 });
 
+test("anchored: a scan's footnotes run from the first one on a page to the next page head", () => {
+  const blocks = [
+    'BOOK  I',
+    'CHAPTER',
+    'BEMEKDINa  THE  LeABNED  ^',
+    'If  one  does  not  preserve  the  learned  in  a state',
+    'Formerly  Lord  Wen  was  once  in\nexile  and  yet  later',
+    '^ This  and  the  two  following  chapters  are  judged  to  be  spurious',
+    'unanimously  by  competent  textual  critics.',
+    'THE  WORKS  OF  MOTSE',
+    '2',
+    'looked  upon  with  awe  by  the  princes  of  CHna.^',
+    '^ Chow of Yin in wine, you go and attack him. We will surely',
+    '[ let you destroy him.”',
+    '^ These are the wicked helpers of the unsuccessful princes.',
+    'Examples of sucli are Tuan Kan Mu,^ CKintse,® and Pu Yiieh.*',
+    'it 1',
+  ];
+  const anchors: [string, string][] = [
+    ['1.1', 'If one does not'],
+    ['1.2', 'Formerly Lord Wen'],
+  ];
+  assert.deepEqual(
+    anchored('mozi', blocks, anchors).map((s) => s.refUnit),
+    [
+      null,
+      null,
+      null,
+      '1.1',
+      '1.2',
+      null,
+      null,
+      null,
+      null,
+      '1.2',
+      '1.2',
+      '1.2',
+      null,
+      '1.2',
+      null,
+    ],
+  );
+});
+
+test('anchored: margin noise before a mark still opens the notes, and long titles are heads', () => {
+  const blocks = [
+    'BOOK XV',
+    'f the prince is a worthy person, his country is well-governed',
+    '[ ^ King T‘ang.',
+    "' * Book of Odes, IV, m, iv, 6.",
+    'j The meaning is that T‘ang won heoanse his character impressed',
+    'XV',
+    'THE METHOD OE MAINTATNINa THE EAVOUR OF ONE’S LORD AND KEEPING IN OFFICE',
+    'If your lord respects and Iionoiiis you',
+    'Yao ^ asked Shun, How are the passions of man ?',
+    'CHINESE INDEX AM) GLOSSARY',
+    'Radical 1. — ',
+  ];
+  const anchors: [string, string][] = [
+    ['15.7', 'f the prince'],
+    ['15.8', 'If your lord'],
+  ];
+  assert.deepEqual(
+    anchored('xunzi', ['BOOK I', ...blocks], anchors).map((s) => s.refUnit),
+    [null, null, '15.7', null, null, null, null, null, '15.8', '15.8', null, null],
+  );
+});
+
+test('anchored: legge’s notes are told by their longer lines, and run to the page head', () => {
+  const note = [
+    'I. Does king Wan ascribe four attributes here to K/ien, or only two?',
+    'According to Appendix IV, always by Chinese writers assigned to',
+    'Confucius, he assigns four.',
+  ].join('\n');
+  const blocks = [
+    'TEXT. SECTION T.',
+    'I. THe AwHien HEXAGRAM.',
+    'Khien (represents) what is great and originating, \npenetrating, advantageous, correct and firm.',
+    '1. In the first (or lowest) line, undivided, (we see \nits subject as) the dragon lying hid (in the deep). \nIt is not the time for active doing.',
+    note,
+    'creature’s proper home is in the water,',
+    '58 THE Yf KING. TEXT,',
+    '6. In the sixth (or topmost) line, undivided, (we \nsee its subject as) the dragon exceeding the proper \nlimits.',
+    'sense esnnseenemeensnneeneenersnerenenenennnnnnenenenene eee,',
+    'Il. THe Kuwikn Hexacram.',
+    'KhwAn (represents) what is great and originating,',
+    'F 2',
+    'HEX. 3. APPENDIX I. 215',
+  ];
+  const anchors: [string, string][] = [
+    ['1', 'Khien (represents)'],
+    ['2', 'KhwAn (represents)'],
+  ];
+  assert.deepEqual(
+    anchored('i-ching', blocks, anchors).map((s) => s.refUnit),
+    [null, null, '1', '1', null, null, null, '1', null, null, '2', null, null],
+  );
+});
+
 test('anchored: a translation whose main text is missing fails', () => {
-  for (const workId of ['chuang-tzu', 'liezi', 'tao-te-ching-giles']) {
+  for (const workId of ['chuang-tzu', 'liezi', 'tao-te-ching-giles', 'mozi', 'xunzi', 'i-ching']) {
     assert.throws(() => segment(workId, ['nothing here']), /main text start not found/);
   }
 });

@@ -5,6 +5,7 @@ import { POLYPHONES, type Reading, type Readings } from './pinyin.js';
 
 // 《經典釋文》 in the 四部叢刊 edition, as transcribed page by page on Chinese Wikisource.
 const API = 'https://zh.wikisource.org/w/api.php?format=json&formatversion=2&';
+const INDEX_1 = 'Sibu Congkan0052-陸德明-經典釋文-12-01.djvu';
 const INDEX = 'Sibu Congkan0061-陸德明-經典釋文-12-10.djvu';
 const INDEX_11 = 'Sibu Congkan0062-陸德明-經典釋文-12-11.djvu';
 
@@ -23,6 +24,8 @@ interface Volume {
   /** The first headword on the text itself, after the notes on the title and preface. */
   start?: string;
   carry?: Carry;
+  /** The characters of each book in the order the 音義 reads them, when the units are not. */
+  slots?: (units: Unit[]) => Map<string, Slot[]>;
 }
 
 export const VOLUMES: Record<string, Volume> = {
@@ -64,6 +67,28 @@ export const VOLUMES: Record<string, Volume> = {
     bookOf: (refUnit) => refUnit.split('.')[0],
     // Its 下同 runs on through long chapters, over other senses of the same character.
     carry: 'phrase',
+  },
+  // 周易音義, 卷二: the six 傳 of 王弼's text, then the wings in 韓康伯's. The first 傳's heading is
+  // broken up by notes, so it is found by the 王弼注 after it.
+  'i-ching': {
+    pages: [[INDEX_1, 76, 138]],
+    books: [
+      '王弼注',
+      '周易上經泰傳第二',
+      '周易上經噬嗑傳第三',
+      '周易下經咸傳第四',
+      '周易下經夬傳第五',
+      '周易下經豐傳第六',
+      '周易繫',
+      '周易繫辭下第八',
+      '周易說卦第九',
+      '周易序卦第十',
+      '周易雜卦',
+      '周易畧例',
+    ],
+    bookOf: ichingBook,
+    carry: 'phrase',
+    slots: wangBi,
   },
 };
 
@@ -179,6 +204,69 @@ const RUZI: Record<string, string> = {
 };
 export const ruzi = (c: string) => RUZI[fold(c)];
 
+// The last hexagram of each 傳, and the books of the wings after them.
+const ZHUAN = [10, 20, 30, 42, 54, 64];
+const WINGS: Record<string, number> = { 'III.1': 7, 'III.2': 8, V: 9, VI: 10, VII: 11 };
+
+function ichingBook(refUnit: string): string {
+  const wing = refUnit.match(/^App\. (III\.\d|V|VI|VII)\b/);
+  if (wing) return String(WINGS[wing[1]]);
+  const n = Number(refUnit.match(/\d+/)![0]);
+  return String(ZHUAN.findIndex((last) => n <= last) + 1);
+}
+
+const YAO = /^(?:[初上用][六九]|[六九][二三四五])[：，]/u;
+
+/** The Chinese characters of each line of a unit, with where each sits in it. */
+function lineSlots(u: Unit | undefined): Slot[][] {
+  if (!u) return [];
+  const lines: Slot[][] = [[]];
+  [...u.body].forEach((char, pos) => {
+    if (char === '\n') lines.push([]);
+    else if (HAN.test(char)) lines.at(-1)!.push({ refUnit: u.refUnit, pos, char });
+  });
+  return lines;
+}
+
+// 王弼 sets the 彖 and the 象 of the whole after each hexagram's judgment, and the 象 of each line
+// after the line, but for the first hexagram, which keeps them apart as Legge does.
+function wangBi(units: Unit[]): Map<string, Slot[]> {
+  const byUnit = new Map(units.map((u) => [u.refUnit, u]));
+  const books = new Map<string, Slot[]>();
+  const add = (book: string, lines: Slot[][]) =>
+    books.set(book, [...(books.get(book) ?? []), ...lines.flat()]);
+  for (const u of units) {
+    const book = ichingBook(u.refUnit);
+    if (!/^\d+$/.test(u.refUnit)) {
+      if (Number(book) > ZHUAN.length) add(book, lineSlots(u));
+      continue;
+    }
+    const n = u.refUnit;
+    const text = lineSlots(u);
+    const tuan = lineSlots(byUnit.get(`App. I.${n}`));
+    const [great, ...lines] = lineSlots(byUnit.get(`App. II.${n}`));
+    const wenyan: Slot[][][] = [];
+    for (let k = 1; byUnit.has(`App. IV.${n}.${k}`); k++)
+      wenyan.push(lineSlots(byUnit.get(`App. IV.${n}.${k}`)));
+    if (n === '1') {
+      add(book, [...text, ...tuan, great ?? [], ...lines, ...wenyan.flat()]);
+      continue;
+    }
+    const first = u.body.split('\n').findIndex((l) => YAO.test(l));
+    if (first < 0) throw new Error(`i-ching ${n}: no line statements`);
+    const yao = text.slice(first);
+    add(book, [
+      ...text.slice(0, first),
+      ...tuan,
+      great ?? [],
+      ...yao.flatMap((line, k) => [line, lines[k] ?? []]),
+      ...lines.slice(yao.length),
+      ...wenyan.flat(),
+    ]);
+  }
+  return books;
+}
+
 // 夫 opening a clause is the particle 音扶 (夫唯, 夫物), which 釋文 does not note every time;
 // 夫子, the Master, keeps its usual reading.
 const clauseInitial = (chars: string[], pos: number) =>
@@ -196,7 +284,8 @@ export interface Note {
 
 async function page(cacheDir: string, index: string, n: number): Promise<string> {
   const url = `${API}action=query&prop=revisions&rvprop=content&rvslots=main&titles=${encodeURIComponent(`Page:${index}/${n}`)}`;
-  const file = index === INDEX ? `shiwen-${n}.json` : `shiwen-11-${n}.json`;
+  const volume = Number(index.match(/-(\d+)\.djvu$/)![1]);
+  const file = volume === 10 ? `shiwen-${n}.json` : `shiwen-${volume}-${n}.json`;
   const json = JSON.parse((await cached(cacheDir, file, url)).toString());
   return json.query.pages[0].revisions[0].slots.main.content as string;
 }
@@ -220,6 +309,8 @@ export async function loadNotes(cacheDir: string, workId: string): Promise<Note[
   for (const code of new Set([...text.matchAll(/\{\{SKchar\|(\d+)\}\}/g)].map((m) => m[1]))) {
     text = text.replaceAll(`{{SKchar|${code}}}`, await skchar(cacheDir, code));
   }
+  // Glyphs with no character, which would break up the notes around them.
+  text = text.replace(/\{\{SKchar2\|\d+\}\}/g, '');
 
   const titles = books.map((b) => han(b).split('').map(fold).join(''));
   const notes: Note[] = [];
@@ -338,6 +429,9 @@ export function slotsByBook(units: Unit[], bookOf: (refUnit: string) => string) 
   }
   return books;
 }
+
+/** A character folded to one code unit, so that a position in a text of them is one in its slots. */
+export const one = (c: string) => (c.codePointAt(0)! > 0xffff ? '〓' : fold(c));
 
 export const CARRY = /下.{0,8}?同|放此|不出者同/;
 
@@ -490,6 +584,17 @@ export function fill(
   });
 }
 
+// Works no 音義 covers: each polyphone takes its usual reading, to be reviewed by hand.
+export const UNANNOTATED = ['art-of-war', 'mozi', 'xunzi'];
+
+export function draftPlain(units: Unit[]): Readings {
+  const readings: Readings = {};
+  const bodies = new Map(units.map((u) => [u.refUnit, [...u.body]]));
+  for (const slots of slotsByBook(units, () => '1').values())
+    fill(readings, slots, new Map(), bodies, 'no 音義');
+  return readings;
+}
+
 /** Draft readings for every polyphone occurrence, from the notes aligned on the text. */
 export function draft(
   gy: Guangyun,
@@ -497,17 +602,18 @@ export function draft(
   units: Unit[],
   bookOf: (refUnit: string) => string,
   carry: Carry = 'book',
+  books = slotsByBook(units, bookOf),
 ): { readings: Readings; unmatched: Note[]; skipped: Skipped[] } {
   const readings: Readings = {};
   const unmatched: Note[] = [];
   const skipped: Skipped[] = [];
   const bodies = new Map(units.map((u) => [u.refUnit, [...u.body]]));
-  for (const [book, slots] of slotsByBook(units, bookOf)) {
-    const text = slots.map((s) => fold(s.char)).join('');
+  for (const [book, slots] of books) {
+    const text = slots.map((s) => one(s.char)).join('');
     const events = new Map<number, ReadingEvent>();
     const own = notes.filter((x) => x.book === book && x.head);
     const positions = align(
-      own.map((n) => [...n.head].map(fold).join('')),
+      own.map((n) => [...n.head].map(one).join('')),
       text,
     );
     own.forEach((n, i) => {

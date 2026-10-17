@@ -416,5 +416,25 @@
     "id": "gentle-strength",
     "situation": "I am too soft and gentle to win against tough people.",
     "relevant": ["tao-te-ching-giles:240", "tao-te-ching-giles:241", "tao-te-ching-giles:126"]
+  },
+  {
+    "id": "staying-humble",
+    "situation": "Things are going well for me and I am afraid success will make me arrogant.",
+    "relevant": ["i-ching:279", "i-ching:280", "i-ching:1484"]
+  },
+  {
+    "id": "know-the-opponent",
+    "situation": "I have a hard negotiation coming up against a much stronger party.",
+    "relevant": ["art-of-war:362", "art-of-war:364", "art-of-war:860"]
+  },
+  {
+    "id": "us-and-them",
+    "situation": "My family only cares about our own people and treats everyone else as rivals.",
+    "relevant": ["mozi:541", "mozi:546", "mozi:548"]
+  },
+  {
+    "id": "giving-up-study",
+    "situation": "I feel I have learned enough and want to stop studying.",
+    "relevant": ["xunzi:2"]
   }
 ]

@@ -193,6 +193,74 @@ function bible(): Scheme {
   };
 }
 
+// Where each Wikisource paragraph of a chapter starts, in Giles's sections. "22+" starts within
+// section 22, which then spans both paragraphs.
+const ART_OF_WAR_PARAGRAPHS = [
+  '1 5 15 26',
+  '1 8 10 15 16 19',
+  '1 3 6 8 11 12 17 18',
+  '1 5 8 11 17',
+  '1 5 12 16 19 21',
+  '1 3 6 10 13 19 22+ 29',
+  '1 5 15 23 27 33',
+  '1 7 11 12',
+  '1 11 15 18 40 42',
+  '1 14 21 25 27',
+  '1 15 20 29 35 42 52 63',
+  '1 5 15',
+  '1 7 14 20 26',
+].map((starts) => starts.split(' ').map((s) => (s.endsWith('+') ? parseFloat(s) + 0.5 : +s)));
+
+/** The source paragraphs that Giles's sections from..to of a chapter fall in: "6.6-7". */
+export function artOfWarUnit(ch: number, from: number, to: number): string {
+  const starts = ART_OF_WAR_PARAGRAPHS[ch - 1];
+  const first = starts.findLastIndex((s) => s <= from) + 1;
+  const last = starts.findLastIndex((s) => s < to + 1) + 1;
+  return first === last ? `${ch}.${first}` : `${ch}.${first}-${last}`;
+}
+
+// Giles's notes are in brackets, and some run over several blocks: an unclosed one goes on with
+// the quotation after it, and a block ending in "]" closes one.
+function artOfWar(): Scheme {
+  let ch = 0;
+  let secs: [number, number] | null = null;
+  let open = false;
+  return {
+    start: /^Chapter I\. /,
+    split: /(?<=\])\n(?=\d+\. )/,
+    read(piece) {
+      const m = piece.match(/^Chapter ([IVX]+)\./);
+      if (m) {
+        [ch, secs, open] = [roman(m[1]), null, false];
+        return { heading: true };
+      }
+      const text = squash(piece);
+      if (text.startsWith('[') || text.endsWith(']') || (open && text.startsWith('"'))) {
+        const depth = (text.match(/\[/g)?.length ?? 0) - (text.match(/\]/g)?.length ?? 0);
+        open = text.startsWith('[') ? depth > 0 : open && !text.endsWith(']');
+        return { heading: true };
+      }
+      open = false;
+      // "5, 6." for two sections in one; the scan drops a period now and then ("9 There").
+      const n = text.match(/^(\d+)(?:, (\d+))?(\.?)\s+/);
+      const last = secs?.[1] ?? 0;
+      if (n && +n[1] > last && +n[1] <= last + 2 && (n[3] || +n[1] === last + 1)) {
+        secs = [+n[1], +(n[2] ?? n[1])];
+        return { text: piece.replace(/^\d+(?:, \d+)?\.?\s+/, '') };
+      }
+      return { text: piece };
+    },
+    ref() {
+      if (!ch || !secs) return null;
+      const [from, to] = secs;
+      return {
+        ref: from === to ? `${ch}.${from}` : `${ch}.${from}-${to}`,
+        refUnit: artOfWarUnit(ch, from, to),
+      };
+    },
+  };
+}
+
 const SCHEMES: Record<string, () => Scheme> = {
   'tao-te-ching': taoTeChing,
   analects,
@@ -200,6 +268,7 @@ const SCHEMES: Record<string, () => Scheme> = {
   'bhagavad-gita': bhagavadGita,
   enchiridion,
   meditations,
+  'art-of-war': artOfWar,
   'sermon-on-the-mount': bible,
   ecclesiastes: bible,
 };
@@ -268,9 +337,60 @@ interface Layout {
   /** A section left out, from the first heading up to the second. */
   skip?: [RegExp, RegExp];
   apparatus(text: string, raw: string): boolean;
+  /**
+   * A scan's footnotes, which run from the first one on a page to the next page head, but for the
+   * blocks of text that open like a note by margin noise, or follow one the scan misplaced.
+   */
+  footnotes?: {
+    note(text: string, raw: string): boolean;
+    head(text: string): boolean;
+    text?: string[];
+    /** Blocks that open a page's notes though they do not look like it. */
+    notes?: string[];
+  };
 }
 
 const LOWER = /\p{Ll}/u;
+
+// A scan's page head, page number or chapter heading: short and mostly capitals, though the OCR
+// reads some of them in lowercase ("THl WOEKS OF MOTSE", "m THE WORKS OE HSt)]SrTZE . xvii").
+function scanHead(text: string): boolean {
+  const letters = text.match(/\p{L}/gu) ?? [];
+  const capitals = letters.filter((c) => /\p{Lu}/u.test(c)).length;
+  return (
+    /^\W*(?:BOOK|CHAP)/.test(text) ||
+    capitals >= letters.length * 0.7 ||
+    (text.split(' ').length <= 9 && /W[OQ0][RBEK]{1,2}S O[FEPKR]\b/.test(text))
+  );
+}
+
+// Legge's notes are set in smaller type, so their lines run longer than the text's, which never pass
+// 56 characters; a block that opens with a paragraph number is still text.
+function smallType(text: string, raw: string): boolean {
+  if (/\p{L}{25}/u.test(text)) return false;
+  const lines = raw
+    .split('\n')
+    .map((l) => l.trim())
+    .filter(Boolean);
+  const full = (lines.length > 1 ? lines.slice(0, -1) : lines)
+    .map((l) => l.length)
+    .sort((a, b) => a - b);
+  return full[full.length >> 1] > 56 && !/^(?:Chapter \S+ )?\d+(?:-\d+)?[.,] /.test(text);
+}
+
+// The I Ching's page heads ("SECT. I. THE KHWAN HEXAGRAM. 59", "62 THE Yi KING. TEXT.", "HEX. 3.
+// APPENDIX I. 215", "CHAP. II, APPENDIX III. 351", "214 THE APPENDIXES. SECT. I.") and titles.
+const LEGGE_HEAD =
+  /^(?:S[\w?]{2,3}[.,?]? (?:\S{1,3}[.,]? )?(?:T\w{1,2} |APPENDIX)|HEX\W.{0,10}APPENDIX|CHAP\W.{0,8}APPENDIX|APPENDIX [IVXL]+\.? \S*\d|\W?\d+ T\S{1,3} (?:[Yy]\S{0,2} KING|APPEN\w+))/;
+const LEGGE_TITLE =
+  /^(?:[IVXLTl]+\.? T\S{1,2} \S.{0,28}|THE APPENDIXES\.|APPENDIX [IVXL]+\.(?: Treatise.*)?|Section \S+?[.,]?(?: \S+\.)?|TEXT\. SECTION.*|Tue GREAT APPENDIX.*|Treatise on .*|Supplementary .*|A P\.?\s?[BR]\s?E\s?N.*)$/;
+const leggeHead = (text: string) => LEGGE_HEAD.test(text) || LEGGE_TITLE.test(text);
+// Titles, page heads (but for one the scan runs into the first line of the page) and rules the
+// scan reads as one long word.
+const leggeApparatus = (text: string) =>
+  LEGGE_TITLE.test(text) ||
+  (LEGGE_HEAD.test(text) && !/(?:\p{Ll}+ ){4}/u.test(text)) ||
+  /\p{L}{25}/u.test(text);
 
 // Translations with no numbers, aligned by hand on the source paragraphs.
 const ANCHORED: Record<string, Layout> = {
@@ -284,6 +404,59 @@ const ANCHORED: Record<string, Layout> = {
     start: /^## Book I$/,
     skip: [/^## Footnotes$/, /^## Book /],
     apparatus: (text) => /^(?:#|\*\*\*)/.test(text),
+  },
+  // A scan. Footnotes open with the OCR of their mark, or with its number; stray letters are noise.
+  mozi: {
+    start: /^BOOK I$/,
+    apparatus: (text) => scanHead(text) || (text.match(/\p{L}/gu)?.length ?? 0) < 4,
+    footnotes: {
+      note: (text) => /^(?:[*®^’•»°]|\d{1,2} \p{Lu})/u.test(text),
+      head: scanHead,
+      text: ['Examples of sucli are', '^ Chow of Yin in wine', '^ and none in the world'],
+    },
+  },
+  // A scan, with folio numbers and margin summaries run into the text, even before a note's mark.
+  xunzi: {
+    start: /^BOOK I$/,
+    end: /^CHINESE INDEX/,
+    apparatus: (text) => scanHead(text) || (text.match(/\p{L}/gu)?.length ?? 0) < 4,
+    footnotes: {
+      note: (text) => /^(?:[^\p{L}\d\s]?\p{L}?\s)?[*®^’•»°]|^1 \p{Lu}/u.test(text),
+      head: scanHead,
+      text: [
+        'peaceful or uneasy, beneficial',
+        'Wherein is it that man is truly man',
+        'The young serve the old',
+        'I desire to be mean and yet noble',
+        'Li Sze ® questioned',
+        "*'Ts‘u^ and Yueh® would not admit",
+        'This is not so. T‘ang and Wu were the best',
+        '^ laziness ; they provide for weeping',
+        "^ ' wEen everyone’s powers",
+        '^te^olioy of But the righteous king',
+        '•not equal to that of the horse',
+        '^ the clear water at the top',
+        '’! purity, nothing can overturn it',
+        'Yao ^ asked Shun',
+        'Fan-jo and Chii-shu',
+      ],
+    },
+  },
+  // A scan. Notes run from the first one on a page to the next page head or title.
+  'i-ching': {
+    start: /^TEXT\. SECTION/,
+    apparatus: (text) => leggeApparatus(text) || (text.match(/\p{L}/gu)?.length ?? 0) < 4,
+    footnotes: {
+      note: smallType,
+      head: leggeHead,
+      text: [
+        'XI. ‘The little come and the great gone',
+        'its correct place. (Its subject) occupies',
+        'to the subject of the line), and its being',
+        'Strength in A4ien',
+      ],
+      notes: ['XIV. Ta YG means', 'LI. Paragraph 1. See what'],
+    },
   },
   // A scan: page numbers and section titles have no lowercase (or read "5i"), and notes open with *.
   'tao-te-ching-giles': {
@@ -314,19 +487,29 @@ function span(from: string, to: string): string {
  */
 export function anchored(workId: string, blocks: string[], anchors: Anchor[]): Segment[] {
   const layout = ANCHORED[workId];
-  const start = blocks.findIndex((b) => layout.start.test(squash(b)));
+  const texts = blocks.map(squash);
+  const start = texts.findIndex((t) => layout.start.test(t));
   if (start < 0) throw new Error(`${workId}: main text start not found`);
   let k = 0;
   let unit: string | null = null;
   let ended = false;
   let skipping = false;
+  let inNotes = false;
+  const notes = blocks.map((b, n) => {
+    if (!layout.footnotes) return false;
+    const text = texts[n];
+    if (layout.footnotes.head(text)) return (inNotes = false);
+    const { note, text: notNotes = [], notes: opening = [] } = layout.footnotes;
+    if (notNotes.some((o) => text.startsWith(o))) return (inNotes = false);
+    return (inNotes ||= note(text, b) || opening.some((o) => text.startsWith(o)));
+  });
   const segments = blocks.map((raw, n) => {
-    const text = squash(raw);
+    const text = texts[n];
     ended ||= n > start && !!layout.end?.test(text);
     if (layout.skip?.[0].test(text)) skipping = true;
     else if (layout.skip?.[1].test(text)) skipping = false;
     let ref: string | null = null;
-    if (n >= start && !ended && !skipping && !layout.apparatus(text, raw)) {
+    if (n >= start && !ended && !skipping && !notes[n] && !layout.apparatus(text, raw)) {
       let from = unit;
       let pos = -1;
       let left = false;

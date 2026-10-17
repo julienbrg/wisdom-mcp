@@ -1,5 +1,5 @@
 import { gunzipSync } from 'node:zlib';
-import { cached } from './cache.js';
+import { cached, download } from './cache.js';
 
 const WCW_URL = 'https://wisdom.owocki.com/downloads/wisdom-corpus.jsonl.gz';
 
@@ -31,7 +31,12 @@ export async function loadWcw(
   return records;
 }
 
-export function parseWcw(jsonl: string): WcwRecord[] {
+/** The latest dump, downloaded without touching the cached copy the import uses. */
+export async function fetchWcw(): Promise<WcwRecord[]> {
+  return parseWcw(gunzipSync(await download(WCW_URL)).toString());
+}
+
+function parseWcw(jsonl: string): WcwRecord[] {
   return jsonl
     .split('\n')
     .filter((line) => line)

@@ -2,7 +2,7 @@ import type { Db } from '../database/database.module.js';
 import { splitPassages, type WcwRecord } from './wcw.js';
 import type { Work } from './works.js';
 
-export interface NewWork {
+interface NewWork {
   slug: string;
   title: string;
   author: string;
@@ -10,7 +10,7 @@ export interface NewWork {
   tradition: string;
 }
 
-export interface ChangedWork {
+interface ChangedWork {
   work: string;
   imported: number;
   upstream: number;

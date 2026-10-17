@@ -19,7 +19,7 @@ export async function cached(
   return body;
 }
 
-async function download(url: string, attempts = 5): Promise<Buffer> {
+export async function download(url: string, attempts = 5): Promise<Buffer> {
   for (let i = 1; ; i++) {
     const res = await fetch(url, { headers: { 'user-agent': USER_AGENT } });
     if (res.ok) return Buffer.from(await res.arrayBuffer());

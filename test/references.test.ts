@@ -280,8 +280,52 @@ test('anchored: units start at their anchors, and a unit starting within a block
   );
 });
 
+test("anchored: a scan's footnotes run from the first one on a page to the next page head", () => {
+  const blocks = [
+    'BOOK  I',
+    'CHAPTER',
+    'BEMEKDINa  THE  LeABNED  ^',
+    'If  one  does  not  preserve  the  learned  in  a state',
+    'Formerly  Lord  Wen  was  once  in\nexile  and  yet  later',
+    '^ This  and  the  two  following  chapters  are  judged  to  be  spurious',
+    'unanimously  by  competent  textual  critics.',
+    'THE  WORKS  OF  MOTSE',
+    '2',
+    'looked  upon  with  awe  by  the  princes  of  CHna.^',
+    '^ Chow of Yin in wine, you go and attack him. We will surely',
+    '[ let you destroy him.”',
+    '^ These are the wicked helpers of the unsuccessful princes.',
+    'Examples of sucli are Tuan Kan Mu,^ CKintse,® and Pu Yiieh.*',
+    'it 1',
+  ];
+  const anchors: [string, string][] = [
+    ['1.1', 'If one does not'],
+    ['1.2', 'Formerly Lord Wen'],
+  ];
+  assert.deepEqual(
+    anchored('mozi', blocks, anchors).map((s) => s.refUnit),
+    [
+      null,
+      null,
+      null,
+      '1.1',
+      '1.2',
+      null,
+      null,
+      null,
+      null,
+      '1.2',
+      '1.2',
+      '1.2',
+      null,
+      '1.2',
+      null,
+    ],
+  );
+});
+
 test('anchored: a translation whose main text is missing fails', () => {
-  for (const workId of ['chuang-tzu', 'liezi', 'tao-te-ching-giles']) {
+  for (const workId of ['chuang-tzu', 'liezi', 'tao-te-ching-giles', 'mozi']) {
     assert.throws(() => segment(workId, ['nothing here']), /main text start not found/);
   }
 });

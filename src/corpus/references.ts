@@ -337,9 +337,25 @@ interface Layout {
   /** A section left out, from the first heading up to the second. */
   skip?: [RegExp, RegExp];
   apparatus(text: string, raw: string): boolean;
+  /**
+   * A scan's footnotes, which run from the first one on a page to the next page head, but for the
+   * blocks of text that open like a note by margin noise, or follow one the scan misplaced.
+   */
+  footnotes?: { note: RegExp; head(text: string): boolean; text?: string[] };
 }
 
 const LOWER = /\p{Ll}/u;
+
+// A scan's page head, page number or chapter heading: short and mostly capitals, though the OCR
+// reads some of them in lowercase ("THl WOEKS OF MOTSE").
+function scanHead(text: string): boolean {
+  const letters = text.match(/\p{L}/gu) ?? [];
+  const capitals = letters.filter((c) => /\p{Lu}/u.test(c)).length;
+  return (
+    /^\W*(?:BOOK|CHAP)/.test(text) ||
+    (text.split(' ').length <= 9 && capitals >= letters.length * 0.7)
+  );
+}
 
 // Translations with no numbers, aligned by hand on the source paragraphs.
 const ANCHORED: Record<string, Layout> = {
@@ -353,6 +369,16 @@ const ANCHORED: Record<string, Layout> = {
     start: /^## Book I$/,
     skip: [/^## Footnotes$/, /^## Book /],
     apparatus: (text) => /^(?:#|\*\*\*)/.test(text),
+  },
+  // A scan. Footnotes open with the OCR of their mark, or with its number; stray letters are noise.
+  mozi: {
+    start: /^BOOK I$/,
+    apparatus: (text) => scanHead(text) || (text.match(/\p{L}/gu)?.length ?? 0) < 4,
+    footnotes: {
+      note: /^(?:[*®^’•»°]|\d{1,2} \p{Lu})/u,
+      head: scanHead,
+      text: ['Examples of sucli are', '^ Chow of Yin in wine', '^ and none in the world'],
+    },
   },
   // A scan: page numbers and section titles have no lowercase (or read "5i"), and notes open with *.
   'tao-te-ching-giles': {
@@ -389,13 +415,22 @@ export function anchored(workId: string, blocks: string[], anchors: Anchor[]): S
   let unit: string | null = null;
   let ended = false;
   let skipping = false;
+  let inNotes = false;
+  const notes = blocks.map((b) => {
+    if (!layout.footnotes) return false;
+    const text = squash(b);
+    if (layout.footnotes.head(text)) return (inNotes = false);
+    const { note, text: notNotes = [] } = layout.footnotes;
+    if (notNotes.some((o) => text.startsWith(o))) return (inNotes = false);
+    return (inNotes ||= note.test(text));
+  });
   const segments = blocks.map((raw, n) => {
     const text = squash(raw);
     ended ||= n > start && !!layout.end?.test(text);
     if (layout.skip?.[0].test(text)) skipping = true;
     else if (layout.skip?.[1].test(text)) skipping = false;
     let ref: string | null = null;
-    if (n >= start && !ended && !skipping && !layout.apparatus(text, raw)) {
+    if (n >= start && !ended && !skipping && !notes[n] && !layout.apparatus(text, raw)) {
       let from = unit;
       let pos = -1;
       let left = false;

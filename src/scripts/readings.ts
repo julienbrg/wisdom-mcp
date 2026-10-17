@@ -13,13 +13,21 @@ import {
   VOLUMES as JIZHU,
 } from '../corpus/transcription/jizhu.js';
 import { loadReadings, readingsFile, type Readings } from '../corpus/transcription/pinyin.js';
-import { draft, loadNotes, VOLUMES, type Skipped } from '../corpus/transcription/shiwen.js';
+import {
+  draft,
+  draftPlain,
+  loadNotes,
+  UNANNOTATED,
+  VOLUMES,
+  type Skipped,
+} from '../corpus/transcription/shiwen.js';
 import { draftSiku, loadSiku, SIKU } from '../corpus/transcription/siku.js';
 import { PILOT_WORKS } from '../corpus/works.js';
 
 // Drafts data/pinyin/<work>.json from 《經典釋文》, cross-checked against 朱熹《論語集注》 for the
 // Analects, from 《四書章句集注》 alone for the books 釋文 does not cover, or from the 四庫 edition's
-// inline 釋文 for the Liezi. Reviewed entries are kept as they are.
+// inline 釋文 for the Liezi; works with no 音義 take the usual readings for review. Reviewed entries
+// are kept as they are.
 // Works can be named on the command line to draft only those.
 const app = await NestFactory.createApplicationContext(CliModule, { logger: ['error', 'warn'] });
 try {
@@ -27,7 +35,9 @@ try {
   const gy = await Guangyun.load(cacheDir);
   const only = process.argv.slice(2);
   const works = PILOT_WORKS.filter(
-    (w) => (VOLUMES[w.id] || JIZHU[w.id] || SIKU[w.id]) && (!only.length || only.includes(w.id)),
+    (w) =>
+      (VOLUMES[w.id] || JIZHU[w.id] || SIKU[w.id] || UNANNOTATED.includes(w.id)) &&
+      (!only.length || only.includes(w.id)),
   );
   const stats = [];
   for (const prepared of await prepareWorks(works, cacheDir)) {
@@ -56,6 +66,9 @@ try {
       [notes, commentary] = [shiwen.length, drafted.unmatched.length];
       if (JIZHU[work.id])
         crossCheck(gy, await loadJizhu(cacheDir, work.id), readings, originals, bookOf);
+    } else if (UNANNOTATED.includes(work.id)) {
+      readings = draftPlain(originals);
+      [notes, commentary] = [0, 0];
     } else if (SIKU[work.id]) {
       const siku = await loadSiku(cacheDir, work.id);
       const drafted = draftSiku(gy, siku, originals, SIKU[work.id].bookOf);

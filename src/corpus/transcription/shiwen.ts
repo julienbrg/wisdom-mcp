@@ -578,6 +578,17 @@ export function fill(
   });
 }
 
+// Works no 音義 covers: each polyphone takes its usual reading, to be reviewed by hand.
+export const UNANNOTATED = ['art-of-war', 'mozi', 'xunzi'];
+
+export function draftPlain(units: Unit[]): Readings {
+  const readings: Readings = {};
+  const bodies = new Map(units.map((u) => [u.refUnit, [...u.body]]));
+  for (const slots of slotsByBook(units, () => '1').values())
+    fill(readings, slots, new Map(), bodies, 'no 音義');
+  return readings;
+}
+
 /** Draft readings for every polyphone occurrence, from the notes aligned on the text. */
 export function draft(
   gy: Guangyun,

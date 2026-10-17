@@ -4,6 +4,7 @@ import { fits } from '../dist/corpus/transcription/guangyun.js';
 import { VOLUMES } from '../dist/corpus/transcription/jizhu.js';
 import {
   align,
+  draftPlain,
   fill,
   slotsByBook,
   VOLUMES as SHIWEN,
@@ -195,5 +196,17 @@ test('周易音義 reads each hexagram in 王弼’s order, the first one apart'
       .map((s) => s.char)
       .join(''),
     '天尊',
+  );
+});
+
+test('a work with no 音義 takes the usual readings, to be reviewed', () => {
+  const readings = draftPlain([{ refUnit: '1.1', body: '將受命於君。夫兵者，不祥之器。' }]);
+  assert.deepEqual(
+    readings['1.1'].map((r) => [r.char, r.pinyin, r.source]),
+    [
+      ['將', 'jiāng', 'no 音義'],
+      ['於', 'yú', 'no 音義'],
+      ['夫', 'fú', 'no 音義'],
+    ],
   );
 });

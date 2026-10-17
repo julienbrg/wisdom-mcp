@@ -1,0 +1,5337 @@
+{
+  "1.1": [
+    {
+      "pos": 0,
+      "char": "孫",
+      "pinyin": "sūn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 9,
+      "char": "大",
+      "pinyin": "dà",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 18,
+      "char": "亡",
+      "pinyin": "wáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 60,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    }
+  ],
+  "1.2": [
+    {
+      "pos": 3,
+      "char": "令",
+      "pinyin": "lìng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 5,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 11,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 16,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 45,
+      "char": "遠",
+      "pinyin": "yuǎn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 58,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 90,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 91,
+      "char": "莫",
+      "pinyin": "mò",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 95,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 98,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 101,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 104,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 124,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 135,
+      "char": "令",
+      "pinyin": "lìng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 137,
+      "char": "行",
+      "pinyin": "xíng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 142,
+      "char": "強",
+      "pinyin": "qiáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 157,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 158,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "1.3": [
+    {
+      "pos": 0,
+      "char": "將",
+      "pinyin": "jiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 8,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 13,
+      "char": "將",
+      "pinyin": "jiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 33,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 78,
+      "char": "遠",
+      "pinyin": "yuǎn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 80,
+      "char": "遠",
+      "pinyin": "yuǎn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 101,
+      "char": "強",
+      "pinyin": "qiáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 140,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 144,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 145,
+      "char": "傳",
+      "pinyin": "chuán",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "1.4": [
+    {
+      "pos": 0,
+      "char": "夫",
+      "pinyin": "fú",
+      "source": "no 音義",
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
+    },
+    {
+      "pos": 6,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 20,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 25,
+      "char": "少",
+      "pinyin": "shǎo",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 30,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 32,
+      "char": "少",
+      "pinyin": "shǎo",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 35,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 39,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 47,
+      "char": "觀",
+      "pinyin": "guān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 50,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 52,
+      "char": "見",
+      "pinyin": "xiàn",
+      "source": "no 音義",
+      "note": "見, to appear (勝負見矣), 去聲 xiàn. Review by Claude",
+      "reviewed": "claude"
+    }
+  ],
+  "2.1": [
+    {
+      "pos": 0,
+      "char": "孫",
+      "pinyin": "sūn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 18,
+      "char": "乘",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "乘, a chariot (counted), 去聲 shèng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 34,
+      "char": "費",
+      "pinyin": "fèi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 52,
+      "char": "費",
+      "pinyin": "fèi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 71,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 93,
+      "char": "足",
+      "pinyin": "zú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 95,
+      "char": "夫",
+      "pinyin": "fú",
+      "source": "no 音義",
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
+    },
+    {
+      "pos": 109,
+      "char": "乘",
+      "pinyin": "chéng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 140,
+      "char": "夫",
+      "pinyin": "fú",
+      "source": "no 音義",
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
+    },
+    {
+      "pos": 156,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 167,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "2.2": [
+    {
+      "pos": 13,
+      "char": "載",
+      "pinyin": "zài",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 17,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 22,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 27,
+      "char": "食",
+      "pinyin": "shí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 29,
+      "char": "足",
+      "pinyin": "zú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "2.3": [
+    {
+      "pos": 3,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 6,
+      "char": "遠",
+      "pinyin": "yuǎn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 9,
+      "char": "遠",
+      "pinyin": "yuǎn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 34,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 43,
+      "char": "中",
+      "pinyin": "zhōng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 47,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 53,
+      "char": "費",
+      "pinyin": "fèi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 63,
+      "char": "費",
+      "pinyin": "fèi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 82,
+      "char": "大",
+      "pinyin": "dà",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "2.4": [
+    {
+      "pos": 2,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 4,
+      "char": "食",
+      "pinyin": "shí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 5,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 8,
+      "char": "食",
+      "pinyin": "shí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 13,
+      "char": "當",
+      "pinyin": "dāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 24,
+      "char": "當",
+      "pinyin": "dāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "2.5": [
+    {
+      "pos": 24,
+      "char": "乘",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "乘, a chariot (counted), 去聲 shèng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 30,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 43,
+      "char": "乘",
+      "pinyin": "chéng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 54,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 58,
+      "char": "強",
+      "pinyin": "qiáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "2.6": [
+    {
+      "pos": 3,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 10,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 13,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    }
+  ],
+  "3.1": [
+    {
+      "pos": 0,
+      "char": "孫",
+      "pinyin": "sūn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 12,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 22,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 32,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 42,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 52,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 65,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "3.2": [
+    {
+      "pos": 26,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 56,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 58,
+      "char": "勝",
+      "pinyin": "shēng",
+      "source": "no 音義",
+      "note": "勝, to bear, to exhaust (不可勝窮), 平聲 shēng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 70,
+      "char": "分",
+      "pinyin": "fēn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "3.3": [
+    {
+      "pos": 37,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "3.4": [
+    {
+      "pos": 18,
+      "char": "分",
+      "pinyin": "fēn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 27,
+      "char": "少",
+      "pinyin": "shǎo",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 46,
+      "char": "大",
+      "pinyin": "dà",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "3.5": [
+    {
+      "pos": 0,
+      "char": "夫",
+      "pinyin": "fú",
+      "source": "no 音義",
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
+    },
+    {
+      "pos": 1,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 14,
+      "char": "強",
+      "pinyin": "qiáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "3.6": [
+    {
+      "pos": 6,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 12,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 25,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 38,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 43,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 63,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 74,
+      "char": "任",
+      "pinyin": "rèn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 93,
+      "char": "難",
+      "pinyin": "nán",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 102,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "3.7": [
+    {
+      "pos": 1,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 2,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 6,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 10,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 16,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 18,
+      "char": "識",
+      "pinyin": "shí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 24,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 31,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 39,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 41,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 48,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 54,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 55,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "3.8": [
+    {
+      "pos": 3,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 5,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 14,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 17,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 21,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 26,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 29,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "4.1": [
+    {
+      "pos": 0,
+      "char": "孫",
+      "pinyin": "sūn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 10,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 11,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 14,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 21,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 25,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 30,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 40,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 43,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 47,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 52,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 57,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 59,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 64,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "4.2": [
+    {
+      "pos": 2,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 9,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 18,
+      "char": "足",
+      "pinyin": "zú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 29,
+      "char": "藏",
+      "pinyin": "cáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 30,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 41,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 53,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "4.3": [
+    {
+      "pos": 0,
+      "char": "見",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 1,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 8,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 18,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 37,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 41,
+      "char": "見",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 45,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 53,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "4.4": [
+    {
+      "pos": 8,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 9,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 11,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 20,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 34,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 46,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 48,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 60,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 76,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 78,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 79,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 87,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 92,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 107,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 108,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "4.5": [
+    {
+      "pos": 5,
+      "char": "度",
+      "pinyin": "dù",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 9,
+      "char": "量",
+      "pinyin": "liàng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 13,
+      "char": "數",
+      "pinyin": "shù",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 17,
+      "char": "稱",
+      "pinyin": "chēng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 21,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 25,
+      "char": "度",
+      "pinyin": "dù",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 27,
+      "char": "度",
+      "pinyin": "dù",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 29,
+      "char": "量",
+      "pinyin": "liàng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 31,
+      "char": "量",
+      "pinyin": "liàng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 33,
+      "char": "數",
+      "pinyin": "shù",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 35,
+      "char": "數",
+      "pinyin": "shù",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 37,
+      "char": "稱",
+      "pinyin": "chēng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 39,
+      "char": "稱",
+      "pinyin": "chēng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 41,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 44,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 49,
+      "char": "稱",
+      "pinyin": "chēng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 57,
+      "char": "稱",
+      "pinyin": "chēng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 60,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 71,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "5.1": [
+    {
+      "pos": 0,
+      "char": "孫",
+      "pinyin": "sūn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 11,
+      "char": "分",
+      "pinyin": "fēn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 12,
+      "char": "數",
+      "pinyin": "shù",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 33,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 42,
+      "char": "奇",
+      "pinyin": "qí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 43,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "5.2": [
+    {
+      "pos": 5,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 9,
+      "char": "奇",
+      "pinyin": "qí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 10,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 15,
+      "char": "奇",
+      "pinyin": "qí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 62,
+      "char": "勝",
+      "pinyin": "shēng",
+      "source": "no 音義",
+      "note": "勝, to bear, to exhaust (不可勝窮), 平聲 shēng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 78,
+      "char": "勝",
+      "pinyin": "shēng",
+      "source": "no 音義",
+      "note": "勝, to bear, to exhaust (不可勝窮), 平聲 shēng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 79,
+      "char": "觀",
+      "pinyin": "guān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 94,
+      "char": "勝",
+      "pinyin": "shēng",
+      "source": "no 音義",
+      "note": "勝, to bear, to exhaust (不可勝窮), 平聲 shēng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 102,
+      "char": "奇",
+      "pinyin": "qí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 103,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 105,
+      "char": "奇",
+      "pinyin": "qí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 106,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 112,
+      "char": "勝",
+      "pinyin": "shēng",
+      "source": "no 音義",
+      "note": "勝, to bear, to exhaust (不可勝窮), 平聲 shēng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 116,
+      "char": "奇",
+      "pinyin": "qí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 117,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 118,
+      "char": "相",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "5.3": [
+    {
+      "pos": 6,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 20,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "5.4": [
+    {
+      "pos": 28,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 33,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 38,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 39,
+      "char": "強",
+      "pinyin": "qiáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 44,
+      "char": "數",
+      "pinyin": "shù",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 53,
+      "char": "強",
+      "pinyin": "qiáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "5.5": [
+    {
+      "pos": 11,
+      "char": "從",
+      "pinyin": "cóng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 14,
+      "char": "予",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "予, to give, 上聲 yǔ. Review by Claude",
+      "reviewed": "claude"
+    }
+  ],
+  "5.6": [
+    {
+      "pos": 7,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 12,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 20,
+      "char": "任",
+      "pinyin": "rèn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 23,
+      "char": "任",
+      "pinyin": "rèn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 56,
+      "char": "行",
+      "pinyin": "xíng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 69,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "6.1": [
+    {
+      "pos": 0,
+      "char": "孫",
+      "pinyin": "sūn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 5,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 6,
+      "char": "處",
+      "pinyin": "chǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 16,
+      "char": "處",
+      "pinyin": "chǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 35,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "6.2": [
+    {
+      "pos": 1,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 12,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "6.3": [
+    {
+      "pos": 0,
+      "char": "行",
+      "pinyin": "xíng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 8,
+      "char": "行",
+      "pinyin": "xíng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 9,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 49,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 60,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 87,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "6.4": [
+    {
+      "pos": 41,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 68,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "6.5": [
+    {
+      "pos": 13,
+      "char": "分",
+      "pinyin": "fēn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 17,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 21,
+      "char": "分",
+      "pinyin": "fēn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 22,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 51,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 60,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 66,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 70,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 89,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 142,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "6.6": [
+    {
+      "pos": 1,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 6,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 20,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 26,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 58,
+      "char": "遠",
+      "pinyin": "yuǎn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 60,
+      "char": "數",
+      "pinyin": "shù",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 66,
+      "char": "數",
+      "pinyin": "shù",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 72,
+      "char": "度",
+      "pinyin": "duó",
+      "source": "no 音義",
+      "note": "度, to estimate (以吾度之), 入聲 duó. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 85,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 86,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 93,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 103,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "6.7": [
+    {
+      "pos": 4,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 13,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 22,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 31,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 35,
+      "char": "足",
+      "pinyin": "zú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 37,
+      "char": "處",
+      "pinyin": "chù",
+      "source": "no 音義",
+      "note": "處, a place, 去聲 chù. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 46,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 55,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 70,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 71,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 77,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 81,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 85,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 90,
+      "char": "莫",
+      "pinyin": "mò",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 91,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 96,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 103,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 108,
+      "char": "應",
+      "pinyin": "yìng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 110,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "6.8": [
+    {
+      "pos": 0,
+      "char": "夫",
+      "pinyin": "fú",
+      "source": "no 音義",
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
+    },
+    {
+      "pos": 8,
+      "char": "行",
+      "pinyin": "xíng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 18,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 31,
+      "char": "行",
+      "pinyin": "xíng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 38,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 57,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 66,
+      "char": "行",
+      "pinyin": "xíng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 69,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 80,
+      "char": "長",
+      "pinyin": "cháng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "7.1": [
+    {
+      "pos": 0,
+      "char": "孫",
+      "pinyin": "sūn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 10,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 13,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 22,
+      "char": "和",
+      "pinyin": "hé",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 24,
+      "char": "舍",
+      "pinyin": "shè",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 26,
+      "char": "莫",
+      "pinyin": "mò",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 27,
+      "char": "難",
+      "pinyin": "nán",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 28,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 35,
+      "char": "難",
+      "pinyin": "nán",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 40,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 45,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 63,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 68,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "7.2": [
+    {
+      "pos": 3,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 8,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 29,
+      "char": "重",
+      "pinyin": "zhòng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 42,
+      "char": "處",
+      "pinyin": "chǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 47,
+      "char": "行",
+      "pinyin": "xíng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 59,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 63,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 87,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 103,
+      "char": "分",
+      "pinyin": "fēn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 113,
+      "char": "重",
+      "pinyin": "zhòng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 115,
+      "char": "亡",
+      "pinyin": "wáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 119,
+      "char": "食",
+      "pinyin": "shí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 121,
+      "char": "亡",
+      "pinyin": "wáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 127,
+      "char": "亡",
+      "pinyin": "wáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 131,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 144,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 159,
+      "char": "行",
+      "pinyin": "xíng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 164,
+      "char": "鄉",
+      "pinyin": "xiàng",
+      "source": "no 音義",
+      "note": "鄉導, guides (嚮導), 去聲 xiàng. Review by Claude",
+      "reviewed": "claude"
+    }
+  ],
+  "7.3": [
+    {
+      "pos": 11,
+      "char": "分",
+      "pinyin": "fēn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 13,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 39,
+      "char": "難",
+      "pinyin": "nán",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 40,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 50,
+      "char": "鄉",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 51,
+      "char": "分",
+      "pinyin": "fēn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 56,
+      "char": "分",
+      "pinyin": "fēn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 64,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 65,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 71,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "7.4": [
+    {
+      "pos": 9,
+      "char": "相",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 13,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 19,
+      "char": "相",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 20,
+      "char": "見",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 23,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 28,
+      "char": "夫",
+      "pinyin": "fú",
+      "source": "no 音義",
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
+    }
+  ],
+  "7.5": [
+    {
+      "pos": 6,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 14,
+      "char": "朝",
+      "pinyin": "zhāo",
+      "source": "no 音義",
+      "note": "朝, morning (朝氣), zhāo. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 67,
+      "char": "遠",
+      "pinyin": "yuǎn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 87,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 88,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "7.6": [
+    {
+      "pos": 19,
+      "char": "從",
+      "pinyin": "cóng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 29,
+      "char": "食",
+      "pinyin": "shí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "8.1": [
+    {
+      "pos": 0,
+      "char": "孫",
+      "pinyin": "sūn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 10,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 13,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 24,
+      "char": "舍",
+      "pinyin": "shè",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 78,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 80,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 87,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 92,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 95,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 102,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 117,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 124,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "8.2": [
+    {
+      "pos": 9,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 14,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 23,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 28,
+      "char": "解",
+      "pinyin": "jiě",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "8.4": [
+    {
+      "pos": 1,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 46,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 60,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    }
+  ],
+  "9.1": [
+    {
+      "pos": 0,
+      "char": "孫",
+      "pinyin": "sūn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 5,
+      "char": "處",
+      "pinyin": "chǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 7,
+      "char": "相",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 17,
+      "char": "處",
+      "pinyin": "chǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 26,
+      "char": "處",
+      "pinyin": "chǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 35,
+      "char": "遠",
+      "pinyin": "yuàn",
+      "source": "no 音義",
+      "note": "遠, to keep away from, 去聲 yuàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 51,
+      "char": "令",
+      "pinyin": "lìng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 74,
+      "char": "處",
+      "pinyin": "chǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 83,
+      "char": "處",
+      "pinyin": "chǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 95,
+      "char": "亟",
+      "pinyin": "jí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 103,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 107,
+      "char": "中",
+      "pinyin": "zhōng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 120,
+      "char": "處",
+      "pinyin": "chǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 129,
+      "char": "處",
+      "pinyin": "chǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 143,
+      "char": "處",
+      "pinyin": "chǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 162,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "9.2": [
+    {
+      "pos": 2,
+      "char": "好",
+      "pinyin": "hào",
+      "source": "no 音義",
+      "note": "好, to like, 去聲 hào. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 5,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "no 音義",
+      "note": "惡, to dislike, 去聲 wù. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 17,
+      "char": "處",
+      "pinyin": "chǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 28,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 36,
+      "char": "處",
+      "pinyin": "chǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 56,
+      "char": "雨",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "9.3": [
+    {
+      "pos": 23,
+      "char": "亟",
+      "pinyin": "jí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 32,
+      "char": "遠",
+      "pinyin": "yuàn",
+      "source": "no 音義",
+      "note": "遠, to keep away from, 去聲 yuàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 77,
+      "char": "處",
+      "pinyin": "chǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "9.4": [
+    {
+      "pos": 11,
+      "char": "遠",
+      "pinyin": "yuǎn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 92,
+      "char": "少",
+      "pinyin": "shǎo",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 113,
+      "char": "強",
+      "pinyin": "qiáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 124,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 139,
+      "char": "和",
+      "pinyin": "hé",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 152,
+      "char": "期",
+      "pinyin": "qī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 174,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 181,
+      "char": "見",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 209,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 211,
+      "char": "重",
+      "pinyin": "zhòng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 232,
+      "char": "食",
+      "pinyin": "shí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 243,
+      "char": "舍",
+      "pinyin": "shè",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 256,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 265,
+      "char": "數",
+      "pinyin": "shuò",
+      "source": "no 音義",
+      "note": "數, often (數賞, 數罰), shuò. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 272,
+      "char": "數",
+      "pinyin": "shuò",
+      "source": "no 音義",
+      "note": "數, often (數賞, 數罰), shuò. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 279,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 307,
+      "char": "相",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 317,
+      "char": "相",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "9.5": [
+    {
+      "pos": 13,
+      "char": "足",
+      "pinyin": "zú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 26,
+      "char": "夫",
+      "pinyin": "fú",
+      "source": "no 音義",
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
+    },
+    {
+      "pos": 37,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "9.6": [
+    {
+      "pos": 15,
+      "char": "難",
+      "pinyin": "nán",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 26,
+      "char": "行",
+      "pinyin": "xíng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 35,
+      "char": "令",
+      "pinyin": "lìng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 40,
+      "char": "齊",
+      "pinyin": "qí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 50,
+      "char": "令",
+      "pinyin": "lìng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 52,
+      "char": "行",
+      "pinyin": "xíng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 62,
+      "char": "令",
+      "pinyin": "lìng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 65,
+      "char": "行",
+      "pinyin": "xíng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 76,
+      "char": "令",
+      "pinyin": "lìng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 78,
+      "char": "行",
+      "pinyin": "xíng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 81,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 83,
+      "char": "相",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "10.1": [
+    {
+      "pos": 0,
+      "char": "孫",
+      "pinyin": "sūn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 28,
+      "char": "遠",
+      "pinyin": "yuǎn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 48,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 66,
+      "char": "難",
+      "pinyin": "nán",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 83,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 94,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 96,
+      "char": "難",
+      "pinyin": "nán",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 137,
+      "char": "令",
+      "pinyin": "lìng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 152,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 165,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 172,
+      "char": "從",
+      "pinyin": "cóng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 177,
+      "char": "從",
+      "pinyin": "cóng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 185,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 199,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 209,
+      "char": "從",
+      "pinyin": "cóng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 212,
+      "char": "遠",
+      "pinyin": "yuǎn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 219,
+      "char": "難",
+      "pinyin": "nán",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 239,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 242,
+      "char": "任",
+      "pinyin": "rèn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "10.2": [
+    {
+      "pos": 36,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 41,
+      "char": "夫",
+      "pinyin": "fú",
+      "source": "no 音義",
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
+    },
+    {
+      "pos": 54,
+      "char": "强",
+      "pinyin": "qiáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 62,
+      "char": "强",
+      "pinyin": "qiáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 69,
+      "char": "大",
+      "pinyin": "dà",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 83,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 85,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 92,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 115,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 122,
+      "char": "少",
+      "pinyin": "shǎo",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 129,
+      "char": "強",
+      "pinyin": "qiáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 149,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 152,
+      "char": "任",
+      "pinyin": "rèn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "10.3": [
+    {
+      "pos": 0,
+      "char": "夫",
+      "pinyin": "fú",
+      "source": "no 音義",
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
+    },
+    {
+      "pos": 13,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 18,
+      "char": "遠",
+      "pinyin": "yuǎn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 22,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 27,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 34,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 37,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 50,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 65,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 97,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "10.4": [
+    {
+      "pos": 9,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 23,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 32,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 38,
+      "char": "令",
+      "pinyin": "lìng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "10.5": [
+    {
+      "pos": 0,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 10,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 17,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 22,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 30,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 39,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 44,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 50,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 60,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 69,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 75,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 92,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 94,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 97,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 102,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 104,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 107,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "11.1": [
+    {
+      "pos": 0,
+      "char": "孫",
+      "pinyin": "sūn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 31,
+      "char": "重",
+      "pinyin": "zhòng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 54,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 67,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 82,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 97,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 106,
+      "char": "屬",
+      "pinyin": "zhǔ",
+      "source": "no 音義",
+      "note": "屬, to join on (三屬, 使之屬), 之欲切 zhǔ. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 108,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 118,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 134,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 135,
+      "char": "重",
+      "pinyin": "zhòng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 148,
+      "char": "難",
+      "pinyin": "nán",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 149,
+      "char": "行",
+      "pinyin": "xíng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 154,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 165,
+      "char": "從",
+      "pinyin": "cóng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 180,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 193,
+      "char": "亡",
+      "pinyin": "wáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 196,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 232,
+      "char": "重",
+      "pinyin": "zhòng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 240,
+      "char": "行",
+      "pinyin": "xíng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "11.2": [
+    {
+      "pos": 10,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 16,
+      "char": "相",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 22,
+      "char": "相",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 28,
+      "char": "相",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 34,
+      "char": "相",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 47,
+      "char": "齊",
+      "pinyin": "qí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 50,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 57,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 70,
+      "char": "將",
+      "pinyin": "jiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 82,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 100,
+      "char": "乘",
+      "pinyin": "chéng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "11.3": [
+    {
+      "pos": 1,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 23,
+      "char": "足",
+      "pinyin": "zú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 24,
+      "char": "食",
+      "pinyin": "shí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 42,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 113,
+      "char": "令",
+      "pinyin": "lìng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 135,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "no 音義",
+      "note": "惡, to dislike, 去聲 wù. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 144,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "no 音義",
+      "note": "惡, to dislike, 去聲 wù. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 148,
+      "char": "令",
+      "pinyin": "lìng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "11.4": [
+    {
+      "pos": 37,
+      "char": "中",
+      "pinyin": "zhōng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 50,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 62,
+      "char": "夫",
+      "pinyin": "fú",
+      "source": "no 音義",
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
+    },
+    {
+      "pos": 65,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 68,
+      "char": "相",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 69,
+      "char": "惡",
+      "pinyin": "wù",
+      "source": "no 音義",
+      "note": "惡, to dislike, 去聲 wù. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 72,
+      "char": "當",
+      "pinyin": "dāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 83,
+      "char": "相",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 101,
+      "char": "足",
+      "pinyin": "zú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 105,
+      "char": "齊",
+      "pinyin": "qí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 134,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "11.5": [
+    {
+      "pos": 0,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 9,
+      "char": "正",
+      "pinyin": "zhèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 21,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 24,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 34,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 37,
+      "char": "識",
+      "pinyin": "shí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 47,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 54,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 56,
+      "char": "期",
+      "pinyin": "qī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 67,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 99,
+      "char": "莫",
+      "pinyin": "mò",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 100,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 112,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 117,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    }
+  ],
+  "11.6": [
+    {
+      "pos": 1,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 38,
+      "char": "重",
+      "pinyin": "zhòng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 75,
+      "char": "將",
+      "pinyin": "jiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 84,
+      "char": "將",
+      "pinyin": "jiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 85,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 87,
+      "char": "屬",
+      "pinyin": "zhǔ",
+      "source": "no 音義",
+      "note": "屬, to join on (三屬, 使之屬), 之欲切 zhǔ. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 93,
+      "char": "將",
+      "pinyin": "jiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 102,
+      "char": "將",
+      "pinyin": "jiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 111,
+      "char": "將",
+      "pinyin": "jiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 116,
+      "char": "重",
+      "pinyin": "zhòng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 120,
+      "char": "將",
+      "pinyin": "jiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 123,
+      "char": "食",
+      "pinyin": "shí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 129,
+      "char": "將",
+      "pinyin": "jiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 138,
+      "char": "將",
+      "pinyin": "jiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 147,
+      "char": "將",
+      "pinyin": "jiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 171,
+      "char": "從",
+      "pinyin": "cóng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "11.7": [
+    {
+      "pos": 3,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 16,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 31,
+      "char": "行",
+      "pinyin": "xíng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 36,
+      "char": "鄉",
+      "pinyin": "xiàng",
+      "source": "no 音義",
+      "note": "鄉導, guides (嚮導), 去聲 xiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 51,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 56,
+      "char": "王",
+      "pinyin": "wáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 61,
+      "char": "夫",
+      "pinyin": "fú",
+      "source": "no 音義",
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
+    },
+    {
+      "pos": 63,
+      "char": "王",
+      "pinyin": "wáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 68,
+      "char": "大",
+      "pinyin": "dà",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 80,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 113,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 127,
+      "char": "施",
+      "pinyin": "shī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 137,
+      "char": "令",
+      "pinyin": "lìng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 146,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 156,
+      "char": "告",
+      "pinyin": "gào",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 166,
+      "char": "告",
+      "pinyin": "gào",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 172,
+      "char": "亡",
+      "pinyin": "wáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 186,
+      "char": "夫",
+      "pinyin": "fú",
+      "source": "no 音義",
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
+    },
+    {
+      "pos": 189,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 195,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 196,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 200,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 206,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 221,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    }
+  ],
+  "11.8": [
+    {
+      "pos": 15,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 18,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 35,
+      "char": "亟",
+      "pinyin": "jí",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 39,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 45,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 47,
+      "char": "期",
+      "pinyin": "qī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 63,
+      "char": "處",
+      "pinyin": "chǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 64,
+      "char": "女",
+      "pinyin": "nǚ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "12.1": [
+    {
+      "pos": 0,
+      "char": "孫",
+      "pinyin": "sūn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 35,
+      "char": "行",
+      "pinyin": "xíng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "12.2": [
+    {
+      "pos": 11,
+      "char": "應",
+      "pinyin": "yìng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 16,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 21,
+      "char": "應",
+      "pinyin": "yìng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 23,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 45,
+      "char": "從",
+      "pinyin": "cóng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 47,
+      "char": "從",
+      "pinyin": "cóng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 52,
+      "char": "從",
+      "pinyin": "cóng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 59,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 64,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 93,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 101,
+      "char": "數",
+      "pinyin": "shù",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 118,
+      "char": "強",
+      "pinyin": "qiáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "12.3": [
+    {
+      "pos": 0,
+      "char": "夫",
+      "pinyin": "fú",
+      "source": "no 音義",
+      "note": "如字 (no note); clause-initial particle 夫, 音扶"
+    },
+    {
+      "pos": 2,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 17,
+      "char": "費",
+      "pinyin": "fèi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 30,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 58,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 68,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 75,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 92,
+      "char": "亡",
+      "pinyin": "wáng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 115,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    }
+  ],
+  "13.1": [
+    {
+      "pos": 0,
+      "char": "孫",
+      "pinyin": "sūn",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 18,
+      "char": "費",
+      "pinyin": "fèi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 26,
+      "char": "費",
+      "pinyin": "fèi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 51,
+      "char": "相",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 53,
+      "char": "數",
+      "pinyin": "shù",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 61,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 71,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 86,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 96,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 105,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 111,
+      "char": "勝",
+      "pinyin": "shèng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 117,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 121,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 122,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 125,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 126,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 132,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 139,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 145,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 146,
+      "char": "度",
+      "pinyin": "dù",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 150,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 153,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "13.2": [
+    {
+      "pos": 2,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 7,
+      "char": "鄉",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 8,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 12,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 16,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 20,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 24,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 27,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 31,
+      "char": "莫",
+      "pinyin": "mò",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 32,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 49,
+      "char": "鄉",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 50,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 55,
+      "char": "鄉",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 62,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 74,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 80,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 86,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 89,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 92,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 95,
+      "char": "令",
+      "pinyin": "lìng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 97,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 98,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 102,
+      "char": "傳",
+      "pinyin": "chuán",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 103,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 105,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 109,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    }
+  ],
+  "13.3": [
+    {
+      "pos": 6,
+      "char": "莫",
+      "pinyin": "mò",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 8,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 9,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 12,
+      "char": "莫",
+      "pinyin": "mò",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 14,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 15,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 18,
+      "char": "莫",
+      "pinyin": "mò",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 20,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 21,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 29,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 36,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 37,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 45,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 59,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 62,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 67,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 71,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 72,
+      "char": "與",
+      "pinyin": "yǔ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 74,
+      "char": "告",
+      "pinyin": "gào",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    }
+  ],
+  "13.4": [
+    {
+      "pos": 20,
+      "char": "先",
+      "pinyin": "xiān",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 21,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 24,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 35,
+      "char": "舍",
+      "pinyin": "shè",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 41,
+      "char": "令",
+      "pinyin": "lìng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 43,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 46,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 54,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 56,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 67,
+      "char": "舍",
+      "pinyin": "shè",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 72,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 82,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 86,
+      "char": "鄉",
+      "pinyin": "xiāng",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 87,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 90,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 94,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 100,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 105,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 106,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 111,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 112,
+      "char": "告",
+      "pinyin": "gào",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 118,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 123,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 125,
+      "char": "使",
+      "pinyin": "shǐ",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 127,
+      "char": "期",
+      "pinyin": "qī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 130,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 136,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 139,
+      "char": "知",
+      "pinyin": "zhī",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 143,
+      "char": "於",
+      "pinyin": "yú",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 145,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 149,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    }
+  ],
+  "13.5": [
+    {
+      "pos": 25,
+      "char": "將",
+      "pinyin": "jiàng",
+      "source": "no 音義",
+      "note": "將, the general, 去聲 jiàng. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 31,
+      "char": "為",
+      "pinyin": "wéi",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 32,
+      "char": "間",
+      "pinyin": "jiàn",
+      "source": "no 音義",
+      "note": "間, a spy (間諜) or a gap, 去聲 jiàn. Review by Claude",
+      "reviewed": "claude"
+    },
+    {
+      "pos": 37,
+      "char": "大",
+      "pinyin": "dà",
+      "source": "no 音義",
+      "note": "如字 (no note)"
+    },
+    {
+      "pos": 43,
+      "char": "要",
+      "pinyin": "yào",
+      "source": "no 音義",
+      "note": "要, the essential, 去聲 yào. Review by Claude",
+      "reviewed": "claude"
+    }
+  ]
+}

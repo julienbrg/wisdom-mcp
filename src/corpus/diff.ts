@@ -14,26 +14,41 @@ interface ChangedWork {
   work: string;
   imported: number;
   upstream: number;
+  edited: number;
 }
 
-/** Passage blocks per imported work, read back from the positional ids ("analects:123b" is block 123). */
-export function importedBlocks(db: Db): Map<string, number> {
-  const rows = db.prepare('select work_id, id from passages').all() as {
+interface ImportedPassage {
+  block: number;
+  raw: string;
+}
+
+/** Each imported passage with its block, read back from the positional id ("analects:123b" is in block 123). */
+export function importedPassages(db: Db): Map<string, ImportedPassage[]> {
+  const rows = db.prepare('select work_id, id, raw from passages').all() as {
     work_id: string;
     id: string;
+    raw: string;
   }[];
-  const blocks = new Map<string, number>();
-  for (const { work_id, id } of rows) {
-    const n = parseInt(id.slice(work_id.length + 1), 10);
-    blocks.set(work_id, Math.max(blocks.get(work_id) ?? 0, n + 1));
+  const passages = new Map<string, ImportedPassage[]>();
+  for (const { work_id, id, raw } of rows) {
+    const block = parseInt(id.slice(work_id.length + 1), 10);
+    passages.set(work_id, [...(passages.get(work_id) ?? []), { block, raw }]);
   }
-  return blocks;
+  return passages;
 }
 
-export function diffCorpus(records: WcwRecord[], works: Work[], imported: Map<string, number>) {
+/**
+ * Full texts on the site that aren't pilot works yet, and imported works a re-import would change:
+ * a different number of blocks, or passages no longer found in the block their id points to.
+ */
+export function diffCorpus(
+  records: WcwRecord[],
+  works: Work[],
+  imported: Map<string, ImportedPassage[]>,
+) {
   const known = new Set(works.map((w) => w.id));
   const newWorks: NewWork[] = records
-    .filter((r) => !known.has(r.slug))
+    .filter((r) => r.kind === 'full-text' && !known.has(r.slug))
     .map(({ slug, title, author, translator, tradition }) => ({
       slug,
       title,
@@ -44,10 +59,14 @@ export function diffCorpus(records: WcwRecord[], works: Work[], imported: Map<st
 
   const bySlug = new Map(records.map((r) => [r.slug, r]));
   const changed: ChangedWork[] = [];
-  for (const [work, blocks] of imported) {
+  for (const [work, passages] of imported) {
     const record = bySlug.get(work);
-    const upstream = record ? splitPassages(record.text).length : 0;
-    if (upstream !== blocks) changed.push({ work, imported: blocks, upstream });
+    const blocks = record ? splitPassages(record.text) : [];
+    const count = Math.max(...passages.map((p) => p.block)) + 1;
+    const edited = passages.filter((p) => !blocks[p.block]?.includes(p.raw)).length;
+    if (count !== blocks.length || edited) {
+      changed.push({ work, imported: count, upstream: blocks.length, edited });
+    }
   }
   return { newWorks, changed };
 }

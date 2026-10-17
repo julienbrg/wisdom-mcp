@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { CliModule } from '../cli.module.js';
-import { diffCorpus, importedBlocks } from '../corpus/diff.js';
+import { diffCorpus, importedPassages } from '../corpus/diff.js';
 import { fetchWcw } from '../corpus/wcw.js';
 import { PILOT_WORKS } from '../corpus/works.js';
 import { DB, type Db } from '../database/database.module.js';
@@ -11,11 +11,13 @@ try {
   const { newWorks, changed } = diffCorpus(
     await fetchWcw(),
     PILOT_WORKS,
-    importedBlocks(app.get<Db>(DB)),
+    importedPassages(app.get<Db>(DB)),
   );
   console.log('On the site, not in PILOT_WORKS yet:');
   console.table(newWorks);
-  console.log('Imported works whose passage blocks changed, so a re-import shifts their ids:');
+  console.log(
+    'Imported works a re-import would change (edited: passages no longer in their block):',
+  );
   console.table(changed);
 } finally {
   await app.close();

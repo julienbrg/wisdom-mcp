@@ -348,8 +348,39 @@ test('anchored: margin noise before a mark still opens the notes, and long title
   );
 });
 
+test('anchored: legge’s notes are told by their longer lines, and run to the page head', () => {
+  const note = [
+    'I. Does king Wan ascribe four attributes here to K/ien, or only two?',
+    'According to Appendix IV, always by Chinese writers assigned to',
+    'Confucius, he assigns four.',
+  ].join('\n');
+  const blocks = [
+    'TEXT. SECTION T.',
+    'I. THe AwHien HEXAGRAM.',
+    'Khien (represents) what is great and originating, \npenetrating, advantageous, correct and firm.',
+    '1. In the first (or lowest) line, undivided, (we see \nits subject as) the dragon lying hid (in the deep). \nIt is not the time for active doing.',
+    note,
+    'creature’s proper home is in the water,',
+    '58 THE Yf KING. TEXT,',
+    '6. In the sixth (or topmost) line, undivided, (we \nsee its subject as) the dragon exceeding the proper \nlimits.',
+    'sense esnnseenemeensnneeneenersnerenenenennnnnnenenenene eee,',
+    'Il. THe Kuwikn Hexacram.',
+    'KhwAn (represents) what is great and originating,',
+    'F 2',
+    'HEX. 3. APPENDIX I. 215',
+  ];
+  const anchors: [string, string][] = [
+    ['1', 'Khien (represents)'],
+    ['2', 'KhwAn (represents)'],
+  ];
+  assert.deepEqual(
+    anchored('i-ching', blocks, anchors).map((s) => s.refUnit),
+    [null, null, '1', '1', null, null, null, '1', null, null, '2', null, null],
+  );
+});
+
 test('anchored: a translation whose main text is missing fails', () => {
-  for (const workId of ['chuang-tzu', 'liezi', 'tao-te-ching-giles', 'mozi', 'xunzi']) {
+  for (const workId of ['chuang-tzu', 'liezi', 'tao-te-ching-giles', 'mozi', 'xunzi', 'i-ching']) {
     assert.throws(() => segment(workId, ['nothing here']), /main text start not found/);
   }
 });

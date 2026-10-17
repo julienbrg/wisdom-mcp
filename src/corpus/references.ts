@@ -341,7 +341,13 @@ interface Layout {
    * A scan's footnotes, which run from the first one on a page to the next page head, but for the
    * blocks of text that open like a note by margin noise, or follow one the scan misplaced.
    */
-  footnotes?: { note: RegExp; head(text: string): boolean; text?: string[] };
+  footnotes?: {
+    note(text: string, raw: string): boolean;
+    head(text: string): boolean;
+    text?: string[];
+    /** Blocks that open a page's notes though they do not look like it. */
+    notes?: string[];
+  };
 }
 
 const LOWER = /\p{Ll}/u;
@@ -357,6 +363,34 @@ function scanHead(text: string): boolean {
     (text.split(' ').length <= 9 && /W[OQ0][RBEK]{1,2}S O[FEPKR]\b/.test(text))
   );
 }
+
+// Legge's notes are set in smaller type, so their lines run longer than the text's, which never pass
+// 56 characters; a block that opens with a paragraph number is still text.
+function smallType(text: string, raw: string): boolean {
+  if (/\p{L}{25}/u.test(text)) return false;
+  const lines = raw
+    .split('\n')
+    .map((l) => l.trim())
+    .filter(Boolean);
+  const full = (lines.length > 1 ? lines.slice(0, -1) : lines)
+    .map((l) => l.length)
+    .sort((a, b) => a - b);
+  return full[full.length >> 1] > 56 && !/^(?:Chapter \S+ )?\d+(?:-\d+)?[.,] /.test(text);
+}
+
+// The I Ching's page heads ("SECT. I. THE KHWAN HEXAGRAM. 59", "62 THE Yi KING. TEXT.", "HEX. 3.
+// APPENDIX I. 215", "CHAP. II, APPENDIX III. 351", "214 THE APPENDIXES. SECT. I.") and titles.
+const LEGGE_HEAD =
+  /^(?:S[\w?]{2,3}[.,?]? (?:\S{1,3}[.,]? )?(?:T\w{1,2} |APPENDIX)|HEX\W.{0,10}APPENDIX|CHAP\W.{0,8}APPENDIX|APPENDIX [IVXL]+\.? \S*\d|\W?\d+ T\S{1,3} (?:[Yy]\S{0,2} KING|APPEN\w+))/;
+const LEGGE_TITLE =
+  /^(?:[IVXLTl]+\.? T\S{1,2} \S.{0,28}|THE APPENDIXES\.|APPENDIX [IVXL]+\.(?: Treatise.*)?|Section \S+?[.,]?(?: \S+\.)?|TEXT\. SECTION.*|Tue GREAT APPENDIX.*|Treatise on .*|Supplementary .*|A P\.?\s?[BR]\s?E\s?N.*)$/;
+const leggeHead = (text: string) => LEGGE_HEAD.test(text) || LEGGE_TITLE.test(text);
+// Titles, page heads (but for one the scan runs into the first line of the page) and rules the
+// scan reads as one long word.
+const leggeApparatus = (text: string) =>
+  LEGGE_TITLE.test(text) ||
+  (LEGGE_HEAD.test(text) && !/(?:\p{Ll}+ ){4}/u.test(text)) ||
+  /\p{L}{25}/u.test(text);
 
 // Translations with no numbers, aligned by hand on the source paragraphs.
 const ANCHORED: Record<string, Layout> = {
@@ -376,7 +410,7 @@ const ANCHORED: Record<string, Layout> = {
     start: /^BOOK I$/,
     apparatus: (text) => scanHead(text) || (text.match(/\p{L}/gu)?.length ?? 0) < 4,
     footnotes: {
-      note: /^(?:[*®^’•»°]|\d{1,2} \p{Lu})/u,
+      note: (text) => /^(?:[*®^’•»°]|\d{1,2} \p{Lu})/u.test(text),
       head: scanHead,
       text: ['Examples of sucli are', '^ Chow of Yin in wine', '^ and none in the world'],
     },
@@ -387,7 +421,7 @@ const ANCHORED: Record<string, Layout> = {
     end: /^CHINESE INDEX/,
     apparatus: (text) => scanHead(text) || (text.match(/\p{L}/gu)?.length ?? 0) < 4,
     footnotes: {
-      note: /^(?:[^\p{L}\d\s]?\p{L}?\s)?[*®^’•»°]|^1 \p{Lu}/u,
+      note: (text) => /^(?:[^\p{L}\d\s]?\p{L}?\s)?[*®^’•»°]|^1 \p{Lu}/u.test(text),
       head: scanHead,
       text: [
         'peaceful or uneasy, beneficial',
@@ -406,6 +440,22 @@ const ANCHORED: Record<string, Layout> = {
         'Yao ^ asked Shun',
         'Fan-jo and Chii-shu',
       ],
+    },
+  },
+  // A scan. Notes run from the first one on a page to the next page head or title.
+  'i-ching': {
+    start: /^TEXT\. SECTION/,
+    apparatus: (text) => leggeApparatus(text) || (text.match(/\p{L}/gu)?.length ?? 0) < 4,
+    footnotes: {
+      note: smallType,
+      head: leggeHead,
+      text: [
+        'XI. ‘The little come and the great gone',
+        'its correct place. (Its subject) occupies',
+        'to the subject of the line), and its being',
+        'Strength in A4ien',
+      ],
+      notes: ['XIV. Ta YG means', 'LI. Paragraph 1. See what'],
     },
   },
   // A scan: page numbers and section titles have no lowercase (or read "5i"), and notes open with *.
@@ -448,9 +498,9 @@ export function anchored(workId: string, blocks: string[], anchors: Anchor[]): S
     if (!layout.footnotes) return false;
     const text = squash(b);
     if (layout.footnotes.head(text)) return (inNotes = false);
-    const { note, text: notNotes = [] } = layout.footnotes;
+    const { note, text: notNotes = [], notes: opening = [] } = layout.footnotes;
     if (notNotes.some((o) => text.startsWith(o))) return (inNotes = false);
-    return (inNotes ||= note.test(text));
+    return (inNotes ||= note(text, b) || opening.some((o) => text.startsWith(o)));
   });
   const segments = blocks.map((raw, n) => {
     const text = squash(raw);

@@ -324,8 +324,32 @@ test("anchored: a scan's footnotes run from the first one on a page to the next 
   );
 });
 
+test('anchored: margin noise before a mark still opens the notes, and long titles are heads', () => {
+  const blocks = [
+    'BOOK XV',
+    'f the prince is a worthy person, his country is well-governed',
+    '[ ^ King T‘ang.',
+    "' * Book of Odes, IV, m, iv, 6.",
+    'j The meaning is that T‘ang won heoanse his character impressed',
+    'XV',
+    'THE METHOD OE MAINTATNINa THE EAVOUR OF ONE’S LORD AND KEEPING IN OFFICE',
+    'If your lord respects and Iionoiiis you',
+    'Yao ^ asked Shun, How are the passions of man ?',
+    'CHINESE INDEX AM) GLOSSARY',
+    'Radical 1. — ',
+  ];
+  const anchors: [string, string][] = [
+    ['15.7', 'f the prince'],
+    ['15.8', 'If your lord'],
+  ];
+  assert.deepEqual(
+    anchored('xunzi', ['BOOK I', ...blocks], anchors).map((s) => s.refUnit),
+    [null, null, '15.7', null, null, null, null, null, '15.8', '15.8', null, null],
+  );
+});
+
 test('anchored: a translation whose main text is missing fails', () => {
-  for (const workId of ['chuang-tzu', 'liezi', 'tao-te-ching-giles', 'mozi']) {
+  for (const workId of ['chuang-tzu', 'liezi', 'tao-te-ching-giles', 'mozi', 'xunzi']) {
     assert.throws(() => segment(workId, ['nothing here']), /main text start not found/);
   }
 });

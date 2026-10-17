@@ -347,13 +347,14 @@ interface Layout {
 const LOWER = /\p{Ll}/u;
 
 // A scan's page head, page number or chapter heading: short and mostly capitals, though the OCR
-// reads some of them in lowercase ("THl WOEKS OF MOTSE").
+// reads some of them in lowercase ("THl WOEKS OF MOTSE", "m THE WORKS OE HSt)]SrTZE . xvii").
 function scanHead(text: string): boolean {
   const letters = text.match(/\p{L}/gu) ?? [];
   const capitals = letters.filter((c) => /\p{Lu}/u.test(c)).length;
   return (
     /^\W*(?:BOOK|CHAP)/.test(text) ||
-    (text.split(' ').length <= 9 && capitals >= letters.length * 0.7)
+    capitals >= letters.length * 0.7 ||
+    (text.split(' ').length <= 9 && /W[OQ0][RBEK]{1,2}S O[FEPKR]\b/.test(text))
   );
 }
 
@@ -378,6 +379,33 @@ const ANCHORED: Record<string, Layout> = {
       note: /^(?:[*®^’•»°]|\d{1,2} \p{Lu})/u,
       head: scanHead,
       text: ['Examples of sucli are', '^ Chow of Yin in wine', '^ and none in the world'],
+    },
+  },
+  // A scan, with folio numbers and margin summaries run into the text, even before a note's mark.
+  xunzi: {
+    start: /^BOOK I$/,
+    end: /^CHINESE INDEX/,
+    apparatus: (text) => scanHead(text) || (text.match(/\p{L}/gu)?.length ?? 0) < 4,
+    footnotes: {
+      note: /^(?:[^\p{L}\d\s]?\p{L}?\s)?[*®^’•»°]|^1 \p{Lu}/u,
+      head: scanHead,
+      text: [
+        'peaceful or uneasy, beneficial',
+        'Wherein is it that man is truly man',
+        'The young serve the old',
+        'I desire to be mean and yet noble',
+        'Li Sze ® questioned',
+        "*'Ts‘u^ and Yueh® would not admit",
+        'This is not so. T‘ang and Wu were the best',
+        '^ laziness ; they provide for weeping',
+        "^ ' wEen everyone’s powers",
+        '^te^olioy of But the righteous king',
+        '•not equal to that of the horse',
+        '^ the clear water at the top',
+        '’! purity, nothing can overturn it',
+        'Yao ^ asked Shun',
+        'Fan-jo and Chii-shu',
+      ],
     },
   },
   // A scan: page numbers and section titles have no lowercase (or read "5i"), and notes open with *.

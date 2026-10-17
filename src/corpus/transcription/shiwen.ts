@@ -6,9 +6,17 @@ import { POLYPHONES, type Reading, type Readings } from './pinyin.js';
 // 《經典釋文》 in the 四部叢刊 edition, as transcribed page by page on Chinese Wikisource.
 const API = 'https://zh.wikisource.org/w/api.php?format=json&formatversion=2&';
 const INDEX = 'Sibu Congkan0061-陸德明-經典釋文-12-10.djvu';
+const INDEX_11 = 'Sibu Congkan0062-陸德明-經典釋文-12-11.djvu';
+
+const ORDINALS = Array.from({ length: 33 }, (_, i) => {
+  const n = i + 1;
+  const tens = n < 10 ? '' : `${n >= 20 ? '〇一二三'[Math.floor(n / 10)] : ''}十`;
+  return `第${tens}${n % 10 ? '〇一二三四五六七八九'[n % 10] : ''}`;
+});
 
 interface Volume {
-  pages: [number, number];
+  /** Page ranges, in order, of the djvu indexes they are in. */
+  pages: [index: string, from: number, to: number][];
   /** The books (篇) in order, as headed in the 音義. */
   books: string[];
   bookOf: (refUnit: string) => string;
@@ -18,7 +26,7 @@ interface Volume {
 
 export const VOLUMES: Record<string, Volume> = {
   analects: {
-    pages: [2, 44],
+    pages: [[INDEX, 2, 44]],
     books: [
       '學而第一',
       '爲政第二',
@@ -43,7 +51,17 @@ export const VOLUMES: Record<string, Volume> = {
     ],
     bookOf: (refUnit) => refUnit.split('.')[0],
   },
-  'tao-te-ching': { pages: [46, 59], books: ['老子'], bookOf: () => '1', start: '徼' },
+  'tao-te-ching': { pages: [[INDEX, 46, 59]], books: ['老子'], bookOf: () => '1', start: '徼' },
+  // 莊子音義, 卷二十六 to 卷二十八. Notes break up some of its headings (齊物論{{…}}第二), so
+  // books are found by their numbers.
+  'chuang-tzu': {
+    pages: [
+      [INDEX, 60, 179],
+      [INDEX_11, 2, 66],
+    ],
+    books: ORDINALS,
+    bookOf: (refUnit) => refUnit.split('.')[0],
+  },
 };
 
 // The usual reading (如字), which 釋文 leaves unannotated.
@@ -173,13 +191,14 @@ export interface Note {
   note: string;
 }
 
-async function page(cacheDir: string, n: number): Promise<string> {
-  const url = `${API}action=query&prop=revisions&rvprop=content&rvslots=main&titles=${encodeURIComponent(`Page:${INDEX}/${n}`)}`;
-  const json = JSON.parse((await cached(cacheDir, `shiwen-${n}.json`, url)).toString());
+async function page(cacheDir: string, index: string, n: number): Promise<string> {
+  const url = `${API}action=query&prop=revisions&rvprop=content&rvslots=main&titles=${encodeURIComponent(`Page:${index}/${n}`)}`;
+  const file = index === INDEX ? `shiwen-${n}.json` : `shiwen-11-${n}.json`;
+  const json = JSON.parse((await cached(cacheDir, file, url)).toString());
   return json.query.pages[0].revisions[0].slots.main.content as string;
 }
 
-async function skchar(cacheDir: string, code: string): Promise<string> {
+export async function skchar(cacheDir: string, code: string): Promise<string> {
   const url = `${API}action=expandtemplates&prop=wikitext&text=${encodeURIComponent(`{{SKchar|${code}}}`)}`;
   const json = JSON.parse((await cached(cacheDir, `skchar-${code}.json`, url)).toString());
   const text = json.expandtemplates.wikitext as string;
@@ -189,17 +208,21 @@ async function skchar(cacheDir: string, code: string): Promise<string> {
 /** The headwords and notes of one 音義, with the number of the book (篇) each falls under. */
 export async function loadNotes(cacheDir: string, workId: string): Promise<Note[]> {
   const { pages, books } = VOLUMES[workId];
-  const [from, to] = pages;
   let text = '';
-  for (let n = from; n <= to; n++)
-    text += (await page(cacheDir, n)).replace(/<noinclude>[\s\S]*?<\/noinclude>/g, '') + '\n';
+  for (const [index, from, to] of pages) {
+    for (let n = from; n <= to; n++)
+      text +=
+        (await page(cacheDir, index, n)).replace(/<noinclude>[\s\S]*?<\/noinclude>/g, '') + '\n';
+  }
   for (const code of new Set([...text.matchAll(/\{\{SKchar\|(\d+)\}\}/g)].map((m) => m[1]))) {
     text = text.replaceAll(`{{SKchar|${code}}}`, await skchar(cacheDir, code));
   }
 
-  const titles = new Map(books.map((b, i) => [han(b).split('').map(fold).join(''), String(i + 1)]));
+  const titles = books.map((b) => han(b).split('').map(fold).join(''));
   const notes: Note[] = [];
   let book = books.length === 1 ? '1' : '0';
+  // Only the next book's heading is looked for, so that 第二 is never taken for 第十二.
+  const next = () => titles[Number(book)];
   let head = '';
   let last: Note | undefined;
   for (const part of text.split(/(\{\{雙行註文\|[^{}]*\}\})/)) {
@@ -210,9 +233,8 @@ export async function loadNotes(cacheDir: string, workId: string): Promise<Note[
       if (!han(head) && last) last.note += note;
       else {
         const h = han(head).split('').map(fold).join('');
-        const title = [...titles.keys()].find((t) => h.endsWith(t));
-        if (title) {
-          book = titles.get(title)!;
+        if (next() && h.endsWith(next())) {
+          book = String(Number(book) + 1);
           last = undefined;
         } else notes.push((last = { book, head: han(head), note }));
       }
@@ -226,9 +248,9 @@ export async function loadNotes(cacheDir: string, workId: string): Promise<Note[
         /^[\s\u3000]*(?:凡|舊)[一二三四五六七八九十百]+章(?:今[一二三四五六七八九十百]+章)?/,
         '',
       );
-      const title = [...titles.keys()].find((t) => h.startsWith(t));
-      if (title && !line.includes('{{')) {
-        book = titles.get(title)!;
+      const title = next();
+      if (title && h.startsWith(title) && !line.includes('{{')) {
+        book = String(Number(book) + 1);
         head = line.slice(line.indexOf(title.at(-1)!) + 1);
         last = undefined;
       } else head += line;
@@ -244,7 +266,7 @@ interface Resolved {
 }
 
 /** Which character of the headword a note reads, and as what. */
-function resolve(gy: Guangyun, head: string, note: string, poly = isPolyphone): Resolved[] {
+export function resolve(gy: Guangyun, head: string, note: string, poly = isPolyphone): Resolved[] {
   const chars = [...head];
   const targets = (prefix: string | undefined) => {
     if (prefix === '上') return [0];
@@ -379,7 +401,8 @@ export interface ReadingEvent {
 
 /**
  * A reading for every polyphone occurrence in a book: the source's own where it has one, carried
- * on by 下同, and the usual reading (如字) elsewhere.
+ * on by 下同 (within its unit only, when the units are scattered passages), and the usual reading
+ * (如字) elsewhere.
  */
 export function fill(
   readings: Readings,
@@ -387,9 +410,11 @@ export function fill(
   events: Map<number, ReadingEvent>,
   bodies: Map<string, string[]>,
   source: string,
+  carryOver = true,
 ): void {
   const carried = new Map<string, ReadingEvent & { at: Slot }>();
   slots.forEach((slot, i) => {
+    if (!carryOver && i && slots[i - 1].refUnit !== slot.refUnit) carried.clear();
     const c = fold(slot.char);
     if (!isPolyphone(c)) return;
     const event = events.get(i);

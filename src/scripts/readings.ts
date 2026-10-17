@@ -14,18 +14,36 @@ import {
 } from '../corpus/transcription/jizhu.js';
 import { loadReadings, readingsFile, type Readings } from '../corpus/transcription/pinyin.js';
 import { draft, loadNotes, VOLUMES, type Skipped } from '../corpus/transcription/shiwen.js';
+import { draftSiku, loadSiku, SIKU } from '../corpus/transcription/siku.js';
 import { PILOT_WORKS } from '../corpus/works.js';
 
 // Drafts data/pinyin/<work>.json from 《經典釋文》, cross-checked against 朱熹《論語集注》 for the
-// Analects, or from 《四書章句集注》 alone for the books 釋文 does not cover. Reviewed entries are
-// kept as they are.
+// Analects, from 《四書章句集注》 alone for the books 釋文 does not cover, or from the 四庫 edition's
+// inline 釋文 for the Liezi. Reviewed entries are kept as they are.
+// Works can be named on the command line to draft only those.
 const app = await NestFactory.createApplicationContext(CliModule, { logger: ['error', 'warn'] });
 try {
   const cacheDir = app.get<Config>(ConfigService).get('CORPUS_CACHE', { infer: true });
   const gy = await Guangyun.load(cacheDir);
-  const works = PILOT_WORKS.filter((w) => VOLUMES[w.id] || JIZHU[w.id]);
+  const only = process.argv.slice(2);
+  const works = PILOT_WORKS.filter(
+    (w) => (VOLUMES[w.id] || JIZHU[w.id] || SIKU[w.id]) && (!only.length || only.includes(w.id)),
+  );
   const stats = [];
-  for (const { work, originals } of await prepareWorks(works, cacheDir)) {
+  for (const prepared of await prepareWorks(works, cacheDir)) {
+    const { work } = prepared;
+    // A range like "10.6-7" is drafted as its source units, which the transcription then joins.
+    const originals = [
+      ...new Map(
+        prepared.originals
+          .flatMap((o) =>
+            /-\d+$/.test(o.refUnit)
+              ? o.parts.map((p) => ({ refUnit: p.unit, body: p.body }))
+              : [{ refUnit: o.refUnit, body: o.body }],
+          )
+          .map((u) => [u.refUnit, u]),
+      ).values(),
+    ];
     let notes: number;
     let commentary: number;
     let readings: Readings;
@@ -38,6 +56,11 @@ try {
       [notes, commentary] = [shiwen.length, drafted.unmatched.length];
       if (JIZHU[work.id])
         crossCheck(gy, await loadJizhu(cacheDir, work.id), readings, originals, bookOf);
+    } else if (SIKU[work.id]) {
+      const siku = await loadSiku(cacheDir, work.id);
+      const drafted = draftSiku(gy, siku, originals, SIKU[work.id].bookOf);
+      readings = drafted.readings;
+      [notes, commentary] = [siku.notes.length, drafted.unmatched.length];
     } else {
       const clauses = await loadJizhu(cacheDir, work.id);
       const drafted = draftJizhu(gy, clauses, originals, JIZHU[work.id].bookOf);

@@ -2,7 +2,12 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { fits } from '../dist/corpus/transcription/guangyun.js';
 import { VOLUMES } from '../dist/corpus/transcription/jizhu.js';
-import { align, fill, slotsByBook } from '../dist/corpus/transcription/shiwen.js';
+import {
+  align,
+  fill,
+  slotsByBook,
+  VOLUMES as SHIWEN,
+} from '../dist/corpus/transcription/shiwen.js';
 
 const cls = (initial: string, tone: 1 | 2 | 3 | 4, group: string) => ({
   id: 0,
@@ -81,4 +86,38 @@ test('a source reading carries on with 後放此, other polyphones take 如字',
 test('each part of a book of Mencius is its own volume of 集注', () => {
   const { bookOf } = VOLUMES.mencius;
   assert.deepEqual(['1A.1', '1B.16', '4A.3', '7B.38'].map(bookOf), ['1', '2', '7', '14']);
+});
+
+test('a 下同 stops at the end of its passage when the passages are scattered', () => {
+  const units = [
+    { refUnit: '2.3', body: '從心之所念。從口之所言。' },
+    { refUnit: '2.11', body: '從漚鳥游。' },
+  ];
+  const slots = slotsByBook(units, () => '2').get('2');
+  const note = { book: '2', head: '從', note: '音縱下同' };
+  const readings: Record<string, { pinyin: string }[]> = {};
+  fill(
+    readings,
+    slots,
+    new Map([[0, { pinyin: 'zòng', note, carry: true }]]),
+    new Map(units.map((u) => [u.refUnit, [...u.body]])),
+    '殷敬順釋文',
+    false,
+  );
+  assert.deepEqual(
+    Object.values(readings)
+      .flat()
+      .map((r) => r.pinyin),
+    ['zòng', 'zòng', 'cóng'],
+  );
+});
+
+test('莊子音義 is found by its book numbers, over two volumes', () => {
+  const { books, pages, bookOf } = SHIWEN['chuang-tzu'];
+  assert.deepEqual(
+    [books[0], books[9], books[10], books[19], books[32]],
+    ['第一', '第十', '第十一', '第二十', '第三十三'],
+  );
+  assert.equal(pages.length, 2);
+  assert.equal(bookOf('17.12'), '17');
 });

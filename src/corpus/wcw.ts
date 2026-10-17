@@ -13,8 +13,14 @@ export interface WcwRecord {
   text: string;
 }
 
-export async function loadWcw(cacheDir: string, slugs: string[]): Promise<Map<string, WcwRecord>> {
-  const jsonl = gunzipSync(await cached(cacheDir, 'wisdom-corpus.jsonl.gz', WCW_URL)).toString();
+export async function loadWcw(
+  cacheDir: string,
+  slugs: string[],
+  refresh = false,
+): Promise<Map<string, WcwRecord>> {
+  const jsonl = gunzipSync(
+    await cached(cacheDir, 'wisdom-corpus.jsonl.gz', WCW_URL, refresh),
+  ).toString();
   const records = new Map<string, WcwRecord>();
   for (const line of jsonl.split('\n')) {
     if (!line) continue;

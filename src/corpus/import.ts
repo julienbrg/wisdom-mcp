@@ -20,10 +20,11 @@ const passageId = (workId: string, s: Pick<Segment, 'n' | 'part'>) =>
   `${workId}:${s.n}${s.part ? String.fromCharCode(97 + s.part) : ''}`;
 
 /** Each work's passages and originals, as the import stores them. */
-export async function prepareWorks(works: Work[], cacheDir: string) {
+export async function prepareWorks(works: Work[], cacheDir: string, refresh = false) {
   const records = await loadWcw(
     cacheDir,
     works.map((w) => w.id),
+    refresh,
   );
   const prepared: { work: Work; segments: Segment[]; originals: Original[] }[] = [];
   for (const work of works) {
@@ -35,9 +36,14 @@ export async function prepareWorks(works: Work[], cacheDir: string) {
   return prepared;
 }
 
-export async function importWorks(db: Db, works: Work[], cacheDir: string): Promise<ImportStats[]> {
+export async function importWorks(
+  db: Db,
+  works: Work[],
+  cacheDir: string,
+  refresh = false,
+): Promise<ImportStats[]> {
   // Everything is fetched before the first write, so a network failure leaves the database as it was.
-  const prepared = await prepareWorks(works, cacheDir);
+  const prepared = await prepareWorks(works, cacheDir, refresh);
   const transcriptions = prepared.map(({ work, originals }) =>
     transcribeOriginals(work.id, work.originalLanguage, originals),
   );

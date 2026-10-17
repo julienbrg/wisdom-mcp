@@ -22,15 +22,20 @@ export async function loadWcw(
     await cached(cacheDir, 'wisdom-corpus.jsonl.gz', WCW_URL, refresh),
   ).toString();
   const records = new Map<string, WcwRecord>();
-  for (const line of jsonl.split('\n')) {
-    if (!line) continue;
-    const record = JSON.parse(line) as WcwRecord;
+  for (const record of parseWcw(jsonl)) {
     if (slugs.includes(record.slug)) records.set(record.slug, record);
   }
   const missing = slugs.filter((s) => !records.has(s));
   if (missing.length)
     throw new Error(`missing from the Wisdom Context Window: ${missing.join(', ')}`);
   return records;
+}
+
+export function parseWcw(jsonl: string): WcwRecord[] {
+  return jsonl
+    .split('\n')
+    .filter((line) => line)
+    .map((line) => JSON.parse(line) as WcwRecord);
 }
 
 // Same split as the Wisdom Context Window API, so block i is its passage i.

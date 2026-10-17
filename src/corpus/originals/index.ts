@@ -18,11 +18,12 @@ export interface Original {
 }
 
 export function loadSource(work: Work, cacheDir: string): Promise<SourceText> {
+  const id = work.originalOf ?? work.id;
   switch (work.original) {
     case 'wikisource':
-      return loadWikisource(work.originalOf ?? work.id, cacheDir);
+      return loadWikisource(id, cacheDir);
     case 'perseus':
-      return loadPerseus(work.id, cacheDir);
+      return loadPerseus(id, cacheDir);
     case 'suttacentral':
       return loadSuttaCentral(cacheDir);
     case 'sefaria':

@@ -300,11 +300,11 @@ const loadAnchors = (workId: string): Anchor[] =>
     readFileSync(new URL(`../../data/alignments/${workId}.json`, import.meta.url), 'utf-8'),
   ) as Anchor[];
 
-// "10.6" to "10.7" in one block is "10.6-7".
+// "10.6" to "10.7" in one block is "10.6-7", as sourceUnits reads it.
 function span(from: string, to: string): string {
   const [, prefix, a] = from.match(/^(.*?)(\d+)$/)!;
   const [, prefix2, b] = to.match(/^(.*?)(\d+)$/)!;
-  if (prefix !== prefix2 || +b !== +a + 1) throw new Error(`no range from ${from} to ${to}`);
+  if (prefix !== prefix2 || +b <= +a) throw new Error(`no range from ${from} to ${to}`);
   return `${from}-${b}`;
 }
 

@@ -259,6 +259,8 @@ export async function loadNotes(cacheDir: string, workId: string): Promise<Note[
       } else head += line;
     }
   }
+  if (books.length > 1 && Number(book) !== books.length)
+    throw new Error(`${workId}: 音義 headings found up to book ${book} of ${books.length}`);
   const start = VOLUMES[workId].start;
   return start ? notes.slice(notes.findIndex((n) => n.head === start)) : notes;
 }
@@ -413,10 +415,14 @@ export type Carry = 'book' | 'unit' | 'phrase';
 
 const HAN_RUN = /\p{Script=Han}/u;
 
+// 「下爲是皆同」 names 爲是; the fanqie in 「下孟反下同」 names nothing.
+const NAMED = /下(?:文)?((?:(?![反切下皆並同注及])\p{Script=Han}){1,4}?)(?:皆|並)?同/gu;
+
 function carriedPhrase(event: ReadingEvent, c: string): { phrase: string[]; offset: number } {
-  const named = event.note.note.match(/下(?:文)?(\p{Script=Han}{1,4}?)(?:皆|並)?同/u)?.[1];
-  const phrase = [...(named ?? '')].map(fold);
-  if (phrase.includes(c)) return { phrase, offset: phrase.indexOf(c) };
+  for (const [, named] of event.note.note.matchAll(NAMED)) {
+    const phrase = [...named].map(fold);
+    if (phrase.includes(c)) return { phrase, offset: phrase.indexOf(c) };
+  }
   const head = [...event.note.head].filter((x) => HAN_RUN.test(x)).map(fold);
   if (head.length > 1 && head.includes(c)) {
     const offset =
@@ -439,9 +445,12 @@ export function fill(
   source: string,
   carry: Carry = 'book',
 ): void {
-  const carried = new Map<string, ReadingEvent & { at: Slot; phrase: string[]; offset: number }>();
+  type Carried = ReadingEvent & { at: Slot; phrase: string[]; offset: number };
+  // By character: one carry at a time, or in 'phrase' mode one per phrase, so that a note on
+  // 好惡 does not end the 下同 of 惡乎.
+  const carried = new Map<string, Carried[]>();
   const text = slots.map((s) => fold(s.char));
-  const reaches = (from: { at: Slot; phrase: string[]; offset: number }, i: number) => {
+  const reaches = (from: Carried, i: number) => {
     if (carry === 'book') return true;
     const sameUnit = from.at.refUnit === slots[i].refUnit;
     if (carry === 'unit' || from.phrase.length === 1) return sameUnit;
@@ -453,15 +462,19 @@ export function fill(
     const c = fold(slot.char);
     if (!isPolyphone(c)) return;
     const event = events.get(i);
+    const from = (carried.get(c) ?? []).findLast((e) => reaches(e, i));
     let entry: Omit<Reading, 'pos' | 'char'>;
     if (event) {
       entry = { pinyin: event.pinyin ?? '', source, note: event.note.note };
       if (!event.pinyin)
         entry.todo = event.todo ?? `note not resolved: ${event.note.head} ${event.note.note}`;
-      if (event.carry) carried.set(c, { ...event, at: slot, ...carriedPhrase(event, c) });
-      else carried.delete(c);
-    } else if (carried.has(c) && reaches(carried.get(c)!, i)) {
-      const from = carried.get(c)!;
+      const next = { ...event, at: slot, ...carriedPhrase(event, c) };
+      const kept =
+        carry === 'phrase'
+          ? (carried.get(c) ?? []).filter((e) => e.phrase.join('') !== next.phrase.join(''))
+          : [];
+      carried.set(c, event.carry ? [...kept, next] : kept);
+    } else if (from) {
       entry = {
         pinyin: from.pinyin ?? '',
         source,
@@ -503,7 +516,10 @@ export function draft(
       for (const r of resolve(gy, n.head, n.note)) {
         // 「惡知，音烏」 reads 惡, not 知, which has no such reading.
         const c = slots[at + r.index].char;
-        if (carry === 'phrase' && r.pinyin && !candidates(c).includes(r.pinyin)) continue;
+        if (carry === 'phrase' && r.pinyin && !candidates(c).includes(r.pinyin)) {
+          unmatched.push(n);
+          continue;
+        }
         events.set(at + r.index, {
           pinyin: r.pinyin,
           note: n,

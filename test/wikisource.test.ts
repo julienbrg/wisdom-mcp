@@ -22,7 +22,7 @@ test('chinese numerals, written and positional', () => {
 test('wikitext: variants, links, conversions and notes', () => {
   assert.equal(
     cleanWikitext(
-      "子曰：「{{另2|《[[尚書|書]]》-{云}-：『孝乎惟孝』|也有點作「《書》」}}，-{zh:顚;zh-hant:顛;zh-hans:颠}-沛<ref>note</ref>{{*|gloss}}'''。'''",
+      "子曰：「{{另2|《[[尚書|書]]》-{云}-：『孝乎惟孝』|也有點作「《書》」}}，-{zh:顚;zh-hant:顛;zh-hans:颠}-沛<ref>note</ref>{{*|gloss}}'''。'''[[en:Analects/Wei Zheng]]",
     ),
     '子曰：「《書》云：『孝乎惟孝』，顛沛。',
   );

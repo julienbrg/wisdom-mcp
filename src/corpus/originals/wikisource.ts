@@ -100,6 +100,8 @@ export function cleanWikitext(s: string): string {
     .replace(/<ref[^>]*\/>|<ref[^>]*>[\s\S]*?<\/ref>/g, '')
     .replace(/-\{([^{}|]*)\}-/g, (_, rule: string) => convert(rule))
     .replace(/\[\[Category:[^\]]*\]\]/g, '')
+    // Interlanguage links: [[en:Mozi/Self-Cultivation]]
+    .replace(/\[\[[a-z]{2,3}(?:-[a-z]+)?:[^\]|]*\]\]/g, '')
     .replace(/\[\[(?:[^|\]]*\|)?([^\]]*)\]\]/g, '$1');
   // Variant readings keep the main one: {{另2|已|一無「已」字}} -> 已
   text = text.replace(/\{\{(?:另2?|参|參)\|([^|{}]*)\|[^{}]*\}\}/g, '$1');

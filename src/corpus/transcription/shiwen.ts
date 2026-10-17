@@ -1,24 +1,33 @@
 import { pinyin } from 'pinyin-pro';
 import { cached } from '../cache.js';
-import { fold, type Guangyun } from './guangyun.js';
+import { candidates, fold, type Guangyun } from './guangyun.js';
 import { POLYPHONES, type Reading, type Readings } from './pinyin.js';
 
 // 《經典釋文》 in the 四部叢刊 edition, as transcribed page by page on Chinese Wikisource.
 const API = 'https://zh.wikisource.org/w/api.php?format=json&formatversion=2&';
 const INDEX = 'Sibu Congkan0061-陸德明-經典釋文-12-10.djvu';
+const INDEX_11 = 'Sibu Congkan0062-陸德明-經典釋文-12-11.djvu';
+
+const ORDINALS = Array.from({ length: 33 }, (_, i) => {
+  const n = i + 1;
+  const tens = n < 10 ? '' : `${n >= 20 ? '〇一二三'[Math.floor(n / 10)] : ''}十`;
+  return `第${tens}${n % 10 ? '〇一二三四五六七八九'[n % 10] : ''}`;
+});
 
 interface Volume {
-  pages: [number, number];
+  /** Page ranges, in order, of the djvu indexes they are in. */
+  pages: [index: string, from: number, to: number][];
   /** The books (篇) in order, as headed in the 音義. */
   books: string[];
   bookOf: (refUnit: string) => string;
   /** The first headword on the text itself, after the notes on the title and preface. */
   start?: string;
+  carry?: Carry;
 }
 
 export const VOLUMES: Record<string, Volume> = {
   analects: {
-    pages: [2, 44],
+    pages: [[INDEX, 2, 44]],
     books: [
       '學而第一',
       '爲政第二',
@@ -43,7 +52,19 @@ export const VOLUMES: Record<string, Volume> = {
     ],
     bookOf: (refUnit) => refUnit.split('.')[0],
   },
-  'tao-te-ching': { pages: [46, 59], books: ['老子'], bookOf: () => '1', start: '徼' },
+  'tao-te-ching': { pages: [[INDEX, 46, 59]], books: ['老子'], bookOf: () => '1', start: '徼' },
+  // 莊子音義, 卷二十六 to 卷二十八. Notes break up some of its headings (齊物論{{…}}第二), so
+  // books are found by their numbers.
+  'chuang-tzu': {
+    pages: [
+      [INDEX, 60, 179],
+      [INDEX_11, 2, 66],
+    ],
+    books: ORDINALS,
+    bookOf: (refUnit) => refUnit.split('.')[0],
+    // Its 下同 runs on through long chapters, over other senses of the same character.
+    carry: 'phrase',
+  },
 };
 
 // The usual reading (如字), which 釋文 leaves unannotated.
@@ -173,13 +194,14 @@ export interface Note {
   note: string;
 }
 
-async function page(cacheDir: string, n: number): Promise<string> {
-  const url = `${API}action=query&prop=revisions&rvprop=content&rvslots=main&titles=${encodeURIComponent(`Page:${INDEX}/${n}`)}`;
-  const json = JSON.parse((await cached(cacheDir, `shiwen-${n}.json`, url)).toString());
+async function page(cacheDir: string, index: string, n: number): Promise<string> {
+  const url = `${API}action=query&prop=revisions&rvprop=content&rvslots=main&titles=${encodeURIComponent(`Page:${index}/${n}`)}`;
+  const file = index === INDEX ? `shiwen-${n}.json` : `shiwen-11-${n}.json`;
+  const json = JSON.parse((await cached(cacheDir, file, url)).toString());
   return json.query.pages[0].revisions[0].slots.main.content as string;
 }
 
-async function skchar(cacheDir: string, code: string): Promise<string> {
+export async function skchar(cacheDir: string, code: string): Promise<string> {
   const url = `${API}action=expandtemplates&prop=wikitext&text=${encodeURIComponent(`{{SKchar|${code}}}`)}`;
   const json = JSON.parse((await cached(cacheDir, `skchar-${code}.json`, url)).toString());
   const text = json.expandtemplates.wikitext as string;
@@ -189,17 +211,21 @@ async function skchar(cacheDir: string, code: string): Promise<string> {
 /** The headwords and notes of one 音義, with the number of the book (篇) each falls under. */
 export async function loadNotes(cacheDir: string, workId: string): Promise<Note[]> {
   const { pages, books } = VOLUMES[workId];
-  const [from, to] = pages;
   let text = '';
-  for (let n = from; n <= to; n++)
-    text += (await page(cacheDir, n)).replace(/<noinclude>[\s\S]*?<\/noinclude>/g, '') + '\n';
+  for (const [index, from, to] of pages) {
+    for (let n = from; n <= to; n++)
+      text +=
+        (await page(cacheDir, index, n)).replace(/<noinclude>[\s\S]*?<\/noinclude>/g, '') + '\n';
+  }
   for (const code of new Set([...text.matchAll(/\{\{SKchar\|(\d+)\}\}/g)].map((m) => m[1]))) {
     text = text.replaceAll(`{{SKchar|${code}}}`, await skchar(cacheDir, code));
   }
 
-  const titles = new Map(books.map((b, i) => [han(b).split('').map(fold).join(''), String(i + 1)]));
+  const titles = books.map((b) => han(b).split('').map(fold).join(''));
   const notes: Note[] = [];
   let book = books.length === 1 ? '1' : '0';
+  // Only the next book's heading is looked for, so that 第二 is never taken for 第十二.
+  const next = () => titles[Number(book)];
   let head = '';
   let last: Note | undefined;
   for (const part of text.split(/(\{\{雙行註文\|[^{}]*\}\})/)) {
@@ -210,9 +236,8 @@ export async function loadNotes(cacheDir: string, workId: string): Promise<Note[
       if (!han(head) && last) last.note += note;
       else {
         const h = han(head).split('').map(fold).join('');
-        const title = [...titles.keys()].find((t) => h.endsWith(t));
-        if (title) {
-          book = titles.get(title)!;
+        if (next() && h.endsWith(next())) {
+          book = String(Number(book) + 1);
           last = undefined;
         } else notes.push((last = { book, head: han(head), note }));
       }
@@ -226,14 +251,16 @@ export async function loadNotes(cacheDir: string, workId: string): Promise<Note[
         /^[\s\u3000]*(?:凡|舊)[一二三四五六七八九十百]+章(?:今[一二三四五六七八九十百]+章)?/,
         '',
       );
-      const title = [...titles.keys()].find((t) => h.startsWith(t));
-      if (title && !line.includes('{{')) {
-        book = titles.get(title)!;
+      const title = next();
+      if (title && h.startsWith(title) && !line.includes('{{')) {
+        book = String(Number(book) + 1);
         head = line.slice(line.indexOf(title.at(-1)!) + 1);
         last = undefined;
       } else head += line;
     }
   }
+  if (books.length > 1 && Number(book) !== books.length)
+    throw new Error(`${workId}: 音義 headings found up to book ${book} of ${books.length}`);
   const start = VOLUMES[workId].start;
   return start ? notes.slice(notes.findIndex((n) => n.head === start)) : notes;
 }
@@ -244,7 +271,7 @@ interface Resolved {
 }
 
 /** Which character of the headword a note reads, and as what. */
-function resolve(gy: Guangyun, head: string, note: string, poly = isPolyphone): Resolved[] {
+export function resolve(gy: Guangyun, head: string, note: string, poly = isPolyphone): Resolved[] {
   const chars = [...head];
   const targets = (prefix: string | undefined) => {
     if (prefix === '上') return [0];
@@ -374,12 +401,41 @@ export interface ReadingEvent {
   pinyin: string | null;
   note: Note;
   carry: boolean;
+  /** Which character of the headword the reading is for. */
+  index?: number;
   todo?: string;
 }
 
 /**
+ * How far a 下同 carries a reading: through the book, within its unit, or to the same phrase
+ * only: the one the note names (「下爲是皆同」), else the headword itself when it has two
+ * characters or more, else within the unit.
+ */
+export type Carry = 'book' | 'unit' | 'phrase';
+
+const HAN_RUN = /\p{Script=Han}/u;
+
+// 「下爲是皆同」 names 爲是; the fanqie in 「下孟反下同」 names nothing.
+const NAMED = /下(?:文)?((?:(?![反切下皆並同注及])\p{Script=Han}){1,4}?)(?:皆|並)?同/gu;
+
+function carriedPhrase(event: ReadingEvent, c: string): { phrase: string[]; offset: number } {
+  for (const [, named] of event.note.note.matchAll(NAMED)) {
+    const phrase = [...named].map(fold);
+    if (phrase.includes(c)) return { phrase, offset: phrase.indexOf(c) };
+  }
+  const head = [...event.note.head].filter((x) => HAN_RUN.test(x)).map(fold);
+  if (head.length > 1 && head.includes(c)) {
+    const offset =
+      event.index !== undefined && head[event.index] === c ? event.index : head.indexOf(c);
+    return { phrase: head, offset };
+  }
+  return { phrase: [c], offset: 0 };
+}
+
+/**
  * A reading for every polyphone occurrence in a book: the source's own where it has one, carried
- * on by 下同, and the usual reading (如字) elsewhere.
+ * on by 下同 (within its unit only, when the units are scattered passages), and the usual reading
+ * (如字) elsewhere.
  */
 export function fill(
   readings: Readings,
@@ -387,21 +443,38 @@ export function fill(
   events: Map<number, ReadingEvent>,
   bodies: Map<string, string[]>,
   source: string,
+  carry: Carry = 'book',
 ): void {
-  const carried = new Map<string, ReadingEvent & { at: Slot }>();
+  type Carried = ReadingEvent & { at: Slot; phrase: string[]; offset: number };
+  // By character: one carry at a time, or in 'phrase' mode one per phrase, so that a note on
+  // 好惡 does not end the 下同 of 惡乎.
+  const carried = new Map<string, Carried[]>();
+  const text = slots.map((s) => fold(s.char));
+  const reaches = (from: Carried, i: number) => {
+    if (carry === 'book') return true;
+    const sameUnit = from.at.refUnit === slots[i].refUnit;
+    if (carry === 'unit' || from.phrase.length === 1) return sameUnit;
+    const start = i - from.offset;
+    // 以爲, 爲之: too common for a 于僞反 to hold beyond its passage.
+    return from.phrase.every((x, k) => text[start + k] === x) && (sameUnit || text[i] !== '為');
+  };
   slots.forEach((slot, i) => {
     const c = fold(slot.char);
     if (!isPolyphone(c)) return;
     const event = events.get(i);
+    const from = (carried.get(c) ?? []).findLast((e) => reaches(e, i));
     let entry: Omit<Reading, 'pos' | 'char'>;
     if (event) {
       entry = { pinyin: event.pinyin ?? '', source, note: event.note.note };
       if (!event.pinyin)
         entry.todo = event.todo ?? `note not resolved: ${event.note.head} ${event.note.note}`;
-      if (event.carry) carried.set(c, { ...event, at: slot });
-      else carried.delete(c);
-    } else if (carried.has(c)) {
-      const from = carried.get(c)!;
+      const next = { ...event, at: slot, ...carriedPhrase(event, c) };
+      const kept =
+        carry === 'phrase'
+          ? (carried.get(c) ?? []).filter((e) => e.phrase.join('') !== next.phrase.join(''))
+          : [];
+      carried.set(c, event.carry ? [...kept, next] : kept);
+    } else if (from) {
       entry = {
         pinyin: from.pinyin ?? '',
         source,
@@ -423,6 +496,7 @@ export function draft(
   notes: Note[],
   units: Unit[],
   bookOf: (refUnit: string) => string,
+  carry: Carry = 'book',
 ): { readings: Readings; unmatched: Note[]; skipped: Skipped[] } {
   const readings: Readings = {};
   const unmatched: Note[] = [];
@@ -440,7 +514,18 @@ export function draft(
       const at = positions[i];
       if (at < 0) return void unmatched.push(n);
       for (const r of resolve(gy, n.head, n.note)) {
-        events.set(at + r.index, { pinyin: r.pinyin, note: n, carry: CARRY.test(n.note) });
+        // 「惡知，音烏」 reads 惡, not 知, which has no such reading.
+        const c = slots[at + r.index].char;
+        if (carry === 'phrase' && r.pinyin && !candidates(c).includes(r.pinyin)) {
+          unmatched.push(n);
+          continue;
+        }
+        events.set(at + r.index, {
+          pinyin: r.pinyin,
+          note: n,
+          carry: CARRY.test(n.note),
+          index: r.index,
+        });
       }
       for (const r of resolve(gy, n.head, n.note, () => true)) {
         const slot = slots[at + r.index];
@@ -453,7 +538,7 @@ export function draft(
       }
     });
 
-    fill(readings, slots, events, bodies, '經典釋文');
+    fill(readings, slots, events, bodies, '經典釋文', carry);
   }
   return { readings, unmatched, skipped };
 }

@@ -396,5 +396,25 @@
     "id": "changing-the-world",
     "situation": "I want to change the world. Where do I start?",
     "relevant": ["great-learning:3", "great-learning:5"]
+  },
+  {
+    "id": "useless",
+    "situation": "Everyone says what I do is useless.",
+    "relevant": ["chuang-tzu:280", "chuang-tzu:284", "chuang-tzu:2060"]
+  },
+  {
+    "id": "dream-or-real",
+    "situation": "Sometimes I can't tell whether my life is real or a dream.",
+    "relevant": ["chuang-tzu:441", "liezi:159"]
+  },
+  {
+    "id": "sky-falling",
+    "situation": "I keep worrying about disasters that will probably never happen.",
+    "relevant": ["liezi:49", "liezi:50"]
+  },
+  {
+    "id": "gentle-strength",
+    "situation": "I am too soft and gentle to win against tough people.",
+    "relevant": ["tao-te-ching-giles:240", "tao-te-ching-giles:241", "tao-te-ching-giles:126"]
   }
 ]

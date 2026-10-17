@@ -6,6 +6,7 @@ import {
   cleanWikitext,
   cnum,
   menciusChapters,
+  paragraphs,
   taoChapters,
   zhangjuChapters,
 } from '../dist/corpus/originals/wikisource.js';
@@ -93,6 +94,24 @@ test('zhangju: chapters end at 右, with notes, titles and the preface dropped',
       ['0', { anchor: '', body: '天命之謂性，率性之謂道。' }],
       ['1', { anchor: '', body: '《康誥》曰：「克明德。」\n富潤屋，德潤身。' }],
     ],
+  );
+});
+
+test('paragraphs: one section per paragraph, header and titles dropped', () => {
+  const sections = paragraphs(
+    '{{header2\n|title=[[../]]\n|section=逍遙遊第一\n}}\n\n北冥有魚，摶{{另|扶|抉}}搖而上。\n\n蜩與鷽鳩笑之曰：「我決起而飛。」\n\n[[Category:先秦]]',
+    1,
+  );
+  assert.deepEqual(
+    [...sections],
+    [
+      ['1.1', { anchor: '', body: '北冥有魚，摶扶搖而上。' }],
+      ['1.2', { anchor: '', body: '蜩與鷽鳩笑之曰：「我決起而飛。」' }],
+    ],
+  );
+  assert.deepEqual(
+    [...paragraphs('{{Header|title=列子|notes=}}\n\n子列子居鄭圃。\n{{footer}}', 8)],
+    [['8.1', { anchor: '', body: '子列子居鄭圃。' }]],
   );
 });
 

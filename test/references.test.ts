@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { roman, segment } from '../dist/corpus/references.js';
+import { anchored, roman, segment } from '../dist/corpus/references.js';
 
 const refs = (workId: string, blocks: string[]) =>
   segment(workId, blocks).map((s) => [s.ref, s.refUnit, s.apparatus]);
@@ -198,4 +198,43 @@ test('aligned: each translation takes the chapter its Chinese paragraph comes fr
     ],
   );
   assert.throws(() => segment('mencius', []), /source text/);
+});
+
+test('anchored: units start at their anchors, and a unit starting within a block takes a range', () => {
+  const blocks = [
+    '## Introduction',
+    'The history of Taoist philosophy',
+    '## Book I',
+    '### Cosmogony',
+    'Our Master Lieh Tzŭ dwelt on a vegetable plot',
+    '"There is a Creative  Principle\nwhich is itself uncreated."',
+    '***',
+    "The Master Lieh Tzŭ said: 'The inspired men of old. The virtue of Heaven and Earth.'",
+    "The Master Lieh Tzŭ said: 'On one hand",
+    '## Footnotes',
+    'A fellow-disciple.',
+    '## Book II',
+    'The Yellow Emperor sat for fifteen years',
+  ];
+  const anchors: [string | null, string][] = [
+    ['1.1', 'Our Master Lieh Tzŭ'],
+    ['1.2', "The Master Lieh Tzŭ said: 'The"],
+    ['1.3', '…The virtue of Heaven'],
+    [null, "The Master Lieh Tzŭ said: 'On"],
+    ['2.1', 'The Yellow Emperor'],
+  ];
+  assert.deepEqual(
+    anchored('liezi', blocks, anchors).map((s) => s.refUnit),
+    [null, null, null, null, '1.1', '1.1', null, '1.2-3', null, null, null, null, '2.1'],
+  );
+  assert.throws(
+    () => anchored('liezi', blocks, [...anchors, ['2.2', 'Not there']]),
+    /anchor not found: 2.2 Not there/,
+  );
+});
+
+test('anchored: a translation whose main text is missing fails', () => {
+  for (const workId of ['chuang-tzu', 'liezi', 'tao-te-ching-giles']) {
+    assert.throws(() => segment(workId, ['nothing here']), /main text start not found/);
+  }
 });

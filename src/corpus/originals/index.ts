@@ -10,17 +10,20 @@ import { loadWikisource } from './wikisource.js';
 
 export interface Original {
   refUnit: string;
+  /** The source units the body joins, for a reference unit that spans several. */
+  parts: { unit: string; body: string }[];
   body: string;
   sourceUrl: string;
   license: string;
 }
 
 export function loadSource(work: Work, cacheDir: string): Promise<SourceText> {
+  const id = work.originalOf ?? work.id;
   switch (work.original) {
     case 'wikisource':
-      return loadWikisource(work.id, cacheDir);
+      return loadWikisource(id, cacheDir);
     case 'perseus':
-      return loadPerseus(work.id, cacheDir);
+      return loadPerseus(id, cacheDir);
     case 'suttacentral':
       return loadSuttaCentral(cacheDir);
     case 'sefaria':
@@ -62,13 +65,14 @@ export function sourceUnits(workId: string, refUnit: string): string[] {
 
 export function loadOriginals(work: Work, refUnits: string[], source: SourceText): Original[] {
   return refUnits.map((refUnit) => {
-    const parts = sourceUnits(work.id, refUnit).map((u) => {
-      const part = source.units.get(u);
-      if (!part) throw new Error(`${work.id} ${refUnit}: no original for source unit ${u}`);
-      return part;
+    const parts = sourceUnits(work.id, refUnit).map((unit) => {
+      const part = source.units.get(unit);
+      if (!part) throw new Error(`${work.id} ${refUnit}: no original for source unit ${unit}`);
+      return { unit, ...part };
     });
     return {
       refUnit,
+      parts: parts.map(({ unit, body }) => ({ unit, body })),
       body: parts.map((p) => p.body).join('\n'),
       sourceUrl: parts[0].url,
       license: source.license,

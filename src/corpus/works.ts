@@ -11,6 +11,8 @@ export interface Work {
   year: number;
   source: string;
   original: OriginalSource;
+  /** Another translation of the same text, whose original and readings this one shares. */
+  originalOf?: string;
 }
 
 export const PILOT_WORKS: Work[] = [
@@ -25,6 +27,19 @@ export const PILOT_WORKS: Work[] = [
     year: 1891,
     source: 'https://www.gutenberg.org/ebooks/216',
     original: 'wikisource',
+  },
+  {
+    id: 'tao-te-ching-giles',
+    author: 'Laozi',
+    title: 'The Sayings of Lao Tzŭ',
+    originalTitle: '道德經',
+    originalLanguage: 'lzh',
+    tradition: 'chinese',
+    translator: 'Lionel Giles',
+    year: 1905,
+    source: 'https://archive.org/details/sayingsoflaotzu00laoz',
+    original: 'wikisource',
+    originalOf: 'tao-te-ching',
   },
   {
     id: 'analects',
@@ -72,6 +87,30 @@ export const PILOT_WORKS: Work[] = [
     translator: 'James Legge',
     year: 1861,
     source: 'https://en.wikisource.org/wiki/The_Chinese_Classics/Volume_2/The_Works_of_Mencius',
+    original: 'wikisource',
+  },
+  {
+    id: 'chuang-tzu',
+    author: 'Zhuangzi',
+    title: 'Chuang Tzŭ: Mystic, Moralist, and Social Reformer',
+    originalTitle: '莊子',
+    originalLanguage: 'lzh',
+    tradition: 'chinese',
+    translator: 'Herbert A. Giles',
+    year: 1889,
+    source: 'https://www.gutenberg.org/ebooks/59709',
+    original: 'wikisource',
+  },
+  {
+    id: 'liezi',
+    author: 'Liezi',
+    title: 'Taoist Teachings from the Book of Lieh Tzŭ',
+    originalTitle: '列子',
+    originalLanguage: 'lzh',
+    tradition: 'chinese',
+    translator: 'Lionel Giles',
+    year: 1912,
+    source: 'https://archive.org/details/taoistteachingsf00liezrich',
     original: 'wikisource',
   },
   {

@@ -3,6 +3,7 @@ import { test } from 'node:test';
 import { sourceUnits } from '../dist/corpus/originals/index.js';
 import {
   analectsChapters,
+  artOfWarChapters,
   cleanWikitext,
   cnum,
   menciusChapters,
@@ -112,6 +113,32 @@ test('paragraphs: one section per paragraph, header and titles dropped', () => {
   assert.deepEqual(
     [...paragraphs('{{Header|title=列子|notes=}}\n\n子列子居鄭圃。\n{{footer}}', 8)],
     [['8.1', { anchor: '', body: '子列子居鄭圃。' }]],
+  );
+});
+
+test('art of war: paragraphs numbered by chapter, the dialogues after the thirteen dropped', () => {
+  const units = artOfWarChapters(
+    [
+      '{{header|title=孫子兵法}}',
+      '== 始計第一 ==',
+      '[[wikipedia:zh:孙武|孫子]]曰：兵者，國之大事。',
+      '',
+      '夫未戰而廟算勝者，得算多也。',
+      '',
+      '== 用間第十三 ==',
+      '孫子曰：凡興師十萬。',
+      '',
+      '== 答話 ==',
+      '吳王問孫武曰：「散地士卒顧家，不可與戰，則必固守不出。」',
+    ].join('\n'),
+  );
+  assert.deepEqual(
+    [...units],
+    [
+      ['1.1', { anchor: '始計第一', body: '孫子曰：兵者，國之大事。' }],
+      ['1.2', { anchor: '始計第一', body: '夫未戰而廟算勝者，得算多也。' }],
+      ['13.1', { anchor: '用間第十三', body: '孫子曰：凡興師十萬。' }],
+    ],
   );
 });
 

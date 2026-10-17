@@ -39,6 +39,28 @@ const ZHUANGZI =
 const LIEZI = '天瑞 黃帝 周穆王 仲尼 湯問 力命 楊朱 說符'
   .split(' ')
   .map((book) => `列子/${book}篇`);
+// Every chapter, so that a unit's number is the chapter's own; lost chapters are not loaded.
+const MOZI_CHAPTERS =
+  '親士 修身 所染 法儀 七患 辭過 三辯 尚賢上 尚賢中 尚賢下 尚同上 尚同中 尚同下 兼愛上 兼愛中 兼愛下 非攻上 非攻中 非攻下 節用上 節用中 節用下 節葬上 節葬中 節葬下 天志上 天志中 天志下 明鬼上 明鬼中 明鬼下 非樂上 非樂中 非樂下 非命上 非命中 非命下 非儒上 非儒下 經上 經下 經說上 經說下 大取 小取 耕柱 貴義 公孟 魯問 公輸'.split(
+    ' ',
+  );
+// Mei translates the ethical and political chapters: not the eight that are lost, nor the
+// dialectical ones (40–45).
+const MOZI_LEFT_OUT = [22, 23, 24, 29, 30, 33, 34, 38, 40, 41, 42, 43, 44, 45];
+const MOZI = MOZI_CHAPTERS.map((chapter, i) => ({
+  title: `墨子/${chapter}`,
+  chapter: i + 1,
+})).filter(({ chapter }) => !MOZI_LEFT_OUT.includes(chapter));
+const XUNZI_BOOKS =
+  '勸學 修身 不苟 榮辱 非相 非十二子 仲尼 儒效 王制 富國 王霸 君道 臣道 致士 議兵 彊國 天論 正論 禮論 樂論 解蔽 正名 性惡'.split(
+    ' ',
+  );
+// The books Dubs translates in whole or in part.
+const XUNZI = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 21, 22, 23].map((book) => ({
+  title: `荀子/${XUNZI_BOOKS[book - 1]}篇`,
+  book,
+}));
+const ART_OF_WAR = '孫子兵法';
 const GREAT_LEARNING = '四書章句集註/大學章句';
 const DOCTRINE_OF_THE_MEAN = '四書章句集註/中庸章句';
 
@@ -168,6 +190,21 @@ export function paragraphs(wikitext: string, chapter: number): Map<string, Secti
   return new Map(paras.map((p, i) => [`${chapter}.${i + 1}`, { anchor: '', body: p }]));
 }
 
+// The thirteen chapters on one page, each a level-2 heading (始計第一); the dialogues after them
+// (答話) are not Sunzi's text.
+export function artOfWarChapters(wikitext: string): Map<string, Section> {
+  const parts = wikitext.split(/^==\s*(.+?)\s*==\s*$/m);
+  const units = new Map<string, Section>();
+  for (let i = 1; i < parts.length; i += 2) {
+    const m = parts[i].match(/第([一二三四五六七八九十]+)$/);
+    if (!m) break;
+    for (const [unit, { body }] of paragraphs(parts[i + 1], cnum(m[1]))) {
+      units.set(unit, { anchor: parts[i], body });
+    }
+  }
+  return units;
+}
+
 export async function wikitext(cacheDir: string, title: string): Promise<string> {
   const file = `wikisource-${title.replace(/[/ ]/g, '_')}.json`;
   const res = JSON.parse(
@@ -185,6 +222,9 @@ export async function loadWikisource(workId: string, cacheDir: string): Promise<
       mencius: MENCIUS.map((title, i) => ({ title, sections: (w) => menciusChapters(w, i) })),
       'chuang-tzu': ZHUANGZI.map((title, i) => ({ title, sections: (w) => paragraphs(w, i + 1) })),
       liezi: LIEZI.map((title, i) => ({ title, sections: (w) => paragraphs(w, i + 1) })),
+      'art-of-war': [{ title: ART_OF_WAR, sections: artOfWarChapters }],
+      mozi: MOZI.map(({ title, chapter }) => ({ title, sections: (w) => paragraphs(w, chapter) })),
+      xunzi: XUNZI.map(({ title, book }) => ({ title, sections: (w) => paragraphs(w, book) })),
       'great-learning': [{ title: GREAT_LEARNING, sections: (w) => zhangjuChapters(w, 0) }],
       'doctrine-of-the-mean': [
         { title: DOCTRINE_OF_THE_MEAN, sections: (w) => zhangjuChapters(w, 1) },

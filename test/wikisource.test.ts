@@ -98,7 +98,7 @@ test('zhangju: chapters end at 右, with notes, titles and the preface dropped',
   );
 });
 
-test('paragraphs: one section per paragraph, header and titles dropped', () => {
+test('paragraphs: one section per paragraph, header, titles and trailing notes dropped', () => {
   const sections = paragraphs(
     '{{header2\n|title=[[../]]\n|section=逍遙遊第一\n}}\n\n北冥有魚，摶{{另|扶|抉}}搖而上。\n\n蜩與鷽鳩笑之曰：「我決起而飛。」\n\n[[Category:先秦]]',
     1,
@@ -113,6 +113,15 @@ test('paragraphs: one section per paragraph, header and titles dropped', () => {
   assert.deepEqual(
     [...paragraphs('{{Header|title=列子|notes=}}\n\n子列子居鄭圃。\n{{footer}}', 8)],
     [['8.1', { anchor: '', body: '子列子居鄭圃。' }]],
+  );
+  assert.deepEqual(
+    [
+      ...paragraphs(
+        '<onlyinclude>\n凡此五者，聖人之所儉節也。\n</onlyinclude>\n==註釋==\n<references/>',
+        6,
+      ),
+    ],
+    [['6.1', { anchor: '', body: '凡此五者，聖人之所儉節也。' }]],
   );
 });
 

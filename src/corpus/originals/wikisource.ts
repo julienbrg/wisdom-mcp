@@ -182,9 +182,12 @@ export function zhangjuChapters(wikitext: string, first: number): Map<string, Se
 }
 
 // A page with no headings or anchors, set out one paragraph per section: "1.3" is chapter 1,
-// paragraph 3. The header and paragraphs with no punctuation (titles, templates) are dropped.
+// paragraph 3. The header, the notes after the transcluded part and paragraphs with no
+// punctuation (titles, templates) are dropped.
 export function paragraphs(wikitext: string, chapter: number): Map<string, Section> {
-  const body = wikitext.replace(/\{\{[Hh]eader2?\s*\|(?:[^{}]|\{\{[^{}]*\}\})*\}\}/, '');
+  const body = wikitext
+    .split('</onlyinclude>')[0]
+    .replace(/\{\{[Hh]eader2?\s*\|(?:[^{}]|\{\{[^{}]*\}\})*\}\}/, '');
   const paras = body
     .split(/\n[ \t]*\n/)
     .map(cleanWikitext)

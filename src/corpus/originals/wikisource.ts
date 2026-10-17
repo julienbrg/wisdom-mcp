@@ -32,6 +32,13 @@ const ANALECTS = [
 const MENCIUS = '一 二 三 四 五 六 七 八 九 十 十一 十二 十三 十四'
   .split(' ')
   .map((n) => `四書章句集註/孟子集注卷${n}`);
+const ZHUANGZI =
+  '逍遙遊 齊物論 養生主 人間世 德充符 大宗師 應帝王 駢拇 馬蹄 胠篋 在宥 天地 天道 天運 刻意 繕性 秋水 至樂 達生 山木 田子方 知北遊 庚桑楚 徐無鬼 則陽 外物 寓言 讓王 盜跖 說劍 漁父 列禦寇 天下'
+    .split(' ')
+    .map((chapter) => `莊子/${chapter}`);
+const LIEZI = '天瑞 黃帝 周穆王 仲尼 湯問 力命 楊朱 說符'
+  .split(' ')
+  .map((book) => `列子/${book}篇`);
 const GREAT_LEARNING = '四書章句集註/大學章句';
 const DOCTRINE_OF_THE_MEAN = '四書章句集註/中庸章句';
 
@@ -150,6 +157,17 @@ export function zhangjuChapters(wikitext: string, first: number): Map<string, Se
   return chapters;
 }
 
+// A page with no headings or anchors, set out one paragraph per section: "1.3" is chapter 1,
+// paragraph 3. The header and paragraphs with no punctuation (titles, templates) are dropped.
+export function paragraphs(wikitext: string, chapter: number): Map<string, Section> {
+  const body = wikitext.replace(/^\{\{[Hh]eader[^\n]*\}\}|^\{\{[Hh]eader2?\n[\s\S]*?\n\}\}/, '');
+  const paras = body
+    .split(/\n[ \t]*\n/)
+    .map(cleanWikitext)
+    .filter((p) => /[，。：；！？]/.test(p));
+  return new Map(paras.map((p, i) => [`${chapter}.${i + 1}`, { anchor: '', body: p }]));
+}
+
 export async function wikitext(cacheDir: string, title: string): Promise<string> {
   const file = `wikisource-${title.replace(/[/ ]/g, '_')}.json`;
   const res = JSON.parse(
@@ -165,6 +183,8 @@ export async function loadWikisource(workId: string, cacheDir: string): Promise<
       'tao-te-ching': [{ title: TAO_TE_CHING, sections: taoChapters }],
       analects: ANALECTS.map((title) => ({ title, sections: analectsChapters })),
       mencius: MENCIUS.map((title, i) => ({ title, sections: (w) => menciusChapters(w, i) })),
+      'chuang-tzu': ZHUANGZI.map((title, i) => ({ title, sections: (w) => paragraphs(w, i + 1) })),
+      liezi: LIEZI.map((title, i) => ({ title, sections: (w) => paragraphs(w, i + 1) })),
       'great-learning': [{ title: GREAT_LEARNING, sections: (w) => zhangjuChapters(w, 0) }],
       'doctrine-of-the-mean': [
         { title: DOCTRINE_OF_THE_MEAN, sections: (w) => zhangjuChapters(w, 1) },

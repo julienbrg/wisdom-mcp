@@ -45,7 +45,7 @@ export async function importWorks(
   // Everything is fetched before the first write, so a network failure leaves the database as it was.
   const prepared = await prepareWorks(works, cacheDir, refresh);
   const transcriptions = prepared.map(({ work, originals }) =>
-    transcribeOriginals(work.id, work.originalLanguage, originals),
+    transcribeOriginals(work.originalOf ?? work.id, work.originalLanguage, originals),
   );
 
   const ids = works.map((w) => w.id);

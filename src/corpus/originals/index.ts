@@ -10,6 +10,8 @@ import { loadWikisource } from './wikisource.js';
 
 export interface Original {
   refUnit: string;
+  /** The source units the body joins, for a reference unit that spans several. */
+  parts: { unit: string; body: string }[];
   body: string;
   sourceUrl: string;
   license: string;
@@ -18,7 +20,7 @@ export interface Original {
 export function loadSource(work: Work, cacheDir: string): Promise<SourceText> {
   switch (work.original) {
     case 'wikisource':
-      return loadWikisource(work.id, cacheDir);
+      return loadWikisource(work.originalOf ?? work.id, cacheDir);
     case 'perseus':
       return loadPerseus(work.id, cacheDir);
     case 'suttacentral':
@@ -62,13 +64,14 @@ export function sourceUnits(workId: string, refUnit: string): string[] {
 
 export function loadOriginals(work: Work, refUnits: string[], source: SourceText): Original[] {
   return refUnits.map((refUnit) => {
-    const parts = sourceUnits(work.id, refUnit).map((u) => {
-      const part = source.units.get(u);
-      if (!part) throw new Error(`${work.id} ${refUnit}: no original for source unit ${u}`);
-      return part;
+    const parts = sourceUnits(work.id, refUnit).map((unit) => {
+      const part = source.units.get(unit);
+      if (!part) throw new Error(`${work.id} ${refUnit}: no original for source unit ${unit}`);
+      return { unit, ...part };
     });
     return {
       refUnit,
+      parts: parts.map(({ unit, body }) => ({ unit, body })),
       body: parts.map((p) => p.body).join('\n'),
       sourceUrl: parts[0].url,
       license: source.license,

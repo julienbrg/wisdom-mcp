@@ -77,6 +77,22 @@ test('the Analects take their readings from data/pinyin/analects.json', () => {
   ]);
 });
 
+test('a unit spanning two source units takes the readings of each', () => {
+  const parts = [
+    {
+      unit: '1.1',
+      body: '子曰：「學而時習之，不亦說乎？有朋自遠方來，不亦樂乎？人不知而不慍，不亦君子乎？」',
+    },
+    { unit: '1.3', body: '子曰：「巧言令色，鮮矣仁。」' },
+  ];
+  const body = parts.map((p) => p.body).join('\n');
+  assert.throws(() => transcribeOriginals('analects', 'lzh', [{ refUnit: '1.1-3', body }]), /說/);
+  assert.deepEqual(transcribeOriginals('analects', 'lzh', [{ refUnit: '1.1-3', body, parts }]), [
+    'zǐ yuē: “xué ér shí xí zhī, bù yì yuè hū? yǒu péng zì yuǎn fāng lái, bù yì lè hū? ' +
+      'rén bù zhī ér bù yùn, bù yì jūn zǐ hū?”\nzǐ yuē: “qiǎo yán lìng sè, xiǎn yǐ rén.”',
+  ]);
+});
+
 test('於 reads yú, and 夫 opening a clause is the particle fú', () => {
   const body =
     '民之饑，以其上食稅之多，是以饑。民之難治，以其上之有為，是以難治。' +

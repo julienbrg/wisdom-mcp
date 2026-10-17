@@ -11,6 +11,8 @@ export interface Work {
   year: number;
   source: string;
   original: OriginalSource;
+  /** Another translation of the same text, whose original and readings this one shares. */
+  originalOf?: string;
 }
 
 export const PILOT_WORKS: Work[] = [

@@ -6,9 +6,12 @@ import {
   artOfWarChapters,
   cleanWikitext,
   cnum,
+  hexagramSections,
   menciusChapters,
   paragraphs,
   taoChapters,
+  wingSections,
+  xiciChapters,
   zhangjuChapters,
 } from '../dist/corpus/originals/wikisource.js';
 
@@ -148,6 +151,89 @@ test('art of war: paragraphs numbered by chapter, the dialogues after the thirte
       ['1.2', { anchor: '始計第一', body: '夫未戰而廟算勝者，得算多也。' }],
       ['13.1', { anchor: '用間第十三', body: '孫子曰：凡興師十萬。' }],
     ],
+  );
+});
+
+test('i ching: a hexagram page gives the text, the 彖, the 象 and the 文言 by chapter', () => {
+  const units = hexagramSections(
+    [
+      '[[周易]]　第二卦',
+      ';坤',
+      "*<span style=\"color:blue\">'''易經：'''</span>",
+      "**<span style=\"color:blue\">'''坤'''：元亨。利牝馬之貞。</span>",
+      '*#<span style="color:blue">初六：履霜，堅冰至。</span>',
+      '',
+      "*'''彖曰：'''",
+      '**至哉坤元，萬物資生，乃順承天。',
+      '***坤厚載物，德合-{无}-疆。',
+      '',
+      "*'''象曰：'''",
+      '**地勢坤，君子以厚德載物。',
+      '*#履霜堅冰，陰始凝也。',
+      '',
+      "*'''文言曰：'''",
+      '**坤至柔而動也剛。',
+      '*#積善之家，必有餘慶。',
+      '*#直其正也，方其義也。',
+      '*:',
+      '*#「潛龍勿用」，下也。',
+    ].join('\n'),
+    2,
+  );
+  assert.deepEqual(Object.fromEntries([...units].map(([unit, { body }]) => [unit, body])), {
+    '2': '坤：元亨。利牝馬之貞。\n初六：履霜，堅冰至。',
+    'App. I.2': '至哉坤元，萬物資生，乃順承天。\n坤厚載物，德合无疆。',
+    'App. II.2': '地勢坤，君子以厚德載物。\n履霜堅冰，陰始凝也。',
+    'App. IV.2.1': '坤至柔而動也剛。',
+    'App. IV.2.2': '積善之家，必有餘慶。\n直其正也，方其義也。',
+    'App. IV.2.3': '「潛龍勿用」，下也。',
+  });
+});
+
+test('i ching: the 繫辭 by Legge’s chapters, and the other wings', () => {
+  const chapter = (n: string, ...paras: string[]) =>
+    `==第${n}章==\n` + paras.map((p) => `{{gap}}${p}`).join('\n\n');
+  const upper = xiciChapters(
+    `{{Header|title=繫辭上傳}}\n\n${chapter('一', '天尊地卑，乾坤定矣。')}\n\n${chapter('二', '聖人設卦觀象。', '是故君子所居而安者。')}`,
+    1,
+  );
+  assert.deepEqual(
+    [...upper].map(([unit, { body }]) => [unit, body]),
+    [
+      ['App. III.1.1', '天尊地卑，乾坤定矣。'],
+      ['App. III.1.2', '聖人設卦觀象。\n是故君子所居而安者。'],
+    ],
+  );
+  // Wikisource's chapters of the 繫辭下 are not Zhu Xi's, so its paragraphs are counted out again.
+  const paras = Array.from({ length: 25 }, (_, i) => `第${i + 1}段。`);
+  const lower = xiciChapters(
+    [chapter('一', ...paras.slice(0, 4)), chapter('二', ...paras.slice(4))].join('\n\n'),
+    2,
+  );
+  assert.equal(lower.size, 12);
+  assert.equal(lower.get('App. III.2.2')!.body, '第2段。\n第3段。\n第4段。');
+  assert.equal(lower.get('App. III.2.12')!.body, '第23段。\n第24段。\n第25段。');
+  assert.throws(() => xiciChapters(chapter('一', ...paras.slice(1)), 2), /paragraphs moved/);
+
+  const sequence = wingSections(
+    '==上篇==\n:有[[周易/乾|天]][[周易/坤|地]]，然後萬物生焉。\n\n==下篇==\n:有天地然後有萬物。',
+    'VI',
+  );
+  assert.deepEqual(
+    [...sequence].map(([unit, { body }]) => [unit, body]),
+    [
+      ['App. VI.1', '有天地，然後萬物生焉。'],
+      ['App. VI.2', '有天地然後有萬物。'],
+    ],
+  );
+  assert.deepEqual(
+    [
+      ...wingSections(
+        '==一篇==\n:乾剛坤柔，比樂師憂。\n\n==校詁版==\n\n乾剛坤柔。比樂師憂。',
+        'VII',
+      ),
+    ].map(([unit, { body }]) => [unit, body]),
+    [['App. VII', '乾剛坤柔，比樂師憂。']],
   );
 });
 

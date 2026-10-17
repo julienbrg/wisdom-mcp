@@ -64,6 +64,10 @@ const XUNZI = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 21, 22, 2
   }),
 );
 const ART_OF_WAR = '孫子兵法';
+const HEXAGRAMS =
+  '乾 坤 屯 蒙 需 訟 師 比 小畜 履 泰 否 同人 大有 謙 豫 隨 蠱 臨 觀 噬嗑 賁 剝 復 无妄 大畜 頤 大過 坎 離 咸 恒 遯 大壯 晉 明夷 家人 睽 蹇 解 損 益 夬 姤 萃 升 困 井 革 鼎 震 艮 漸 歸妹 豐 旅 巽 兌 渙 節 中孚 小過 既濟 未濟'
+    .split(' ')
+    .map((name) => `周易/${name}`);
 const GREAT_LEARNING = '四書章句集註/大學章句';
 const DOCTRINE_OF_THE_MEAN = '四書章句集註/中庸章句';
 
@@ -213,6 +217,78 @@ export function artOfWarChapters(wikitext: string): Map<string, Section> {
   return units;
 }
 
+// A hexagram's page, split as Legge divides it: the Text (卦辭 and 爻辭) of hexagram 3 is "3", its 彖
+// Appendix I ("App. I.3"), its 象 Appendix II, and the 文言 on the first two Appendix IV, one chapter
+// for each run of paragraphs (**) or of lines (*#).
+export function hexagramSections(wikitext: string, n: number): Map<string, Section> {
+  const parts: Record<string, string[][]> = { 易經: [], 彖曰: [], 象曰: [], 文言曰: [] };
+  let part: string[][] | null = null;
+  let kind = '';
+  for (const line of wikitext.split('\n')) {
+    const m = line.match(/'''(易經|彖曰|象曰|文言曰)：'''/);
+    if (m) [part, kind] = [parts[m[1]], ''];
+    else if (!part || !line.startsWith('*')) continue;
+    else if (line.startsWith('*:')) kind = '';
+    else {
+      const k = line.startsWith('*#') ? '#' : '*';
+      if (k !== kind || !part.length) part.push([]);
+      kind = k;
+      part.at(-1)!.push(cleanWikitext(line.replace(/^[*#]+/, '')));
+    }
+  }
+  const all = (chapters: string[][]) => chapters.flat().join('\n');
+  const units = new Map<string, Section>([
+    [`${n}`, { anchor: '', body: all(parts.易經) }],
+    [`App. I.${n}`, { anchor: '', body: all(parts.彖曰) }],
+    [`App. II.${n}`, { anchor: '', body: all(parts.象曰) }],
+  ]);
+  parts.文言曰.forEach((lines, i) =>
+    units.set(`App. IV.${n}.${i + 1}`, { anchor: '', body: lines.join('\n') }),
+  );
+  return units;
+}
+
+// Each level-2 heading of a page and the paragraphs under it.
+function headed(wikitext: string): { heading: string; paras: string[] }[] {
+  const parts = wikitext.split(/^==\s*([^=]+?)\s*==\s*$/m);
+  const sections = [];
+  for (let i = 1; i < parts.length; i += 2) {
+    const paras = parts[i + 1]
+      .split(/\n[ \t]*\n/)
+      .map((p) => cleanWikitext(p.replace(/^[:*#]+/gm, '')))
+      .filter((p) => /[，。：；！？]/.test(p));
+    sections.push({ heading: parts[i], paras });
+  }
+  return sections;
+}
+
+// How many of Wikisource's paragraphs of the 繫辭下 each of Legge's chapters (Zhu Xi's) takes.
+const XICI_II = [1, 3, 1, 1, 9, 1, 1, 1, 2, 1, 1, 3];
+
+// Legge's Appendix III is the 繫辭, chapter by chapter: "App. III.2.5" is section II, chapter V.
+export function xiciChapters(wikitext: string, section: 1 | 2): Map<string, Section> {
+  const chapters = headed(wikitext).filter((c) => /^第.+章$/.test(c.heading));
+  let paras = chapters.map((c) => c.paras.join('\n'));
+  if (section === 2) {
+    const all = chapters.flatMap((c) => c.paras);
+    if (all.length !== XICI_II.reduce((a, b) => a + b)) throw new Error('繫辭下: paragraphs moved');
+    paras = XICI_II.map((count) => all.splice(0, count).join('\n'));
+  }
+  return new Map(paras.map((body, i) => [`App. III.${section}.${i + 1}`, { anchor: '', body }]));
+}
+
+// The 說卦 (Appendix V) by chapter, the 序卦 (VI) by its two parts, and the 雜卦 (VII) whole, but
+// for the collated text Wikisource adds after it.
+export function wingSections(wikitext: string, appendix: 'V' | 'VI' | 'VII'): Map<string, Section> {
+  const sections = headed(wikitext).filter((s) => s.heading !== '校詁版');
+  return new Map(
+    sections.map(({ heading, paras }, i) => [
+      appendix === 'VII' ? 'App. VII' : `App. ${appendix}.${i + 1}`,
+      { anchor: heading, body: paras.join('\n') },
+    ]),
+  );
+}
+
 export async function wikitext(cacheDir: string, title: string): Promise<string> {
   const file = `wikisource-${title.replace(/[/ ]/g, '_')}.json`;
   const res = JSON.parse(
@@ -231,6 +307,17 @@ export async function loadWikisource(workId: string, cacheDir: string): Promise<
       'chuang-tzu': ZHUANGZI.map((title, i) => ({ title, sections: (w) => paragraphs(w, i + 1) })),
       liezi: LIEZI.map((title, i) => ({ title, sections: (w) => paragraphs(w, i + 1) })),
       'art-of-war': [{ title: ART_OF_WAR, sections: artOfWarChapters }],
+      'i-ching': [
+        ...HEXAGRAMS.map((title, i) => ({
+          title,
+          sections: (w: string) => hexagramSections(w, i + 1),
+        })),
+        { title: '易傳/繫辭上', sections: (w) => xiciChapters(w, 1) },
+        { title: '易傳/繫辭下', sections: (w) => xiciChapters(w, 2) },
+        { title: '易傳/說卦', sections: (w) => wingSections(w, 'V') },
+        { title: '易傳/序卦', sections: (w) => wingSections(w, 'VI') },
+        { title: '易傳/雜卦', sections: (w) => wingSections(w, 'VII') },
+      ],
       mozi: MOZI.map(({ title, chapter }) => ({ title, sections: (w) => paragraphs(w, chapter) })),
       xunzi: XUNZI.map(({ title, book }) => ({ title, sections: (w) => paragraphs(w, book) })),
       'great-learning': [{ title: GREAT_LEARNING, sections: (w) => zhangjuChapters(w, 0) }],

@@ -281,6 +281,7 @@ export function xiciChapters(wikitext: string, section: 1 | 2): Map<string, Sect
 // for the collated text Wikisource adds after it.
 export function wingSections(wikitext: string, appendix: 'V' | 'VI' | 'VII'): Map<string, Section> {
   const sections = headed(wikitext).filter((s) => s.heading !== '校詁版');
+  if (appendix === 'VII' && sections.length !== 1) throw new Error('雜卦: sections moved');
   return new Map(
     sections.map(({ heading, paras }, i) => [
       appendix === 'VII' ? 'App. VII' : `App. ${appendix}.${i + 1}`,

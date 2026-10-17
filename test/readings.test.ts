@@ -158,3 +158,42 @@ test('a phrase 下同 carries to the phrase it names or to its headword, not to 
     ['wū', 'wū', 'hǎo', 'è', 'wèi', 'wéi', 'wèi'],
   );
 });
+
+test('周易音義 reads each hexagram in 王弼’s order, the first one apart', () => {
+  const { bookOf, slots } = SHIWEN['i-ching'];
+  assert.deepEqual(
+    ['1', '10', '11', '42', '43', '64', 'App. I.30', 'App. IV.2.1', 'App. III.1.5'].map(bookOf),
+    ['1', '1', '2', '4', '5', '6', '3', '1', '7'],
+  );
+  assert.deepEqual(['App. III.2.12', 'App. V.3', 'App. VI.2', 'App. VII'].map(bookOf), [
+    '8',
+    '9',
+    '10',
+    '11',
+  ]);
+  const units = [
+    { refUnit: '1', body: '乾：元。\n初九：潛。' },
+    { refUnit: '2', body: '坤：元。\n初六：履。\n六二：直。' },
+    { refUnit: 'App. I.1', body: '大哉。' },
+    { refUnit: 'App. I.2', body: '至哉。' },
+    { refUnit: 'App. II.1', body: '天行。\n潛龍。' },
+    { refUnit: 'App. II.2', body: '地勢。\n履霜。\n直方。' },
+    { refUnit: 'App. IV.2.1', body: '坤至。' },
+    { refUnit: 'App. III.1.1', body: '天尊。' },
+  ];
+  const books = slots!(units);
+  assert.equal(
+    books
+      .get('1')!
+      .map((s) => s.char)
+      .join(''),
+    '乾元初九潛大哉天行潛龍坤元至哉地勢初六履履霜六二直直方坤至',
+  );
+  assert.equal(
+    books
+      .get('7')!
+      .map((s) => s.char)
+      .join(''),
+    '天尊',
+  );
+});

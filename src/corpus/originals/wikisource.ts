@@ -52,14 +52,17 @@ const MOZI = MOZI_CHAPTERS.map((chapter, i) => ({
   chapter: i + 1,
 })).filter(({ chapter }) => !MOZI_LEFT_OUT.includes(chapter));
 const XUNZI_BOOKS =
-  '勸學 修身 不苟 榮辱 非相 非十二子 仲尼 儒效 王制 富國 王霸 君道 臣道 致士 議兵 彊國 天論 正論 禮論 樂論 解蔽 正名 性惡'.split(
+  '勸學 修身 不苟 榮辱 非相 非十二子 仲尼 儒效 王制 富國 王霸 君道 臣道 致士 議兵 彊國 天論 正論 禮論 樂論 解蔽 正名 性惡 君子 成相 賦 大略 宥坐 子道 法行 哀公 堯問'.split(
     ' ',
   );
-// The books Dubs translates in whole or in part.
-const XUNZI = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 21, 22, 23].map((book) => ({
-  title: `荀子/${XUNZI_BOOKS[book - 1]}篇`,
-  book,
-}));
+// The books Dubs translates in whole or in part, and the eulogy at the end of 堯問 that he puts
+// after book 23.
+const XUNZI = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 21, 22, 23, 32].map(
+  (book) => ({
+    title: `荀子/${XUNZI_BOOKS[book - 1]}篇`,
+    book,
+  }),
+);
 const ART_OF_WAR = '孫子兵法';
 const GREAT_LEARNING = '四書章句集註/大學章句';
 const DOCTRINE_OF_THE_MEAN = '四書章句集註/中庸章句';

@@ -502,12 +502,14 @@ export function draft(
   const unmatched: Note[] = [];
   const skipped: Skipped[] = [];
   const bodies = new Map(units.map((u) => [u.refUnit, [...u.body]]));
+  // One code unit a character, so that a position in the text is one in the slots.
+  const unit = (c: string) => (c.codePointAt(0)! > 0xffff ? '〓' : fold(c));
   for (const [book, slots] of slotsByBook(units, bookOf)) {
-    const text = slots.map((s) => fold(s.char)).join('');
+    const text = slots.map((s) => unit(s.char)).join('');
     const events = new Map<number, ReadingEvent>();
     const own = notes.filter((x) => x.book === book && x.head);
     const positions = align(
-      own.map((n) => [...n.head].map(fold).join('')),
+      own.map((n) => [...n.head].map(unit).join('')),
       text,
     );
     own.forEach((n, i) => {

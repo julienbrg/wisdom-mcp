@@ -9308,7 +9308,7 @@
       "char": "亡",
       "pinyin": "wáng",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字絶句"
     },
     {
       "pos": 188,
@@ -9320,9 +9320,9 @@
     {
       "pos": 190,
       "char": "惡",
-      "pinyin": "è",
+      "pinyin": "wù",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "烏路反下及注同一音如字讀則連亡字爲句"
     },
     {
       "pos": 196,
@@ -9418,23 +9418,23 @@
     {
       "pos": 278,
       "char": "樂",
-      "pinyin": "yuè",
+      "pinyin": "lè",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音洛"
     },
     {
       "pos": 290,
       "char": "解",
-      "pinyin": "jiě",
+      "pinyin": "xiè",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音蟹下及注同向云縣解無所係也"
     },
     {
       "pos": 297,
       "char": "解",
-      "pinyin": "jiě",
+      "pinyin": "xiè",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "下同 (6.6 解: 音蟹下及注同向云縣解無所係也)"
     },
     {
       "pos": 306,
@@ -9665,7 +9665,7 @@
       "char": "惡",
       "pinyin": "wū",
       "source": "經典釋文",
-      "note": "下同 (6.5 惡惡可: 並音烏下惡乎同)"
+      "note": "音烏"
     }
   ],
   "6.7": [
@@ -9681,14 +9681,14 @@
       "char": "相",
       "pinyin": "xiāng",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字崔云猶親也或一音豫"
     },
     {
       "pos": 14,
       "char": "與",
       "pinyin": "yǔ",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字崔云猶親也或一音豫"
     },
     {
       "pos": 22,
@@ -9730,14 +9730,14 @@
       "char": "相",
       "pinyin": "xiāng",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字或一音于僞反"
     },
     {
       "pos": 30,
       "char": "爲",
       "pinyin": "wéi",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字或一音于僞反"
     },
     {
       "pos": 31,
@@ -9807,7 +9807,7 @@
       "char": "莫",
       "pinyin": "mò",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字崔云定也"
     },
     {
       "pos": 79,
@@ -9833,9 +9833,9 @@
     {
       "pos": 112,
       "char": "和",
-      "pinyin": "hé",
+      "pinyin": "huò",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "胡臥反"
     },
     {
       "pos": 139,
@@ -9854,9 +9854,9 @@
     {
       "pos": 176,
       "char": "惡",
-      "pinyin": "è",
+      "pinyin": "wū",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音烏下皆同"
     },
     {
       "pos": 177,
@@ -9931,9 +9931,9 @@
     {
       "pos": 317,
       "char": "惡",
-      "pinyin": "è",
+      "pinyin": "wū",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "下同 (6.7 惡知: 音烏下皆同)"
     },
     {
       "pos": 318,
@@ -10001,9 +10001,9 @@
     {
       "pos": 390,
       "char": "觀",
-      "pinyin": "guān",
+      "pinyin": "guàn",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "古亂反示也注同"
     },
     {
       "pos": 406,
@@ -10213,9 +10213,9 @@
     {
       "pos": 142,
       "char": "惡",
-      "pinyin": "è",
+      "pinyin": "wū",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音烏下同"
     },
     {
       "pos": 143,
@@ -10234,9 +10234,9 @@
     {
       "pos": 153,
       "char": "惡",
-      "pinyin": "è",
+      "pinyin": "wū",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "下同 (6.8 惡知: 音烏下同)"
     },
     {
       "pos": 154,
@@ -10383,30 +10383,30 @@
     {
       "pos": 121,
       "char": "與",
-      "pinyin": "yǔ",
+      "pinyin": "yù",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音豫下同"
     },
     {
       "pos": 128,
       "char": "好",
       "pinyin": "hǎo",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字又呼報反"
     },
     {
       "pos": 134,
       "char": "與",
-      "pinyin": "yǔ",
+      "pinyin": "yù",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "下同 (6.9 以與: 音豫下同)"
     },
     {
       "pos": 141,
       "char": "觀",
-      "pinyin": "guān",
+      "pinyin": "guàn",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "古亂反"
     },
     {
       "pos": 150,
@@ -10481,9 +10481,9 @@
     {
       "pos": 221,
       "char": "爲",
-      "pinyin": "wéi",
+      "pinyin": "wèi",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "于僞反注同"
     },
     {
       "pos": 225,
@@ -10509,9 +10509,9 @@
     {
       "pos": 253,
       "char": "長",
-      "pinyin": "cháng",
+      "pinyin": "zhǎng",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "丁丈反"
     },
     {
       "pos": 254,
@@ -10588,9 +10588,9 @@
     {
       "pos": 163,
       "char": "好",
-      "pinyin": "hǎo",
+      "pinyin": "hào",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "呼報反注同"
     },
     {
       "pos": 181,
@@ -10618,9 +10618,9 @@
     {
       "pos": 29,
       "char": "食",
-      "pinyin": "shí",
+      "pinyin": "sì",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音嗣注同"
     },
     {
       "pos": 49,
@@ -10632,9 +10632,9 @@
     {
       "pos": 64,
       "char": "任",
-      "pinyin": "rèn",
+      "pinyin": "rén",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音壬"
     },
     {
       "pos": 97,
@@ -22041,9 +22041,9 @@
     {
       "pos": 68,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音符篇末同"
     },
     {
       "pos": 72,
@@ -22055,9 +22055,9 @@
     {
       "pos": 73,
       "char": "說",
-      "pinyin": "shuō",
+      "pinyin": "shuì",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "始銳反"
     },
     {
       "pos": 78,
@@ -22155,7 +22155,7 @@
       "char": "要",
       "pinyin": "yāo",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "一遥反"
     },
     {
       "pos": 262,
@@ -32442,9 +32442,9 @@
     {
       "pos": 207,
       "char": "長",
-      "pinyin": "cháng",
+      "pinyin": "zhǎng",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "丁丈反下同"
     },
     {
       "pos": 219,
@@ -32456,9 +32456,9 @@
     {
       "pos": 235,
       "char": "長",
-      "pinyin": "cháng",
+      "pinyin": "zhǎng",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "下同 (21.8 長: 丁丈反下同)"
     },
     {
       "pos": 252,
@@ -32491,9 +32491,9 @@
     {
       "pos": 271,
       "char": "大",
-      "pinyin": "dà",
+      "pinyin": "tài",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音泰"
     },
     {
       "pos": 297,
@@ -32556,16 +32556,16 @@
     {
       "pos": 3,
       "char": "爲",
-      "pinyin": "wéi",
+      "pinyin": "wèi",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "于僞反"
     },
     {
       "pos": 25,
       "char": "適",
-      "pinyin": "shì",
+      "pinyin": "dí",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "丁歷反"
     },
     {
       "pos": 35,
@@ -32619,9 +32619,9 @@
     {
       "pos": 177,
       "char": "中",
-      "pinyin": "zhōng",
+      "pinyin": "zhòng",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "丁仲反又如字中精神也"
     },
     {
       "pos": 182,
@@ -32740,9 +32740,9 @@
     {
       "pos": 226,
       "char": "大",
-      "pinyin": "dà",
+      "pinyin": "tài",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音泰"
     },
     {
       "pos": 240,
@@ -32754,9 +32754,9 @@
     {
       "pos": 254,
       "char": "爲",
-      "pinyin": "wéi",
+      "pinyin": "wèi",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "于僞反下同"
     }
   ],
   "21.11": [
@@ -34154,9 +34154,9 @@
     {
       "pos": 14,
       "char": "惡",
-      "pinyin": "è",
+      "pinyin": "wū",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音烏"
     },
     {
       "pos": 36,
@@ -34198,7 +34198,7 @@
       "char": "監",
       "pinyin": "jiān",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "古銜反"
     },
     {
       "pos": 146,
@@ -34254,7 +34254,7 @@
       "char": "澹",
       "pinyin": "dàn",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "徒暫反"
     },
     {
       "pos": 236,
@@ -34361,7 +34361,7 @@
       "char": "荷",
       "pinyin": "hé",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音河本或作苛"
     },
     {
       "pos": 3,
@@ -34767,9 +34767,9 @@
     {
       "pos": 333,
       "char": "大",
-      "pinyin": "dà",
+      "pinyin": "tài",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音泰"
     },
     {
       "pos": 347,
@@ -34834,9 +34834,9 @@
     {
       "pos": 25,
       "char": "與",
-      "pinyin": "yǔ",
+      "pinyin": "yú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音餘下同"
     },
     {
       "pos": 29,
@@ -34848,9 +34848,9 @@
     {
       "pos": 47,
       "char": "好",
-      "pinyin": "hǎo",
+      "pinyin": "hào",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "呼報反"
     },
     {
       "pos": 51,
@@ -34862,9 +34862,9 @@
     {
       "pos": 76,
       "char": "長",
-      "pinyin": "cháng",
+      "pinyin": "zhǎng",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "丁丈反"
     }
   ],
   "22.11": [
@@ -34885,9 +34885,9 @@
     {
       "pos": 42,
       "char": "見",
-      "pinyin": "jiàn",
+      "pinyin": "xiàn",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "賢遍反"
     },
     {
       "pos": 58,
@@ -34913,9 +34913,9 @@
     {
       "pos": 120,
       "char": "爲",
-      "pinyin": "wéi",
+      "pinyin": "wèi",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "于僞反"
     },
     {
       "pos": 140,
@@ -34941,9 +34941,9 @@
     {
       "pos": 192,
       "char": "先",
-      "pinyin": "xiān",
+      "pinyin": "xiàn",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "悉薦反下及注同"
     },
     {
       "pos": 211,
@@ -35015,7 +35015,8 @@
       "char": "相",
       "pinyin": "xiāng",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "子兮反 reads 䪡 (和也) in the headword 相䪡; 相 keeps its usual reading. Review by Claude",
+      "reviewed": "claude"
     },
     {
       "pos": 144,
@@ -35055,9 +35056,9 @@
     {
       "pos": 178,
       "char": "與",
-      "pinyin": "yǔ",
+      "pinyin": "yú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音餘下同"
     },
     {
       "pos": 182,
@@ -35076,9 +35077,9 @@
     {
       "pos": 190,
       "char": "樂",
-      "pinyin": "yuè",
+      "pinyin": "lè",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音洛注下皆同"
     },
     {
       "pos": 191,
@@ -38699,9 +38700,9 @@
     {
       "pos": 38,
       "char": "見",
-      "pinyin": "jiàn",
+      "pinyin": "xiàn",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "賢遍反"
     },
     {
       "pos": 41,
@@ -38727,9 +38728,9 @@
     {
       "pos": 55,
       "char": "相",
-      "pinyin": "xiāng",
+      "pinyin": "xiàng",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "息亮反司馬云佐王獵者也"
     },
     {
       "pos": 65,
@@ -38743,7 +38744,7 @@
       "char": "便",
       "pinyin": "biàn",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "婢面反"
     },
     {
       "pos": 90,
@@ -38771,9 +38772,9 @@
     {
       "pos": 21,
       "char": "見",
-      "pinyin": "jiàn",
+      "pinyin": "xiàn",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "賢遍反"
     },
     {
       "pos": 26,
@@ -38827,9 +38828,9 @@
     {
       "pos": 113,
       "char": "惡",
-      "pinyin": "è",
+      "pinyin": "wū",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音烏下同"
     },
     {
       "pos": 116,
@@ -38841,16 +38842,16 @@
     {
       "pos": 127,
       "char": "惡",
-      "pinyin": "è",
+      "pinyin": "wū",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "下同 (24.9 彼惡: 音烏下同)"
     },
     {
       "pos": 141,
       "char": "喪",
-      "pinyin": "sāng",
+      "pinyin": "sàng",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "息浪反"
     },
     {
       "pos": 147,
@@ -38906,16 +38907,16 @@
     {
       "pos": 75,
       "char": "難",
-      "pinyin": "nán",
+      "pinyin": "nàn",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "乃旦反注同"
     },
     {
       "pos": 76,
       "char": "解",
-      "pinyin": "jiě",
+      "pinyin": "xiè",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音蟹注同司馬云冝僚楚之勇士也善弄丸楚白公勝將作亂殺令尹子西子期石乞曰市南有熊冝僚者若得之可以當五百人乃往告之不許也承之以劒不動弄丸如故曰吾亦不泄子白公遂殺子西子期歎息兩家而巳冝僚不預其患"
     },
     {
       "pos": 78,
@@ -39111,16 +39112,16 @@
     {
       "pos": 18,
       "char": "爲",
-      "pinyin": "wéi",
+      "pinyin": "wèi",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "于僞反"
     },
     {
       "pos": 20,
       "char": "相",
-      "pinyin": "xiāng",
+      "pinyin": "xiàng",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "息亮反"
     },
     {
       "pos": 25,
@@ -39272,9 +39273,9 @@
     {
       "pos": 194,
       "char": "好",
-      "pinyin": "hǎo",
+      "pinyin": "hào",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "呼報反"
     },
     {
       "pos": 199,
@@ -39307,9 +39308,9 @@
     {
       "pos": 226,
       "char": "樂",
-      "pinyin": "yuè",
+      "pinyin": "lè",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音洛"
     },
     {
       "pos": 227,
@@ -39433,9 +39434,9 @@
     {
       "pos": 310,
       "char": "行",
-      "pinyin": "xíng",
+      "pinyin": "xìng",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "下孟反注同"
     },
     {
       "pos": 317,
@@ -39461,9 +39462,9 @@
     {
       "pos": 337,
       "char": "幾",
-      "pinyin": "jī",
+      "pinyin": "jǐ",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "居豈反"
     },
     {
       "pos": 341,
@@ -39570,7 +39571,7 @@
       "char": "畜",
       "pinyin": "xù",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "許六反郭他六反李云行仁貌王云䘏愛勤勞之貌"
     },
     {
       "pos": 45,
@@ -39584,7 +39585,7 @@
       "char": "與",
       "pinyin": "yǔ",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "如字"
     },
     {
       "pos": 56,
@@ -39603,9 +39604,9 @@
     {
       "pos": 58,
       "char": "與",
-      "pinyin": "yǔ",
+      "pinyin": "yú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音餘言將馳走於仁義不復營農飢則相食"
     },
     {
       "pos": 60,
@@ -39624,9 +39625,9 @@
     {
       "pos": 86,
       "char": "惡",
-      "pinyin": "è",
+      "pinyin": "wù",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "烏路反"
     },
     {
       "pos": 109,
@@ -39638,9 +39639,9 @@
     {
       "pos": 113,
       "char": "行",
-      "pinyin": "xíng",
+      "pinyin": "xìng",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "下孟反"
     },
     {
       "pos": 122,
@@ -39766,16 +39767,16 @@
     {
       "pos": 172,
       "char": "行",
-      "pinyin": "xíng",
+      "pinyin": "xìng",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "下孟反"
     },
     {
       "pos": 230,
       "char": "長",
-      "pinyin": "cháng",
+      "pinyin": "zhǎng",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "丁丈反注同"
     },
     {
       "pos": 235,
@@ -39787,9 +39788,9 @@
     {
       "pos": 255,
       "char": "惡",
-      "pinyin": "è",
+      "pinyin": "wù",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "烏路反"
     },
     {
       "pos": 286,
@@ -39808,9 +39809,9 @@
     {
       "pos": 301,
       "char": "知",
-      "pinyin": "zhī",
+      "pinyin": "zhì",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音智"
     },
     {
       "pos": 303,
@@ -39882,7 +39883,7 @@
       "char": "解",
       "pinyin": "jiě",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "佳買反司馬云去也一音懈"
     },
     {
       "pos": 84,
@@ -39943,9 +39944,9 @@
     {
       "pos": 172,
       "char": "長",
-      "pinyin": "cháng",
+      "pinyin": "zhǎng",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "丁丈反注同"
     },
     {
       "pos": 192,
@@ -40132,9 +40133,9 @@
     {
       "pos": 302,
       "char": "解",
-      "pinyin": "jiě",
+      "pinyin": "xiè",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音蟹下同又佳買反"
     },
     {
       "pos": 305,
@@ -40174,16 +40175,16 @@
     {
       "pos": 348,
       "char": "解",
-      "pinyin": "jiě",
+      "pinyin": "xiè",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "下同 (24.14 解之: 音蟹下同又佳買反)"
     },
     {
       "pos": 354,
       "char": "解",
-      "pinyin": "jiě",
+      "pinyin": "xiè",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "下同 (24.14 解之: 音蟹下同又佳買反)"
     },
     {
       "pos": 359,
@@ -40232,7 +40233,7 @@
       "char": "解",
       "pinyin": "jiě",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "佳買反注同"
     },
     {
       "pos": 439,
@@ -43750,9 +43751,9 @@
     {
       "pos": 584,
       "char": "夫",
-      "pinyin": "fū",
+      "pinyin": "fú",
       "source": "經典釋文",
-      "note": "如字 (no note)"
+      "note": "音符"
     },
     {
       "pos": 590,

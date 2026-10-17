@@ -12,7 +12,8 @@ const app = await NestFactory.createApplicationContext(CliModule, { logger: ['er
 try {
   const cacheDir = app.get<Config>(ConfigService).get('CORPUS_CACHE', { infer: true });
   const db = app.get<Db>(DB);
-  console.table(await importWorks(db, PILOT_WORKS, cacheDir));
+  const refresh = process.argv.includes('--refresh');
+  console.table(await importWorks(db, PILOT_WORKS, cacheDir, refresh));
   console.table([await importConcepts(db, cacheDir)]);
 } finally {
   await app.close();

@@ -4,9 +4,14 @@ import { setTimeout as sleep } from 'node:timers/promises';
 
 const USER_AGENT = 'wisdom-mcp/0.1 (https://github.com/julienbrg/wisdom-mcp)';
 
-export async function cached(dir: string, name: string, url: string): Promise<Buffer> {
+export async function cached(
+  dir: string,
+  name: string,
+  url: string,
+  refresh = false,
+): Promise<Buffer> {
   const path = join(dir, name);
-  if (existsSync(path)) return readFileSync(path);
+  if (!refresh && existsSync(path)) return readFileSync(path);
 
   const body = await download(url);
   mkdirSync(dir, { recursive: true });
@@ -14,7 +19,7 @@ export async function cached(dir: string, name: string, url: string): Promise<Bu
   return body;
 }
 
-async function download(url: string, attempts = 5): Promise<Buffer> {
+export async function download(url: string, attempts = 5): Promise<Buffer> {
   for (let i = 1; ; i++) {
     const res = await fetch(url, { headers: { 'user-agent': USER_AGENT } });
     if (res.ok) return Buffer.from(await res.arrayBuffer());

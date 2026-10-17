@@ -54,6 +54,20 @@ pnpm corpus:import
 
 This imports the 11 pilot works from the Wisdom Context Window, with their original-language texts, and its concept graph: 208 concepts, each with a summary, key passages and links to parallel, opposing, related and broader concepts. Downloads are cached in `CORPUS_CACHE`, so later runs work offline, and each run replaces the works and concepts it imports.
 
+The cached Wisdom Context Window dump is never downloaded again on its own. To see what changed on the site first:
+
+```sh
+pnpm corpus:diff
+```
+
+This downloads the latest dump, without touching the cached copy, and lists the full texts on the site that are not in `PILOT_WORKS` yet, then the imported works a re-import would change: a different number of passage blocks, or passages no longer in the block their id points to (`edited`). Passage ids such as `analects:123` are positional, so those works' ids would shift. It reads the database and changes nothing. Then re-import from the latest dump:
+
+```sh
+pnpm corpus:import --refresh
+```
+
+`--refresh` downloads the dump again and overwrites the cached copy. The original-language texts and the concept graph stay cached.
+
 The corpus badge at the top of this README is static: after an import changes the counts, update it with `select count(*) from texts` and `select count(*) from passages`.
 
 | Work                 | Translation                | Reference      | Original                    |
@@ -154,18 +168,19 @@ Any MCP client that speaks Streamable HTTP can use the server. Local clients suc
 
 ## Scripts
 
-| Script                | What it does                    |
-| --------------------- | ------------------------------- |
-| `pnpm build`          | Compile to `dist/`              |
-| `pnpm start`          | Run the compiled server         |
-| `pnpm corpus:import`  | Import the pilot corpus         |
-| `pnpm corpus:index`   | Build the search indexes        |
-| `pnpm readings:draft` | Draft the pinyin readings files |
-| `pnpm eval`           | Measure search Recall@10        |
-| `pnpm test`           | Build, then run the tests       |
-| `pnpm lint`           | ESLint                          |
-| `pnpm format:check`   | Prettier check                  |
-| `pnpm typecheck`      | TypeScript without emitting     |
+| Script                | What it does                     |
+| --------------------- | -------------------------------- |
+| `pnpm build`          | Compile to `dist/`               |
+| `pnpm start`          | Run the compiled server          |
+| `pnpm corpus:import`  | Import the pilot corpus          |
+| `pnpm corpus:diff`    | Compare the corpus with the site |
+| `pnpm corpus:index`   | Build the search indexes         |
+| `pnpm readings:draft` | Draft the pinyin readings files  |
+| `pnpm eval`           | Measure search Recall@10         |
+| `pnpm test`           | Build, then run the tests        |
+| `pnpm lint`           | ESLint                           |
+| `pnpm format:check`   | Prettier check                   |
+| `pnpm typecheck`      | TypeScript without emitting      |
 
 ## Privacy
 

@@ -487,23 +487,24 @@ function span(from: string, to: string): string {
  */
 export function anchored(workId: string, blocks: string[], anchors: Anchor[]): Segment[] {
   const layout = ANCHORED[workId];
-  const start = blocks.findIndex((b) => layout.start.test(squash(b)));
+  const texts = blocks.map(squash);
+  const start = texts.findIndex((t) => layout.start.test(t));
   if (start < 0) throw new Error(`${workId}: main text start not found`);
   let k = 0;
   let unit: string | null = null;
   let ended = false;
   let skipping = false;
   let inNotes = false;
-  const notes = blocks.map((b) => {
+  const notes = blocks.map((b, n) => {
     if (!layout.footnotes) return false;
-    const text = squash(b);
+    const text = texts[n];
     if (layout.footnotes.head(text)) return (inNotes = false);
     const { note, text: notNotes = [], notes: opening = [] } = layout.footnotes;
     if (notNotes.some((o) => text.startsWith(o))) return (inNotes = false);
     return (inNotes ||= note(text, b) || opening.some((o) => text.startsWith(o)));
   });
   const segments = blocks.map((raw, n) => {
-    const text = squash(raw);
+    const text = texts[n];
     ended ||= n > start && !!layout.end?.test(text);
     if (layout.skip?.[0].test(text)) skipping = true;
     else if (layout.skip?.[1].test(text)) skipping = false;

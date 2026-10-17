@@ -49,9 +49,9 @@ try {
     let readings: Readings;
     let skipped: Skipped[] = [];
     if (VOLUMES[work.id]) {
-      const { bookOf } = VOLUMES[work.id];
+      const { bookOf, carry } = VOLUMES[work.id];
       const shiwen = await loadNotes(cacheDir, work.id);
-      const drafted = draft(gy, shiwen, originals, bookOf);
+      const drafted = draft(gy, shiwen, originals, bookOf, carry);
       ({ readings, skipped } = drafted);
       [notes, commentary] = [shiwen.length, drafted.unmatched.length];
       if (JIZHU[work.id])

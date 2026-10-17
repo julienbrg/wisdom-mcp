@@ -102,7 +102,7 @@ test('a 下同 stops at the end of its passage when the passages are scattered',
     new Map([[0, { pinyin: 'zòng', note, carry: true }]]),
     new Map(units.map((u) => [u.refUnit, [...u.body]])),
     '殷敬順釋文',
-    false,
+    'unit',
   );
   assert.deepEqual(
     Object.values(readings)
@@ -120,4 +120,41 @@ test('莊子音義 is found by its book numbers, over two volumes', () => {
   );
   assert.equal(pages.length, 2);
   assert.equal(bookOf('17.12'), '17');
+});
+
+test('a phrase 下同 carries to the phrase it names or to its headword, not to every occurrence', () => {
+  const units = [
+    { refUnit: '2.3', body: '惡乎隱。惡乎存。好惡之。' },
+    { refUnit: '2.4', body: '爲是不用。道通爲一。爲是。' },
+  ];
+  const slots = slotsByBook(units, () => '2').get('2');
+  const readings: Record<string, { pinyin: string }[]> = {};
+  fill(
+    readings,
+    slots,
+    new Map([
+      [
+        0,
+        {
+          pinyin: 'wū',
+          note: { book: '2', head: '惡乎', note: '音烏下皆同' },
+          carry: true,
+          index: 0,
+        },
+      ],
+      [
+        9,
+        { pinyin: 'wèi', note: { book: '2', head: '故爲', note: '于僞反下爲是皆同' }, carry: true },
+      ],
+    ]),
+    new Map(units.map((u) => [u.refUnit, [...u.body]])),
+    '經典釋文',
+    'phrase',
+  );
+  assert.deepEqual(
+    Object.values(readings)
+      .flat()
+      .map((r) => r.pinyin),
+    ['wū', 'wū', 'hǎo', 'è', 'wèi', 'wéi', 'wèi'],
+  );
 });

@@ -1,6 +1,6 @@
 import { pinyin } from 'pinyin-pro';
 import { cached } from '../cache.js';
-import { fold, type Guangyun } from './guangyun.js';
+import { candidates, fold, type Guangyun } from './guangyun.js';
 import { POLYPHONES, type Reading, type Readings } from './pinyin.js';
 
 // 《經典釋文》 in the 四部叢刊 edition, as transcribed page by page on Chinese Wikisource.
@@ -22,6 +22,7 @@ interface Volume {
   bookOf: (refUnit: string) => string;
   /** The first headword on the text itself, after the notes on the title and preface. */
   start?: string;
+  carry?: Carry;
 }
 
 export const VOLUMES: Record<string, Volume> = {
@@ -61,6 +62,8 @@ export const VOLUMES: Record<string, Volume> = {
     ],
     books: ORDINALS,
     bookOf: (refUnit) => refUnit.split('.')[0],
+    // Its 下同 runs on through long chapters, over other senses of the same character.
+    carry: 'phrase',
   },
 };
 
@@ -396,7 +399,31 @@ export interface ReadingEvent {
   pinyin: string | null;
   note: Note;
   carry: boolean;
+  /** Which character of the headword the reading is for. */
+  index?: number;
   todo?: string;
+}
+
+/**
+ * How far a 下同 carries a reading: through the book, within its unit, or to the same phrase
+ * only: the one the note names (「下爲是皆同」), else the headword itself when it has two
+ * characters or more, else within the unit.
+ */
+export type Carry = 'book' | 'unit' | 'phrase';
+
+const HAN_RUN = /\p{Script=Han}/u;
+
+function carriedPhrase(event: ReadingEvent, c: string): { phrase: string[]; offset: number } {
+  const named = event.note.note.match(/下(?:文)?(\p{Script=Han}{1,4}?)(?:皆|並)?同/u)?.[1];
+  const phrase = [...(named ?? '')].map(fold);
+  if (phrase.includes(c)) return { phrase, offset: phrase.indexOf(c) };
+  const head = [...event.note.head].filter((x) => HAN_RUN.test(x)).map(fold);
+  if (head.length > 1 && head.includes(c)) {
+    const offset =
+      event.index !== undefined && head[event.index] === c ? event.index : head.indexOf(c);
+    return { phrase: head, offset };
+  }
+  return { phrase: [c], offset: 0 };
 }
 
 /**
@@ -410,11 +437,19 @@ export function fill(
   events: Map<number, ReadingEvent>,
   bodies: Map<string, string[]>,
   source: string,
-  carryOver = true,
+  carry: Carry = 'book',
 ): void {
-  const carried = new Map<string, ReadingEvent & { at: Slot }>();
+  const carried = new Map<string, ReadingEvent & { at: Slot; phrase: string[]; offset: number }>();
+  const text = slots.map((s) => fold(s.char));
+  const reaches = (from: { at: Slot; phrase: string[]; offset: number }, i: number) => {
+    if (carry === 'book') return true;
+    const sameUnit = from.at.refUnit === slots[i].refUnit;
+    if (carry === 'unit' || from.phrase.length === 1) return sameUnit;
+    const start = i - from.offset;
+    // 以爲, 爲之: too common for a 于僞反 to hold beyond its passage.
+    return from.phrase.every((x, k) => text[start + k] === x) && (sameUnit || text[i] !== '為');
+  };
   slots.forEach((slot, i) => {
-    if (!carryOver && i && slots[i - 1].refUnit !== slot.refUnit) carried.clear();
     const c = fold(slot.char);
     if (!isPolyphone(c)) return;
     const event = events.get(i);
@@ -423,9 +458,9 @@ export function fill(
       entry = { pinyin: event.pinyin ?? '', source, note: event.note.note };
       if (!event.pinyin)
         entry.todo = event.todo ?? `note not resolved: ${event.note.head} ${event.note.note}`;
-      if (event.carry) carried.set(c, { ...event, at: slot });
+      if (event.carry) carried.set(c, { ...event, at: slot, ...carriedPhrase(event, c) });
       else carried.delete(c);
-    } else if (carried.has(c)) {
+    } else if (carried.has(c) && reaches(carried.get(c)!, i)) {
       const from = carried.get(c)!;
       entry = {
         pinyin: from.pinyin ?? '',
@@ -448,6 +483,7 @@ export function draft(
   notes: Note[],
   units: Unit[],
   bookOf: (refUnit: string) => string,
+  carry: Carry = 'book',
 ): { readings: Readings; unmatched: Note[]; skipped: Skipped[] } {
   const readings: Readings = {};
   const unmatched: Note[] = [];
@@ -465,7 +501,15 @@ export function draft(
       const at = positions[i];
       if (at < 0) return void unmatched.push(n);
       for (const r of resolve(gy, n.head, n.note)) {
-        events.set(at + r.index, { pinyin: r.pinyin, note: n, carry: CARRY.test(n.note) });
+        // 「惡知，音烏」 reads 惡, not 知, which has no such reading.
+        const c = slots[at + r.index].char;
+        if (carry === 'phrase' && r.pinyin && !candidates(c).includes(r.pinyin)) continue;
+        events.set(at + r.index, {
+          pinyin: r.pinyin,
+          note: n,
+          carry: CARRY.test(n.note),
+          index: r.index,
+        });
       }
       for (const r of resolve(gy, n.head, n.note, () => true)) {
         const slot = slots[at + r.index];
@@ -478,7 +522,7 @@ export function draft(
       }
     });
 
-    fill(readings, slots, events, bodies, '經典釋文');
+    fill(readings, slots, events, bodies, '經典釋文', carry);
   }
   return { readings, unmatched, skipped };
 }

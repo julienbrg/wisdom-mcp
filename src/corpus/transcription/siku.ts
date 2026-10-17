@@ -125,7 +125,7 @@ export function draftSiku(
         events.set(slot, { pinyin: r.pinyin, note: { ...n, note }, carry: CARRY.test(note) });
       }
     }
-    fill(readings, slots, events, bodies, '殷敬順釋文', false);
+    fill(readings, slots, events, bodies, '殷敬順釋文', 'unit');
   }
   return { readings, unmatched };
 }

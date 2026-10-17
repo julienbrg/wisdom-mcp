@@ -1,7 +1,7 @@
 import { wikitext } from '../originals/wikisource.js';
 import { candidates, fold, toneOf, type Guangyun } from './guangyun.js';
 import type { Readings } from './pinyin.js';
-import { CARRY, fill, ruzi, slotsByBook, type ReadingEvent, type Unit } from './shiwen.js';
+import { CARRY, fill, one, ruzi, slotsByBook, type ReadingEvent, type Unit } from './shiwen.js';
 
 // 朱熹《四書章句集注》 on Chinese Wikisource: it cross-checks the Analects readings drawn from 釋文,
 // and is the only source for the books 釋文 does not cover.
@@ -34,7 +34,7 @@ const HAN = /\p{Script=Han}/u;
 const plain = (s: string) =>
   [...s]
     .filter((c) => HAN.test(c))
-    .map(fold)
+    .map(one)
     .join('');
 
 interface Clause {
@@ -157,7 +157,7 @@ export function draftJizhu(
   const unmatched: Clause[] = [];
   const bodies = new Map(units.map((u) => [u.refUnit, [...u.body]]));
   for (const [book, slots] of slotsByBook(units, bookOf)) {
-    const text = slots.map((s) => fold(s.char)).join('');
+    const text = slots.map((s) => one(s.char)).join('');
     const events = new Map<number, ReadingEvent>();
     let cursor = 0;
     for (const c of clauses.filter((x) => x.book === book)) {
@@ -199,7 +199,7 @@ export function crossCheck(
     Object.entries(readings).flatMap(([ref, list]) => list.map((e) => [`${ref}\0${e.pos}`, e])),
   );
   for (const [book, slots] of slotsByBook(units, bookOf)) {
-    const text = slots.map((s) => fold(s.char)).join('');
+    const text = slots.map((s) => one(s.char)).join('');
     let cursor = 0;
     for (const c of clauses.filter((x) => x.book === book)) {
       const at = c.segment ? text.indexOf(c.segment, cursor) : -1;

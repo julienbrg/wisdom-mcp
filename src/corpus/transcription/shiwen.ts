@@ -215,7 +215,7 @@ function ichingBook(refUnit: string): string {
   return String(ZHUAN.findIndex((last) => n <= last) + 1);
 }
 
-const YAO = /^(?:[初上用][六九]|[六九][二三四五])：/u;
+const YAO = /^(?:[初上用][六九]|[六九][二三四五])[：，]/u;
 
 /** The Chinese characters of each line of a unit, with where each sits in it. */
 function lineSlots(u: Unit | undefined): Slot[][] {
@@ -245,12 +245,15 @@ function wangBi(units: Unit[]): Map<string, Slot[]> {
     const text = lineSlots(u);
     const tuan = lineSlots(byUnit.get(`App. I.${n}`));
     const [great, ...lines] = lineSlots(byUnit.get(`App. II.${n}`));
-    const wenyan = units.filter((w) => w.refUnit.startsWith(`App. IV.${n}.`)).map(lineSlots);
+    const wenyan: Slot[][][] = [];
+    for (let k = 1; byUnit.has(`App. IV.${n}.${k}`); k++)
+      wenyan.push(lineSlots(byUnit.get(`App. IV.${n}.${k}`)));
     if (n === '1') {
       add(book, [...text, ...tuan, great ?? [], ...lines, ...wenyan.flat()]);
       continue;
     }
-    const first = [...u.body.split('\n')].findIndex((l) => YAO.test(l));
+    const first = u.body.split('\n').findIndex((l) => YAO.test(l));
+    if (first < 0) throw new Error(`i-ching ${n}: no line statements`);
     const yao = text.slice(first);
     add(book, [
       ...text.slice(0, first),
@@ -427,6 +430,9 @@ export function slotsByBook(units: Unit[], bookOf: (refUnit: string) => string) 
   return books;
 }
 
+/** A character folded to one code unit, so that a position in a text of them is one in its slots. */
+export const one = (c: string) => (c.codePointAt(0)! > 0xffff ? '〓' : fold(c));
+
 export const CARRY = /下.{0,8}?同|放此|不出者同/;
 
 function occurrences(text: string, h: string): number[] {
@@ -602,14 +608,12 @@ export function draft(
   const unmatched: Note[] = [];
   const skipped: Skipped[] = [];
   const bodies = new Map(units.map((u) => [u.refUnit, [...u.body]]));
-  // One code unit a character, so that a position in the text is one in the slots.
-  const unit = (c: string) => (c.codePointAt(0)! > 0xffff ? '〓' : fold(c));
   for (const [book, slots] of books) {
-    const text = slots.map((s) => unit(s.char)).join('');
+    const text = slots.map((s) => one(s.char)).join('');
     const events = new Map<number, ReadingEvent>();
     const own = notes.filter((x) => x.book === book && x.head);
     const positions = align(
-      own.map((n) => [...n.head].map(unit).join('')),
+      own.map((n) => [...n.head].map(one).join('')),
       text,
     );
     own.forEach((n, i) => {

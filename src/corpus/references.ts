@@ -1,4 +1,6 @@
+import { readFileSync } from 'node:fs';
 import { gitaRange } from './originals/gita-verses.js';
+import { squash } from './originals/source.js';
 
 export interface Segment {
   n: number;
@@ -260,11 +262,105 @@ function aligned(blocks: string[], source: ReadonlyMap<string, { body: string }>
   });
 }
 
+interface Layout {
+  start: RegExp;
+  end?: RegExp;
+  /** A section left out, from the first heading up to the second. */
+  skip?: [RegExp, RegExp];
+  apparatus(text: string, raw: string): boolean;
+}
+
+const LOWER = /\p{Ll}/u;
+
+// Translations with no numbers, aligned by hand on the source paragraphs.
+const ANCHORED: Record<string, Layout> = {
+  // Giles's notes and chapter arguments are indented, and titles have no lowercase.
+  'chuang-tzu': {
+    start: /^CHAPTER I\.$/,
+    end: /^_INDEX_$/,
+    apparatus: (text, raw) => raw.startsWith(' ') || text.startsWith('[') || !LOWER.test(text),
+  },
+  liezi: {
+    start: /^## Book I$/,
+    skip: [/^## Footnotes$/, /^## Book /],
+    apparatus: (text) => /^(?:#|\*\*\*)/.test(text),
+  },
+  // A scan: page numbers and section titles have no lowercase (or read "5i"), and notes open with *.
+  'tao-te-ching-giles': {
+    start: /^TAO IN ITS TRANSCENDENTAL ASPECT/,
+    apparatus: (text) => text.startsWith('*') || !LOWER.test(text) || /^\d+[il]?$/.test(text),
+  },
+};
+
+/** Where each unit starts, in order: a block's opening words, or after "…", words within one. */
+export type Anchor = [unit: string | null, at: string];
+
+const loadAnchors = (workId: string): Anchor[] =>
+  JSON.parse(
+    readFileSync(new URL(`../../data/alignments/${workId}.json`, import.meta.url), 'utf-8'),
+  ) as Anchor[];
+
+// "10.6" to "10.7" in one block is "10.6-7".
+function span(from: string, to: string): string {
+  const [, prefix, a] = from.match(/^(.*?)(\d+)$/)!;
+  const [, prefix2, b] = to.match(/^(.*?)(\d+)$/)!;
+  if (prefix !== prefix2 || +b !== +a + 1) throw new Error(`no range from ${from} to ${to}`);
+  return `${from}-${b}`;
+}
+
+/**
+ * Each block takes the unit of the last anchor before it, or a range when a unit starts within
+ * it; an anchor with no unit leaves its block out. Every anchor must be found, in order.
+ */
+export function anchored(workId: string, blocks: string[], anchors: Anchor[]): Segment[] {
+  const layout = ANCHORED[workId];
+  const start = blocks.findIndex((b) => layout.start.test(squash(b)));
+  if (start < 0) throw new Error(`${workId}: main text start not found`);
+  let k = 0;
+  let unit: string | null = null;
+  let ended = false;
+  let skipping = false;
+  const segments = blocks.map((raw, n) => {
+    const text = squash(raw);
+    ended ||= n > start && !!layout.end?.test(text);
+    if (layout.skip?.[0].test(text)) skipping = true;
+    else if (layout.skip?.[1].test(text)) skipping = false;
+    let ref: string | null = null;
+    if (n >= start && !ended && !skipping && !layout.apparatus(text, raw)) {
+      let from = unit;
+      let pos = -1;
+      let left = false;
+      for (; k < anchors.length; k++) {
+        const [next, at] = anchors[k];
+        const i = at.startsWith('…')
+          ? text.indexOf(at.slice(1), pos + 1)
+          : pos < 0 && text.startsWith(at)
+            ? 0
+            : -1;
+        if (i < 0) break;
+        pos = i;
+        if (next === null) {
+          left = true;
+          k++;
+          break;
+        }
+        if (i === 0) from = next;
+        unit = next;
+      }
+      if (!left && unit) ref = from === unit ? unit : span(from!, unit);
+    }
+    return { n, part: 0, raw, text: raw, ref, refUnit: ref, apparatus: !ref };
+  });
+  if (k < anchors.length) throw new Error(`${workId}: anchor not found: ${anchors[k].join(' ')}`);
+  return segments;
+}
+
 export function segment(
   workId: string,
   blocks: string[],
   source?: ReadonlyMap<string, { body: string }>,
 ): Segment[] {
+  if (ANCHORED[workId]) return anchored(workId, blocks, loadAnchors(workId));
   if (ALIGNED.has(workId)) {
     if (!source) throw new Error(`${workId}: references come from the source text`);
     return aligned(blocks, source);

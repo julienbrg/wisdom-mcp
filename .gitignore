@@ -3,6 +3,7 @@ dist
 coverage
 data/*
 !data/pinyin/
+!data/alignments/
 .env
 docs/notes/
 test/output/

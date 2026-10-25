@@ -55,6 +55,9 @@
     "typescript-eslint": "^8.72.0"
   },
   "pnpm": {
+    "overrides": {
+      "multer": "^2.5.0"
+    },
     "onlyBuiltDependencies": [
       "better-sqlite3"
     ],

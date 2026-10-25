@@ -121,6 +121,7 @@ export async function loadSuttaCentral(workId: string, cacheDir: string): Promis
   for (const uid of suttas) {
     const url = `${API}/${uid}/sujato`;
     const sutta = JSON.parse((await cached(cacheDir, `bilara-${uid}-sujato.json`, url)).toString());
+    if (!Array.isArray(sutta.keys_order)) throw new Error(`${url}: no segments for ${uid}`);
     const parsed = paragraphsOf(uid, sutta as Bilara);
     for (const [unit, part] of parsed.units) units.set(unit, part);
     segments.push(...parsed.segments);

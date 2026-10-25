@@ -334,6 +334,31 @@ test('anchored: units start at their anchors, and a unit starting within a block
   );
 });
 
+test('anchored: Plato by Stephanus section, over a page break, persons and titles apparatus', () => {
+  const blocks = [
+    'MENO',
+    'INTRODUCTION.',
+    'Meno asks Socrates whether virtue can be taught.',
+    'MENO',
+    'PERSONS OF THE DIALOGUE: Meno, Socrates, A Slave of Meno (Boy), Anytus.',
+    'MENO: Can you tell me, Socrates, whether virtue is acquired by teaching',
+    'SOCRATES: O Meno, there was a time when the Thessalians were famous. Here at Athens there is a dearth of the commodity, and all wisdom seems to have emigrated',
+    'MENO: No, indeed.',
+    'SOCRATES: Not only that, my dear boy.',
+  ];
+  const anchors: [string, string][] = [
+    ['70a', 'MENO: Can you tell'],
+    ['70b', '…when the Thessalians'],
+    ['70c', '…Here at Athens'],
+    ['71a', '…and all wisdom'],
+    ['71b', 'MENO: No, indeed.'],
+  ];
+  assert.deepEqual(
+    anchored('meno', blocks, anchors).map((s) => s.refUnit),
+    [null, null, null, null, null, '70a', '70a-71a', '71b', '71b'],
+  );
+});
+
 test("anchored: a scan's footnotes run from the first one on a page to the next page head", () => {
   const blocks = [
     'BOOK  I',

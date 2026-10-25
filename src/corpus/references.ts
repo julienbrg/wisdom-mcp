@@ -538,23 +538,29 @@ export function anchored(workId: string, blocks: string[], anchors: Anchor[]): S
   return segments;
 }
 
-const letters = (s: string) => s.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+const letters = (s: string) =>
+  s
+    .normalize('NFC')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]/gu, '');
+
+const sutta = (id: string) => id.split(':')[0];
 
 /**
  * Sujato's translations, split on SuttaCentral's paragraphs: each block is found, in order, in the
- * run of segments it was made from. Its reference is that segment range, and its unit the root
- * paragraphs they belong to. Titles, headings and colophons are apparatus.
+ * run of segments of one sutta it was made from. Its reference is that segment range, and its unit
+ * the root paragraphs they belong to. Titles, headings and colophons are apparatus.
  */
 export function bilara(workId: string, blocks: string[], all: BilaraSegment[]): Segment[] {
-  const segments = all.filter((s) => letters(s.text));
+  const segments = all.map((s) => ({ ...s, letters: letters(s.text) })).filter((s) => s.letters);
   let stream = '';
-  const starts = segments.map((s) => {
-    const at = stream.length;
-    stream += letters(s.text);
-    return at;
+  const first = new Map<number, number>();
+  const ends = new Map<number, number>();
+  segments.forEach((s, i) => {
+    first.set(stream.length, i);
+    stream += s.letters;
+    ends.set(stream.length, i);
   });
-  const ends = new Map(starts.map((at, i) => [at + letters(segments[i].text).length, i]));
-  const first = new Map(starts.map((at, i) => [at, i]));
   const range = (a: string, b: string) => (a === b ? a : `${a}-${b.split(':')[1]}`);
   let cursor = 0;
   const missing: string[] = [];
@@ -562,18 +568,21 @@ export function bilara(workId: string, blocks: string[], all: BilaraSegment[]): 
     const none = { n, part: 0, raw, text: raw, ref: null, refUnit: null, apparatus: true };
     const needle = letters(raw.replace(/^#\s*/, ''));
     if (!needle) return none;
+    const within = (at: number) => {
+      const [a, b] = [first.get(at), ends.get(at + needle.length)];
+      return a !== undefined && b !== undefined && sutta(segments[a].id) === sutta(segments[b].id);
+    };
     let at = stream.indexOf(needle, cursor);
-    while (at >= 0 && !(first.has(at) && ends.has(at + needle.length)))
-      at = stream.indexOf(needle, at + 1);
+    while (at >= 0 && !within(at)) at = stream.indexOf(needle, at + 1);
     if (at < 0) {
       missing.push(squash(raw).slice(0, 60));
       return none;
     }
     cursor = at + needle.length;
-    const [a, b] = [segments[first.get(at)!], segments[ends.get(cursor)!]];
-    if (segments.slice(first.get(at), ends.get(cursor)! + 1).every((s) => s.heading)) return none;
-    const ref = range(a.id, b.id);
-    return { ...none, ref, refUnit: range(a.unit, b.unit), apparatus: false };
+    const run = segments.slice(first.get(at), ends.get(cursor)! + 1);
+    if (run.every((s) => s.heading)) return none;
+    const [a, b] = [run[0], run[run.length - 1]];
+    return { ...none, ref: range(a.id, b.id), refUnit: range(a.unit, b.unit), apparatus: false };
   });
   if (missing.length)
     throw new Error(`${workId}: not in the SuttaCentral translation:\n${missing.join('\n')}`);

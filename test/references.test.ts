@@ -430,10 +430,20 @@ test('bilara: each block takes the segments it was made from, headings are appar
   );
 });
 
-test('bilara: a block across paragraphs spans their units; a block not found fails', () => {
+test('bilara: a block across paragraphs spans their units; one not found or across suttas fails', () => {
   const segs = bilara('udana', ['At one time the Buddha “Yes, sir.”'], SEGMENTS);
   assert.deepEqual([segs[0].ref, segs[0].refUnit], ['ud1.1:1.2-2.1', 'ud1.1:1.1-2.1']);
   assert.throws(() => bilara('udana', ['So I have read.'], SEGMENTS), /So I have read/);
   // Only whole segments match: "Buddha" alone is part of one.
   assert.throws(() => bilara('udana', ['Buddha'], SEGMENTS), /not in the SuttaCentral/);
+  const next = { id: 'ud1.2:1.1', unit: 'ud1.2:1.1', text: 'So I have heard.', heading: false };
+  assert.throws(
+    () =>
+      bilara(
+        'udana',
+        ['The Heartfelt Sayings are finished. So I have heard.'],
+        [...SEGMENTS, next],
+      ),
+    /not in the SuttaCentral/,
+  );
 });

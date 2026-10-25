@@ -359,6 +359,26 @@ test('anchored: Plato by Stephanus section, over a page break, persons and title
   );
 });
 
+test('anchored: a scan by Bekker column, its heads apparatus and its footnotes left out', () => {
+  const blocks = [
+    'BOOK A',
+    '1 ALL men by nature desire to know. An indication of 980° this is the delight we take in our senses',
+    '1 Cf. Pl, Gorg. 448 C, 462 BC.',
+    '981" METAPHYSICA',
+    'a certain constitution, marked off in one class',
+  ];
+  const anchors: [string | null, string][] = [
+    ['980a', '1 ALL men by'],
+    ['980b', '…this is the delight'],
+    [null, '1 Cf. Pl, Gorg.'],
+    ['981a', 'a certain constitution, marked'],
+  ];
+  assert.deepEqual(
+    anchored('metaphysics', blocks, anchors).map((s) => s.refUnit),
+    [null, '980a-b', null, null, '981a'],
+  );
+});
+
 test("anchored: a scan's footnotes run from the first one on a page to the next page head", () => {
   const blocks = [
     'BOOK  I',

@@ -456,5 +456,25 @@
     "id": "no-good-friends",
     "situation": "I cannot find friends I can trust. Should I just stay on my own?",
     "relevant": ["sutta-nipata:52", "sutta-nipata:53", "sutta-nipata:54", "sutta-nipata:82"]
+  },
+  {
+    "id": "why-me",
+    "situation": "I lost my job and my health in the same year, and I keep asking why this happened to me.",
+    "relevant": ["job:22", "job:33", "job:314"]
+  },
+  {
+    "id": "quick-temper",
+    "situation": "My colleague snaps at me and I answer back just as hard. How should I respond?",
+    "relevant": ["proverbs:409", "proverbs:426", "proverbs:473"]
+  },
+  {
+    "id": "afraid-at-night",
+    "situation": "I am scared of what is coming and I cannot sleep at night.",
+    "relevant": ["psalms:35", "psalms:301", "psalms:820"]
+  },
+  {
+    "id": "putting-it-off",
+    "situation": "There is work that matters to me, but I keep putting it off until I have more time.",
+    "relevant": ["pirkei-avot:185", "pirkei-avot:222", "pirkei-avot:264"]
   }
 ]

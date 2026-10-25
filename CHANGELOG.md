@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+- `body-parser` 2.4.0 and `multer` 2.5.0 fix two high-severity denial-of-service advisories (GHSA-27r3-jxmh-p828, GHSA-q7qp-rjg7-q26m); `multer` is set through `pnpm.overrides` because `@nestjs/platform-express` pins 2.4.0.
 - `/mcp` rejects JSON-RPC batches with 400, which let a single request run any number of tool calls past the rate limits.
 - `/mcp` rejects a present `Origin` header whose host is not `PUBLIC_URL`'s, so websites can't make their visitors' browsers call the tools.
 - Every response sets `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy` and a strict Content Security Policy, and no longer sends `X-Powered-By`.

@@ -1,8 +1,9 @@
 import { cached } from '../cache.js';
-import { squash, type SourceText } from './source.js';
+import { squash, type BilaraSegment, type SourceText } from './source.js';
 
 const RAW =
   'https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/pli/ms/sutta/kn/dhp';
+const API = 'https://suttacentral.net/api/bilarasuttas';
 
 // One file per vagga, named after its verse range.
 const VAGGAS = [
@@ -34,6 +35,20 @@ const VAGGAS = [
   '383-423',
 ];
 
+// "ud" with [10, 10] is ud1.1 … ud1.10, ud2.1 … ud2.10.
+const chapters = (collection: string, sizes: number[]) =>
+  sizes.flatMap((size, c) =>
+    Array.from({ length: size }, (_, i) => `${collection}${c + 1}.${i + 1}`),
+  );
+
+// The suttas of each work, in the order of its translation.
+const SUTTAS: Record<string, string[]> = {
+  'pali-core-suttas': ['sn56.11', 'mn10', 'mn118', 'snp1.8', 'an3.65', 'dn31'],
+  'sutta-nipata': chapters('snp', [12, 14, 12, 16, 19]),
+  udana: chapters('ud', [10, 10, 10, 10, 10, 10, 10, 10]),
+  itivuttaka: Array.from({ length: 112 }, (_, i) => `iti${i + 1}`),
+};
+
 // Segment ids are "dhp<verse>:<line>"; line 0 and 0.x hold titles, and a vagga's
 // last verse carries its closing title ("Pupphavaggo catuttho.").
 export function versesOf(segments: Record<string, string>): Map<number, string> {
@@ -46,7 +61,7 @@ export function versesOf(segments: Record<string, string>): Map<number, string> 
   return new Map([...verses].map(([n, lines]) => [n, lines.join('\n')]));
 }
 
-export async function loadSuttaCentral(cacheDir: string): Promise<SourceText> {
+async function loadDhammapada(cacheDir: string): Promise<SourceText> {
   const units = new Map();
   for (const range of VAGGAS) {
     const file = `dhp${range}_root-pli-ms.json`;
@@ -56,4 +71,59 @@ export async function loadSuttaCentral(cacheDir: string): Promise<SourceText> {
     }
   }
   return { license: 'CC0 1.0 (SuttaCentral, Mahāsaṅgīti edition)', units };
+}
+
+export interface Bilara {
+  keys_order: string[];
+  root_text: Record<string, string>;
+  translation_text: Record<string, string>;
+  html_text: Record<string, string>;
+}
+
+const OPENS_PARAGRAPH = /<(?:p|h\d|li)\b/;
+// Titles, the nipāta and vagga lines, section headings, colophons and the uddāna's intro.
+const HEADING = /<(?:h\d|li)\b|class='(?:end\w*|uddana-intro)'/;
+
+/**
+ * One source unit per paragraph of the root text, named after its first segment ("ud1.1:2.1"),
+ * with verse lines on lines of their own.
+ */
+export function paragraphsOf(uid: string, sutta: Bilara) {
+  const units = new Map<string, { body: string; url: string }>();
+  const segments: BilaraSegment[] = [];
+  let unit = '';
+  let lines: string[] = [];
+  const close = () => {
+    const body = lines.join('').trim();
+    if (unit && body) units.set(unit, { body, url: `https://suttacentral.net/${uid}/pli/ms` });
+  };
+  for (const id of sutta.keys_order) {
+    const html = sutta.html_text[id] ?? '{}';
+    if (!unit || OPENS_PARAGRAPH.test(html.split('{}')[0])) {
+      close();
+      [unit, lines] = [id, []];
+    }
+    const root = squash(sutta.root_text[id] ?? '');
+    if (root) lines.push(/verse-line/.test(html) ? `${root}\n` : `${root} `);
+    const text = squash((sutta.translation_text[id] ?? '').replace(/<[^>]*>/g, ''));
+    if (text) segments.push({ id, unit, text, heading: HEADING.test(html) });
+  }
+  close();
+  return { units, segments };
+}
+
+export async function loadSuttaCentral(workId: string, cacheDir: string): Promise<SourceText> {
+  if (workId === 'dhammapada') return loadDhammapada(cacheDir);
+  const suttas = SUTTAS[workId];
+  if (!suttas) throw new Error(`no SuttaCentral texts for ${workId}`);
+  const units = new Map<string, { body: string; url: string }>();
+  const segments: BilaraSegment[] = [];
+  for (const uid of suttas) {
+    const url = `${API}/${uid}/sujato`;
+    const sutta = JSON.parse((await cached(cacheDir, `bilara-${uid}-sujato.json`, url)).toString());
+    const parsed = paragraphsOf(uid, sutta as Bilara);
+    for (const [unit, part] of parsed.units) units.set(unit, part);
+    segments.push(...parsed.segments);
+  }
+  return { license: 'CC0 1.0 (SuttaCentral, Mahāsaṅgīti edition)', units, segments };
 }

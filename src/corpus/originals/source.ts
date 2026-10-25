@@ -3,9 +3,19 @@ interface SourceUnit {
   url: string;
 }
 
+/** A segment of a SuttaCentral translation, with the root text paragraph it belongs to. */
+export interface BilaraSegment {
+  id: string;
+  unit: string;
+  text: string;
+  heading: boolean;
+}
+
 export interface SourceText {
   license: string;
   units: Map<string, SourceUnit>;
+  /** The translation's segments, for a work aligned on them. */
+  segments?: BilaraSegment[];
 }
 
 const ENTITIES: Record<string, string> = {

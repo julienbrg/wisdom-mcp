@@ -550,6 +550,6 @@
   {
     "id": "advice-ignored",
     "situation": "I keep advising someone in power who will not listen. Should I keep trying or walk away?",
-    "relevant": ["seventh-letter:10", "seventh-letter:11"]
+    "relevant": ["seventh-letter:10", "seventh-letter:11", "seventh-letter:12"]
   }
 ]

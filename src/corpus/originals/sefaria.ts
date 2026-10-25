@@ -10,7 +10,10 @@ interface Response {
 export function cleanVerse(html: string): string {
   return squash(
     decodeEntities(
-      html.replace(/<span class="mam-spi-[^"]*">[^<]*<\/span>/g, '').replace(/<[^>]+>/g, ' '),
+      html
+        .replace(/<span class="mam-spi-[^"]*">[^<]*<\/span>/g, '')
+        .replace(/<br\s*\/?>/g, ' ')
+        .replace(/<[^>]+>/g, ''),
     ),
   );
 }

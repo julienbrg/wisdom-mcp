@@ -49,6 +49,10 @@ test('sefaria: paragraph markers and tags are dropped, ketiv and qere kept', () 
   );
 });
 
+test('sefaria: a large or small letter stays in its word', () => {
+  assert.equal(cleanVerse('<big>ט֥</big>וֹב שֵׁ֖ם<br>מִשֶּׁ֣מֶן'), 'ט֥וֹב שֵׁ֖ם מִשֶּׁ֣מֶן');
+});
+
 test('suttacentral: verse lines without titles or the vagga colophon', () => {
   const verses = versesOf({
     'dhp58:0': 'Garahadinnavatthu ',

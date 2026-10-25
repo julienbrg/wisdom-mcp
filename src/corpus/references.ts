@@ -287,8 +287,9 @@ function artOfWar(): Scheme {
 }
 
 // Gorfinkle's sayings are numbered within each chapter, several to a block at times, and the next
-// one may start midline ("(31).  13. He used to say"). His notes open with their number in
-// brackets, and the sayings read before and after each chapter are not part of the tractate.
+// one may start midline, after the end of a sentence ("(31).  13. He used to say"). His notes open
+// with their number in brackets, and the sayings read before and after each chapter are not part of
+// the tractate.
 function pirkeiAvot(): Scheme {
   let ch = 0;
   let sayings: [number, number] | null = null;
@@ -301,7 +302,7 @@ function pirkeiAvot(): Scheme {
       if (m || /^[([]/.test(piece)) return { heading: true };
       let first = 0;
       let last = sayings?.[1] ?? 0;
-      while (new RegExp(`(?:^|\\s)${last + 1}\\.\\s`).test(piece)) {
+      while (new RegExp(`(?:^|[.!?)'"]\\s+)${last + 1}\\.\\s`).test(piece)) {
         last++;
         first ||= last;
       }

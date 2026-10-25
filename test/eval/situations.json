@@ -551,5 +551,63 @@
     "id": "advice-ignored",
     "situation": "I keep advising someone in power who will not listen. Should I keep trying or walk away?",
     "relevant": ["seventh-letter:10", "seventh-letter:11", "seventh-letter:12"]
+  },
+  {
+    "id": "desire-to-understand",
+    "situation": "I keep wanting to understand how things work, even when it is of no practical use to me. Is that curiosity worth anything?",
+    "relevant": ["metaphysics:1", "metaphysics:26", "metaphysics:32"]
+  },
+  {
+    "id": "what-makes-a-good-life",
+    "situation": "I have a comfortable life but I am not sure it is a good one. What would make it truly happy, not just pleasant?",
+    "relevant": ["nicomachean-ethics:104", "nicomachean-ethics:106", "nicomachean-ethics:111"]
+  },
+  {
+    "id": "live-alone",
+    "situation": "I am tempted to cut myself off from other people and live entirely on my own. Do I really need a community?",
+    "relevant": ["politics:45", "politics:47", "politics:177"]
+  },
+  {
+    "id": "win-them-over",
+    "situation": "I have to convince a skeptical room to back my proposal. How do I persuade people who are not inclined to agree?",
+    "relevant": ["rhetoric:13", "rhetoric:15", "rhetoric:16"]
+  },
+  {
+    "id": "out-of-my-hands",
+    "situation": "I worry all the time about things I cannot control: what others think, my health, the economy.",
+    "relevant": ["discourses-selection:13", "discourses-selection:14", "discourses-selection:249"]
+  },
+  {
+    "id": "afraid-of-dying",
+    "situation": "I lie awake afraid of dying. How can I stop fearing death?",
+    "relevant": ["epicurus-letters:114", "epicurus-letters:118", "epicurus-letters:131"]
+  },
+  {
+    "id": "too-many-things",
+    "situation": "I own too much and keep wanting more. How little do I really need to live well?",
+    "relevant": [
+      "lives-of-eminent-philosophers:560",
+      "lives-of-eminent-philosophers:1130",
+      "lives-of-eminent-philosophers:2063"
+    ]
+  },
+  {
+    "id": "beauty-within",
+    "situation": "I have lost touch with anything beautiful or good in myself. How do I find it again?",
+    "relevant": ["enneads:288", "enneads:290", "enneads:292"]
+  },
+  {
+    "id": "beyond-the-noise",
+    "situation": "Everything around me is noise and distraction. How do I find something lasting and still within?",
+    "relevant": ["enneads-mackenna:953", "enneads-mackenna:7892", "enneads-mackenna:7893"]
+  },
+  {
+    "id": "every-argument-has-another",
+    "situation": "Every argument I hear seems convincing until I hear the opposite one. How can I find peace when I cannot settle what is true?",
+    "relevant": [
+      "outlines-of-pyrrhonism:21",
+      "outlines-of-pyrrhonism:39",
+      "outlines-of-pyrrhonism:42"
+    ]
   }
 ]

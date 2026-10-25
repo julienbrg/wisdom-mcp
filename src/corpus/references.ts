@@ -467,7 +467,16 @@ const plato = (start: RegExp, notes: string[] = []): Layout => ({
     notes.some((n) => text.startsWith(n)),
 });
 
+// A scan's page heads, signature marks and stray letters; its footnotes are left out by the anchors.
+const scan = (start: RegExp, skip?: [RegExp, RegExp]): Layout => ({
+  start,
+  skip,
+  apparatus: (text) => scanHead(text) || (text.match(/\p{L}/gu)?.length ?? 0) < 4,
+});
+
 // Translations with no numbers, aligned by hand on the source paragraphs, or Plato's as above.
+// The later Greek works are aligned the same way on a Perseus or First1KGreek English
+// translation, or on the translator's own chapter numbers.
 const ANCHORED: Record<string, Layout> = {
   // Giles's notes and chapter arguments are indented, and titles have no lowercase.
   'chuang-tzu': {
@@ -553,6 +562,18 @@ const ANCHORED: Record<string, Layout> = {
   timaeus: plato(/^SOCRATES: One, two, three; but where/),
   laws: plato(/^ATHENIAN: Tell me, Strangers, is a God/),
   'seventh-letter': plato(/^plato to the kindred and friends of dion/),
+  metaphysics: scan(/^1 ALL men by nature desire to know/),
+  'nicomachean-ethics': {
+    start: /^Every art, and every science reduced/,
+    end: /^NOTES$/,
+    apparatus: (text) => !LOWER.test(text) || /^(?:Chapter [IVXL]+\.|\[Illustration\])$/.test(text),
+  },
+  politics: {
+    start: /^As we see that every city is a society/,
+    end: /^INDEX$/,
+    apparatus: (text) => !LOWER.test(text),
+  },
+  rhetoric: { start: /^Rhetoric is a counterpart/, apparatus: (text) => text.startsWith('#') },
 };
 
 /** Where each unit starts, in order: a block's opening words, or after "…", words within one. */

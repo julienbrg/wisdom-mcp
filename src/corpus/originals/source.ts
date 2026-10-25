@@ -16,6 +16,8 @@ export interface SourceText {
   units: Map<string, SourceUnit>;
   /** The translation's segments, for a work aligned on them. */
   segments?: BilaraSegment[];
+  /** Units are Stephanus sections, and ranges run over them. */
+  stephanus?: boolean;
 }
 
 const ENTITIES: Record<string, string> = {

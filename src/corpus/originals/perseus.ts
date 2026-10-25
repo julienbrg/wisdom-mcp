@@ -160,7 +160,7 @@ export async function loadPerseus(workId: string, cacheDir: string): Promise<Sou
     const units = new Map();
     for (const [n, { path, body }] of parseStephanus(xml, steph.part))
       units.set(n, { body, url: reader(steph.urn, path) });
-    return { license, units };
+    return { license, units, stephanus: true };
   }
   const ed = EDITIONS[workId];
   const { xml, license } = await loadTei(ed.urn, cacheDir);

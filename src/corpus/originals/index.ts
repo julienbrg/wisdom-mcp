@@ -101,11 +101,24 @@ export function paragraphRange(units: ReadonlyMap<string, unknown>, refUnit: str
   return [refUnit];
 }
 
+// "70d-71b" is every Stephanus section from 70d to 71b, and "70a-c" from 70a to 70c, in the
+// source's order: a page may end before its e.
+export function stephanusRange(units: ReadonlyMap<string, unknown>, refUnit: string): string[] {
+  const m = refUnit.match(/^(\d+)([a-e])-(\d+)?([a-e])$/);
+  if (!m) return [refUnit];
+  const keys = [...units.keys()];
+  const a = keys.indexOf(m[1] + m[2]);
+  const b = keys.indexOf((m[3] ?? m[1]) + m[4]);
+  return a >= 0 && b > a ? keys.slice(a, b + 1) : [refUnit];
+}
+
 export function loadOriginals(work: Work, refUnits: string[], source: SourceText): Original[] {
   return refUnits.map((refUnit) => {
     const units = source.segments
       ? paragraphRange(source.units, refUnit)
-      : sourceUnits(work.id, refUnit);
+      : source.stephanus
+        ? stephanusRange(source.units, refUnit)
+        : sourceUnits(work.id, refUnit);
     const parts = units.map((unit) => {
       const part = source.units.get(unit);
       if (!part) throw new Error(`${work.id} ${refUnit}: no original for source unit ${unit}`);

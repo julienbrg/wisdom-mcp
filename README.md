@@ -1,4 +1,4 @@
-[![Corpus](https://img.shields.io/badge/corpus-26%20texts%20%C2%B7%2028%2C596%20passages-45a2f8?labelColor=8c1c84)](#corpus)
+[![Corpus](https://img.shields.io/badge/corpus-41%20texts%20%C2%B7%2042%2C448%20passages-45a2f8?labelColor=8c1c84)](#corpus)
 [![CI](https://github.com/julienbrg/wisdom-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/julienbrg/wisdom-mcp/actions/workflows/ci.yml)
 [![NestJS](https://img.shields.io/badge/NestJS-v12-E0234E?logo=nestjs)](https://nestjs.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript)](https://www.typescriptlang.org/)
@@ -52,7 +52,7 @@ Over either rate limit, `/mcp` answers 429 with a JSON-RPC error and a `Retry-Af
 pnpm corpus:import
 ```
 
-This imports the 26 pilot works from the Wisdom Context Window, with their original-language texts, and its concept graph: 208 concepts, each with a summary, key passages and links to parallel, opposing, related and broader concepts. Downloads are cached in `CORPUS_CACHE`, so later runs work offline, and each run replaces the works and concepts it imports.
+This imports the 41 pilot works from the Wisdom Context Window, with their original-language texts, and its concept graph: 208 concepts, each with a summary, key passages and links to parallel, opposing, related and broader concepts. Downloads are cached in `CORPUS_CACHE`, so later runs work offline, and each run replaces the works and concepts it imports.
 
 The cached Wisdom Context Window dump is never downloaded again on its own. To see what changed on the site first:
 
@@ -92,6 +92,21 @@ The corpus badge at the top of this README is static: after an import changes th
 | Bhagavad Gita        | Edwin Arnold               | chapter.verses | gita/gita dataset, by verse |
 | Enchiridion          | Thomas Wentworth Higginson | section        | Perseus                     |
 | Meditations          | Meric Casaubon             | book.section   | Perseus, by section         |
+| Euthyphro            | Benjamin Jowett            | Stephanus      | Perseus (Burnet)            |
+| Apology              | Benjamin Jowett            | Stephanus      | Perseus (Burnet)            |
+| Crito                | Benjamin Jowett            | Stephanus      | Perseus (Burnet)            |
+| Phaedo               | Benjamin Jowett            | Stephanus      | Perseus (Burnet)            |
+| Theaetetus           | Benjamin Jowett            | Stephanus      | Perseus (Burnet)            |
+| Symposium            | Benjamin Jowett            | Stephanus      | Perseus (Burnet)            |
+| Phaedrus             | Benjamin Jowett            | Stephanus      | Perseus (Burnet)            |
+| Alcibiades I         | Benjamin Jowett            | Stephanus      | Perseus (Burnet)            |
+| Protagoras           | Benjamin Jowett            | Stephanus      | Perseus (Burnet)            |
+| Gorgias              | Benjamin Jowett            | Stephanus      | Perseus (Burnet)            |
+| Meno                 | Benjamin Jowett            | Stephanus      | Perseus (Burnet)            |
+| Republic             | Benjamin Jowett            | Stephanus      | Perseus (Burnet)            |
+| Timaeus              | Benjamin Jowett            | Stephanus      | Perseus (Burnet)            |
+| Laws                 | Benjamin Jowett            | Stephanus      | Perseus (Burnet)            |
+| Seventh Letter       | George Burges              | Stephanus      | Perseus (Burnet)            |
 | Sermon on the Mount  | King James Version         | chapter:verse  | Perseus                     |
 | Ecclesiastes         | King James Version         | chapter:verse  | Sefaria                     |
 | Job                  | King James Version         | chapter:verse  | Sefaria                     |
@@ -108,6 +123,8 @@ The three Giles translations have no numbers either, and no Chinese, so they are
 The Art of War keeps Giles's section numbers (`6.22`), and each section takes the Wikisource paragraph of its chapter it falls in, or a range of them (`6.6-7`); his bracketed notes are apparatus. Mei's Motse and Dubs's Hsüntze are scans with footnotes, page heads and margin summaries run into the text, aligned by hand like the Giles translations, by chapter (or book) and Wikisource paragraph: a footnote runs from the first one on a page to the next page head. Dubs translates 19 of the 32 books and the eulogy that ends book 32. Legge's Yi King is also a scan, whose notes are told from the text by their smaller type, which the OCR gives as longer lines. The Text goes by hexagram (`15`); the appendixes by Legge's numbering: the 彖 and 象 by hexagram (`App. I.15`, `App. II.15`), the 繫辭 by section and chapter (`App. III.1.5`), the 文言 by hexagram and chapter (`App. IV.1.2`), the 說卦 by chapter (`App. V.5`), the 序卦 by part (`App. VI.2`) and the 雜卦 whole (`App. VII`). The originals are the Wikisource pages of the hexagrams and of the 易傳.
 
 Sujato's translations of the Core Suttas (SN 56.11, MN 10, MN 118, Snp 1.8, AN 3.65, DN 31), the Sutta Nipāta, the Udāna and the Itivuttaka are split on SuttaCentral's [bilara](https://github.com/suttacentral/bilara-data) segments, the same segments as the Pali root text. Each block is found, in order, in the run of segments it was made from, and takes that range as its reference (`ud1.1:2.1-2.13`) and the root text paragraphs it covers as its original. The suttas come from the SuttaCentral API (`bilarasuttas/<uid>/sujato`). Titles, chapter headings and colophons are flagged `is_apparatus`.
+
+Plato's works go by Stephanus section (`514a`), and their Greek is Burnet's, split at the section milestones of the Perseus edition. Jowett's and Burges's translations give no Stephanus numbers, so each is aligned in `data/alignments/<work>.json`, like the Giles translations, on the section milestones of the Perseus English translation, which are those of the Greek. The anchors were found by matching the words the two English translations share, in order, and setting each speech of a dialogue on the speech it translates. A passage that runs over several sections takes a range (`514a-b`, `70d-71b`). Jowett's introductions, the persons and scene of each dialogue and book heads are flagged `is_apparatus`.
 
 Ecclesiastes, Job, Proverbs and Psalms go by KJV chapter and verse, and their Hebrew is Sefaria's Miqra according to the Masorah. Where the KJV numbers verses differently, each verse takes the Hebrew one it translates: the Hebrew counts most psalm titles as a verse, or two, which the KJV leaves unnumbered and the Wisdom Context Window leaves out, Ecclesiastes 5:1 is the Hebrew 4:17, and Job 41:1-8 the Hebrew 40:25-32. Pirkei Avot keeps Gorfinkle's saying numbers (`2:5`), which follow Taylor's, and each saying takes the mishnayot of Sefaria's Torat Emet edition it falls in (`2:4`), or a range of them (`5:8-9`). His notes, and the sayings recited before and after each chapter (“All Israel have a portion…”, “Rabbi Chanania…”), are flagged `is_apparatus`.
 
@@ -179,7 +196,7 @@ pnpm eval
 
 This runs `search_passages` on each situation in `test/eval/situations.json` and reports Recall@10: the share of the passages judged relevant that appear in the first 10 hits, per situation and on average. It needs a built corpus and `MISTRAL_API_KEY`, so it is not part of CI. Run it before each launch; the target is 0.7.
 
-The set has 63 situations written as a person would ask them, each with 3 to 6 passages judged relevant by hand, at most 3 per work since search returns at most 3 hits per work. A hit counts only if it is the same passage, not another passage of the same reference.
+The set has 78 situations written as a person would ask them, each with 3 to 6 passages judged relevant by hand, at most 3 per work since search returns at most 3 hits per work. A hit counts only if it is the same passage, not another passage of the same reference.
 
 | Date       | Recall@10 | Situations |
 | ---------- | --------- | ---------- |

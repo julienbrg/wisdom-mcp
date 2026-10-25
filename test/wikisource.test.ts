@@ -253,6 +253,13 @@ test('translation units map onto source units', () => {
   assert.deepEqual(sourceUnits('ecclesiastes', '5:1'), ['4:17']);
   assert.deepEqual(sourceUnits('ecclesiastes', '5:20'), ['5:19']);
   assert.deepEqual(sourceUnits('ecclesiastes', '4:16'), ['4:16']);
+  assert.deepEqual(sourceUnits('job', '41:8'), ['40:32']);
+  assert.deepEqual(sourceUnits('job', '41:9'), ['41:1']);
+  assert.deepEqual(sourceUnits('psalms', '23:1'), ['23:1']);
+  assert.deepEqual(sourceUnits('psalms', '3:1'), ['3:2']);
+  assert.deepEqual(sourceUnits('psalms', '51:1'), ['51:3']);
+  assert.deepEqual(sourceUnits('psalms', '13:5'), ['13:6']);
+  assert.deepEqual(sourceUnits('psalms', '13:6'), ['13:6']);
 });
 
 test('a bilara range covers every paragraph between its ends', () => {

@@ -567,7 +567,8 @@ const loadAnchors = (workId: string): Anchor[] =>
 // is "70a-c", but "70d" to "71b" is "70d-71b".
 function span(from: string, to: string): string {
   const [f, t] = [from, to].map((u) => u.match(/^(\d+)([a-e])$/));
-  if (f && t) {
+  if (f || t) {
+    if (!f || !t) throw new Error(`no range from ${from} to ${to}`);
     if (+t[1] < +f[1] || (t[1] === f[1] && t[2] <= f[2]))
       throw new Error(`no range from ${from} to ${to}`);
     return `${from}-${t[1] === f[1] ? t[2] : to}`;

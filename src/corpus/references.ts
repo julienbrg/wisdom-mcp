@@ -574,6 +574,10 @@ const ANCHORED: Record<string, Layout> = {
     apparatus: (text) => !LOWER.test(text),
   },
   rhetoric: { start: /^Rhetoric is a counterpart/, apparatus: (text) => text.startsWith('#') },
+  'discourses-selection': {
+    start: /^OF THE THINGS WHICH ARE IN OUR POWER/,
+    apparatus: (text) => !LOWER.test(text),
+  },
 };
 
 /** Where each unit starts, in order: a block's opening words, or after "…", words within one. */

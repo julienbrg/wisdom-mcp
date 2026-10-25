@@ -487,6 +487,18 @@ export const PILOT_WORKS: Work[] = [
     original: 'perseus',
   },
   {
+    id: 'discourses-selection',
+    author: 'Epictetus',
+    title: 'A Selection from the Discourses of Epictetus',
+    originalTitle: 'Ἐπικτήτου διατριβαί',
+    originalLanguage: 'grc',
+    tradition: 'greco-roman',
+    translator: 'George Long',
+    year: 1877,
+    source: 'https://www.gutenberg.org/ebooks/10661',
+    original: 'perseus',
+  },
+  {
     id: 'sermon-on-the-mount',
     author: 'Jesus (per Matthew)',
     title: 'Sermon on the Mount (Matthew 5-7)',

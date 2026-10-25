@@ -578,6 +578,12 @@ const ANCHORED: Record<string, Layout> = {
     start: /^OF THE THINGS WHICH ARE IN OUR POWER/,
     apparatus: (text) => !LOWER.test(text),
   },
+  'epicurus-letters': { start: /^EPICURUS TO HERODOTUS/, apparatus: (text) => !LOWER.test(text) },
+  'lives-of-eminent-philosophers': {
+    start: /^I\. Some say that the study of philosophy/,
+    end: /^FOOTNOTES$/,
+    apparatus: (text) => !LOWER.test(text),
+  },
 };
 
 /** Where each unit starts, in order: a block's opening words, or after "…", words within one. */

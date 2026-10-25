@@ -5,13 +5,18 @@ const API = 'https://www.sefaria.org/api/v3/texts';
 
 const MAM = 'Miqra according to the Masorah';
 
-// Each work's Sefaria book and Hebrew version.
-const BOOKS: Record<string, { book: string; version: string }> = {
+// Each work's Sefaria book and Hebrew version, and what to drop from its markup.
+const BOOKS: Record<string, { book: string; version: string; drop?: RegExp }> = {
   ecclesiastes: { book: 'Ecclesiastes', version: MAM },
   job: { book: 'Job', version: MAM },
   proverbs: { book: 'Proverbs', version: MAM },
   psalms: { book: 'Psalms', version: MAM },
-  'pirkei-avot': { book: 'Pirkei_Avot', version: 'Torat Emet 357' },
+  // Torat Emet cites verses in brackets, and runs the saying recited after a chapter into 6:11.
+  'pirkei-avot': {
+    book: 'Pirkei_Avot',
+    version: 'Torat Emet 357',
+    drop: /\s*\([^()<>]*\)|<br><br>[\s\S]*$/g,
+  },
 };
 
 interface Response {
@@ -30,7 +35,8 @@ export function cleanVerse(html: string): string {
 }
 
 export async function loadSefaria(workId: string, cacheDir: string): Promise<SourceText> {
-  const { book, version } = BOOKS[workId];
+  if (!BOOKS[workId]) throw new Error(`${workId}: no Sefaria book`);
+  const { book, version, drop } = BOOKS[workId];
   const url = `${API}/${book}?version=${encodeURIComponent(`hebrew|${version}`)}`;
   const res = JSON.parse(
     (await cached(cacheDir, `sefaria-${workId}.json`, url)).toString(),
@@ -41,7 +47,7 @@ export async function loadSefaria(workId: string, cacheDir: string): Promise<Sou
   found.text.forEach((verses, c) =>
     verses.forEach((html, v) =>
       units.set(`${c + 1}:${v + 1}`, {
-        body: cleanVerse(html),
+        body: cleanVerse(drop ? html.replace(drop, '') : html),
         url: `https://www.sefaria.org/${book}.${c + 1}.${v + 1}?lang=he`,
       }),
     ),

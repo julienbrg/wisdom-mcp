@@ -25,7 +25,7 @@ export function loadSource(work: Work, cacheDir: string): Promise<SourceText> {
     case 'perseus':
       return loadPerseus(id, cacheDir);
     case 'suttacentral':
-      return loadSuttaCentral(cacheDir);
+      return loadSuttaCentral(id, cacheDir);
     case 'sefaria':
       return loadSefaria(cacheDir);
     case 'gita':
@@ -63,9 +63,26 @@ export function sourceUnits(workId: string, refUnit: string): string[] {
   return Array.from({ length: +to - +from + 1 }, (_, i) => `${prefix}${+from + i}`);
 }
 
+// "dn31:2.1-3.1" is every paragraph from dn31:2.1 to dn31:3.1, in the source's order. Some
+// segment ids have a hyphen of their own ("mn10:26-28.1").
+export function paragraphRange(units: ReadonlyMap<string, unknown>, refUnit: string): string[] {
+  if (units.has(refUnit)) return [refUnit];
+  const keys = [...units.keys()];
+  for (let i = refUnit.indexOf('-'); i >= 0; i = refUnit.indexOf('-', i + 1)) {
+    const from = refUnit.slice(0, i);
+    const a = keys.indexOf(from);
+    const b = keys.indexOf(`${from.split(':')[0]}:${refUnit.slice(i + 1)}`);
+    if (a >= 0 && b > a) return keys.slice(a, b + 1);
+  }
+  return [refUnit];
+}
+
 export function loadOriginals(work: Work, refUnits: string[], source: SourceText): Original[] {
   return refUnits.map((refUnit) => {
-    const parts = sourceUnits(work.id, refUnit).map((unit) => {
+    const units = source.segments
+      ? paragraphRange(source.units, refUnit)
+      : sourceUnits(work.id, refUnit);
+    const parts = units.map((unit) => {
       const part = source.units.get(unit);
       if (!part) throw new Error(`${work.id} ${refUnit}: no original for source unit ${unit}`);
       return { unit, ...part };

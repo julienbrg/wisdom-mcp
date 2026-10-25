@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { anchored, artOfWarUnit, roman, segment } from '../dist/corpus/references.js';
+import { anchored, artOfWarUnit, bilara, roman, segment } from '../dist/corpus/references.js';
 
 const refs = (workId: string, blocks: string[]) =>
   segment(workId, blocks).map((s) => [s.ref, s.refUnit, s.apparatus]);
@@ -227,7 +227,7 @@ test('aligned: each translation takes the chapter its Chinese paragraph comes fr
       '## chapter02',
       'Liang Hui Wang II',
     ],
-    source,
+    { units: source },
   );
   assert.deepEqual(
     segs.map((s) => [s.ref, s.refUnit, s.apparatus]),
@@ -383,4 +383,67 @@ test('anchored: a translation whose main text is missing fails', () => {
   for (const workId of ['chuang-tzu', 'liezi', 'tao-te-ching-giles', 'mozi', 'xunzi', 'i-ching']) {
     assert.throws(() => segment(workId, ['nothing here']), /main text start not found/);
   }
+});
+
+const SEGMENTS = [
+  { id: 'ud1.1:0.1', unit: 'ud1.1:0.1', text: 'Heartfelt Sayings 1.1', heading: true },
+  { id: 'ud1.1:0.2', unit: 'ud1.1:0.2', text: 'Upon Awakening (1st)', heading: true },
+  { id: 'ud1.1:1.1', unit: 'ud1.1:1.1', text: 'So I have heard.', heading: false },
+  { id: 'ud1.1:1.2', unit: 'ud1.1:1.1', text: 'At one time the Buddha', heading: false },
+  { id: 'ud1.1:2.1', unit: 'ud1.1:2.1', text: '“Yes, sir.”', heading: false },
+  { id: 'ud1.1:3.1', unit: 'ud1.1:3.1', text: 'Then he said:', heading: false },
+  { id: 'ud1.1:3.2', unit: 'ud1.1:3.1', text: '“Yes, sir.”', heading: false },
+  { id: 'ud1.1:3.3', unit: 'ud1.1:3.1', text: '…', heading: false },
+  {
+    id: 'ud1.1:4.1',
+    unit: 'ud1.1:4.1',
+    text: 'The Heartfelt Sayings are finished.',
+    heading: true,
+  },
+];
+
+test('bilara: each block takes the segments it was made from, headings are apparatus', () => {
+  const segs = bilara(
+    'udana',
+    [
+      'Heartfelt Sayings 1.1',
+      '# Upon Awakening (1st)',
+      'So I have heard. At one time the Buddha',
+      '“Yes, sir.”',
+      'Then he said: “Yes, sir.” …',
+      '---',
+      'The Heartfelt Sayings are finished.',
+    ],
+    SEGMENTS,
+  );
+  assert.deepEqual(
+    segs.map((s) => [s.ref, s.refUnit, s.apparatus]),
+    [
+      [null, null, true],
+      [null, null, true],
+      ['ud1.1:1.1-1.2', 'ud1.1:1.1', false],
+      ['ud1.1:2.1', 'ud1.1:2.1', false],
+      ['ud1.1:3.1-3.2', 'ud1.1:3.1', false],
+      [null, null, true],
+      [null, null, true],
+    ],
+  );
+});
+
+test('bilara: a block across paragraphs spans their units; one not found or across suttas fails', () => {
+  const segs = bilara('udana', ['At one time the Buddha “Yes, sir.”'], SEGMENTS);
+  assert.deepEqual([segs[0].ref, segs[0].refUnit], ['ud1.1:1.2-2.1', 'ud1.1:1.1-2.1']);
+  assert.throws(() => bilara('udana', ['So I have read.'], SEGMENTS), /So I have read/);
+  // Only whole segments match: "Buddha" alone is part of one.
+  assert.throws(() => bilara('udana', ['Buddha'], SEGMENTS), /not in the SuttaCentral/);
+  const next = { id: 'ud1.2:1.1', unit: 'ud1.2:1.1', text: 'So I have heard.', heading: false };
+  assert.throws(
+    () =>
+      bilara(
+        'udana',
+        ['The Heartfelt Sayings are finished. So I have heard.'],
+        [...SEGMENTS, next],
+      ),
+    /not in the SuttaCentral/,
+  );
 });

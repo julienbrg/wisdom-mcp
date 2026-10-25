@@ -436,5 +436,25 @@
     "id": "giving-up-study",
     "situation": "I feel I have learned enough and want to stop studying.",
     "relevant": ["xunzi:2"]
+  },
+  {
+    "id": "whom-to-believe",
+    "situation": "Everyone tells me something different about what is true and I do not know whom to believe.",
+    "relevant": ["pali-core-suttas:199", "pali-core-suttas:221"]
+  },
+  {
+    "id": "stingy",
+    "situation": "I earn well but I find it hard to give anything to others.",
+    "relevant": ["itivuttaka:269", "itivuttaka:271"]
+  },
+  {
+    "id": "self-love",
+    "situation": "Is it selfish to care about myself first?",
+    "relevant": ["udana:419"]
+  },
+  {
+    "id": "no-good-friends",
+    "situation": "I cannot find friends I can trust. Should I just stay on my own?",
+    "relevant": ["sutta-nipata:52", "sutta-nipata:53", "sutta-nipata:54", "sutta-nipata:82"]
   }
 ]

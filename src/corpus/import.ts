@@ -29,7 +29,7 @@ export async function prepareWorks(works: Work[], cacheDir: string, refresh = fa
   const prepared: { work: Work; segments: Segment[]; originals: Original[] }[] = [];
   for (const work of works) {
     const source = await loadSource(work, cacheDir);
-    const segments = segment(work.id, splitPassages(records.get(work.id)!.text), source.units);
+    const segments = segment(work.id, splitPassages(records.get(work.id)!.text), source);
     const units = [...new Set(segments.flatMap((s) => (s.apparatus ? [] : [s.refUnit!])))];
     prepared.push({ work, segments, originals: loadOriginals(work, units, source) });
   }

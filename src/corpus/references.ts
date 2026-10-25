@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { gitaRange } from './originals/gita-verses.js';
-import { squash } from './originals/source.js';
+import { squash, type BilaraSegment, type SourceText } from './originals/source.js';
 
 export interface Segment {
   n: number;
@@ -538,15 +538,67 @@ export function anchored(workId: string, blocks: string[], anchors: Anchor[]): S
   return segments;
 }
 
+const letters = (s: string) =>
+  s
+    .normalize('NFC')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]/gu, '');
+
+const sutta = (id: string) => id.split(':')[0];
+
+/**
+ * Sujato's translations, split on SuttaCentral's paragraphs: each block is found, in order, in the
+ * run of segments of one sutta it was made from. Its reference is that segment range, and its unit
+ * the root paragraphs they belong to. Titles, headings and colophons are apparatus.
+ */
+export function bilara(workId: string, blocks: string[], all: BilaraSegment[]): Segment[] {
+  const segments = all.map((s) => ({ ...s, letters: letters(s.text) })).filter((s) => s.letters);
+  let stream = '';
+  const first = new Map<number, number>();
+  const ends = new Map<number, number>();
+  segments.forEach((s, i) => {
+    first.set(stream.length, i);
+    stream += s.letters;
+    ends.set(stream.length, i);
+  });
+  const range = (a: string, b: string) => (a === b ? a : `${a}-${b.split(':')[1]}`);
+  let cursor = 0;
+  const missing: string[] = [];
+  const out = blocks.map((raw, n) => {
+    const none = { n, part: 0, raw, text: raw, ref: null, refUnit: null, apparatus: true };
+    const needle = letters(raw.replace(/^#\s*/, ''));
+    if (!needle) return none;
+    const within = (at: number) => {
+      const [a, b] = [first.get(at), ends.get(at + needle.length)];
+      return a !== undefined && b !== undefined && sutta(segments[a].id) === sutta(segments[b].id);
+    };
+    let at = stream.indexOf(needle, cursor);
+    while (at >= 0 && !within(at)) at = stream.indexOf(needle, at + 1);
+    if (at < 0) {
+      missing.push(squash(raw).slice(0, 60));
+      return none;
+    }
+    cursor = at + needle.length;
+    const run = segments.slice(first.get(at), ends.get(cursor)! + 1);
+    if (run.every((s) => s.heading)) return none;
+    const [a, b] = [run[0], run[run.length - 1]];
+    return { ...none, ref: range(a.id, b.id), refUnit: range(a.unit, b.unit), apparatus: false };
+  });
+  if (missing.length)
+    throw new Error(`${workId}: not in the SuttaCentral translation:\n${missing.join('\n')}`);
+  return out;
+}
+
 export function segment(
   workId: string,
   blocks: string[],
-  source?: ReadonlyMap<string, { body: string }>,
+  source?: Pick<SourceText, 'units' | 'segments'>,
 ): Segment[] {
   if (ANCHORED[workId]) return anchored(workId, blocks, loadAnchors(workId));
+  if (source?.segments) return bilara(workId, blocks, source.segments);
   if (ALIGNED.has(workId)) {
     if (!source) throw new Error(`${workId}: references come from the source text`);
-    return aligned(blocks, source);
+    return aligned(blocks, source.units);
   }
   const scheme = SCHEMES[workId]?.();
   if (!scheme) throw new Error(`no reference scheme for ${workId}`);

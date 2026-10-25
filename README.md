@@ -1,4 +1,4 @@
-[![Corpus](https://img.shields.io/badge/corpus-22%20texts%20%C2%B7%2023%2C499%20passages-45a2f8?labelColor=8c1c84)](#corpus)
+[![Corpus](https://img.shields.io/badge/corpus-26%20texts%20%C2%B7%2028%2C596%20passages-45a2f8?labelColor=8c1c84)](#corpus)
 [![CI](https://github.com/julienbrg/wisdom-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/julienbrg/wisdom-mcp/actions/workflows/ci.yml)
 [![NestJS](https://img.shields.io/badge/NestJS-v12-E0234E?logo=nestjs)](https://nestjs.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript)](https://www.typescriptlang.org/)
@@ -52,7 +52,7 @@ Over either rate limit, `/mcp` answers 429 with a JSON-RPC error and a `Retry-Af
 pnpm corpus:import
 ```
 
-This imports the 22 pilot works from the Wisdom Context Window, with their original-language texts, and its concept graph: 208 concepts, each with a summary, key passages and links to parallel, opposing, related and broader concepts. Downloads are cached in `CORPUS_CACHE`, so later runs work offline, and each run replaces the works and concepts it imports.
+This imports the 26 pilot works from the Wisdom Context Window, with their original-language texts, and its concept graph: 208 concepts, each with a summary, key passages and links to parallel, opposing, related and broader concepts. Downloads are cached in `CORPUS_CACHE`, so later runs work offline, and each run replaces the works and concepts it imports.
 
 The cached Wisdom Context Window dump is never downloaded again on its own. To see what changed on the site first:
 
@@ -94,6 +94,10 @@ The corpus badge at the top of this README is static: after an import changes th
 | Meditations          | Meric Casaubon             | book.section   | Perseus, by section         |
 | Sermon on the Mount  | King James Version         | chapter:verse  | Perseus                     |
 | Ecclesiastes         | King James Version         | chapter:verse  | Sefaria                     |
+| Job                  | King James Version         | chapter:verse  | Sefaria                     |
+| Proverbs             | King James Version         | chapter:verse  | Sefaria                     |
+| Psalms               | King James Version         | chapter:verse  | Sefaria                     |
+| Pirkei Avot          | Joseph I. Gorfinkle        | chapter:saying | Sefaria (Torat Emet)        |
 
 Every quotable passage has a reference and an original. Front matter, translators' notes, indexes and headings are kept but flagged `is_apparatus`.
 
@@ -105,6 +109,8 @@ The Art of War keeps Giles's section numbers (`6.22`), and each section takes th
 
 Sujato's translations of the Core Suttas (SN 56.11, MN 10, MN 118, Snp 1.8, AN 3.65, DN 31), the Sutta Nipāta, the Udāna and the Itivuttaka are split on SuttaCentral's [bilara](https://github.com/suttacentral/bilara-data) segments, the same segments as the Pali root text. Each block is found, in order, in the run of segments it was made from, and takes that range as its reference (`ud1.1:2.1-2.13`) and the root text paragraphs it covers as its original. The suttas come from the SuttaCentral API (`bilarasuttas/<uid>/sujato`). Titles, chapter headings and colophons are flagged `is_apparatus`.
 
+Ecclesiastes, Job, Proverbs and Psalms go by KJV chapter and verse, and their Hebrew is Sefaria's Miqra according to the Masorah. Where the KJV numbers verses differently, each verse takes the Hebrew one it translates: the Hebrew counts most psalm titles as a verse, or two, which the KJV leaves unnumbered and the Wisdom Context Window leaves out, Ecclesiastes 5:1 is the Hebrew 4:17, and Job 41:1-8 the Hebrew 40:25-32. Pirkei Avot keeps Gorfinkle's saying numbers (`2:5`), which follow Taylor's, and each saying takes the mishnayot of Sefaria's Torat Emet edition it falls in (`2:4`), or a range of them (`5:8-9`). His notes, and the sayings recited before and after each chapter (“All Israel have a portion…”, “Rabbi Chanania…”), are flagged `is_apparatus`.
+
 ### Transcriptions
 
 `read_passages` gives each original a transcription under it, so a reader who doesn't know the script can say it aloud. It is labelled as a pronunciation aid, never as the source. The import computes it into `originals.transcription`.
@@ -113,7 +119,7 @@ Sujato's translations of the Core Suttas (SN 56.11, MN 10, MN 118, Snp 1.8, AN 3
 | ------------------------- | ------------------------------------------------------------------------------------------------ |
 | Classical Chinese (`lzh`) | Hanyu Pinyin with tone marks, using classical readings                                           |
 | Ancient Greek (`grc`)     | Romanization with accents and breathings: ē and ō for η and ω, h for the rough breathing, ῳ → ōi |
-| Biblical Hebrew (`hbo`)   | SBL general-purpose style, read from the points: v, kh, f for spirants, dagesh forte doubled     |
+| Ancient Hebrew (`hbo`)    | SBL general-purpose style, read from the points: v, kh, f for spirants, dagesh forte doubled     |
 | Sanskrit (`san`)          | IAST                                                                                             |
 | Pali (`pli`)              | None, already in Latin script                                                                    |
 
@@ -173,7 +179,7 @@ pnpm eval
 
 This runs `search_passages` on each situation in `test/eval/situations.json` and reports Recall@10: the share of the passages judged relevant that appear in the first 10 hits, per situation and on average. It needs a built corpus and `MISTRAL_API_KEY`, so it is not part of CI. Run it before each launch; the target is 0.7.
 
-The set has 59 situations written as a person would ask them, each with 3 to 6 passages judged relevant by hand, at most 3 per work since search returns at most 3 hits per work. A hit counts only if it is the same passage, not another passage of the same reference.
+The set has 63 situations written as a person would ask them, each with 3 to 6 passages judged relevant by hand, at most 3 per work since search returns at most 3 hits per work. A hit counts only if it is the same passage, not another passage of the same reference.
 
 | Date       | Recall@10 | Situations |
 | ---------- | --------- | ---------- |

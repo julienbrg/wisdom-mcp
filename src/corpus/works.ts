@@ -548,6 +548,18 @@ export const PILOT_WORKS: Work[] = [
     originalOf: 'enneads',
   },
   {
+    id: 'outlines-of-pyrrhonism',
+    author: 'Sextus Empiricus',
+    title: 'Outlines of Pyrrhonism',
+    originalTitle: 'Πυρρώνειοι ὑποτυπώσεις',
+    originalLanguage: 'grc',
+    tradition: 'greco-roman',
+    translator: 'Mary Mills Patrick',
+    year: 1899,
+    source: 'https://www.gutenberg.org/ebooks/17556',
+    original: 'perseus',
+  },
+  {
     id: 'sermon-on-the-mount',
     author: 'Jesus (per Matthew)',
     title: 'Sermon on the Mount (Matthew 5-7)',

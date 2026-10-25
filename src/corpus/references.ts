@@ -597,6 +597,10 @@ const ANCHORED: Record<string, Layout> = {
     /^(?:NOTE ON THE ORDER OF THE TRACTATES|ACKNOWLEDGEMENTS?$)/,
     /^THE \w+:? ENNEAD$/,
   ]),
+  'outlines-of-pyrrhonism': {
+    start: /^It is probable that those who seek after anything/,
+    apparatus: (text) => !LOWER.test(text) || /^_.*_$/.test(text),
+  },
 };
 
 /** Where each unit starts, in order: a block's opening words, or after "…", words within one. */

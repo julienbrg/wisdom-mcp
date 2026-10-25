@@ -467,11 +467,14 @@ const plato = (start: RegExp, notes: string[] = []): Layout => ({
     notes.some((n) => text.startsWith(n)),
 });
 
-// A scan's page heads, signature marks and stray letters; its footnotes are left out by the anchors.
+// A scan's page heads, signature marks and stray letters.
+const scanApparatus = (text: string) => scanHead(text) || (text.match(/\p{L}/gu)?.length ?? 0) < 4;
+
+// A scan whose footnotes are left out by the anchors.
 const scan = (start: RegExp, skip?: [RegExp, RegExp]): Layout => ({
   start,
   skip,
-  apparatus: (text) => scanHead(text) || (text.match(/\p{L}/gu)?.length ?? 0) < 4,
+  apparatus: scanApparatus,
 });
 
 // Translations with no numbers, aligned by hand on the source paragraphs, or Plato's as above.
@@ -492,7 +495,7 @@ const ANCHORED: Record<string, Layout> = {
   // A scan. Footnotes open with the OCR of their mark, or with its number; stray letters are noise.
   mozi: {
     start: /^BOOK I$/,
-    apparatus: (text) => scanHead(text) || (text.match(/\p{L}/gu)?.length ?? 0) < 4,
+    apparatus: scanApparatus,
     footnotes: {
       note: (text) => /^(?:[*®^’•»°]|\d{1,2} \p{Lu})/u.test(text),
       head: scanHead,
@@ -503,7 +506,7 @@ const ANCHORED: Record<string, Layout> = {
   xunzi: {
     start: /^BOOK I$/,
     end: /^CHINESE INDEX/,
-    apparatus: (text) => scanHead(text) || (text.match(/\p{L}/gu)?.length ?? 0) < 4,
+    apparatus: scanApparatus,
     footnotes: {
       note: (text) => /^(?:[^\p{L}\d\s]?\p{L}?\s)?[*®^’•»°]|^1 \p{Lu}/u.test(text),
       head: scanHead,

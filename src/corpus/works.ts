@@ -435,7 +435,7 @@ export const PILOT_WORKS: Work[] = [
     tradition: 'greco-roman',
     translator: 'George Burges',
     year: 1851,
-    source: 'https://en.wikisource.org/wiki/Epistles_(Jowett)/Seventh_Letter',
+    source: 'https://en.wikisource.org/wiki/Epistles_(Burges)/Seventh_Letter',
     original: 'perseus',
   },
   {

@@ -5,7 +5,7 @@ import { gitaRange, gitaVerses } from '../dist/corpus/originals/gita-verses.js';
 import { meditationsChapters } from '../dist/corpus/originals/meditations.js';
 import { group, parseTei } from '../dist/corpus/originals/perseus.js';
 import { cleanVerse } from '../dist/corpus/originals/sefaria.js';
-import { versesOf } from '../dist/corpus/originals/suttacentral.js';
+import { paragraphsOf, versesOf } from '../dist/corpus/originals/suttacentral.js';
 
 const TEI = `<TEI><teiHeader><title>skip me</title></teiHeader><text><body>
 <div type="edition"><head>ΚΑΤΑ ΜΑΘΘΑΙΟΝ</head>
@@ -65,6 +65,71 @@ test('suttacentral: verse lines without titles or the vagga colophon', () => {
       [59, 'Evaṁ saṅkārabhūtesu,'],
     ],
   );
+});
+
+test('suttacentral: one unit per root paragraph, verse lines kept, headings marked', () => {
+  const sutta = {
+    keys_order: [
+      'iti1:0.1',
+      'iti1:0.2',
+      'iti1:2.1',
+      'iti1:2.2',
+      'iti1:3.1',
+      'iti1:3.2',
+      'iti1:4.2',
+    ],
+    html_text: {
+      'iti1:0.1': "<article id='iti1'><header><ul><li class='division'>{}</li></ul>",
+      'iti1:0.2': "<h1 class='sutta-title'>{}</h1></header>",
+      'iti1:2.1': '<p>{}',
+      'iti1:2.2': '{}</p>',
+      'iti1:3.1': "<blockquote class='gatha'><p><span class='verse-line'>{}</span>",
+      'iti1:3.2': "<span class='verse-line'>{}</span></p></blockquote>",
+      'iti1:4.2': "<p class='endsutta'>{}</p></article>",
+    },
+    root_text: {
+      'iti1:0.1': 'Itivuttaka 1 ',
+      'iti1:0.2': 'Lobhasutta ',
+      'iti1:2.1': '“Ekadhammaṁ, bhikkhave, pajahatha; ',
+      'iti1:2.2': 'ahaṁ vo pāṭibhogo anāgāmitāya. ',
+      'iti1:3.1': '“Yena lobhena luddhāse, ',
+      'iti1:3.2': 'sattā gacchanti duggatiṁ; ',
+      'iti1:4.2': 'Paṭhamaṁ. ',
+    },
+    translation_text: {
+      'iti1:0.1': 'So It Was Said 1 ',
+      'iti1:0.2': 'Greed ',
+      'iti1:2.1': '“Mendicants, give up one thing ',
+      'iti1:2.2': 'and I guarantee <j>you non-return. ',
+      'iti1:3.1': '“When overcome by greed ',
+      'iti1:3.2': 'beings go to a bad place. ',
+      'iti1:4.2': '',
+    },
+  };
+  const { units, segments } = paragraphsOf('iti1', sutta);
+  assert.deepEqual(
+    [...units].map(([unit, { body }]) => [unit, body]),
+    [
+      ['iti1:0.1', 'Itivuttaka 1'],
+      ['iti1:0.2', 'Lobhasutta'],
+      ['iti1:2.1', '“Ekadhammaṁ, bhikkhave, pajahatha; ahaṁ vo pāṭibhogo anāgāmitāya.'],
+      ['iti1:3.1', '“Yena lobhena luddhāse,\nsattā gacchanti duggatiṁ;'],
+      ['iti1:4.2', 'Paṭhamaṁ.'],
+    ],
+  );
+  assert.equal(units.get('iti1:2.1')?.url, 'https://suttacentral.net/iti1/pli/ms');
+  assert.deepEqual(
+    segments.map((s) => [s.id, s.unit, s.heading]),
+    [
+      ['iti1:0.1', 'iti1:0.1', true],
+      ['iti1:0.2', 'iti1:0.2', true],
+      ['iti1:2.1', 'iti1:2.1', false],
+      ['iti1:2.2', 'iti1:2.1', false],
+      ['iti1:3.1', 'iti1:3.1', false],
+      ['iti1:3.2', 'iti1:3.1', false],
+    ],
+  );
+  assert.equal(segments[3].text, 'and I guarantee you non-return.');
 });
 
 test('gita: one unit per chapter.verse, blank lines dropped', () => {

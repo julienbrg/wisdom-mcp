@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { sourceUnits } from '../dist/corpus/originals/index.js';
+import { paragraphRange, sourceUnits } from '../dist/corpus/originals/index.js';
 import {
   analectsChapters,
   artOfWarChapters,
@@ -253,4 +253,18 @@ test('translation units map onto source units', () => {
   assert.deepEqual(sourceUnits('ecclesiastes', '5:1'), ['4:17']);
   assert.deepEqual(sourceUnits('ecclesiastes', '5:20'), ['5:19']);
   assert.deepEqual(sourceUnits('ecclesiastes', '4:16'), ['4:16']);
+});
+
+test('a bilara range covers every paragraph between its ends', () => {
+  const units = new Map(
+    ['mn10:17.1', 'mn10:18-23.1', 'mn10:24.1', 'mn10:26-28.1', 'mn10:29.1'].map((u) => [u, {}]),
+  );
+  assert.deepEqual(paragraphRange(units, 'mn10:26-28.1'), ['mn10:26-28.1']);
+  assert.deepEqual(paragraphRange(units, 'mn10:17.1-24.1'), [
+    'mn10:17.1',
+    'mn10:18-23.1',
+    'mn10:24.1',
+  ]);
+  assert.deepEqual(paragraphRange(units, 'mn10:26-28.1-29.1'), ['mn10:26-28.1', 'mn10:29.1']);
+  assert.deepEqual(paragraphRange(units, 'mn10:99.1'), ['mn10:99.1']);
 });

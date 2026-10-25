@@ -99,28 +99,32 @@ export function parseStephanus(xml: string, part?: string) {
   let skip = 0;
   let current: { path: string; lines: string[] } | undefined;
   let line = false;
+  const append = (text: string) => {
+    if (line || !current!.lines.length) current!.lines.push('');
+    current!.lines[current!.lines.length - 1] += text;
+    line = false;
+  };
 
   for (const [token] of body.matchAll(/<[^>]+>|[^<]+/g)) {
     const path = divs.filter((n): n is string => n !== null);
     const inside = !part || path[0] === part;
     if (token[0] !== '<') {
       if (skip || !inside || !current) continue;
-      if (line || !current.lines.length) current.lines.push('');
-      current.lines[current.lines.length - 1] += decodeEntities(token);
-      line = false;
+      append(decodeEntities(token));
       continue;
     }
     const [, close, name] = token.match(/^<(\/?)([\w:]+)/) ?? [];
     if (!name) continue;
     if (name === 'milestone' && inside) {
       const n = token.match(/\bn="(\d+[a-e])"/)?.[1];
-      if (/unit="section"/.test(token) && n && !sections.has(n)) {
+      if (/unit="section"/.test(token) && n) {
+        if (sections.has(n)) throw new Error(`Stephanus section ${n} twice`);
         current = { path: path.join('.'), lines: [] };
         sections.set(n, current);
       } else if (/unit="para"/.test(token)) line = true;
     }
     if (token.endsWith('/>')) continue;
-    if (['note', 'head', 'bibl'].includes(name)) skip += close ? -1 : 1;
+    if (SKIPPED.has(name) && name !== 'label') skip += close ? -1 : 1;
     else if (name === 'div') {
       if (close) divs.pop();
       else
@@ -130,9 +134,7 @@ export function parseStephanus(xml: string, part?: string) {
     } else if (!close && ['said', 'p', 'l'].includes(name)) line = true;
     else if (!skip && inside && current && (name === 'del' || name === 'add')) {
       // Burnet's deletions and additions, in his brackets.
-      const mark = name === 'del' ? (close ? ']' : '[') : close ? '⟩' : '⟨';
-      if (!current.lines.length) current.lines.push('');
-      current.lines[current.lines.length - 1] += mark;
+      append(name === 'del' ? (close ? ']' : '[') : close ? '⟩' : '⟨');
     }
   }
   const texts = new Map<string, { path: string; body: string }>();
@@ -143,10 +145,11 @@ export function parseStephanus(xml: string, part?: string) {
   return texts;
 }
 
-async function loadTei(urn: string, cacheDir: string) {
+async function loadTei(urn: string, cacheDir: string, fallback?: string) {
   const [tg, work] = urn.split('.');
   const xml = (await cached(cacheDir, `${urn}.xml`, `${RAW}/${tg}/${work}/${urn}.xml`)).toString();
-  const license = xml.match(/<licence[^>]*>([^<]+)/)?.[1].trim() ?? REPO_LICENCE;
+  const license = xml.match(/<licence[^>]*>([^<]+)/)?.[1].trim() || fallback;
+  if (!license) throw new Error(`${urn}: no licence in the TEI header`);
   return { xml, license: `${license} (Perseus Digital Library)` };
 }
 
@@ -156,7 +159,7 @@ const reader = (urn: string, passage: string) =>
 export async function loadPerseus(workId: string, cacheDir: string): Promise<SourceText> {
   const steph = STEPHANUS[workId];
   if (steph) {
-    const { xml, license } = await loadTei(steph.urn, cacheDir);
+    const { xml, license } = await loadTei(steph.urn, cacheDir, REPO_LICENCE);
     const units = new Map();
     for (const [n, { path, body }] of parseStephanus(xml, steph.part))
       units.set(n, { body, url: reader(steph.urn, path) });

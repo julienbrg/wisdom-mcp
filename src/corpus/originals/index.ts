@@ -27,7 +27,7 @@ export function loadSource(work: Work, cacheDir: string): Promise<SourceText> {
     case 'suttacentral':
       return loadSuttaCentral(id, cacheDir);
     case 'sefaria':
-      return loadSefaria(cacheDir);
+      return loadSefaria(id, cacheDir);
     case 'gita':
       return loadGita(cacheDir);
   }

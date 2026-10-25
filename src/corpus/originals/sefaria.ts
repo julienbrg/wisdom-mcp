@@ -1,7 +1,18 @@
 import { cached } from '../cache.js';
 import { decodeEntities, squash, type SourceText } from './source.js';
 
-const API = 'https://www.sefaria.org/api/v3/texts/Ecclesiastes?version=hebrew';
+const API = 'https://www.sefaria.org/api/v3/texts';
+
+const MAM = 'Miqra according to the Masorah';
+
+// Each work's Sefaria book and Hebrew version.
+const BOOKS: Record<string, { book: string; version: string }> = {
+  ecclesiastes: { book: 'Ecclesiastes', version: MAM },
+  job: { book: 'Job', version: MAM },
+  proverbs: { book: 'Proverbs', version: MAM },
+  psalms: { book: 'Psalms', version: MAM },
+  'pirkei-avot': { book: 'Pirkei_Avot', version: 'Torat Emet 357' },
+};
 
 interface Response {
   versions: { versionTitle: string; license: string; text: string[][] }[];
@@ -18,19 +29,22 @@ export function cleanVerse(html: string): string {
   );
 }
 
-export async function loadSefaria(cacheDir: string): Promise<SourceText> {
+export async function loadSefaria(workId: string, cacheDir: string): Promise<SourceText> {
+  const { book, version } = BOOKS[workId];
+  const url = `${API}/${book}?version=${encodeURIComponent(`hebrew|${version}`)}`;
   const res = JSON.parse(
-    (await cached(cacheDir, 'sefaria-ecclesiastes.json', API)).toString(),
+    (await cached(cacheDir, `sefaria-${workId}.json`, url)).toString(),
   ) as Response;
-  const [version] = res.versions;
+  const [found] = res.versions;
+  if (!found) throw new Error(`${workId}: Sefaria has no ${version} for ${book}`);
   const units = new Map();
-  version.text.forEach((verses, c) =>
+  found.text.forEach((verses, c) =>
     verses.forEach((html, v) =>
       units.set(`${c + 1}:${v + 1}`, {
         body: cleanVerse(html),
-        url: `https://www.sefaria.org/Ecclesiastes.${c + 1}.${v + 1}?lang=he`,
+        url: `https://www.sefaria.org/${book}.${c + 1}.${v + 1}?lang=he`,
       }),
     ),
   );
-  return { license: `${version.license} (Sefaria, ${version.versionTitle})`, units };
+  return { license: `${found.license} (Sefaria, ${found.versionTitle})`, units };
 }

@@ -227,7 +227,7 @@ test('aligned: each translation takes the chapter its Chinese paragraph comes fr
       '## chapter02',
       'Liang Hui Wang II',
     ],
-    source,
+    { units: source },
   );
   assert.deepEqual(
     segs.map((s) => [s.ref, s.refUnit, s.apparatus]),

@@ -134,6 +134,7 @@ export function parseStephanus(xml: string, part?: string, bekker = false) {
   let skip = 0;
   let current: { path: string; lines: string[] } | undefined;
   let line = false;
+  let last: string | undefined;
   const append = (text: string) => {
     if (line || !current!.lines.length) current!.lines.push('');
     current!.lines[current!.lines.length - 1] += text;
@@ -152,11 +153,13 @@ export function parseStephanus(xml: string, part?: string, bekker = false) {
     if (!name) continue;
     if (name === 'milestone' && inside) {
       const n = token.match(/\bn="(\d+[a-e])"/)?.[1];
-      if (bekker && n && n === [...sections.keys()].at(-1)) continue;
+      if (bekker && n === last) continue;
       if ((bekker ? /unit="page"/ : /unit="section"/).test(token) && n) {
-        if (sections.has(n)) throw new Error(`Stephanus section ${n} twice`);
+        if (sections.has(n))
+          throw new Error(`${bekker ? 'Bekker column' : 'Stephanus section'} ${n} twice`);
         current = { path: path.join('.'), lines: [] };
         sections.set(n, current);
+        last = n;
       } else if (/unit="para"/.test(token)) line = true;
     }
     if (token.endsWith('/>')) continue;
@@ -193,7 +196,8 @@ async function loadTei(
   ).toString();
   const license = xml.match(/<licence[^>]*>([^<]+)/)?.[1].trim() || fallback;
   if (!license) throw new Error(`${urn}: no licence in the TEI header`);
-  return { xml, license: `${license} (Perseus Digital Library)` };
+  const library = repo === 'first1k' ? 'First1KGreek' : 'Perseus Digital Library';
+  return { xml, license: `${license} (${library})` };
 }
 
 const reader = (urn: string, passage: string) =>
@@ -209,17 +213,21 @@ export async function loadPerseus(workId: string, cacheDir: string): Promise<Sou
     return { license, units, stephanus: true };
   }
   const units = new Map();
-  let license = '';
-  for (const ed of [EDITIONS[workId]].flat()) {
-    const tei = await loadTei(ed.urn, cacheDir, undefined, ed.repo);
-    license = tei.license;
+  const editions = [EDITIONS[workId]].flat();
+  const teis = await Promise.all(
+    editions.map((ed) => loadTei(ed.urn, cacheDir, undefined, ed.repo)),
+  );
+  const license = teis[0].license;
+  for (const [i, ed] of editions.entries()) {
+    const tei = teis[i];
+    if (tei.license !== license) throw new Error(`${workId}: its editions have different licences`);
     for (const [unit, parts] of group(parseTei(tei.xml), ed.depth, ed.sep, ed.skip)) {
+      // A section that runs over two lives, or chapters, is one unit, its parts unlabelled.
+      const label = (path: string) => path.split('.').slice(ed.depth).join('.');
       const body =
         parts.length === 1
           ? parts[0].body
-          : parts
-              .map((p) => `(${p.path.split('.').slice(ed.depth).join('.')}) ${p.body}`)
-              .join('\n');
+          : parts.map((p) => (label(p.path) ? `(${label(p.path)}) ${p.body}` : p.body)).join('\n');
       const passage = parts[0].path.split('.').slice(0, ed.depth).join('.');
       units.set((ed.prefix ?? '') + unit, { body, url: reader(ed.urn, passage) });
     }

@@ -66,6 +66,31 @@ test('perseus: Stephanus sections from milestone to milestone, a line per speech
   assert.throws(() => parseStephanus(xml), /section 323d twice/);
 });
 
+test('perseus: a level left out of the unit, for sections numbered through each book', () => {
+  const texts = new Map([
+    ['10.1.121', 'a'],
+    ['10.1.122', 'b'],
+    ['10.2.123', 'c'],
+  ]);
+  assert.deepEqual([...group(texts, 3, '.', 1).keys()], ['10.121', '10.122', '10.123']);
+});
+
+test('perseus: Bekker columns from page milestone to page milestone, a column restated goes on', () => {
+  const xml = `<TEI><text><body><div type="edition">
+<div type="textpart" subtype="book" n="2"><div type="textpart" subtype="chapter" n="9">
+<p><milestone unit="page" resp="Bekker" n="1109b"/>διὸ <milestone unit="line" n="25"/>ἔργον.</p></div></div>
+<div type="textpart" subtype="book" n="3"><div type="textpart" subtype="chapter" n="1">
+<p><milestone unit="page" resp="Bekker" n="1109b"/>τῆς ἀρετῆς <milestone unit="page" n="1110a"/>δή</p>
+</div></div></div></body></text></TEI>`;
+  assert.deepEqual(
+    [...parseStephanus(xml, undefined, true)],
+    [
+      ['1109b', { path: '2.9', body: 'διὸ ἔργον.\nτῆς ἀρετῆς' }],
+      ['1110a', { path: '3.1', body: 'δή' }],
+    ],
+  );
+});
+
 test('sefaria: paragraph markers and tags are dropped, ketiv and qere kept', () => {
   assert.equal(
     cleanVerse(

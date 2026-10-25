@@ -282,3 +282,14 @@ test('a Stephanus range covers every section between its ends, across pages', ()
   assert.deepEqual(stephanusRange(units, '70a-c'), ['70a', '70b', '70c']);
   assert.deepEqual(stephanusRange(units, '70d-71b'), ['70d', '71a', '71b']);
 });
+
+test('a Bekker range covers every column between its ends', () => {
+  const units = new Map(['1094a', '1094b', '1095a', '1095b'].map((u) => [u, u]));
+  assert.deepEqual(stephanusRange(units, '1094a-b'), ['1094a', '1094b']);
+  assert.deepEqual(stephanusRange(units, '1094b-1095b'), ['1094b', '1095a', '1095b']);
+});
+
+test('a range of chapters or Encheiridion sections, as the anchors make them', () => {
+  assert.deepEqual(sourceUnits('enneads', '1.6.3-4'), ['1.6.3', '1.6.4']);
+  assert.deepEqual(sourceUnits('discourses-selection', 'Ench. 50-51'), ['Ench. 50', 'Ench. 51']);
+});

@@ -476,5 +476,80 @@
     "id": "putting-it-off",
     "situation": "There is work that matters to me, but I keep putting it off until I have more time.",
     "relevant": ["pirkei-avot:185", "pirkei-avot:222", "pirkei-avot:264"]
+  },
+  {
+    "id": "report-my-father",
+    "situation": "My father did something seriously wrong, and I am thinking of reporting him, but my family says turning on him would be impious.",
+    "relevant": ["euthyphro:56", "euthyphro:57", "euthyphro:65"]
+  },
+  {
+    "id": "beg-for-mercy",
+    "situation": "I am accused of something at work I believe I did right, and everyone expects me to grovel and plead to get off.",
+    "relevant": ["apology:98", "apology:99", "apology:102"]
+  },
+  {
+    "id": "pay-them-back",
+    "situation": "Someone wronged me badly, and I want to pay them back in the same way.",
+    "relevant": ["crito:93", "crito:101", "crito:116"]
+  },
+  {
+    "id": "facing-my-death",
+    "situation": "I have been told I do not have long to live, and I am terrified of dying.",
+    "relevant": ["phaedo:133", "phaedo:183", "phaedo:444"]
+  },
+  {
+    "id": "more-confused",
+    "situation": "The more I think about a question, the more confused I get. Is that a sign I am not cut out for it?",
+    "relevant": ["theaetetus:399", "theaetetus:400", "theaetetus:336"]
+  },
+  {
+    "id": "more-than-attraction",
+    "situation": "Is love only physical attraction, or can it lead to something higher?",
+    "relevant": ["symposium:194", "symposium:198", "symposium:199"]
+  },
+  {
+    "id": "write-it-down",
+    "situation": "I write everything down, and I feel I no longer remember or really understand anything.",
+    "relevant": ["phaedrus:440", "phaedrus:444", "phaedrus:451"]
+  },
+  {
+    "id": "ready-to-lead",
+    "situation": "I want to go into politics, but I am not sure I actually know enough to advise anyone.",
+    "relevant": ["alcibiades-i:78", "alcibiades-i:132", "alcibiades-i:268"]
+  },
+  {
+    "id": "know-better-still-do",
+    "situation": "I know what is bad for me, and I keep giving in to it anyway.",
+    "relevant": ["protagoras:391", "protagoras:395", "protagoras:413"]
+  },
+  {
+    "id": "cut-corners",
+    "situation": "My boss wants me to cheat our clients. Going along would get me ahead, refusing could cost me my job.",
+    "relevant": ["gorgias:562", "gorgias:616", "gorgias:1249"]
+  },
+  {
+    "id": "teach-my-son",
+    "situation": "I have tried to raise my son to be good, but he does not share my values. Can goodness even be taught?",
+    "relevant": ["meno:499", "meno:509", "meno:617"]
+  },
+  {
+    "id": "why-be-honest",
+    "situation": "Why should I be honest when people who cheat seem to get away with it and do better?",
+    "relevant": ["republic:912", "republic:936", "republic:4684"]
+  },
+  {
+    "id": "why-a-world",
+    "situation": "Why is there a world at all, and why does it have any order?",
+    "relevant": ["timaeus:234", "timaeus:236", "timaeus:237"]
+  },
+  {
+    "id": "at-war-with-myself",
+    "situation": "I feel at war with myself: part of me wants one thing and part of me another.",
+    "relevant": ["laws:384", "laws:387", "laws:540"]
+  },
+  {
+    "id": "advice-ignored",
+    "situation": "I keep advising someone in power who will not listen. Should I keep trying or walk away?",
+    "relevant": ["seventh-letter:10", "seventh-letter:11", "seventh-letter:12"]
   }
 ]

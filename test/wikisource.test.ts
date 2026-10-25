@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { paragraphRange, sourceUnits } from '../dist/corpus/originals/index.js';
+import { paragraphRange, sourceUnits, stephanusRange } from '../dist/corpus/originals/index.js';
 import {
   analectsChapters,
   artOfWarChapters,
@@ -274,4 +274,11 @@ test('a bilara range covers every paragraph between its ends', () => {
   ]);
   assert.deepEqual(paragraphRange(units, 'mn10:26-28.1-29.1'), ['mn10:26-28.1', 'mn10:29.1']);
   assert.deepEqual(paragraphRange(units, 'mn10:99.1'), ['mn10:99.1']);
+});
+
+test('a Stephanus range covers every section between its ends, across pages', () => {
+  const units = new Map(['70a', '70b', '70c', '70d', '71a', '71b'].map((u) => [u, u]));
+  assert.deepEqual(stephanusRange(units, '70b'), ['70b']);
+  assert.deepEqual(stephanusRange(units, '70a-c'), ['70a', '70b', '70c']);
+  assert.deepEqual(stephanusRange(units, '70d-71b'), ['70d', '71a', '71b']);
 });

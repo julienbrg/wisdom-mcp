@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { verseUnits } from '../dist/corpus/originals/gita.js';
 import { gitaRange, gitaVerses } from '../dist/corpus/originals/gita-verses.js';
 import { meditationsChapters } from '../dist/corpus/originals/meditations.js';
-import { group, parseTei } from '../dist/corpus/originals/perseus.js';
+import { group, parseStephanus, parseTei } from '../dist/corpus/originals/perseus.js';
 import { cleanVerse } from '../dist/corpus/originals/sefaria.js';
 import { paragraphsOf, versesOf } from '../dist/corpus/originals/suttacentral.js';
 
@@ -38,6 +38,32 @@ test('perseus: grouping by the leading levels of the citation', () => {
       ?.map((p) => p.path),
     ['1.1.1', '1.2.1'],
   );
+});
+
+test('perseus: Stephanus sections from milestone to milestone, a line per speech', () => {
+  const xml = `<TEI><text><body><div type="edition">
+<div type="textpart" subtype="letter" n="6"><div type="textpart" subtype="section" n="323">
+<p><milestone unit="section" resp="Stephanus" n="323d"/>ἔρρωσθε.</p></div></div>
+<div type="textpart" subtype="letter" n="7"><head>Ζ</head>
+<div type="textpart" subtype="section" n="323"><p><milestone unit="section" n="323d"/>Πλάτων
+τοῖς Δίωνος <del>οἰκείοις</del> εὖ πράττειν.</p>
+<p><del>ἐρρῶσθαι</del> <said who="#a"><label>ΣΩ.</label> ἐπεστείλατέ <milestone unit="page" n="324"/>
+<milestone unit="section" resp="Stephanus" n="324a"/>μοι<note>a note</note>, <add>καὶ</add></said></p>
+<milestone unit="para"/>ἐγὼ δέ</div></div></div></body></text></TEI>`;
+  assert.deepEqual(
+    [...parseStephanus(xml, '7')],
+    [
+      [
+        '323d',
+        {
+          path: '7.323',
+          body: 'Πλάτων τοῖς Δίωνος [οἰκείοις] εὖ πράττειν.\n[ἐρρῶσθαι]\nΣΩ. ἐπεστείλατέ',
+        },
+      ],
+      ['324a', { path: '7.323', body: 'μοι, ⟨καὶ⟩\nἐγὼ δέ' }],
+    ],
+  );
+  assert.throws(() => parseStephanus(xml), /section 323d twice/);
 });
 
 test('sefaria: paragraph markers and tags are dropped, ketiv and qere kept', () => {

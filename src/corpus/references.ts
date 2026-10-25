@@ -456,7 +456,18 @@ const leggeApparatus = (text: string) =>
   (LEGGE_HEAD.test(text) && !/(?:\p{Ll}+ ){4}/u.test(text)) ||
   /\p{L}{25}/u.test(text);
 
-// Translations with no numbers, aligned by hand on the source paragraphs.
+// Plato's translators give no Stephanus numbers, so each work is aligned on the Stephanus sections
+// of the Perseus English translation, whose milestones are those of the Greek. Titles, book heads,
+// the persons and scene of a dialogue, and the translator's notes are apparatus.
+const plato = (start: RegExp, notes: string[] = []): Layout => ({
+  start,
+  apparatus: (text) =>
+    !LOWER.test(text) ||
+    /^(?:PERSONS OF THE DIALOGUE|SCENE:|PLACE OF THE NARRATION:)/.test(text) ||
+    notes.some((n) => text.startsWith(n)),
+});
+
+// Translations with no numbers, aligned by hand on the source paragraphs, or Plato's as above.
 const ANCHORED: Record<string, Layout> = {
   // Giles's notes and chapter arguments are indented, and titles have no lowercase.
   'chuang-tzu': {
@@ -527,6 +538,21 @@ const ANCHORED: Record<string, Layout> = {
     start: /^TAO IN ITS TRANSCENDENTAL ASPECT/,
     apparatus: (text) => text.startsWith('*') || !LOWER.test(text) || /^\d+[il]?$/.test(text),
   },
+  euthyphro: plato(/^EUTHYPHRO: Why have you left the Lyceum/),
+  apology: plato(/^How you, O Athenians, have been affected/),
+  crito: plato(/^SOCRATES: Why have you come at this hour/),
+  phaedo: plato(/^ECHECRATES: Were you yourself, Phaedo/, ['(Compare Milton', "'But when lust"]),
+  theaetetus: plato(/^EUCLID: Have you only just arrived/),
+  symposium: plato(/^Concerning the things about which you ask/),
+  phaedrus: plato(/^SOCRATES: My dear Phaedrus, whence come you/),
+  'alcibiades-i': plato(/^SOCRATES: I dare say that you may be surprised/),
+  protagoras: plato(/^COMPANION: Where do you come from, Socrates/),
+  gorgias: plato(/^CALLICLES: The wise man, as the proverb says/),
+  meno: plato(/^MENO: Can you tell me, Socrates/),
+  republic: plato(/^I went down yesterday to the Piraeus/),
+  timaeus: plato(/^SOCRATES: One, two, three; but where/),
+  laws: plato(/^ATHENIAN: Tell me, Strangers, is a God/),
+  'seventh-letter': plato(/^plato to the kindred and friends of dion/),
 };
 
 /** Where each unit starts, in order: a block's opening words, or after "…", words within one. */
@@ -537,8 +563,16 @@ const loadAnchors = (workId: string): Anchor[] =>
     readFileSync(new URL(`../../data/alignments/${workId}.json`, import.meta.url), 'utf-8'),
   ) as Anchor[];
 
-// "10.6" to "10.7" in one block is "10.6-7", as sourceUnits reads it.
+// "10.6" to "10.7" in one block is "10.6-7", as sourceUnits reads it, and Stephanus "70a" to "70c"
+// is "70a-c", but "70d" to "71b" is "70d-71b".
 function span(from: string, to: string): string {
+  const [f, t] = [from, to].map((u) => u.match(/^(\d+)([a-e])$/));
+  if (f || t) {
+    if (!f || !t) throw new Error(`no range from ${from} to ${to}`);
+    if (+t[1] < +f[1] || (t[1] === f[1] && t[2] <= f[2]))
+      throw new Error(`no range from ${from} to ${to}`);
+    return `${from}-${t[1] === f[1] ? t[2] : to}`;
+  }
   const [, prefix, a] = from.match(/^(.*?)(\d+)$/)!;
   const [, prefix2, b] = to.match(/^(.*?)(\d+)$/)!;
   if (prefix !== prefix2 || +b <= +a) throw new Error(`no range from ${from} to ${to}`);

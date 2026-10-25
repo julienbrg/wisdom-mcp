@@ -209,14 +209,39 @@ const ART_OF_WAR_PARAGRAPHS = [
   '1 15 20 29 35 42 52 63',
   '1 5 15',
   '1 7 14 20 26',
-].map((starts) => starts.split(' ').map((s) => (s.endsWith('+') ? parseFloat(s) + 0.5 : +s)));
+].map(startsOf);
+
+// Where each Sefaria mishnah of a chapter of Pirkei Avot starts, in Gorfinkle's numbering, which
+// follows Taylor's. "11+" starts within his 11, which then spans both.
+const AVOT_MISHNAYOT = [
+  '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18',
+  '1 2 3 4 6 7 8 9 13 15 16 17 18 19 20 21',
+  '1 2 4 5 6 7 8 10 11 13 15 16 17 18 19 20 21 23',
+  '1 2 3 4 6 8 9 10 11 12 13 15 16 18 19 21 22 23 24 25 28 29',
+  '1 2 4 5 8 9 10 11 11+ 13 14 15 16 17 18 19 20 21 22 23 24 25 26',
+  '1 2 3 4 5 6 7 8 9 10 11',
+].map(startsOf);
+
+function startsOf(starts: string): number[] {
+  return starts.split(' ').map((s) => (s.endsWith('+') ? parseFloat(s) + 0.5 : +s));
+}
+
+// The source units that sections from..to of a chapter fall in, by where each unit starts.
+function unitsOf(table: number[][], sep: string, ch: number, from: number, to: number): string {
+  const starts = table[ch - 1];
+  const first = starts.findLastIndex((s) => s <= from) + 1;
+  const last = starts.findLastIndex((s) => s < to + 1) + 1;
+  return first === last ? `${ch}${sep}${first}` : `${ch}${sep}${first}-${last}`;
+}
 
 /** The source paragraphs that Giles's sections from..to of a chapter fall in: "6.6-7". */
 export function artOfWarUnit(ch: number, from: number, to: number): string {
-  const starts = ART_OF_WAR_PARAGRAPHS[ch - 1];
-  const first = starts.findLastIndex((s) => s <= from) + 1;
-  const last = starts.findLastIndex((s) => s < to + 1) + 1;
-  return first === last ? `${ch}.${first}` : `${ch}.${first}-${last}`;
+  return unitsOf(ART_OF_WAR_PARAGRAPHS, '.', ch, from, to);
+}
+
+/** The mishnayot that Gorfinkle's sayings from..to of a chapter fall in: "5:8-9". */
+export function avotUnit(ch: number, from: number, to: number): string {
+  return unitsOf(AVOT_MISHNAYOT, ':', ch, from, to);
 }
 
 // Giles's notes are in brackets, and some run over several blocks: an unclosed one goes on with
@@ -261,6 +286,41 @@ function artOfWar(): Scheme {
   };
 }
 
+// Gorfinkle's sayings are numbered within each chapter, several to a block at times, and the next
+// one may start midline, after the end of a sentence ("(31).  13. He used to say"). His notes open
+// with their number in brackets, and the sayings read before and after each chapter are not part of
+// the tractate.
+function pirkeiAvot(): Scheme {
+  let ch = 0;
+  let sayings: [number, number] | null = null;
+  return {
+    start: /^CHAPTER I$/,
+    end: /TRANSCRIPTION NOTES$/,
+    read(piece) {
+      const m = piece.match(/^CHAPTER ([IVX]+)$/);
+      if (m) [ch, sayings] = [roman(m[1]), null];
+      if (m || /^[([]/.test(piece)) return { heading: true };
+      let first = 0;
+      let last = sayings?.[1] ?? 0;
+      while (new RegExp(`(?:^|[.!?)'"]\\s+)${last + 1}\\.\\s`).test(piece)) {
+        last++;
+        first ||= last;
+      }
+      if (!first) return { heading: true };
+      sayings = [first, last];
+      return { text: piece.replace(/^\d+\.\s+/, '') };
+    },
+    ref() {
+      if (!ch || !sayings) return null;
+      const [from, to] = sayings;
+      return {
+        ref: from === to ? `${ch}:${from}` : `${ch}:${from}-${to}`,
+        refUnit: avotUnit(ch, from, to),
+      };
+    },
+  };
+}
+
 const SCHEMES: Record<string, () => Scheme> = {
   'tao-te-ching': taoTeChing,
   analects,
@@ -271,6 +331,10 @@ const SCHEMES: Record<string, () => Scheme> = {
   'art-of-war': artOfWar,
   'sermon-on-the-mount': bible,
   ecclesiastes: bible,
+  job: bible,
+  proverbs: bible,
+  psalms: bible,
+  'pirkei-avot': pirkeiAvot,
 };
 
 // Texts with no numbers, where each Chinese paragraph is followed by Legge's translation of it.

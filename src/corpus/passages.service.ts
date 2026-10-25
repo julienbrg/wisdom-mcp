@@ -9,7 +9,7 @@ const LANGUAGES: Record<string, string> = {
   pli: 'Pali',
   san: 'Sanskrit',
   grc: 'Ancient Greek',
-  hbo: 'Biblical Hebrew',
+  hbo: 'Ancient Hebrew',
 };
 
 const SCHEMES: Record<string, string> = {

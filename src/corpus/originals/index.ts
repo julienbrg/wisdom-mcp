@@ -27,7 +27,7 @@ export function loadSource(work: Work, cacheDir: string): Promise<SourceText> {
     case 'suttacentral':
       return loadSuttaCentral(id, cacheDir);
     case 'sefaria':
-      return loadSefaria(cacheDir);
+      return loadSefaria(id, cacheDir);
     case 'gita':
       return loadGita(cacheDir);
   }
@@ -52,7 +52,31 @@ const UNIT_MAPS: Record<string, (unit: string) => string[] | undefined> = {
     const [c, v] = unit.split(':').map(Number);
     if (c === 5) return [v === 1 ? '4:17' : `5:${v - 1}`];
   },
+  // The KJV's 41:1-8 are the Hebrew 40:25-32.
+  job(unit) {
+    const [c, v] = unit.split(':').map(Number);
+    if (c === 41) return [v <= 8 ? `40:${v + 24}` : `41:${v - 8}`];
+  },
+  psalms(unit) {
+    const [c, v] = unit.split(':').map(Number);
+    // Psalm 13's KJV 5 and 6 are both the Hebrew 6.
+    if (c === 13 && v === 6) return ['13:6'];
+    const titles = PSALM_TITLES.get(c);
+    if (titles) return [`${c}:${v + titles}`];
+  },
 };
+
+// The Hebrew counts these psalms' titles as their first verse, or first two, and the KJV doesn't
+// number them, as in the Copenhagen Alliance's English versification mappings:
+// https://github.com/Copenhagen-Alliance/versification-specification
+const PSALM_TITLES = new Map([
+  ...[51, 52, 54, 60].map((c) => [c, 2] as const),
+  ...[
+    3, 4, 5, 6, 7, 8, 9, 12, 13, 18, 19, 20, 21, 22, 30, 31, 34, 36, 38, 39, 40, 41, 42, 44, 45, 46,
+    47, 48, 49, 53, 55, 56, 57, 58, 59, 61, 62, 63, 64, 65, 67, 68, 69, 70, 75, 76, 77, 80, 81, 83,
+    84, 85, 88, 89, 92, 102, 108, 140, 142,
+  ].map((c) => [c, 1] as const),
+]);
 
 export function sourceUnits(workId: string, refUnit: string): string[] {
   const mapped = UNIT_MAPS[workId]?.(refUnit);

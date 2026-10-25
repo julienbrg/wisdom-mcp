@@ -1,6 +1,13 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { anchored, artOfWarUnit, bilara, roman, segment } from '../dist/corpus/references.js';
+import {
+  anchored,
+  artOfWarUnit,
+  avotUnit,
+  bilara,
+  roman,
+  segment,
+} from '../dist/corpus/references.js';
 
 const refs = (workId: string, blocks: string[]) =>
   segment(workId, blocks).map((s) => [s.ref, s.refUnit, s.apparatus]);
@@ -131,6 +138,53 @@ test('bible: verse numbers become chapter:verse', () => {
       ['1:4', 'One generation passeth away'],
     ],
   );
+});
+
+test('pirkei avot: sayings by number, several to a block, notes and recitations are apparatus', () => {
+  assert.deepEqual(
+    refs('pirkei-avot', [
+      'SAYINGS OF THE FATHERS',
+      'All Israel (1) have a portion in the world to come',
+      'CHAPTER I',
+      '1. Moses received the _Torah_ (4) from Sinai (5)',
+      '      (4) The word _Torah_ is usually translated by "law."\n      See chapter II, 2. Also',
+      '2. Simon, the Just (9), was of the last survivors\n(11).  3. Antigonus of\nSoko.  4.\nJose, the son of Joezer',
+      'Rabbi Chanania (45), the son of Akashia, said',
+      'CHAPTER V',
+      'All Israel have a portion in the world to come',
+      '1. With ten sayings the world was created.  2. There were ten\ngenerations from Adam to Noah.  3. There were ten generations',
+      'CHAPTER VI',
+      'THE ACQUISITION OF THE TORAH (1)',
+      'The sages taught (the following).\n 1. R. Meir (2) said',
+      '_____________________\n  TRANSCRIPTION NOTES',
+    ]),
+    [
+      [null, null, true],
+      [null, null, true],
+      [null, null, true],
+      ['1:1', '1:1', false],
+      [null, null, true],
+      ['1:2-4', '1:2-4', false],
+      [null, null, true],
+      [null, null, true],
+      [null, null, true],
+      ['5:1-3', '5:1-2', false],
+      [null, null, true],
+      [null, null, true],
+      ['6:1', '6:1', false],
+      [null, null, true],
+    ],
+  );
+});
+
+test("pirkei avot: Gorfinkle's sayings take the mishnayot they fall in", () => {
+  assert.equal(avotUnit(2, 4, 4), '2:4');
+  assert.equal(avotUnit(2, 5, 5), '2:4');
+  assert.equal(avotUnit(2, 9, 12), '2:8');
+  assert.equal(avotUnit(3, 21, 22), '3:17');
+  assert.equal(avotUnit(5, 11, 11), '5:8-9');
+  assert.equal(avotUnit(5, 12, 12), '5:9');
+  assert.equal(avotUnit(5, 26, 26), '5:23');
 });
 
 test('gita: verse ranges counted per chapter, colophons and footnotes are apparatus', () => {

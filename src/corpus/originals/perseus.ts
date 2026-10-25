@@ -1,7 +1,10 @@
 import { cached } from '../cache.js';
 import { decodeEntities, squash, type SourceText } from './source.js';
 
-const RAW = 'https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/master/data';
+const RAW = {
+  perseus: 'https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/master/data',
+  first1k: 'https://raw.githubusercontent.com/OpenGreekAndLatin/First1KGreek/master/data',
+};
 const SKIPPED = new Set(['note', 'head', 'bibl', 'label']);
 // The repository's licence, for the files whose header has none (Plato's).
 const REPO_LICENCE =
@@ -12,18 +15,41 @@ interface Edition {
   // How many levels of the citation scheme make one reference unit.
   depth: number;
   sep: string;
+  /** A level left out of the unit: Diogenes Laertius numbers his sections through each book. */
+  skip?: number;
+  /** Prefixed to the unit, for a work that joins two editions. */
+  prefix?: string;
+  repo?: keyof typeof RAW;
 }
 
-/** A work cited by Stephanus sections, and the textpart it is in an edition of several. */
+/** A work cited by Stephanus sections or Bekker columns, and the textpart it is in an edition of several. */
 interface StephanusEdition {
   urn: string;
   part?: string;
+  bekker?: boolean;
 }
 
-const EDITIONS: Record<string, Edition> = {
+const LIVES: Edition = { urn: 'tlg0004.tlg001.perseus-grc2', depth: 3, sep: '.', skip: 1 };
+
+const EDITIONS: Record<string, Edition | Edition[]> = {
   'sermon-on-the-mount': { urn: 'tlg0031.tlg001.perseus-grc2', depth: 2, sep: ':' },
   meditations: { urn: 'tlg0562.tlg001.perseus-grc2', depth: 2, sep: '.' },
   enchiridion: { urn: 'tlg0557.tlg002.perseus-grc2', depth: 1, sep: '.' },
+  // Long's selection is by chapter, and ends with the whole Encheiridion.
+  'discourses-selection': [
+    { urn: 'tlg0557.tlg001.perseus-grc2', depth: 2, sep: '.' },
+    { urn: 'tlg0557.tlg002.perseus-grc2', depth: 1, sep: '.', prefix: 'Ench. ' },
+  ],
+  'lives-of-eminent-philosophers': LIVES,
+  'epicurus-letters': LIVES,
+  'outlines-of-pyrrhonism': {
+    urn: 'tlg0544.tlg001.1st1K-grc1',
+    depth: 3,
+    sep: '.',
+    skip: 1,
+    repo: 'first1k',
+  },
+  enneads: { urn: 'tlg2000.tlg001.1st1K-grc1', depth: 3, sep: '.', repo: 'first1k' },
 };
 
 // Burnet's Plato.
@@ -43,6 +69,11 @@ const STEPHANUS: Record<string, StephanusEdition> = {
   timaeus: { urn: 'tlg0059.tlg031.perseus-grc2' },
   laws: { urn: 'tlg0059.tlg034.perseus-grc2' },
   'seventh-letter': { urn: 'tlg0059.tlg036.perseus-grc2', part: '7' },
+  // Bywater's Ethics and Ross's Metaphysics, Politics and Rhetoric.
+  'nicomachean-ethics': { urn: 'tlg0086.tlg010.perseus-grc2', bekker: true },
+  metaphysics: { urn: 'tlg0086.tlg025.perseus-grc2', bekker: true },
+  politics: { urn: 'tlg0086.tlg035.perseus-grc2', bekker: true },
+  rhetoric: { urn: 'tlg0086.tlg038.perseus-grc2', bekker: true },
 };
 
 // Leaf text of every textpart, keyed by its citation path ("5.3", "4.12.2").
@@ -76,12 +107,15 @@ export function parseTei(xml: string): Map<string, string> {
   return texts;
 }
 
-export function group(texts: Map<string, string>, depth: number, sep: string) {
+export function group(texts: Map<string, string>, depth: number, sep: string, skip?: number) {
   const units = new Map<string, { path: string; body: string }[]>();
   for (const [path, body] of texts) {
     if (!body) continue;
     const parts = path.split('.');
-    const unit = parts.slice(0, depth).join(sep);
+    const unit = parts
+      .slice(0, depth)
+      .filter((_, i) => i !== skip)
+      .join(sep);
     units.set(unit, [...(units.get(unit) ?? []), { path, body }]);
   }
   return units;
@@ -90,15 +124,17 @@ export function group(texts: Map<string, string>, depth: number, sep: string) {
 /**
  * The text of each Stephanus section ("70b"), from its milestone to the next, with the citation
  * path it starts in ("70", "1.327"). Speakers' labels are kept, and each speech or paragraph
- * starts a line. Only the textpart `part` is read, if given.
+ * starts a line. Only the textpart `part` is read, if given. With `bekker`, the units are Bekker
+ * columns ("1094a"), from their page milestones; a column restated at the start of a book goes on.
  */
-export function parseStephanus(xml: string, part?: string) {
+export function parseStephanus(xml: string, part?: string, bekker = false) {
   const body = xml.slice(xml.indexOf('<body'));
   const sections = new Map<string, { path: string; lines: string[] }>();
   const divs: (string | null)[] = [];
   let skip = 0;
   let current: { path: string; lines: string[] } | undefined;
   let line = false;
+  let last: string | undefined;
   const append = (text: string) => {
     if (line || !current!.lines.length) current!.lines.push('');
     current!.lines[current!.lines.length - 1] += text;
@@ -117,10 +153,13 @@ export function parseStephanus(xml: string, part?: string) {
     if (!name) continue;
     if (name === 'milestone' && inside) {
       const n = token.match(/\bn="(\d+[a-e])"/)?.[1];
-      if (/unit="section"/.test(token) && n) {
-        if (sections.has(n)) throw new Error(`Stephanus section ${n} twice`);
+      if (bekker && n === last) continue;
+      if ((bekker ? /unit="page"/ : /unit="section"/).test(token) && n) {
+        if (sections.has(n))
+          throw new Error(`${bekker ? 'Bekker column' : 'Stephanus section'} ${n} twice`);
         current = { path: path.join('.'), lines: [] };
         sections.set(n, current);
+        last = n;
       } else if (/unit="para"/.test(token)) line = true;
     }
     if (token.endsWith('/>')) continue;
@@ -145,12 +184,20 @@ export function parseStephanus(xml: string, part?: string) {
   return texts;
 }
 
-async function loadTei(urn: string, cacheDir: string, fallback?: string) {
+async function loadTei(
+  urn: string,
+  cacheDir: string,
+  fallback?: string,
+  repo: keyof typeof RAW = 'perseus',
+) {
   const [tg, work] = urn.split('.');
-  const xml = (await cached(cacheDir, `${urn}.xml`, `${RAW}/${tg}/${work}/${urn}.xml`)).toString();
+  const xml = (
+    await cached(cacheDir, `${urn}.xml`, `${RAW[repo]}/${tg}/${work}/${urn}.xml`)
+  ).toString();
   const license = xml.match(/<licence[^>]*>([^<]+)/)?.[1].trim() || fallback;
   if (!license) throw new Error(`${urn}: no licence in the TEI header`);
-  return { xml, license: `${license} (Perseus Digital Library)` };
+  const library = repo === 'first1k' ? 'First1KGreek' : 'Perseus Digital Library';
+  return { xml, license: `${license} (${library})` };
 }
 
 const reader = (urn: string, passage: string) =>
@@ -161,21 +208,29 @@ export async function loadPerseus(workId: string, cacheDir: string): Promise<Sou
   if (steph) {
     const { xml, license } = await loadTei(steph.urn, cacheDir, REPO_LICENCE);
     const units = new Map();
-    for (const [n, { path, body }] of parseStephanus(xml, steph.part))
+    for (const [n, { path, body }] of parseStephanus(xml, steph.part, steph.bekker))
       units.set(n, { body, url: reader(steph.urn, path) });
     return { license, units, stephanus: true };
   }
-  const ed = EDITIONS[workId];
-  const { xml, license } = await loadTei(ed.urn, cacheDir);
-
   const units = new Map();
-  for (const [unit, parts] of group(parseTei(xml), ed.depth, ed.sep)) {
-    const body =
-      parts.length === 1
-        ? parts[0].body
-        : parts.map((p) => `(${p.path.split('.').slice(ed.depth).join('.')}) ${p.body}`).join('\n');
-    const passage = unit.replaceAll(ed.sep, '.');
-    units.set(unit, { body, url: reader(ed.urn, passage) });
+  const editions = [EDITIONS[workId]].flat();
+  const teis = await Promise.all(
+    editions.map((ed) => loadTei(ed.urn, cacheDir, undefined, ed.repo)),
+  );
+  const license = teis[0].license;
+  for (const [i, ed] of editions.entries()) {
+    const tei = teis[i];
+    if (tei.license !== license) throw new Error(`${workId}: its editions have different licences`);
+    for (const [unit, parts] of group(parseTei(tei.xml), ed.depth, ed.sep, ed.skip)) {
+      // A section that runs over two lives, or chapters, is one unit, its parts unlabelled.
+      const label = (path: string) => path.split('.').slice(ed.depth).join('.');
+      const body =
+        parts.length === 1
+          ? parts[0].body
+          : parts.map((p) => (label(p.path) ? `(${label(p.path)}) ${p.body}` : p.body)).join('\n');
+      const passage = parts[0].path.split('.').slice(0, ed.depth).join('.');
+      units.set((ed.prefix ?? '') + unit, { body, url: reader(ed.urn, passage) });
+    }
   }
   return { license, units };
 }

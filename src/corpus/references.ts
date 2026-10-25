@@ -467,7 +467,19 @@ const plato = (start: RegExp, notes: string[] = []): Layout => ({
     notes.some((n) => text.startsWith(n)),
 });
 
+// A scan's page heads, signature marks and stray letters.
+const scanApparatus = (text: string) => scanHead(text) || (text.match(/\p{L}/gu)?.length ?? 0) < 4;
+
+// A scan whose footnotes are left out by the anchors.
+const scan = (start: RegExp, skip?: [RegExp, RegExp]): Layout => ({
+  start,
+  skip,
+  apparatus: scanApparatus,
+});
+
 // Translations with no numbers, aligned by hand on the source paragraphs, or Plato's as above.
+// The later Greek works are aligned the same way on a Perseus or First1KGreek English
+// translation, or on the translator's own chapter numbers.
 const ANCHORED: Record<string, Layout> = {
   // Giles's notes and chapter arguments are indented, and titles have no lowercase.
   'chuang-tzu': {
@@ -483,7 +495,7 @@ const ANCHORED: Record<string, Layout> = {
   // A scan. Footnotes open with the OCR of their mark, or with its number; stray letters are noise.
   mozi: {
     start: /^BOOK I$/,
-    apparatus: (text) => scanHead(text) || (text.match(/\p{L}/gu)?.length ?? 0) < 4,
+    apparatus: scanApparatus,
     footnotes: {
       note: (text) => /^(?:[*®^’•»°]|\d{1,2} \p{Lu})/u.test(text),
       head: scanHead,
@@ -494,7 +506,7 @@ const ANCHORED: Record<string, Layout> = {
   xunzi: {
     start: /^BOOK I$/,
     end: /^CHINESE INDEX/,
-    apparatus: (text) => scanHead(text) || (text.match(/\p{L}/gu)?.length ?? 0) < 4,
+    apparatus: scanApparatus,
     footnotes: {
       note: (text) => /^(?:[^\p{L}\d\s]?\p{L}?\s)?[*®^’•»°]|^1 \p{Lu}/u.test(text),
       head: scanHead,
@@ -553,6 +565,45 @@ const ANCHORED: Record<string, Layout> = {
   timaeus: plato(/^SOCRATES: One, two, three; but where/),
   laws: plato(/^ATHENIAN: Tell me, Strangers, is a God/),
   'seventh-letter': plato(/^plato to the kindred and friends of dion/),
+  metaphysics: scan(/^1 ALL men by nature desire to know/),
+  'nicomachean-ethics': {
+    start: /^Every art, and every science reduced/,
+    end: /^NOTES$/,
+    apparatus: (text) => !LOWER.test(text) || /^(?:Chapter [IVXL]+\.|\[Illustration\])$/.test(text),
+  },
+  politics: {
+    start: /^As we see that every city is a society/,
+    end: /^INDEX$/,
+    apparatus: (text) => !LOWER.test(text),
+  },
+  rhetoric: { start: /^Rhetoric is a counterpart/, apparatus: (text) => text.startsWith('#') },
+  'discourses-selection': {
+    start: /^OF THE THINGS WHICH ARE IN OUR POWER/,
+    apparatus: (text) => !LOWER.test(text),
+  },
+  'epicurus-letters': { start: /^EPICURUS TO HERODOTUS/, apparatus: (text) => !LOWER.test(text) },
+  'lives-of-eminent-philosophers': {
+    start: /^I\. Some say that the study of philosophy/,
+    end: /^FOOTNOTES$/,
+    apparatus: (text) => !LOWER.test(text),
+  },
+  // Guthrie's notes close each volume, and his source notes and editorial asides are apparatus.
+  enneads: {
+    start: /^FIRST ENNEAD, BOOK SIXTH\.$/,
+    end: /^PORPHYRY, COMMENTARIES OR OUTLINES/,
+    skip: [/^FOOTNOTES:/, /^\w+ ENNEAD,(?:\[\d+\])? BOOK \w+\./],
+    apparatus: (text) =>
+      !LOWER.test(text) ||
+      /^(?:Page \d+, line|Paragraph \d+ of this book|\(_.*_(?:\[\d+\])?\)\.?$)/.test(text),
+  },
+  'enneads-mackenna': scan(/^THE FIRST ENNEAD$/, [
+    /^(?:NOTE ON THE ORDER OF THE TRACTATES|ACKNOWLEDGEMENTS?$)/,
+    /^THE \w+:? ENNEAD$/,
+  ]),
+  'outlines-of-pyrrhonism': {
+    start: /^It is probable that those who seek after anything/,
+    apparatus: (text) => !LOWER.test(text) || /^_.*_$/.test(text),
+  },
 };
 
 /** Where each unit starts, in order: a block's opening words, or after "…", words within one. */

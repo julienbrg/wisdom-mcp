@@ -7,6 +7,9 @@ updates:
     ignore:
       - dependency-name: '@types/node'
         update-types: ['version-update:semver-major']
+    groups:
+      nestjs:
+        patterns: ['@nestjs/*']
   - package-ecosystem: github-actions
     directory: /
     schedule:

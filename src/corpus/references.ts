@@ -584,6 +584,19 @@ const ANCHORED: Record<string, Layout> = {
     end: /^FOOTNOTES$/,
     apparatus: (text) => !LOWER.test(text),
   },
+  // Guthrie's notes close each volume, and his source notes and editorial asides are apparatus.
+  enneads: {
+    start: /^FIRST ENNEAD, BOOK SIXTH\.$/,
+    end: /^PORPHYRY, COMMENTARIES OR OUTLINES/,
+    skip: [/^FOOTNOTES:/, /^\w+ ENNEAD,(?:\[\d+\])? BOOK \w+\./],
+    apparatus: (text) =>
+      !LOWER.test(text) ||
+      /^(?:Page \d+, line|Paragraph \d+ of this book|\(_.*_(?:\[\d+\])?\)\.?$)/.test(text),
+  },
+  'enneads-mackenna': scan(/^THE FIRST ENNEAD$/, [
+    /^(?:NOTE ON THE ORDER OF THE TRACTATES|ACKNOWLEDGEMENTS?$)/,
+    /^THE \w+:? ENNEAD$/,
+  ]),
 };
 
 /** Where each unit starts, in order: a block's opening words, or after "…", words within one. */
